@@ -4,6 +4,10 @@ import javax.swing.JFrame;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
+import java.net.URL;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+
 
 public class Frame extends JFrame {
     JMenuBar menuBar;
@@ -13,6 +17,8 @@ public class Frame extends JFrame {
     JMenu menuExames;
     JMenu menuMateriais;
     JMenu menuRelatorios;
+    JLabel iconAgendamento; 
+    JLabel iconPaciente; 
     
     public Frame() {
         super();
@@ -25,9 +31,9 @@ public class Frame extends JFrame {
     
      public JMenuBar getBarraMenu() {
         if (this.menuBar == null) {
-            this.menuBar = new JMenuBar();
-            this.menuBar.add(getMenuAgendamentos());
-            this.menuBar.add(getMenuPacientes());
+            this.menuBar = new JMenuBar(); 
+            this.menuBar.add(getIconAgendamento()); // apenas pra teste
+            this.menuBar.add(getIconPaciente()); // apenas pra teste
             this.menuBar.add(getMenuMedicos());
             this.menuBar.add(getMenuExames());
             this.menuBar.add(getMenuMateriais());
@@ -40,10 +46,41 @@ public class Frame extends JFrame {
      
     public JMenu getMenuAgendamentos() {
         if (this.menuAgendamentos == null) {
-            this.menuAgendamentos = new JMenu("Agendamentos");
+            this.menuAgendamentos = new JMenu();
+            this.menuAgendamentos.add(getIconAgendamento());
+            
         }
         
         return this.menuAgendamentos;
+    }
+    
+    public JLabel getIconAgendamento() {
+        if (this.iconAgendamento == null) {
+            URL agendamentoIconURL = this.getClass().getResource("resources/calendar.png");
+            ImageIcon teste = new ImageIcon(new ImageIcon(agendamentoIconURL).getImage().getScaledInstance(70, 70, 70));
+            this.iconAgendamento = new JLabel("Agendamento", teste, JLabel.CENTER);
+            this.iconAgendamento.setVerticalTextPosition(JLabel.BOTTOM);
+            this.iconAgendamento.setHorizontalTextPosition(JLabel.CENTER);
+            //this.iconAgendamento = new JLabel("Teste");
+            
+        }
+        
+        return this.iconAgendamento;
+    }
+    
+    
+    public JLabel getIconPaciente() {
+        if (this.iconPaciente == null) {
+            URL agendamentoIconURL = this.getClass().getResource("resources/patient.png");
+            ImageIcon teste = new ImageIcon(new ImageIcon(agendamentoIconURL).getImage().getScaledInstance(70, 70, 70));
+            this.iconPaciente = new JLabel("Paciente", teste, JLabel.CENTER);
+            this.iconPaciente.setVerticalTextPosition(JLabel.BOTTOM);
+            this.iconPaciente.setHorizontalTextPosition(JLabel.CENTER);
+            //this.iconAgendamento = new JLabel("Teste");
+            
+        }
+        
+        return this.iconPaciente;
     }
     
     public JMenu getMenuPacientes() {

@@ -18,5 +18,7 @@ public class ControladorFrame {
     
     public static void main(String[] args) {
         new ControladorFrame();
+        
+        
     }
 }
