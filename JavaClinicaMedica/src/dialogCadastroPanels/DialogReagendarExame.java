@@ -16,7 +16,7 @@ public class DialogReagendarExame extends JDialog {
 	private JTextField txFHora;
 	private JTextField txFMedicoResponsavel;
 	private JTextField txFValorParticular;
-
+ 
     public DialogReagendarExame(JFrame parent) {
         super(parent, "Reagendar Exame", true); // True para torná-lo modal
 

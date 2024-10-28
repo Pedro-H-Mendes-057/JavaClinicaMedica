@@ -11,7 +11,7 @@ import java.awt.event.ActionListener;
 public class PanelExames extends JPanel {
     private JTextField txFPsqExame;
     private JTable tabela;
-
+ 
     public PanelExames(JFrame frame) {
         // Definindo o layout
         GridBagLayout gridBagLayout = new GridBagLayout();

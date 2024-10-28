@@ -14,7 +14,7 @@ public class DialogCadastroPaciente extends JDialog {
 	private JTextField txFPeso;
 	private JTextField txFHistMedic;
 	private JTextField txFConvenio;
-
+ 
     public DialogCadastroPaciente(JFrame parent) {
         super(parent, "Cadastrar Paciente", true); // True para torná-lo modal
 
