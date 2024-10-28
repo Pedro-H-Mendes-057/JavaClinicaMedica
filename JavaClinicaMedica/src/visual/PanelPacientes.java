@@ -2,7 +2,7 @@ package visual;
 
 import javax.swing.*;
 
-import visuPacientes.DialogCadastroPaciente;
+import dialogCadastroPanels.DialogCadastroPaciente;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;

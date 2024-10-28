@@ -1,4 +1,4 @@
-package visuPacientes;
+package dialogCadastroPanels;
 
 import javax.swing.*;
 import java.awt.*;
