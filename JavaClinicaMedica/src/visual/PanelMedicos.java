@@ -72,6 +72,7 @@ public class PanelMedicos extends JPanel {
         if (this.textFieldPesquisar == null) {
             this.textFieldPesquisar = new JTextField();           
             this.textFieldPesquisar.setPreferredSize(new Dimension(800, 40));
+            
         }
         return this.textFieldPesquisar;
     }
@@ -79,7 +80,7 @@ public class PanelMedicos extends JPanel {
     public JButton getButtonPesquisar() {
         if (this.buttonPesquisar == null) {
             this.buttonPesquisar = new JButton("PESQUISAR");
-           
+            this.buttonPesquisar.setFont(new Font("Tahoma", Font.PLAIN, 14));
         }
         return this.buttonPesquisar;
     }
@@ -95,7 +96,9 @@ public class PanelMedicos extends JPanel {
     public JButton getButtonNovo() {
         if (this.buttonNovo == null) {
             this.buttonNovo = new JButton("NOVO");
-           
+            this.buttonNovo.setBackground(new Color(0, 128, 255));
+            this.buttonNovo.setForeground(new Color(255, 255, 255));
+            this.buttonNovo.setFont(new Font("Tahoma", Font.PLAIN, 20));
         }
         return this.buttonNovo;
     }
@@ -103,7 +106,8 @@ public class PanelMedicos extends JPanel {
     public JButton getButtonEditar() {
         if (this.buttonEditar == null) {
             this.buttonEditar = new JButton("EDITAR");
-           
+            this.buttonEditar.setFont(new Font("Tahoma", Font.PLAIN, 20));
+            this.buttonEditar.setBounds(345, 639, 151, 39);
         }
         return this.buttonEditar;
     }
@@ -111,6 +115,9 @@ public class PanelMedicos extends JPanel {
     public JButton getButtonCancelar() {
         if (this.buttonCancelar == null) {
             this.buttonCancelar = new JButton("CANCELAR");
+            this.buttonCancelar.setBackground(new Color(253, 2, 90));
+            this.buttonCancelar.setFont(new Font("Tahoma", Font.PLAIN, 20));
+            this.buttonCancelar.setBounds(506, 639, 151, 39);
            
         }
         return this.buttonCancelar;
