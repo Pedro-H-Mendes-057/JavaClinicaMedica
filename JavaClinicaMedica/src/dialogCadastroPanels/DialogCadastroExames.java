@@ -11,12 +11,12 @@ public class DialogCadastroExames extends JDialog {
 	private JTextField txFValor;
 	private JTextField txFMedico;
 
-	 
+	  
     public DialogCadastroExames(JFrame parent) {
         super(parent, "Cadastrar Exame", true); // True para torná-lo modal
 
         this.setSize(1300, 650);
-
+        this.setResizable(false);
         this.setLocationRelativeTo(parent); // Centraliza o diálogo em relação ao Frame principal
         getContentPane().setLayout(null);
         
