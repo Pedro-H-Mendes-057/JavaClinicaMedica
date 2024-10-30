@@ -28,10 +28,10 @@ public class Frame extends JFrame {
         panelInicial.setLayout(new BorderLayout());
 
         //imagem de fundo
-        JLabel backgroundLabel = new JLabel(new ImageIcon(getClass().getResource("resources/background.png"))); 
+        JLabel backgroundLabel = new JLabel(new ImageIcon(getClass().getResource("resources/Background.png"))); 
         panelInicial.add(backgroundLabel, BorderLayout.CENTER);
 
-        tabbedPane.addTab("Home", resizeIcon("resources/BemVindo.png", 30, 30), panelInicial, "Tela inicial");
+        tabbedPane.addTab("Home", resizeIcon("resources/Pacientes.png", 30, 30), panelInicial, "Tela inicial");
         tabbedPane.addTab("Pacientes", resizeIcon("resources/Pacientes.png", 30, 30), new PanelPacientes(this), "Gerenciar Pacientes");
         tabbedPane.addTab("Médicos", resizeIcon("resources/Medico.png", 30, 30), new PanelMedicos(this), "Gerenciar Médicos");
         tabbedPane.addTab("Agendar", resizeIcon("resources/Agenda.png", 30, 30), new PanelAgendar(this), "Agendar Consultas");
@@ -76,7 +76,4 @@ public class Frame extends JFrame {
         return null;
     }
 
-    public static void main(String[] args) {
-        new Frame();
-    }
-}
+  }
