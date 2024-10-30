@@ -1,5 +1,5 @@
 package dialogCadastroPanels;
-
+ 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -21,7 +21,7 @@ public class DialogReagendarExame extends JDialog {
         super(parent, "Reagendar Exame", true); // True para torná-lo modal
 
         this.setSize(1300, 650);
-
+        this.setResizable(false);
         this.setLocationRelativeTo(parent);
         getContentPane().setLayout(null);
         
@@ -108,4 +108,5 @@ public class DialogReagendarExame extends JDialog {
         btnCancelar.setFont(new Font("Tahoma", Font.PLAIN, 20));
         btnCancelar.setBounds(1033, 514, 152, 48);
         getContentPane().add(btnCancelar);
+    }
 }

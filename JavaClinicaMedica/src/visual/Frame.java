@@ -7,7 +7,7 @@ import java.net.URL;
 import visual.PanelPacientes;
 import visual.PanelMedicos;
 import visual.PanelAgendar;
-import visual.PanelExames;
+import visual.PanelExame;
 import visual.PanelMateriais;
 import visual.PanelRelatorios;
 
@@ -23,40 +23,51 @@ public class Frame extends JFrame {
 
         tabbedPane = new JTabbedPane();
 
+        // Painel neutro
+        JPanel panelInicial = new JPanel();
+        panelInicial.setLayout(new BorderLayout());
+
+        //imagem de fundo
+        JLabel backgroundLabel = new JLabel(new ImageIcon(getClass().getResource("resources/background.png"))); 
+        panelInicial.add(backgroundLabel, BorderLayout.CENTER);
+
+        tabbedPane.addTab("Home", resizeIcon("resources/BemVindo.png", 30, 30), panelInicial, "Tela inicial");
         tabbedPane.addTab("Pacientes", resizeIcon("resources/Pacientes.png", 30, 30), new PanelPacientes(this), "Gerenciar Pacientes");
         tabbedPane.addTab("Médicos", resizeIcon("resources/Medico.png", 30, 30), new PanelMedicos(this), "Gerenciar Médicos");
         tabbedPane.addTab("Agendar", resizeIcon("resources/Agenda.png", 30, 30), new PanelAgendar(this), "Agendar Consultas");
-        tabbedPane.addTab("Exames", resizeIcon("resources/Exames.png", 30, 30), new PanelExames(this), "Gerenciar Exames");
+        tabbedPane.addTab("Exames", resizeIcon("resources/Exames.png", 30, 30), new PanelExame(this), "Gerenciar Exames");
         tabbedPane.addTab("Materiais", resizeIcon("resources/Materiais.png", 30, 30), new PanelMateriais(this), "Gerenciar Materiais");
         tabbedPane.addTab("Relatórios", resizeIcon("resources/Relatorio.png", 30, 30), new PanelRelatorios(this), "Visualizar Relatórios");
 
-        // ESSA LOGO ME DEU UM TRABALHO DO KARAIOOOOOOOO
-        iconClinicaLogo = new JLabel(resizeIcon("resources/ClinicaLogo.png", 30, 30));
+        //cabeçalho
+        ImageIcon headerIcon = new ImageIcon(getClass().getResource("resources/HEADER.png"));
+        Image headerImage = headerIcon.getImage().getScaledInstance(1920, 50, Image.SCALE_SMOOTH); // Defina a largura e altura desejadas
+        JLabel headerLabel = new JLabel(new ImageIcon(headerImage)); // Adiciona a imagem redimensionada
 
-        // CRIA UM PAINEL PRA ALINHAR COM A LOGO E JTABBED AAAAAAAAAAA
+        // cabeçalho e o tabbed pane
         JPanel headerPanel = new JPanel();
-        headerPanel.setLayout(new FlowLayout(FlowLayout.LEFT)); // Alinha tudo pra esquerda
-        headerPanel.add(iconClinicaLogo);
-        headerPanel.add(tabbedPane);
-
-        // Bota o painel no frame
-        add(headerPanel, BorderLayout.WEST); // NAO MUDAR A ORIENTAÇÃO (LOGO DA CLINICA DEPENDE DISSO)
-
-        add(tabbedPane, BorderLayout.CENTER);
+        headerPanel.setLayout(new BorderLayout()); 
+        headerPanel.add(headerLabel, BorderLayout.NORTH); 
+        headerPanel.add(tabbedPane, BorderLayout.CENTER); 
+        add(headerPanel, BorderLayout.NORTH); 
 
         setVisible(true);
     }
     
+    public JTabbedPane getTabbedPane() {
+        return tabbedPane; // Mudar cor dos icones
+    }
+
     private ImageIcon getIcon(String path) {
         URL iconURL = this.getClass().getResource(path);
         if (iconURL != null) {
             return new ImageIcon(iconURL);
         } else {
-            return null; // Retornar nulo se n tiver o icone
+            return null; // Retorna nulo se n tiver o ícone
         }
     }
 
-    private ImageIcon resizeIcon(String path, int width, int height) {
+    public ImageIcon resizeIcon(String path, int width, int height) {
         ImageIcon icon = getIcon(path);
         if (icon != null) {
             Image img = icon.getImage().getScaledInstance(width, height, Image.SCALE_SMOOTH);

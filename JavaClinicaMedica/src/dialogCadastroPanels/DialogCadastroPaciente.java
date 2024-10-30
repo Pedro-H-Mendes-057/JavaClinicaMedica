@@ -1,5 +1,5 @@
 package dialogCadastroPanels;
-
+ 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -19,7 +19,7 @@ public class DialogCadastroPaciente extends JDialog {
         super(parent, "Cadastrar Paciente", true); // True para torná-lo modal
 
         this.setSize(1300, 650);
-
+        this.setResizable(false);
         this.setLocationRelativeTo(parent); // Centraliza o diálogo em relação ao Frame principal
         getContentPane().setLayout(null);
         
