@@ -18,16 +18,14 @@ public class ControladorFrame {
         frame.getTabbedPane().addChangeListener(new ChangeListener() {
             @Override
             public void stateChanged(ChangeEvent e) {
-                updateTabIcon(frame.getTabbedPane().getSelectedIndex());
+                atualizIconPintado(frame.getTabbedPane().getSelectedIndex());
             }
         });
     }
 
-    private void updateTabIcon(int selectedIndex) {
-        if (selectedIndex < 1) return; // Ignora a Home
-
-        // Atualiza o ícone da aba selecionada
-        switch (selectedIndex) {
+    private void atualizIconPintado(int abaSelecionada) {
+        if (abaSelecionada < 1) return; // Ignora a Home
+        switch (abaSelecionada) {
             case 1: // Pacientes
                 frame.getTabbedPane().setIconAt(1, frame.resizeIcon("resources/Pintados/Pacientes2.png", 30, 30));
                 break;
@@ -47,13 +45,11 @@ public class ControladorFrame {
                 frame.getTabbedPane().setIconAt(6, frame.resizeIcon("resources/Pintados/Relatorio2.png", 30, 30));
                 break;
         }
-
-        // Atualiza os ícones das outras abas para os ícones normais
-        updateOtherTabIcons(selectedIndex);
+        mudaRestoIcones(abaSelecionada);
     }
 
-    private void updateOtherTabIcons(int selectedIndex) {
-        // Atualiza os ícones das abas não selecionadas
+    private void mudaRestoIcones(int selectedIndex) {
+        // Muda o icone das abas não selecionadas
         if (selectedIndex != 1) {
             frame.getTabbedPane().setIconAt(1, frame.resizeIcon("resources/Pacientes.png", 30, 30));
         }
