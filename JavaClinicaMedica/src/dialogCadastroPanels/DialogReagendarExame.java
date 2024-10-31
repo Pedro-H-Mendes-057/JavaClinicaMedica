@@ -102,6 +102,8 @@ public class DialogReagendarExame extends JDialog {
         JButton btnSalvar = new JButton("SALVAR");
         btnSalvar.setFont(new Font("Tahoma", Font.PLAIN, 20));
         btnSalvar.setBounds(840, 514, 152, 48);
+        btnSalvar.setBackground(new Color(50, 205, 101));
+        btnSalvar.setForeground(new Color(255, 255, 255));
         getContentPane().add(btnSalvar);
         
         JButton btnCancelar = new JButton("CANCELAR");

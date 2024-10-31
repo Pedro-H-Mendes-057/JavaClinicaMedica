@@ -105,7 +105,8 @@ public class DialogCadastroPaciente extends JDialog {
         
         JButton btSalvar = new JButton("SALVAR");
         btSalvar.setFont(new Font("Tahoma", Font.PLAIN, 20));
-        btSalvar.setBackground(new Color(0, 128, 255));
+        btSalvar.setBackground(new Color(50, 205, 101));
+        btSalvar.setForeground(new Color(255, 255, 255));
         btSalvar.setBounds(844, 538, 177, 55);
         getContentPane().add(btSalvar);
         
