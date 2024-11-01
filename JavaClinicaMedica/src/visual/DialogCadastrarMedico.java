@@ -34,10 +34,19 @@ public class DialogCadastrarMedico extends JDialog {
         this.setSize(1300, 650);
         this.setResizable(false);
         this.setLocationRelativeTo(parent);         
-        getContentPane().setLayout(null);
-        setVisible(true);
-        getContentPane().add(getLabelNome());
+        this.setLayout(null);       
+        this.add(getLabelNome()); 
+        this.add(getTextFieldNome()); 
+        this.add(getLabelContato()); 
+        this.add(getTextFieldContato()); 
+        this.add(getLabelCRM()); 
+        this.add(getTextFieldCRM()); 
+        this.add(getLabelEspecialidade()); 
+        this.add(getTextFieldEspecialidade());       
+        this.add(getLabelValor()); 
+        this.add(getTextFieldValor()); 
         
+        this.setVisible(true);
     }
     
     JLabel getLabelNome() {
@@ -47,13 +56,13 @@ public class DialogCadastrarMedico extends JDialog {
             this.labelNome.setFont(new Font("Tahoma", Font.PLAIN, 20));
             this.labelNome.setBounds(63, 44, 452, 29);
         }
-        
         return this.labelNome;
     }
     
     public JTextField getTextFieldNome() {
         if (this.textFieldNome == null) {
-            this.textFieldNome = new JTextField();           
+            this.textFieldNome = new JTextField();
+            this.textFieldNome.setBounds(63, 83, 1170, 40);
         }
         return this.textFieldNome;
     }
@@ -61,7 +70,9 @@ public class DialogCadastrarMedico extends JDialog {
     JLabel getLabelContato() {
         if (this.labelContato == null) {
             this.labelContato = new JLabel();
-            this.labelContato.setText("Contato:");            
+            this.labelContato.setText("Contato:"); 
+            this.labelContato.setFont(new Font("Tahoma", Font.PLAIN, 20));
+            this.labelContato.setBounds(63, 140, 452, 29);
         }
         
         return this.labelContato;
@@ -69,7 +80,8 @@ public class DialogCadastrarMedico extends JDialog {
     
     public JTextField getTextFieldContato() {
         if (this.textFieldContato == null) {
-            this.textFieldContato = new JTextField();           
+            this.textFieldContato = new JTextField();
+            this.textFieldContato.setBounds(63, 179, 520, 40);
         }
         return this.textFieldContato;
     }
@@ -77,7 +89,9 @@ public class DialogCadastrarMedico extends JDialog {
     JLabel getLabelCRM() {
         if (this.labelCRM == null) {
             this.labelCRM = new JLabel();
-            this.labelCRM.setText("CRM:");            
+            this.labelCRM.setText("CRM:"); 
+            this.labelCRM.setFont(new Font("Tahoma", Font.PLAIN, 20));
+            this.labelCRM.setBounds(710, 140, 452, 29);
         }
         
         return this.labelCRM;
@@ -85,7 +99,8 @@ public class DialogCadastrarMedico extends JDialog {
     
     public JTextField getTextFieldCRM() {
         if (this.textFieldCRM == null) {
-            this.textFieldCRM = new JTextField();           
+            this.textFieldCRM = new JTextField();
+            this.textFieldCRM.setBounds(710, 179, 520, 40);
         }
         return this.textFieldCRM;
     }
@@ -93,7 +108,9 @@ public class DialogCadastrarMedico extends JDialog {
     JLabel getLabelEspecialidade() {
         if (this.labelEspecialidade == null) {
             this.labelEspecialidade = new JLabel();
-            this.labelEspecialidade.setText("Especialidade:");            
+            this.labelEspecialidade.setText("Especialidade:");
+            this.labelEspecialidade.setFont(new Font("Tahoma", Font.PLAIN, 20));
+            //this.labelEspecialidade.setBounds(63, 44, 452, 29);            
         }
         
         return this.labelEspecialidade;
@@ -109,7 +126,9 @@ public class DialogCadastrarMedico extends JDialog {
     JLabel getLabelValor() {
         if (this.labelValor == null) {
             this.labelValor = new JLabel();
-            this.labelValor.setText("Valor:");            
+            this.labelValor.setText("Valor:");
+            this.labelValor.setFont(new Font("Tahoma", Font.PLAIN, 20));
+            //this.labelValor.setBounds(63, 44, 452, 29);            
         }
         
         return this.labelValor;
