@@ -10,11 +10,14 @@ import visual.PanelAgendar;
 import visual.PanelExame;
 import visual.PanelMateriais;
 import visual.PanelRelatorios;
+import controle.ControladorPanelMedicos; //temporario 
 
 public class Frame extends JFrame {
     private JTabbedPane tabbedPane;
     private JLabel iconClinicaLogo;
-
+    PanelMedicos panelMedicos; // temporario
+    ControladorPanelMedicos controladorPanelMedicos; 
+    
     public Frame() {
         super();
         this.setSize(1920, 1080);
@@ -31,9 +34,12 @@ public class Frame extends JFrame {
         JLabel backgroundLabel = new JLabel(new ImageIcon(getClass().getResource("resources/Background.png"))); 
         panelInicial.add(backgroundLabel, BorderLayout.CENTER);
 
+        this.panelMedicos = new PanelMedicos(this); // temporario
+        this.controladorPanelMedicos = new ControladorPanelMedicos(this.panelMedicos); // temporario
+        
         tabbedPane.addTab("Home", resizeIcon("resources/Pacientes.png", 30, 30), panelInicial, "Tela inicial");
         tabbedPane.addTab("Pacientes", resizeIcon("resources/Pacientes.png", 30, 30), new PanelPacientes(this), "Gerenciar Pacientes");
-        tabbedPane.addTab("Médicos", resizeIcon("resources/Medico.png", 30, 30), new PanelMedicos(this), "Gerenciar Médicos");
+        tabbedPane.addTab("Médicos", resizeIcon("resources/Medico.png", 30, 30), this.panelMedicos, "Gerenciar Médicos");
         tabbedPane.addTab("Agendar", resizeIcon("resources/Agenda.png", 30, 30), new PanelAgendar(this), "Agendar Consultas");
         tabbedPane.addTab("Exames", resizeIcon("resources/Exames.png", 30, 30), new PanelExame(this), "Gerenciar Exames");
         tabbedPane.addTab("Materiais", resizeIcon("resources/Materiais.png", 30, 30), new PanelMateriais(this), "Gerenciar Materiais");

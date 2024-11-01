@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import javax.swing.table.DefaultTableModel;
 
+
 public class PanelMedicos extends JPanel {
     JLabel labelPesquisar;
     JTextField textFieldPesquisar;
@@ -15,8 +16,10 @@ public class PanelMedicos extends JPanel {
     GridBagConstraints gbc;
     JPanel panelBotoes;
     JPanel panelPesquisar;
+   
     
     public PanelMedicos(JFrame frame) {
+        
         setLayout(new GridBagLayout());
         gbc = new GridBagConstraints();
         gbc.insets = new Insets(50, 200, 5, 200);

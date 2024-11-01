@@ -7,7 +7,7 @@ import javax.swing.event.ChangeListener;
 import visual.Frame;
 
 public class ControladorFrame {
-    Frame frame;
+    public static Frame frame;
 
     public ControladorFrame() {
         frame = new Frame();
