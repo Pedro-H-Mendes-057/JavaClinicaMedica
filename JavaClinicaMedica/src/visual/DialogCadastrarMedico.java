@@ -7,8 +7,10 @@ package visual;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import controle.ControladorFrame;
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridBagLayout;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
@@ -27,6 +29,8 @@ public class DialogCadastrarMedico extends JDialog {
     JTextField textFieldEspecialidade;
     JLabel labelValor;
     JTextField textFieldValor;
+    JButton buttonSalvar;
+    JButton buttonCancelar;
     
     
     public DialogCadastrarMedico(JFrame parent) {
@@ -45,6 +49,8 @@ public class DialogCadastrarMedico extends JDialog {
         this.add(getTextFieldEspecialidade());       
         this.add(getLabelValor()); 
         this.add(getTextFieldValor()); 
+        this.add(getButtonSalvar()); 
+        this.add(getButtonCancelar());
         
         this.setVisible(true);
     }
@@ -110,7 +116,7 @@ public class DialogCadastrarMedico extends JDialog {
             this.labelEspecialidade = new JLabel();
             this.labelEspecialidade.setText("Especialidade:");
             this.labelEspecialidade.setFont(new Font("Tahoma", Font.PLAIN, 20));
-            //this.labelEspecialidade.setBounds(63, 44, 452, 29);            
+            this.labelEspecialidade.setBounds(63, 236, 452, 29);            
         }
         
         return this.labelEspecialidade;
@@ -118,7 +124,8 @@ public class DialogCadastrarMedico extends JDialog {
     
     public JTextField getTextFieldEspecialidade() {
         if (this.textFieldEspecialidade == null) {
-            this.textFieldEspecialidade = new JTextField();           
+            this.textFieldEspecialidade = new JTextField();
+            this.textFieldEspecialidade.setBounds(63, 275, 520, 40);
         }
         return this.textFieldEspecialidade;
     }
@@ -128,7 +135,7 @@ public class DialogCadastrarMedico extends JDialog {
             this.labelValor = new JLabel();
             this.labelValor.setText("Valor:");
             this.labelValor.setFont(new Font("Tahoma", Font.PLAIN, 20));
-            //this.labelValor.setBounds(63, 44, 452, 29);            
+            this.labelValor.setBounds(63, 332, 452, 29);            
         }
         
         return this.labelValor;
@@ -136,8 +143,33 @@ public class DialogCadastrarMedico extends JDialog {
     
     public JTextField getTextFieldValor() {
         if (this.textFieldValor == null) {
-            this.textFieldValor = new JTextField();           
+            this.textFieldValor = new JTextField();
+            this.textFieldValor.setBounds(63, 371, 520, 40);
         }
         return this.textFieldValor;
+    }
+    
+    public JButton getButtonSalvar() {
+        if (this.buttonSalvar == null) {
+            this.buttonSalvar = new JButton("SALVAR");
+            this.buttonSalvar.setFont(new Font("Tahoma", Font.PLAIN, 20));
+            this.buttonSalvar.setBackground(new Color(50, 205, 101));
+            this.buttonSalvar.setForeground(new Color(255, 255, 255));
+            this.buttonSalvar.setBounds(63, 500, 177, 55);
+           
+        }
+        return this.buttonSalvar;
+    }
+    
+    public JButton getButtonCancelar() {
+        if (this.buttonCancelar == null) {
+            this.buttonCancelar  = new JButton("CANCELAR");
+            this.buttonCancelar.setFont(new Font("Tahoma", Font.PLAIN, 20));
+            this.buttonCancelar.setBackground(new Color(244, 0, 9));
+            this.buttonCancelar.setForeground(new Color(255, 255, 255));
+            this.buttonCancelar.setBounds(270, 500, 177, 55);
+           
+        }
+        return this.buttonCancelar;
     }
 }
