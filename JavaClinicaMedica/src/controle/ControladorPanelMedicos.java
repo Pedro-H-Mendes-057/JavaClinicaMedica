@@ -16,6 +16,7 @@ import visual.DialogCadastrarMedico;
 public class ControladorPanelMedicos implements ActionListener {
     PanelMedicos panelMedicos;
     DialogCadastrarMedico cadastrarMedico;
+    ControladorDialogCadastrarMedico controladorDialogCadastrarMedico;
     
     public ControladorPanelMedicos(PanelMedicos panelMedicos) {
         this.panelMedicos = panelMedicos;
@@ -24,12 +25,16 @@ public class ControladorPanelMedicos implements ActionListener {
     
     public void addEventos() {
         this.panelMedicos.getButtonNovo().addActionListener(this);
-        System.out.println("addEventos");
+        this.panelMedicos.getButtonCancelar().addActionListener(this);
+        
     }
     
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == this.panelMedicos.getButtonNovo()) {           
-            this.cadastrarMedico = new DialogCadastrarMedico(ControladorFrame.frame);
+        if (e.getSource() == this.panelMedicos.getButtonNovo()) {            
+            this.cadastrarMedico = new DialogCadastrarMedico(ControladorFrame.frame);            
+            this.controladorDialogCadastrarMedico = new ControladorDialogCadastrarMedico(this.cadastrarMedico);            
+        } else if (e.getSource() == this.panelMedicos.getButtonCancelar()) {
+            this.panelMedicos.getMessageDialogCancelarItem(panelMedicos);
         }
     }
 }

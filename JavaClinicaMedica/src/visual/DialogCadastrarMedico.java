@@ -12,7 +12,10 @@ import java.awt.Font;
 import java.awt.GridBagLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -31,6 +34,8 @@ public class DialogCadastrarMedico extends JDialog {
     JTextField textFieldValor;
     JButton buttonSalvar;
     JButton buttonCancelar;
+    JTable tableHorarios;
+    JScrollPane scrollPaneHorarios;
     
     
     public DialogCadastrarMedico(JFrame parent) {
@@ -51,6 +56,8 @@ public class DialogCadastrarMedico extends JDialog {
         this.add(getTextFieldValor()); 
         this.add(getButtonSalvar()); 
         this.add(getButtonCancelar());
+        this.add(getScrollPaneHorarios());
+         addEventos();
         
         this.setVisible(true);
     }
@@ -171,5 +178,59 @@ public class DialogCadastrarMedico extends JDialog {
            
         }
         return this.buttonCancelar;
+    }
+    
+    public JTable getTableHorarios() {
+        if (this.tableHorarios == null) {
+            String [] colunas = {"Horários", "Seg", "Terç", "Qua ","Qui", "Sex"};
+            int numLinhas = 0;
+            DefaultTableModel model = new DefaultTableModel(numLinhas, colunas.length);
+            
+            model.setColumnIdentifiers(colunas);
+            model.addRow(new String[] {"8h", "", "", "" ,"", ""});
+            model.addRow(new String[] {"9h", "", "", "" ,"", ""});
+            model.addRow(new String[] {"10h", "", "", "" ,"", ""});
+            model.addRow(new String[] {"11h", "", "", "" ,"", ""});
+            model.addRow(new String[] {"12h", "", "", "" ,"", ""});
+            model.addRow(new String[] {"13h", "", "", "" ,"", ""});
+            model.addRow(new String[] {"14h", "", "", "" ,"", ""});
+            model.addRow(new String[] {"15h", "", "", "" ,"", ""});
+            model.addRow(new String[] {"16h", "", "", "" ,"", ""});
+            model.addRow(new String[] {"17h", "", "", "" ,"", ""});
+            model.addRow(new String[] {"18h", "", "", "" ,"", ""});
+            
+            this.tableHorarios = new JTable(model);
+        }
+        
+        return this.tableHorarios;
+    
+    }  
+    
+    
+    public JScrollPane getScrollPaneHorarios() {
+        if (this.scrollPaneHorarios == null) {
+            this.scrollPaneHorarios = new JScrollPane(getTableHorarios());
+            this.scrollPaneHorarios.setBounds(710, 250, 520, 300);
+           
+        }
+        return this.scrollPaneHorarios;
+    }
+    
+    // CODIGO TODO FUDIDO
+    void addEventos() {
+        this.tableHorarios.addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
+            public void mouseClicked(java.awt.event.MouseEvent e) {
+                int row = tableHorarios.rowAtPoint(e.getPoint());
+                int col = tableHorarios.columnAtPoint(e.getPoint());
+                
+                System.out.println("teste 2");
+                
+                if (row >= 0 && col >= 0) {
+                    tableHorarios.getModel().setValueAt("X", row, col);
+                }
+            }
+           
+        });
     }
 }

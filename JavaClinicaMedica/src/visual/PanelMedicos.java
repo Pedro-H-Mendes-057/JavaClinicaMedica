@@ -158,4 +158,14 @@ public class PanelMedicos extends JPanel {
         }
         return this.buttonCancelar;
     }
+    
+    public boolean getMessageDialogCancelarItem(PanelMedicos panelMedicos) {
+        int resposta = JOptionPane.showConfirmDialog(panelMedicos, "Tem certeza que deseja apagar este item?");
+        
+        if (resposta == JOptionPane.YES_OPTION){  
+            return true;  
+        } else {
+            return false;
+        }  
+    }
 }
