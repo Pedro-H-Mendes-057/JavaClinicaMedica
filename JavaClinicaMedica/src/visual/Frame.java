@@ -16,9 +16,14 @@ import controle.ControladorPanelMedicos; //temporario
 public class Frame extends JFrame {
     private JTabbedPane tabbedPane;
     private JLabel iconClinicaLogo;
-    PanelMedicos panelMedicos; 
+    JPanel panelInicial;
+    PanelPacientes panelPacientes;
+    PanelMedicos panelMedicos;
+    PanelAgendar panelAgendar;
+    PanelExame panelExame;
+    PanelMateriais panelMateriais;
+    PanelRelatorios panelRelatorios;
     ControladorPanelMedicos controladorPanelMedicos; 
-    PanelMateriais panelMateriais; 
     ControladorPanelMateriais controladorPanelMateriais; 
     
     public Frame() {
@@ -29,26 +34,36 @@ public class Frame extends JFrame {
 
         tabbedPane = new JTabbedPane();
 
-        // Painel neutro
-        JPanel panelInicial = new JPanel();
+        // 														 Painel inicial
+        panelInicial = new JPanel();
         panelInicial.setLayout(new BorderLayout());
 
-        //imagem de fundo
+        //														imagem de fundo
         JLabel backgroundLabel = new JLabel(new ImageIcon(getClass().getResource("resources/Background.png"))); 
         panelInicial.add(backgroundLabel, BorderLayout.CENTER);
-
+        
+        //										inicialização dos respectivos paineis e controladores
+        //OBS.: FALTA CRIAR OS CONTROLADORES DE MUITOS PAINEIS
+        this.panelPacientes = new PanelPacientes(this);
+//      this.controladorPanelPacientes = new ControladorPanelPacientes(this.panelPacientes);
         this.panelMedicos = new PanelMedicos(this);
         this.controladorPanelMedicos = new ControladorPanelMedicos(this.panelMedicos);
+        this.panelAgendar = new PanelAgendar(this);
+//      this.controladorPanelAgendar = new ControladorPanelAgendar(this.panelAgendar);
+        this.panelExame = new PanelExame(this);
+//      this.controladorPanelExame = new ControladorPanelExame(this.panelExame);
         this.panelMateriais = new PanelMateriais(this);
         this.controladorPanelMateriais = new ControladorPanelMateriais(this.panelMateriais);
+        this.panelRelatorios = new PanelRelatorios(this);
+//      this.controladorPanelRelatorios = new ControladorPanelRelatorios(this.panelRelatorios);
         
-        tabbedPane.addTab("Home", resizeIcon("resources/Pacientes.png", 30, 30), panelInicial, "Tela inicial");
-        tabbedPane.addTab("Pacientes", resizeIcon("resources/Pacientes.png", 30, 30), new PanelPacientes(this), "Gerenciar Pacientes");
+        tabbedPane.addTab("Home", resizeIcon("resources/Pacientes.png", 30, 30), this.panelInicial, "Tela inicial");
+        tabbedPane.addTab("Pacientes", resizeIcon("resources/Pacientes.png", 30, 30), this.panelPacientes, "Gerenciar Pacientes");
         tabbedPane.addTab("Médicos", resizeIcon("resources/Medico.png", 30, 30), this.panelMedicos, "Gerenciar Médicos");
-        tabbedPane.addTab("Agendar", resizeIcon("resources/Agenda.png", 30, 30), new PanelAgendar(this), "Agendar Consultas");
-        tabbedPane.addTab("Exames", resizeIcon("resources/Exames.png", 30, 30), new PanelExame(this), "Gerenciar Exames");
+        tabbedPane.addTab("Agendar", resizeIcon("resources/Agenda.png", 30, 30), this.panelAgendar, "Agendar Consultas");
+        tabbedPane.addTab("Exames", resizeIcon("resources/Exames.png", 30, 30), this.panelExame, "Gerenciar Exames");
         tabbedPane.addTab("Materiais", resizeIcon("resources/Materiais.png", 30, 30), this.panelMateriais, "Gerenciar Materiais");
-        tabbedPane.addTab("Relatórios", resizeIcon("resources/Relatorio.png", 30, 30), new PanelRelatorios(this), "Visualizar Relatórios");
+        tabbedPane.addTab("Relatórios", resizeIcon("resources/Relatorio.png", 30, 30), this.panelRelatorios, "Visualizar Relatórios");
 
         //cabeçalho
         ImageIcon headerIcon = new ImageIcon(getClass().getResource("resources/HEADER.png"));
