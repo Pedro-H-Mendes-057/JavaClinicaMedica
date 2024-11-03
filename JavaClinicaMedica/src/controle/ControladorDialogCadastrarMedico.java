@@ -22,8 +22,9 @@ public class ControladorDialogCadastrarMedico implements ActionListener {
     public ControladorDialogCadastrarMedico(DialogCadastrarMedico dialogCadastrarMedico) {
         this.dialogCadastrarMedico = dialogCadastrarMedico;
         tableHorarios = this.dialogCadastrarMedico.getTableHorarios();
-        System.out.println("teste 1 ");
+        System.out.println("teste CONTROLADOR ");
         addEventos();
+        this.dialogCadastrarMedico.setVisible(true);
     }
     
     void addEventos() {

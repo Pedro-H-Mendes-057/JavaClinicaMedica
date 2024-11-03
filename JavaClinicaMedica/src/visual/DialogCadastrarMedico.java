@@ -57,9 +57,6 @@ public class DialogCadastrarMedico extends JDialog {
         this.add(getButtonSalvar()); 
         this.add(getButtonCancelar());
         this.add(getScrollPaneHorarios());
-         addEventos();
-        
-        this.setVisible(true);
     }
     
     JLabel getLabelNome() {
@@ -216,20 +213,4 @@ public class DialogCadastrarMedico extends JDialog {
         return this.scrollPaneHorarios;
     }
     
-    // CODIGO TODO FUDIDO
-    void addEventos() {
-        this.tableHorarios.addMouseListener(new java.awt.event.MouseAdapter() {
-            @Override
-            public void mouseClicked(java.awt.event.MouseEvent e) {
-                int row = tableHorarios.rowAtPoint(e.getPoint());
-                int col = tableHorarios.columnAtPoint(e.getPoint());               
-                
-                
-                if (row >= 0 && col >= 0) {
-                    tableHorarios.getModel().setValueAt("X", row, col);
-                }
-            }
-           
-        });
-    }
 }
