@@ -210,7 +210,7 @@ public class DialogCadastrarMedico extends JDialog {
     public JScrollPane getScrollPaneHorarios() {
         if (this.scrollPaneHorarios == null) {
             this.scrollPaneHorarios = new JScrollPane(getTableHorarios());
-            this.scrollPaneHorarios.setBounds(710, 250, 520, 300);
+            this.scrollPaneHorarios.setBounds(710, 250, 520, 198);
            
         }
         return this.scrollPaneHorarios;
@@ -222,9 +222,8 @@ public class DialogCadastrarMedico extends JDialog {
             @Override
             public void mouseClicked(java.awt.event.MouseEvent e) {
                 int row = tableHorarios.rowAtPoint(e.getPoint());
-                int col = tableHorarios.columnAtPoint(e.getPoint());
+                int col = tableHorarios.columnAtPoint(e.getPoint());               
                 
-                System.out.println("teste 2");
                 
                 if (row >= 0 && col >= 0) {
                     tableHorarios.getModel().setValueAt("X", row, col);
