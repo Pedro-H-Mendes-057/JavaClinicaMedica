@@ -170,8 +170,8 @@ public class PanelMateriais extends JPanel {
         return this.buttonCancelar;
     }
     
-    public boolean getMessageDialogCancelarItem(PanelMedicos panelMedicos) {
-        int resposta = JOptionPane.showConfirmDialog(panelMedicos, "Tem certeza que deseja apagar este item?");
+    public boolean getMessageDialogCancelarItem(PanelMateriais panelMateriais) {
+        int resposta = JOptionPane.showConfirmDialog(panelMateriais, "Tem certeza que deseja apagar este item?");
         
         if (resposta == JOptionPane.YES_OPTION){  
             return true;  

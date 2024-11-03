@@ -1,5 +1,6 @@
 package visual;
 
+import controle.ControladorPanelMateriais;
 import javax.swing.*;
 import java.awt.*;
 import java.net.URL;
@@ -16,7 +17,9 @@ public class Frame extends JFrame {
     private JTabbedPane tabbedPane;
     private JLabel iconClinicaLogo;
     PanelMedicos panelMedicos; // temporario
-    ControladorPanelMedicos controladorPanelMedicos; 
+    ControladorPanelMedicos controladorPanelMedicos; // temporario
+    PanelMateriais panelMateriais; // temporario
+    ControladorPanelMateriais controladorPanelMateriais; // temporario
     
     public Frame() {
         super();
@@ -36,13 +39,15 @@ public class Frame extends JFrame {
 
         this.panelMedicos = new PanelMedicos(this); // temporario
         this.controladorPanelMedicos = new ControladorPanelMedicos(this.panelMedicos); // temporario
+        this.panelMateriais = new PanelMateriais(this);
+        this.controladorPanelMateriais = new ControladorPanelMateriais(this.panelMateriais);
         
         tabbedPane.addTab("Home", resizeIcon("resources/Pacientes.png", 30, 30), panelInicial, "Tela inicial");
         tabbedPane.addTab("Pacientes", resizeIcon("resources/Pacientes.png", 30, 30), new PanelPacientes(this), "Gerenciar Pacientes");
         tabbedPane.addTab("Médicos", resizeIcon("resources/Medico.png", 30, 30), this.panelMedicos, "Gerenciar Médicos");
         tabbedPane.addTab("Agendar", resizeIcon("resources/Agenda.png", 30, 30), new PanelAgendar(this), "Agendar Consultas");
         tabbedPane.addTab("Exames", resizeIcon("resources/Exames.png", 30, 30), new PanelExame(this), "Gerenciar Exames");
-        tabbedPane.addTab("Materiais", resizeIcon("resources/Materiais.png", 30, 30), new PanelMateriais(this), "Gerenciar Materiais");
+        tabbedPane.addTab("Materiais", resizeIcon("resources/Materiais.png", 30, 30), this.panelMateriais, "Gerenciar Materiais");
         tabbedPane.addTab("Relatórios", resizeIcon("resources/Relatorio.png", 30, 30), new PanelRelatorios(this), "Visualizar Relatórios");
 
         //cabeçalho
