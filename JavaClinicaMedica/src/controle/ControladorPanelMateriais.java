@@ -6,13 +6,16 @@ package controle;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import visual.DialogCadastrarMaterial;
 import visual.PanelMateriais;
 /**
  *
  * @author fonfon
  */
 public class ControladorPanelMateriais implements ActionListener {
-    PanelMateriais panelMateriais;   
+    PanelMateriais panelMateriais;
+    DialogCadastrarMaterial  dialogCadastrarMaterial;
+    ControladorDialogCadastrarMaterial controladorDialogCadastrarMaterial;
     
     public ControladorPanelMateriais(PanelMateriais panelMateriais) {
         this.panelMateriais = panelMateriais;
@@ -26,7 +29,8 @@ public class ControladorPanelMateriais implements ActionListener {
     }
     
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == this.panelMateriais.getButtonNovo()) {           
+        if (e.getSource() == this.panelMateriais.getButtonNovo()) {
+            
                        
         } else if (e.getSource() == this.panelMateriais.getButtonCancelar()) {
             this.panelMateriais.getMessageDialogCancelarItem(panelMateriais);
