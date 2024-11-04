@@ -4,18 +4,32 @@
  */
 package controle;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import visual.DialogCadastrarMaterial;
 
 /**
  *
  * @author fonfon
  */
-public class ControladorDialogCadastrarMaterial {
+public class ControladorDialogCadastrarMaterial implements ActionListener {
     DialogCadastrarMaterial dialogCadastrarMaterial;
     
     public ControladorDialogCadastrarMaterial(DialogCadastrarMaterial dialogCadastrarMaterial) {
         this.dialogCadastrarMaterial = dialogCadastrarMaterial;
         
+        addEventos();
+        
         this.dialogCadastrarMaterial.setVisible(true);
     }
+    
+    void addEventos() {
+        this.dialogCadastrarMaterial.getButtonUpload().addActionListener(this);
+    }
+    
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == this.dialogCadastrarMaterial.getButtonUpload()) {
+            
+        }
+    }  
 }

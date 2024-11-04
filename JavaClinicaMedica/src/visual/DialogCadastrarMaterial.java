@@ -29,6 +29,7 @@ public class DialogCadastrarMaterial extends JDialog {
     JTextField textFieldFornecedor;
     JButton buttonSalvar;
     JButton buttonCancelar;
+    JButton buttonUpload;
     
     public DialogCadastrarMaterial(JFrame parent) {
         super(parent, "Cadastrar Material", true);
@@ -47,7 +48,8 @@ public class DialogCadastrarMaterial extends JDialog {
         this.add(getLabelFornecedor()); 
         this.add(getTextFieldFornecedor());         
         this.add(getButtonSalvar()); 
-        this.add(getButtonCancelar()); 
+        this.add(getButtonCancelar());
+        this.add(getButtonUpload());
         
     }
     
@@ -163,5 +165,15 @@ public class DialogCadastrarMaterial extends JDialog {
            
         }
         return this.buttonCancelar;
+    }
+    
+    public JButton getButtonUpload() {
+        if (this.buttonUpload == null) {
+            this.buttonUpload = new JButton("UPLOAD IMAGEM");
+            this.buttonUpload.setFont(new Font("Tahoma", Font.PLAIN, 17));            
+            this.buttonUpload.setBounds(830, 420, 260, 37);
+           
+        }
+        return this.buttonUpload;
     }
 }
