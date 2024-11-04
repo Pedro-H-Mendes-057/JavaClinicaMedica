@@ -16,10 +16,10 @@ import controle.ControladorPanelMedicos; //temporario
 public class Frame extends JFrame {
     private JTabbedPane tabbedPane;
     private JLabel iconClinicaLogo;
-    PanelMedicos panelMedicos; // temporario
-    ControladorPanelMedicos controladorPanelMedicos; // temporario
-    PanelMateriais panelMateriais; // temporario
-    ControladorPanelMateriais controladorPanelMateriais; // temporario
+    PanelMedicos panelMedicos; 
+    ControladorPanelMedicos controladorPanelMedicos; 
+    PanelMateriais panelMateriais; 
+    ControladorPanelMateriais controladorPanelMateriais; 
     
     public Frame() {
         super();
@@ -37,8 +37,8 @@ public class Frame extends JFrame {
         JLabel backgroundLabel = new JLabel(new ImageIcon(getClass().getResource("resources/Background.png"))); 
         panelInicial.add(backgroundLabel, BorderLayout.CENTER);
 
-        this.panelMedicos = new PanelMedicos(this); // temporario
-        this.controladorPanelMedicos = new ControladorPanelMedicos(this.panelMedicos); // temporario
+        this.panelMedicos = new PanelMedicos(this);
+        this.controladorPanelMedicos = new ControladorPanelMedicos(this.panelMedicos);
         this.panelMateriais = new PanelMateriais(this);
         this.controladorPanelMateriais = new ControladorPanelMateriais(this.panelMateriais);
         
@@ -52,8 +52,8 @@ public class Frame extends JFrame {
 
         //cabeçalho
         ImageIcon headerIcon = new ImageIcon(getClass().getResource("resources/HEADER.png"));
-        Image headerImage = headerIcon.getImage().getScaledInstance(1920, 50, Image.SCALE_SMOOTH); // Defina a largura e altura desejadas
-        JLabel headerLabel = new JLabel(new ImageIcon(headerImage)); // Adiciona a imagem redimensionada
+        Image headerImage = headerIcon.getImage().getScaledInstance(1920, 50, Image.SCALE_SMOOTH);
+        JLabel headerLabel = new JLabel(new ImageIcon(headerImage));
 
         // cabeçalho e o tabbed pane
         JPanel headerPanel = new JPanel();

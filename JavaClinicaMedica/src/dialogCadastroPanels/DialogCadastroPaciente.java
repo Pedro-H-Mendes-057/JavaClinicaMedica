@@ -1,26 +1,31 @@
 package dialogCadastroPanels;
- 
+
 import javax.swing.*;
+import ctrlRepositorios.controladorCadastroPacientes;
+import modelo.Endereco;
+import modelo.Paciente;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class DialogCadastroPaciente extends JDialog {
-	private JTextField txFNomePaciente;
-	private JTextField txFDataNasc;
-	private JTextField txFContato;
-	private JTextField txFAltura;
-	private JTextField txFTipoSang;
-	private JTextField txFPeso;
-	private JTextField txFHistMedic;
-	private JTextField txFConvenio;
- 
-    public DialogCadastroPaciente(JFrame parent) {
-        super(parent, "Cadastrar Paciente", true); // True para torná-lo modal
+    private JTextField txFNomePaciente;
+    private JTextField txFDataNasc;
+    private JTextField txFContato;
+    private JTextField txFAltura;
+    private JTextField txFTipoSang;
+    private JTextField txFPeso;
+    private JTextField txFHistMedic;
+    private JTextField txFConvenio;
+    private controladorCadastroPacientes controlador;
+
+    public DialogCadastroPaciente(JFrame parent, controladorCadastroPacientes controlador) {
+        super(parent, "Cadastrar Paciente", true);
+        this.controlador = controlador;
 
         this.setSize(1300, 650);
         this.setResizable(false);
-        this.setLocationRelativeTo(parent); // Centraliza o diálogo em relação ao Frame principal
+        this.setLocationRelativeTo(parent);
         getContentPane().setLayout(null);
         
         JLabel lblNomePaciente = new JLabel("Nome do Paciente:");
@@ -109,11 +114,29 @@ public class DialogCadastroPaciente extends JDialog {
         btSalvar.setForeground(new Color(255, 255, 255));
         btSalvar.setBounds(844, 538, 177, 55);
         getContentPane().add(btSalvar);
+        btSalvar.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                String nome = txFNomePaciente.getText();
+                String dataNasc = txFDataNasc.getText();
+                String contato = txFContato.getText();
+                String tipoSang = txFTipoSang.getText();
+                int altura = Integer.parseInt(txFAltura.getText());
+                double peso = Double.parseDouble(txFPeso.getText());
+                String convenio = txFConvenio.getText();
+                Endereco endereco = null;
+
+                // Usa o controlador para cadastrar o paciente
+                controlador.cadastrarNovoPaciente(nome, dataNasc, contato, tipoSang, altura, peso, convenio, endereco);
+              JOptionPane.showMessageDialog(DialogCadastroPaciente.this, "Paciente salvo com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+                dispose();
+            }
+        });
         
         JButton btCancelar = new JButton("CANCELAR");
         btCancelar.setFont(new Font("Tahoma", Font.PLAIN, 20));
         btCancelar.setBackground(new Color(253, 2, 90));
         btCancelar.setBounds(1055, 538, 177, 55);
         getContentPane().add(btCancelar);
+        
     }
 }

@@ -133,12 +133,6 @@ public class PanelExame extends JPanel {
             this.btNovo = new JButton("NOVO");
             this.btNovo.setBackground(new Color(50, 205, 101));
             this.btNovo.setForeground(new Color(255, 255, 255));
-            this.btNovo.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    new DialogCadastroExames(frame).setVisible(true);
-                }
-            });
         }
         return this.btNovo;
     }

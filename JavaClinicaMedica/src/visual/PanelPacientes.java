@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.table.DefaultTableModel;
 import dialogCadastroPanels.DialogCadastroPaciente;
+import ctrlRepositorios.controladorCadastroPacientes;
 
 public class PanelPacientes extends JPanel {
     JLabel labelPesquisar;
@@ -142,10 +143,11 @@ public class PanelPacientes extends JPanel {
             this.btNovo.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    new DialogCadastroPaciente(frame).setVisible(true); // Abre o JDialog como modal
+                    controladorCadastroPacientes controlador = new controladorCadastroPacientes();
+                    new DialogCadastroPaciente(frame, controlador).setVisible(true);
                 }
             });
-            
+           
         }
         return this.btNovo;
     }

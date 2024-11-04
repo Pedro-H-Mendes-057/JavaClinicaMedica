@@ -13,11 +13,11 @@ public class DialogCadastroExames extends JDialog {
 
 	  
     public DialogCadastroExames(JFrame parent) {
-        super(parent, "Cadastrar Exame", true); // True para torná-lo modal
+        super(parent, "Cadastrar Exame", true);
 
         this.setSize(1300, 650);
         this.setResizable(false);
-        this.setLocationRelativeTo(parent); // Centraliza o diálogo em relação ao Frame principal
+        this.setLocationRelativeTo(parent); // Centraliza o dialog no frame
         getContentPane().setLayout(null);
         
         JLabel lblNomeExame = new JLabel("Nome do Exame:");
