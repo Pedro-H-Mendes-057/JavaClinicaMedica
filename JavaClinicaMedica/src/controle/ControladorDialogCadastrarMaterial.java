@@ -6,6 +6,8 @@ package controle;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import visual.DialogCadastrarMaterial;
 
 /**
@@ -29,7 +31,15 @@ public class ControladorDialogCadastrarMaterial implements ActionListener {
     
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == this.dialogCadastrarMaterial.getButtonUpload()) {
-            
+            uploadImage();
         }
     }  
+    
+    public void uploadImage() {
+        JFileChooser chooser = new JFileChooser(); 
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("JPG Imagens", "jpg");
+        chooser.setFileFilter(filter);
+        int returnVal = chooser.showOpenDialog(this.dialogCadastrarMaterial);
+    }
+    
 }
