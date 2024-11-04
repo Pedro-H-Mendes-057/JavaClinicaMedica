@@ -30,7 +30,8 @@ public class ControladorPanelMateriais implements ActionListener {
     
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == this.panelMateriais.getButtonNovo()) {
-            
+           this.dialogCadastrarMaterial = new DialogCadastrarMaterial(ControladorFrame.frame);
+           this.controladorDialogCadastrarMaterial = new ControladorDialogCadastrarMaterial(this.dialogCadastrarMaterial);
                        
         } else if (e.getSource() == this.panelMateriais.getButtonCancelar()) {
             this.panelMateriais.getMessageDialogCancelarItem(panelMateriais);

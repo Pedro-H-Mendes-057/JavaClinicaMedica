@@ -35,19 +35,19 @@ public class DialogCadastrarMaterial extends JDialog {
         this.setSize(1300, 650);
         this.setResizable(false);
         this.setLocationRelativeTo(parent);         
-        this.setLayout(null);
+        this.setLayout(null); 
         this.add(getLabelNome()); 
         this.add(getTextFieldNome());
         this.add(getLabelQtdEstoque()); 
         this.add(getTextFieldQtdEstoque());
         this.add(getLabelQtdMinima()); 
-        this.add(getTextFieldQtdMinima());
+        this.add(getTextFieldQtdMinima()); 
         this.add(getLabelPreco()); 
         this.add(getTextFieldPreco());
         this.add(getLabelFornecedor()); 
-        this.add(getTextFieldFornecedor());        
+        this.add(getTextFieldFornecedor());         
         this.add(getButtonSalvar()); 
-        this.add(getButtonCancelar());
+        this.add(getButtonCancelar()); 
         
     }
     
@@ -134,7 +134,7 @@ public class DialogCadastrarMaterial extends JDialog {
     }
     
     public JTextField getTextFieldFornecedor() {
-        if (this.textFieldPreco == null) {
+        if (this.textFieldFornecedor == null) {
             this.textFieldFornecedor = new JTextField();
             this.textFieldFornecedor.setBounds(63, 467, 520, 40);
         }
@@ -147,7 +147,7 @@ public class DialogCadastrarMaterial extends JDialog {
             this.buttonSalvar.setFont(new Font("Tahoma", Font.PLAIN, 20));
             this.buttonSalvar.setBackground(new Color(50, 205, 101));
             this.buttonSalvar.setForeground(new Color(255, 255, 255));
-            this.buttonSalvar.setBounds(63, 500, 177, 55);
+            this.buttonSalvar.setBounds(63, 530, 177, 55);
            
         }
         return this.buttonSalvar;
@@ -159,7 +159,7 @@ public class DialogCadastrarMaterial extends JDialog {
             this.buttonCancelar.setFont(new Font("Tahoma", Font.PLAIN, 20));
             this.buttonCancelar.setBackground(new Color(244, 0, 9));
             this.buttonCancelar.setForeground(new Color(255, 255, 255));
-            this.buttonCancelar.setBounds(270, 500, 177, 55);
+            this.buttonCancelar.setBounds(270, 530, 177, 55);
            
         }
         return this.buttonCancelar;

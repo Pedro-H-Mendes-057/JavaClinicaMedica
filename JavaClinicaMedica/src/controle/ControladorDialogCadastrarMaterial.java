@@ -4,10 +4,18 @@
  */
 package controle;
 
+import visual.DialogCadastrarMaterial;
+
 /**
  *
  * @author fonfon
  */
 public class ControladorDialogCadastrarMaterial {
+    DialogCadastrarMaterial dialogCadastrarMaterial;
     
+    public ControladorDialogCadastrarMaterial(DialogCadastrarMaterial dialogCadastrarMaterial) {
+        this.dialogCadastrarMaterial = dialogCadastrarMaterial;
+        
+        this.dialogCadastrarMaterial.setVisible(true);
+    }
 }
