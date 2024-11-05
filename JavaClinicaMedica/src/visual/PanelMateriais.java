@@ -20,13 +20,14 @@ public class PanelMateriais extends JPanel {
     JLabel labelPesquisar;
     JTextField textFieldPesquisar;
     JButton buttonPesquisar;    
-    JScrollPane tableMateriais;
+    JTable tableMateriais;
     JButton buttonNovo;
     JButton buttonEditar;
     JButton buttonCancelar;   
     GridBagConstraints gbc;
     JPanel panelBotoes;
     JPanel panelPesquisar;
+    JScrollPane jscrollPaneMateriais;
    
     
     public PanelMateriais(JFrame frame) {
@@ -48,7 +49,7 @@ public class PanelMateriais extends JPanel {
         gbc.gridx = 0;
         gbc.gridy = 2;
         gbc.fill = GridBagConstraints.HORIZONTAL;
-        this.add(getTextTableMedicos(), gbc);
+        this.add(getJScrollPaneMateriais(), gbc);
         
         gbc.insets = new Insets(25, 200, 5, 200);
         gbc.fill = GridBagConstraints.NONE;
@@ -130,18 +131,26 @@ public class PanelMateriais extends JPanel {
         return this.panelBotoes;
     }
     
-    public JScrollPane getTextTableMedicos() {
+    public JTable getTableMateriais() {
         if (this.tableMateriais == null) {
             String [] colunas = {"NOME", "QTD ESTOQUE", "QTD MÍNIMA ","PREÇO", "FORNECEDOR"};
-            int numLinhas = 1;
+            int numLinhas = 0;
             DefaultTableModel model = new DefaultTableModel(numLinhas, colunas.length);
             model.setColumnIdentifiers(colunas);
-            this.tableMateriais =new JScrollPane(new JTable(model));
-           
+            this.tableMateriais = new JTable(model);
         }
+        
         return this.tableMateriais;
     }
     
+    public JScrollPane getJScrollPaneMateriais() {
+        if (this.jscrollPaneMateriais == null) {
+            this.jscrollPaneMateriais = new JScrollPane(getTableMateriais());
+           
+        }
+        return this.jscrollPaneMateriais;
+    }
+ 
     public JButton getButtonNovo() {
         if (this.buttonNovo == null) {
             this.buttonNovo = new JButton("NOVO");

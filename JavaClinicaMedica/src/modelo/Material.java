@@ -6,6 +6,10 @@ public class Material {
 	private int quantMin; //sistema alerta baixo estoque!!
 	private String fornecedor;
 	private String preco;
+        
+        public Material() {
+        
+        }
 	
 	public Material(String nome, int quant, int quantMin, String fornecedor, String preco) {
 		super();

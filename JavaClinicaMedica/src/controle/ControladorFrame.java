@@ -9,13 +9,17 @@ import java.awt.event.ActionListener;
 import javax.swing.JFrame;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+import repositorio.RepositorioMateriais;
 import visual.Frame;
 
 public class ControladorFrame {
     public static Frame frame;
+    public static RepositorioMateriais repositorioMateriais;
 
     public ControladorFrame() {
+        repositorioMateriais = new RepositorioMateriais();
         frame = new Frame();
+        
         addEventos();
     }
 
@@ -77,7 +81,7 @@ public class ControladorFrame {
 
     public static void main(String[] args) {
         new ControladorFrame();
-controladorCadastroPacientes controlador = new controladorCadastroPacientes();
+        controladorCadastroPacientes controlador = new controladorCadastroPacientes();
         
        
     }
