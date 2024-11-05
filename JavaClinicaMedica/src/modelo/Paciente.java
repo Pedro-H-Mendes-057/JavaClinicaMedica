@@ -11,6 +11,10 @@ public class Paciente {
 	private String convenio;
 	private Endereco endereco;
 	
+	public Paciente() {
+
+	}
+	
 	public Paciente(String nome, String dataNasc, String contato, String tipoSang, int altura, double peso,
 			HistMed histMed, String convenio, Endereco endereco) {
 		super();

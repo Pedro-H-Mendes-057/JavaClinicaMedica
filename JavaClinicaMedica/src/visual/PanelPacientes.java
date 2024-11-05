@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.table.DefaultTableModel;
+
 import dialogCadastroPanels.DialogCadastroPaciente;
 import ctrlRepositorios.controladorCadastroPacientes;
 
@@ -13,7 +14,8 @@ public class PanelPacientes extends JPanel {
     JLabel labelPesquisar;
     JTextField textFieldPesquisar;
     JButton btPesquisar;    
-    JScrollPane tablePacientes;
+    JTable tablePacientes;
+    JScrollPane jscrollPanePacientes;
     JButton btNovo;
     JButton btEditar;
     JButton btCancelar;   
@@ -41,7 +43,7 @@ public class PanelPacientes extends JPanel {
         gbc.gridx = 0;
         gbc.gridy = 2;
         gbc.fill = GridBagConstraints.HORIZONTAL;
-        this.add(getTextTableMedicos(), gbc);
+        this.add(getJScrollPanePacientes(), gbc);
         
         gbc.insets = new Insets(25, 200, 5, 200);
         gbc.fill = GridBagConstraints.NONE;
@@ -123,16 +125,22 @@ public class PanelPacientes extends JPanel {
         return this.panelBotoes;
     }
     
-    public JScrollPane getTextTableMedicos() {
+    public JTable getTablePacientes() {
         if (this.tablePacientes == null) {
-            String [] colunas = {"NOME", "TELEFONE", "TIPO SANGUINEO", "DATA NASC", "CONVENIO"};
-            int numLinhas = 1;
+            String[] colunas = {"NOME", "DATA NASC", "CONTATO", "TIPO SANG", "CONVENIO"};
+            int numLinhas = 0;
             DefaultTableModel model = new DefaultTableModel(numLinhas, colunas.length);
             model.setColumnIdentifiers(colunas);
-            this.tablePacientes =new JScrollPane(new JTable(model));
-           
+            this.tablePacientes = new JTable(model);
         }
         return this.tablePacientes;
+    }
+
+    public JScrollPane getJScrollPanePacientes() {
+        if (this.jscrollPanePacientes == null) {
+            this.jscrollPanePacientes = new JScrollPane(getTablePacientes());
+        }
+        return this.jscrollPanePacientes;
     }
     
     public JButton getButtonNovo() {
@@ -141,7 +149,6 @@ public class PanelPacientes extends JPanel {
             this.btNovo.setBackground(new Color(50, 205, 101));
             this.btNovo.setForeground(new Color(255, 255, 255));
             this.btNovo.addActionListener(new ActionListener() {
-                @Override
                 public void actionPerformed(ActionEvent e) {
                     controladorCadastroPacientes controlador = new controladorCadastroPacientes();
                     new DialogCadastroPaciente(frame, controlador).setVisible(true);
@@ -169,4 +176,16 @@ public class PanelPacientes extends JPanel {
         }
         return this.btCancelar;
     }
+    
+    public boolean getMessageDialogCancelarItem(PanelPacientes panelPacientes) {
+        int resposta = JOptionPane.showConfirmDialog(panelPacientes, "Tem certeza que deseja apagar este item?");
+        
+        if (resposta == JOptionPane.YES_OPTION){  
+            return true;  
+        } else {
+            return false;
+        }  
+    }
+    
+    
 }

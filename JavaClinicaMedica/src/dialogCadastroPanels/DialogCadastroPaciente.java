@@ -4,6 +4,8 @@ import javax.swing.*;
 import ctrlRepositorios.controladorCadastroPacientes;
 import modelo.Endereco;
 import modelo.Paciente;
+import visual.Frame;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -17,6 +19,7 @@ public class DialogCadastroPaciente extends JDialog {
     private JTextField txFPeso;
     private JTextField txFHistMedic;
     private JTextField txFConvenio;
+    private JButton btSalvar; 
     private controladorCadastroPacientes controlador;
 
     public DialogCadastroPaciente(JFrame parent, controladorCadastroPacientes controlador) {
@@ -108,7 +111,7 @@ public class DialogCadastroPaciente extends JDialog {
         txFConvenio.setBounds(278, 458, 277, 40);
         getContentPane().add(txFConvenio);
         
-        JButton btSalvar = new JButton("SALVAR");
+        btSalvar = new JButton("SALVAR");
         btSalvar.setFont(new Font("Tahoma", Font.PLAIN, 20));
         btSalvar.setBackground(new Color(50, 205, 101));
         btSalvar.setForeground(new Color(255, 255, 255));
@@ -124,10 +127,8 @@ public class DialogCadastroPaciente extends JDialog {
                 double peso = Double.parseDouble(txFPeso.getText());
                 String convenio = txFConvenio.getText();
                 Endereco endereco = null;
-
-                // Usa o controlador para cadastrar o paciente
                 controlador.cadastrarNovoPaciente(nome, dataNasc, contato, tipoSang, altura, peso, convenio, endereco);
-              JOptionPane.showMessageDialog(DialogCadastroPaciente.this, "Paciente salvo com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(DialogCadastroPaciente.this, "Paciente salvo com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
                 dispose();
             }
         });
@@ -139,4 +140,51 @@ public class DialogCadastroPaciente extends JDialog {
         getContentPane().add(btCancelar);
         
     }
+    public DialogCadastroPaciente(Frame frame) {
+		// TODO Auto-generated constructor stub
+	}
+	public String getNomePaciente() {
+        return txFNomePaciente.getText();
+    }
+
+    public String getDataNascimento() {
+        return txFDataNasc.getText();
+    }
+
+    public String getContato() {
+        return txFContato.getText();
+    }
+
+    public int getAltura() {
+        try {
+            return Integer.parseInt(txFAltura.getText());
+        } catch (NumberFormatException e) {
+            return 0;
+        }
+    }
+
+    public String getTipoSang() {
+        return txFTipoSang.getText();
+    }
+
+    public double getPeso() {
+        try {
+            return Double.parseDouble(txFPeso.getText());
+        } catch (NumberFormatException e) {
+            return 0.0;
+        }
+    }
+
+    public String getHistoricoMedico() {
+        return txFHistMedic.getText();
+    }
+
+    public String getConvenio() {
+        return txFConvenio.getText();
+    }
+    
+    public JButton getBtSalvar() {
+        return btSalvar;
+    }
+
 }
