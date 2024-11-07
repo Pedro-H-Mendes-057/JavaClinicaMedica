@@ -5,7 +5,7 @@ public class HistMed {
 	/*private String[] alergia;
 	private String[] cronicCondic;
 	private String[] doencaPrev;*/
-	private String[] histMed;
+	private String[] historico;
 //=======
 	
 	public HistMed() {
@@ -13,17 +13,17 @@ public class HistMed {
 	}
 //>>>>>>> branch 'main' of https://github.com/Pedro-H-Mendes-057/JavaClinicaMedica.git
 
-	public HistMed(String[] histMed) {
+	public HistMed(String[] historico) {
 		super();
-		this.histMed = histMed;
+		this.historico = historico;
 	}
 
 	public String[] getHistMed() {
-		return histMed;
+		return historico;
 	}
 
-	public void setHistMed(String[] histMed) {
-		this.histMed = histMed;
+	public void setHistMed(String[] historico) {
+		this.historico = historico;
 	}
 	
 	

@@ -40,10 +40,10 @@ public class ControladorDialogCadastrarPaciente implements ActionListener{
         this.paciente.setNome(this.dialogCadastroPaciente.getNomePaciente());
         this.paciente.setDataNasc(this.dialogCadastroPaciente.getDataNascimento());
         this.paciente.setContato(this.dialogCadastroPaciente.getContato());
-        this.paciente.setAltura(Integer.parseInt(this.dialogCadastroPaciente.getAltura()));
+        this.paciente.setAltura(Integer.valueOf(this.dialogCadastroPaciente.getAltura()));
         this.paciente.setTipoSang(this.dialogCadastroPaciente.getTipoSang());
-        this.paciente.setPeso(Double.parseDouble(this.dialogCadastroPaciente.getPeso()));
-        this.paciente.setHistMed(this.dialogCadastroPaciente.getHistoricoMedico());
+        this.paciente.setPeso(Double.valueOf(this.dialogCadastroPaciente.getPeso()));
+//      this.paciente.setHistMed(this.dialogCadastroPaciente.getHistoricoMedico());
         this.paciente.setConvenio(this.dialogCadastroPaciente.getConvenio());
 
         ControladorFrame.repositorioPacientes.addPaciente(this.paciente);
