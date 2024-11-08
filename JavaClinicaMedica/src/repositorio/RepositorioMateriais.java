@@ -7,10 +7,6 @@ package repositorio;
 import java.util.ArrayList;
 import modelo.Material;
 
-/**
- *
- * @author fonfon
- */
 public class RepositorioMateriais {
     private ArrayList<Material> repositorioMateriais;
     

@@ -31,6 +31,7 @@ public class Frame extends JFrame {
         this.setSize(1920, 1080);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setTitle("Clínica Médica");
+        this.setLocationRelativeTo(null);
 
         tabbedPane = new JTabbedPane();
 

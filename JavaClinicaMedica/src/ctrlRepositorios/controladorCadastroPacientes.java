@@ -19,7 +19,7 @@ public class controladorCadastroPacientes {
     }
 
     public void exibirPacientes() {
-        for (Paciente p : repositorioPacientes.getListaPacientes()) {
+        for (Paciente p : repositorioPacientes.getPacientes()) {
             System.out.println("Nome: " + p.getNome());
         }
     }
