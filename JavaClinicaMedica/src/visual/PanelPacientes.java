@@ -1,17 +1,11 @@
 package visual;
 
 import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
 import javax.swing.table.DefaultTableModel;
 
-import dialogCadastroPanels.DialogCadastroPaciente;
-import ctrlRepositorios.controladorCadastroPacientes;
 
-public class PanelPacientes extends JPanel {
-    JLabel labelPesquisar;
+public class PanelPacientes extends TemplatePanel {
+   /* JLabel labelPesquisar;
     JTextField textFieldPesquisar;
     JButton btPesquisar;    
     JTable tablePacientes;
@@ -22,11 +16,37 @@ public class PanelPacientes extends JPanel {
     GridBagConstraints gbc;
     JPanel panelBotoes;
     JPanel panelPesquisar;
-    private JFrame frame;
+    private JFrame frame;*/
     
     
-    public PanelPacientes(JFrame frame) {
-        setLayout(new GridBagLayout());
+    public PanelPacientes() {
+    	super();
+    	
+    	getLabelPesquisar().setText("Pesquisar por Paciente:");
+    	
+        
+    }
+    
+    @Override
+    public JTable getTable() {
+        if (this.table == null) {
+            String[] colunas = {"NOME", "DATA NASC", "CONTATO", "TIPO SANGU.", "CONVENIO"};
+            DefaultTableModel model = new DefaultTableModel(10, colunas.length);
+            model.setColumnIdentifiers(colunas);
+            this.table = new JTable(model);
+        }
+        return this.table;
+    }
+    
+
+   /* public void setTable(JTable table) {
+    	String[] colunas = {"PEDRO", "TIAGO", "E JOÃO", "NO", "BARQUINHO"};
+    	DefaultTableModel model = new DefaultTableModel(10, colunas.length);
+        model.setColumnIdentifiers(colunas);
+        this.table = new JTable(model);
+    }*/
+    
+       /* setLayout(new GridBagLayout());
         gbc = new GridBagConstraints();
         gbc.insets = new Insets(50, 200, 5, 200);
         
@@ -52,9 +72,10 @@ public class PanelPacientes extends JPanel {
         gbc.gridy = 3; 
         gbc.weighty = 1;
         this.add(getPanelBotoes(), gbc); 
-        
-    }    
+        */
+    //do PanelPacientes 
     
+    /*
     public JPanel getPanelPesquisar() {
         if (this.panelPesquisar == null) {
             this.panelPesquisar = new JPanel();
@@ -184,8 +205,6 @@ public class PanelPacientes extends JPanel {
             return true;  
         } else {
             return false;
-        }  
-    }
-    
-    
-}
+        } */
+    	
+}//da classe

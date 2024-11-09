@@ -17,11 +17,11 @@ public class TemplatePanel extends JPanel {
     JPanel panelPesquisar;
     JScrollPane jscrollPane;
 
-    public TemplatePanel(JFrame frame) {
+    public TemplatePanel() {
         setLayout(new GridBagLayout());
 
         GridBagConstraints gbcPesquisar = new GridBagConstraints();
-        gbcPesquisar.insets = new Insets(20, 0, 20, 0);
+        gbcPesquisar.insets = new Insets(20, 20, 20, 20);
         gbcPesquisar.gridx = 0;
         gbcPesquisar.gridy = 0;
         gbcPesquisar.fill = GridBagConstraints.BOTH;
@@ -32,7 +32,7 @@ public class TemplatePanel extends JPanel {
         gbcTabela.gridy = 1;
         gbcTabela.fill = GridBagConstraints.BOTH;
         gbcTabela.weightx = 1.0;
-        gbcTabela.weighty = 1.0;
+        gbcTabela.weighty = 0;
         this.add(getJScrollPane(), gbcTabela);
 
         GridBagConstraints gbcBotoes = new GridBagConstraints();
@@ -114,6 +114,11 @@ public JPanel getPanelBotoes() {
         }
         return this.table;
     }
+    
+	public void setTableColunas(String[] colunas) {
+	    DefaultTableModel model = (DefaultTableModel) getTable().getModel();
+	    model.setColumnIdentifiers(colunas);
+	}
 
     public JLabel getLabelPesquisar() {
         if (this.labelPesquisar == null) {
@@ -162,4 +167,14 @@ public JPanel getPanelBotoes() {
         }
         return this.btnCancelar;
     }
+    
+      public boolean getMessageDialogCancelarItem(JPanel panel) {
+        	int resposta = JOptionPane.showConfirmDialog(panel, "Tem certeza que deseja apagar este item?");
+        
+        	if (resposta == JOptionPane.YES_OPTION){  
+        		return true;  
+        	} else {
+        		return false;
+        	}
+        }
 }

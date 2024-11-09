@@ -23,24 +23,24 @@ public class ControladorPanelPacientes implements ActionListener{
     }
 
     public void addEventos() {
-        this.panelPacientes.getButtonNovo().addActionListener(this);
-        this.panelPacientes.getButtonCancelar().addActionListener(this);
+        this.panelPacientes.getBTNNovo().addActionListener(this);
+        this.panelPacientes.getBTNCancelar().addActionListener(this);
 
     }
 
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == this.panelPacientes.getButtonNovo()) {
+        if (e.getSource() == this.panelPacientes.getBTNNovo()) {
            this.dialogCadastroPaciente = new DialogCadastroPaciente(ControladorFrame.frame);
            this.controladorDialogCadastrarPaciente = new ControladorDialogCadastrarPaciente(this.dialogCadastroPaciente);
            atualizarTabela();
 
-        } else if (e.getSource() == this.panelPacientes.getButtonCancelar()) {
+        } else if (e.getSource() == this.panelPacientes.getBTNCancelar()) {
             this.panelPacientes.getMessageDialogCancelarItem(panelPacientes);
         }
     }
     
     public void atualizarTabela() {
-        DefaultTableModel model = (DefaultTableModel) this.panelPacientes.getTablePacientes().getModel(); 
+        DefaultTableModel model = (DefaultTableModel) this.panelPacientes.getTable().getModel(); 
         model.setRowCount(0); // Apaga todos os itens da tabela para que ela seja refeita
         
         for (int i = 0; i < ControladorFrame.repositorioPacientes.getPacientes().size(); i++) {

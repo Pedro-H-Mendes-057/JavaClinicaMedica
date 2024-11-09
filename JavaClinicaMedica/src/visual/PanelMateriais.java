@@ -1,5 +1,6 @@
 package visual;
 
+import visual.TemplatePanel;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.GridBagConstraints;
@@ -16,8 +17,8 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
-public class PanelMateriais extends JPanel {
-    JLabel labelPesquisar;
+public class PanelMateriais extends TemplatePanel {
+   /* JLabel labelPesquisar;
     JTextField textFieldPesquisar;
     JButton buttonPesquisar;    
     JTable tableMateriais;
@@ -27,11 +28,16 @@ public class PanelMateriais extends JPanel {
     GridBagConstraints gbc;
     JPanel panelBotoes;
     JPanel panelPesquisar;
-    JScrollPane jscrollPaneMateriais;
+    JScrollPane jscrollPaneMateriais;*/
    
     
-    public PanelMateriais(JFrame frame) {
-        
+    public PanelMateriais() {
+    	super();
+    	
+    	 getBTNNovo().setText("NOVO"); //Ignore, apenas teste
+    	 }//do PanelMateriais
+    
+        /*
         setLayout(new GridBagLayout());
         gbc = new GridBagConstraints();
         gbc.insets = new Insets(30, 200, 0, 200);
@@ -179,14 +185,6 @@ public class PanelMateriais extends JPanel {
         return this.buttonCancelar;
     }
     
-    public boolean getMessageDialogCancelarItem(PanelMateriais panelMateriais) {
-        int resposta = JOptionPane.showConfirmDialog(panelMateriais, "Tem certeza que deseja apagar este item?");
-        
-        if (resposta == JOptionPane.YES_OPTION){  
-            return true;  
-        } else {
-            return false;
-        }  
-    }
-}
+    }*/
+}//da Classe
 

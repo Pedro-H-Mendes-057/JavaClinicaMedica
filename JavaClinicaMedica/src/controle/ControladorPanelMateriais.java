@@ -5,6 +5,7 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import visual.DialogCadastrarMaterial;
 import visual.PanelMateriais;
+import visual.TemplatePanel;
 /**
  *
  * @author fonfon
@@ -20,24 +21,24 @@ public class ControladorPanelMateriais implements ActionListener {
     }
 
     public void addEventos() {
-        this.panelMateriais.getButtonNovo().addActionListener(this);
-        this.panelMateriais.getButtonCancelar().addActionListener(this);
+        this.panelMateriais.getBTNNovo().addActionListener(this);
+        this.panelMateriais.getBTNCancelar().addActionListener(this);
 
     }
 
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == this.panelMateriais.getButtonNovo()) {
+        if (e.getSource() == this.panelMateriais.getBTNNovo()) {
            this.dialogCadastrarMaterial = new DialogCadastrarMaterial(ControladorFrame.frame);
            this.controladorDialogCadastrarMaterial = new ControladorDialogCadastrarMaterial(this.dialogCadastrarMaterial);
            atualizarTabela();
 
-        } else if (e.getSource() == this.panelMateriais.getButtonCancelar()) {
+        } else if (e.getSource() == this.panelMateriais.getBTNCancelar()) {
             this.panelMateriais.getMessageDialogCancelarItem(panelMateriais);
         }
     }
     
     public void atualizarTabela() {
-        DefaultTableModel model = (DefaultTableModel) this.panelMateriais.getTableMateriais().getModel(); 
+        DefaultTableModel model = (DefaultTableModel) this.panelMateriais.getTable().getModel(); 
         
         //System.out.println("size = " + ControladorFrame.repositorioMateriais.getMateriais().size());
         model.setRowCount(0); // apaga todos os itens da tabela para que ela seja refeita
