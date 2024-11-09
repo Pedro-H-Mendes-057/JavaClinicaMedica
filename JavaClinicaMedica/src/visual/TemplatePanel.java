@@ -5,8 +5,7 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
 public class TemplatePanel extends JPanel {
-	public TemplatePanel() {
-	}
+	
     JLabel labelPesquisar;
     JTextField txFPesquisar;
     JButton btnPesquisar;
