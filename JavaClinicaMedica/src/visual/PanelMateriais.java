@@ -34,7 +34,7 @@ public class PanelMateriais extends JPanel {
         
         setLayout(new GridBagLayout());
         gbc = new GridBagConstraints();
-        gbc.insets = new Insets(50, 200, 5, 200);
+        gbc.insets = new Insets(30, 200, 0, 200);
         
         gbc.gridx = 0;
         gbc.gridy = 0;       
