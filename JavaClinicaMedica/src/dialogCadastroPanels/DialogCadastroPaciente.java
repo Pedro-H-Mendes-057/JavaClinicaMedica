@@ -1,6 +1,7 @@
 package dialogCadastroPanels;
 
 import javax.swing.*;
+
 import ctrlRepositorios.controladorCadastroPacientes;
 import modelo.Endereco;
 import modelo.Paciente;
@@ -22,14 +23,16 @@ public class DialogCadastroPaciente extends JDialog {
     private JButton btSalvar; 
     private controladorCadastroPacientes controlador;
 
-    public DialogCadastroPaciente(JFrame parent, controladorCadastroPacientes controlador) {
+    /**
+     * @wbp.parser.constructor
+     */
+    public DialogCadastroPaciente(JFrame parent) {
         super(parent, "Cadastrar Paciente", true);
-        this.controlador = controlador;
-
         this.setSize(1300, 650);
         this.setResizable(false);
         this.setLocationRelativeTo(parent);
         getContentPane().setLayout(null);
+
         
         JLabel lblNomePaciente = new JLabel("Nome do Paciente:");
         lblNomePaciente.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -119,6 +122,7 @@ public class DialogCadastroPaciente extends JDialog {
         getContentPane().add(btSalvar);
         btSalvar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                // Captura os dados do formulário e chama o método do controlador
                 String nome = txFNomePaciente.getText();
                 String dataNasc = txFDataNasc.getText();
                 String contato = txFContato.getText();
@@ -127,6 +131,7 @@ public class DialogCadastroPaciente extends JDialog {
                 double peso = Double.parseDouble(txFPeso.getText());
                 String convenio = txFConvenio.getText();
                 Endereco endereco = null;
+                
                 controlador.cadastrarNovoPaciente(nome, dataNasc, contato, tipoSang, altura, peso, convenio, endereco);
                 JOptionPane.showMessageDialog(DialogCadastroPaciente.this, "Paciente salvo com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
                 dispose();
@@ -138,53 +143,25 @@ public class DialogCadastroPaciente extends JDialog {
         btCancelar.setBackground(new Color(253, 2, 90));
         btCancelar.setBounds(1055, 538, 177, 55);
         getContentPane().add(btCancelar);
-        
-    }
-    public DialogCadastroPaciente(Frame frame) {
-		// TODO Auto-generated constructor stub
-	}
-	public String getNomePaciente() {
-        return txFNomePaciente.getText();
-    }
-
-    public String getDataNascimento() {
-        return txFDataNasc.getText();
-    }
-
-    public String getContato() {
-        return txFContato.getText();
-    }
-
-    public int getAltura() {
-        try {
-            return Integer.parseInt(txFAltura.getText());
-        } catch (NumberFormatException e) {
-            return 0;
-        }
-    }
-
-    public String getTipoSang() {
-        return txFTipoSang.getText();
-    }
-
-    public double getPeso() {
-        try {
-            return Double.parseDouble(txFPeso.getText());
-        } catch (NumberFormatException e) {
-            return 0.0;
-        }
-    }
-
-    public String getHistoricoMedico() {
-        return txFHistMedic.getText();
-    }
-
-    public String getConvenio() {
-        return txFConvenio.getText();
     }
     
-    public JButton getBtSalvar() {
-        return btSalvar;
+    public String getNomePaciente() { return txFNomePaciente.getText(); }
+    public String getDataNascimento() { return txFDataNasc.getText(); }
+    public String getContato() { return txFContato.getText(); }
+    public int getAltura() { return parseInt(txFAltura.getText(), 0); }
+    public String getTipoSang() { return txFTipoSang.getText(); }
+    public double getPeso() { return parseDouble(txFPeso.getText(), 0.0); }
+    public String getHistoricoMedico() { return txFHistMedic.getText(); }
+    public String getConvenio() { return txFConvenio.getText(); }
+    public JButton getBtSalvar() { return btSalvar; }
+    
+    private int parseInt(String text, int defaultValue) {
+        try { return Integer.parseInt(text); }
+        catch (NumberFormatException e) { return defaultValue; }
     }
 
+    private double parseDouble(String text, double defaultValue) {
+        try { return Double.parseDouble(text); }
+        catch (NumberFormatException e) { return defaultValue; }
+    }
 }

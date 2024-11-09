@@ -37,7 +37,6 @@ public class ControladorFrame {
 
     void addEventos() {
         frame.getTabbedPane().addChangeListener(new ChangeListener() {
-            @Override
             public void stateChanged(ChangeEvent e) {
                 atualizIconPintado(frame.getTabbedPane().getSelectedIndex());
             }

@@ -196,7 +196,7 @@ public class PanelPacientes extends TemplatePanel {
            
         }
         return this.btCancelar;
-    }
+    }*/
     
     public boolean getMessageDialogCancelarItem(PanelPacientes panelPacientes) {
         int resposta = JOptionPane.showConfirmDialog(panelPacientes, "Tem certeza que deseja apagar este item?");
@@ -205,6 +205,6 @@ public class PanelPacientes extends TemplatePanel {
             return true;  
         } else {
             return false;
-        } */
-    	
+        } 
+    }
 }//da classe

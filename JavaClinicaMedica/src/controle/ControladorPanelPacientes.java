@@ -2,56 +2,49 @@ package controle;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
-import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-
-import repositorio.RepositorioPacientes;
-import controle.ControladorDialogCadastrarPaciente;
-import dialogCadastroPanels.DialogCadastroPaciente;
 import visual.PanelPacientes;
+import dialogCadastroPanels.DialogCadastroPaciente;
 
-
-public class ControladorPanelPacientes implements ActionListener{
-	PanelPacientes panelPacientes;
-    DialogCadastroPaciente  dialogCadastroPaciente;
-    ControladorDialogCadastrarPaciente controladorDialogCadastrarPaciente;
+public class ControladorPanelPacientes implements ActionListener {
+    private PanelPacientes panelPacientes;
+    private DialogCadastroPaciente dialogCadastroPaciente;
+    private ControladorDialogCadastrarPaciente controladorDialogCadastrarPaciente;
     
     public ControladorPanelPacientes(PanelPacientes panelPacientes) {
         this.panelPacientes = panelPacientes;
         addEventos();
     }
 
-    public void addEventos() {
-        this.panelPacientes.getBTNNovo().addActionListener(this);
-        this.panelPacientes.getBTNCancelar().addActionListener(this);
-
+    private void addEventos() {
+        panelPacientes.getBTNNovo().addActionListener(this);
+        panelPacientes.getBTNCancelar().addActionListener(this);
     }
 
+    @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == this.panelPacientes.getBTNNovo()) {
-           this.dialogCadastroPaciente = new DialogCadastroPaciente(ControladorFrame.frame);
-           this.controladorDialogCadastrarPaciente = new ControladorDialogCadastrarPaciente(this.dialogCadastroPaciente);
-           atualizarTabela();
+        if (e.getSource() == panelPacientes.getBTNNovo()) {
+            dialogCadastroPaciente = new DialogCadastroPaciente(ControladorFrame.frame);
+            
+            controladorDialogCadastrarPaciente = new ControladorDialogCadastrarPaciente(dialogCadastroPaciente);
 
-        } else if (e.getSource() == this.panelPacientes.getBTNCancelar()) {
-            this.panelPacientes.getMessageDialogCancelarItem(panelPacientes);
+            dialogCadastroPaciente.setVisible(true);
+            atualizarTabela();
         }
     }
     
-    public void atualizarTabela() {
-        DefaultTableModel model = (DefaultTableModel) this.panelPacientes.getTable().getModel(); 
+    private void atualizarTabela() {
+        DefaultTableModel model = (DefaultTableModel) panelPacientes.getTable().getModel();
         model.setRowCount(0); // Apaga todos os itens da tabela para que ela seja refeita
         
-        for (int i = 0; i < ControladorFrame.repositorioPacientes.getPacientes().size(); i++) {
-            model.addRow(new Object [] {
-                ControladorFrame.repositorioPacientes.getPacientes().get(i).getNome(),
-                ControladorFrame.repositorioPacientes.getPacientes().get(i).getDataNasc(),
-                ControladorFrame.repositorioPacientes.getPacientes().get(i).getContato(),
-                ControladorFrame.repositorioPacientes.getPacientes().get(i).getTipoSang(),
-                ControladorFrame.repositorioPacientes.getPacientes().get(i).getConvenio()
+        ControladorFrame.repositorioPacientes.getPacientes().forEach(paciente -> {
+            model.addRow(new Object[]{
+                paciente.getNome(),
+                paciente.getDataNasc(),
+                paciente.getContato(),
+                paciente.getTipoSang(),
+                paciente.getConvenio()
             });
-        }    
+        });
     }
-
 }

@@ -8,26 +8,23 @@ import controle.ControladorPanelPacientes;
 import dialogCadastroPanels.DialogCadastroPaciente;
 import repositorio.RepositorioPacientes;
 
-public class ControladorDialogCadastrarPaciente implements ActionListener{
-	DialogCadastroPaciente dialogCadastroPaciente;
-    Paciente paciente;
-    
-    public ControladorDialogCadastrarPaciente(DialogCadastroPaciente dialogCadastroPaciente2) {
-		// TODO Auto-generated constructor stub
-	}
+public class ControladorDialogCadastrarPaciente implements ActionListener {
+    private DialogCadastroPaciente dialogCadastroPaciente;
+    private Paciente paciente;
 
-	public void ControladorDialogCadastroPaciente(DialogCadastroPaciente dialogCadastroPaciente) {
+    // Construtor que recebe o DialogCadastroPaciente
+    public ControladorDialogCadastrarPaciente(DialogCadastroPaciente dialogCadastroPaciente) {
         this.dialogCadastroPaciente = dialogCadastroPaciente;
         
         addEventos();
         
         this.dialogCadastroPaciente.setVisible(true);
     }
-    
+
     void addEventos() {
         this.dialogCadastroPaciente.getBtSalvar().addActionListener(this);
     }
-    
+
     public void actionPerformed(ActionEvent e) {
        if (e.getSource() == this.dialogCadastroPaciente.getBtSalvar()) {            
             addPaciente();
@@ -40,10 +37,9 @@ public class ControladorDialogCadastrarPaciente implements ActionListener{
         this.paciente.setNome(this.dialogCadastroPaciente.getNomePaciente());
         this.paciente.setDataNasc(this.dialogCadastroPaciente.getDataNascimento());
         this.paciente.setContato(this.dialogCadastroPaciente.getContato());
-        this.paciente.setAltura(Integer.valueOf(this.dialogCadastroPaciente.getAltura()));
+        this.paciente.setAltura(this.dialogCadastroPaciente.getAltura());
         this.paciente.setTipoSang(this.dialogCadastroPaciente.getTipoSang());
-        this.paciente.setPeso(Double.valueOf(this.dialogCadastroPaciente.getPeso()));
-//      this.paciente.setHistMed(this.dialogCadastroPaciente.getHistoricoMedico());
+        this.paciente.setPeso(this.dialogCadastroPaciente.getPeso());
         this.paciente.setConvenio(this.dialogCadastroPaciente.getConvenio());
 
         ControladorFrame.repositorioPacientes.addPaciente(this.paciente);
