@@ -21,26 +21,29 @@ public class TemplatePanel extends JPanel {
         setLayout(new GridBagLayout());
 
         GridBagConstraints gbcPesquisar = new GridBagConstraints();
-        gbcPesquisar.insets = new Insets(20, 20, 20, 20);
+        gbcPesquisar.anchor = GridBagConstraints.SOUTH;
+        gbcPesquisar.weighty = 0.3;
+        gbcPesquisar.insets = new Insets(0, 100, 20, 100);
         gbcPesquisar.gridx = 0;
         gbcPesquisar.gridy = 0;
-        gbcPesquisar.fill = GridBagConstraints.BOTH;
+        gbcPesquisar.fill = GridBagConstraints.HORIZONTAL;
         this.add(getPanelPesquisar(), gbcPesquisar);
 
         GridBagConstraints gbcTabela = new GridBagConstraints();
+        gbcTabela.weightx = 1.0;
+        gbcTabela.insets = new Insets(0, 100, 0, 100);
         gbcTabela.gridx = 0;
         gbcTabela.gridy = 1;
         gbcTabela.fill = GridBagConstraints.BOTH;
-        gbcTabela.weightx = 1.0;
-        gbcTabela.weighty = 0;
+        gbcTabela.weighty = 0.3;
         this.add(getJScrollPane(), gbcTabela);
 
         GridBagConstraints gbcBotoes = new GridBagConstraints();
-        gbcBotoes.fill = GridBagConstraints.BOTH;
-        gbcBotoes.insets = new Insets(20, 0, 20, 0);
+        gbcBotoes.weighty = 1.2;
+        gbcBotoes.insets = new Insets(15, 100, 20, 100);
         gbcBotoes.gridx = 0;
         gbcBotoes.gridy = 2;
-	    gbcBotoes.anchor = GridBagConstraints.LINE_START;
+	    gbcBotoes.anchor = GridBagConstraints.NORTHWEST;
         this.add(getPanelBotoes(), gbcBotoes);
     }
 
@@ -48,15 +51,18 @@ public class TemplatePanel extends JPanel {
         if (this.panelPesquisar == null) {
             this.panelPesquisar = new JPanel(new GridBagLayout());
             GridBagConstraints c1 = new GridBagConstraints();
+            c1.insets = new Insets(0, 10, 0, 0);
+            c1.anchor = GridBagConstraints.WEST;
             c1.gridx = 0;
             c1.gridy = 0;
             c1.weighty = 0.6;
             this.panelPesquisar.add(getLabelPesquisar(), c1);
 
             GridBagConstraints c2 = new GridBagConstraints();
+            c2.weighty = 1.0;
             c2.gridx = 0;
             c2.gridy = 1;
-            c2.weightx = 0.8;
+            c2.weightx = 1.0;
             c2.fill = GridBagConstraints.BOTH;
             this.panelPesquisar.add(getTxFPesquisar(), c2);
 
@@ -88,7 +94,6 @@ public JPanel getPanelBotoes() {
         this.panelBotoes.add(getBTNEditar(), c2);
 
         GridBagConstraints c3 = new GridBagConstraints();
-        c3.insets = new Insets(0, 0, 0, 10);
         c3.gridx = 2;
         c3.ipady = 10;
         c3.anchor = GridBagConstraints.LINE_START;
@@ -153,7 +158,7 @@ public JPanel getPanelBotoes() {
     public JButton getBTNEditar() {
         if (this.btnEditar == null) {
             this.btnEditar = new JButton("EDITAR");
-            this.btnEditar.setBackground(new Color(0, 255, 255));
+            this.btnEditar.setBackground(new Color(100, 149, 237));
             this.btnEditar.setForeground(Color.WHITE);
         }
         return this.btnEditar;

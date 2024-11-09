@@ -10,7 +10,8 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class PanelExame extends JPanel {
+public class PanelExame extends TemplatePanel {
+	/*
     private JTextField textFieldPesquisar;
     private JLabel labelPesquisar;
     private JScrollPane tableExames;
@@ -22,35 +23,24 @@ public class PanelExame extends JPanel {
     private JPanel panelBotoes;
     GridBagConstraints gbc;
     private JFrame frame;
-
-    public PanelExame(JFrame frame) {
-        setLayout(new GridBagLayout());
-        gbc = new GridBagConstraints();
-        gbc.insets = new Insets(50, 200, 5, 200);
+*/
+    public PanelExame() {
+        super();
         
-        gbc.gridx = 0;
-        gbc.gridy = 0;       
-        gbc.weighty = 0.1;
-        gbc.weightx = 0.1;
-        gbc.anchor = GridBagConstraints.FIRST_LINE_START;
-        gbc.fill = GridBagConstraints.BOTH;   
-  
-        this.add(getPanelPesquisar(), gbc);
-        
-        gbc.gridx = 0;
-        gbc.gridy = 2;
-        gbc.fill = GridBagConstraints.HORIZONTAL;
-        this.add(getTextTableMedicos(), gbc);
-        
-        gbc.insets = new Insets(25, 200, 5, 200);
-        gbc.fill = GridBagConstraints.NONE;
-        gbc.gridwidth = 1;
-        gbc.gridx = 0;
-        gbc.gridy = 3; 
-        gbc.weighty = 1;
-        this.add(getPanelBotoes(), gbc); 
-    }    
+        getLabelPesquisar().setText("Pesquisar por Exame:");
+    }
     
+    @Override
+    public JTable getTable() {
+        if (this.table == null) {
+            String[] colunas = {"NOME DO PACIENTE", "TIPO DE EXAME", "VALOR", "DESCRICAO"};
+            DefaultTableModel model = new DefaultTableModel(10, colunas.length);
+            model.setColumnIdentifiers(colunas);
+            this.table = new JTable(model);
+        }
+        return this.table;
+    }
+    /*
     public JPanel getPanelPesquisar() {
         if (this.panelPesquisar == null) {
             this.panelPesquisar = new JPanel();
@@ -158,4 +148,5 @@ public class PanelExame extends JPanel {
         }
         return this.btCancelar;
     }
+    */
 }

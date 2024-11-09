@@ -34,10 +34,11 @@ public class Frame extends JFrame {
     
     public Frame() {
         super();
-        this.setSize(1920, 1080);
+        this.setSize(1280, 720);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setTitle("Clínica Médica");
         this.setLocationRelativeTo(null);
+        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
 
         tabbedPane = new JTabbedPane();
 
@@ -53,11 +54,11 @@ public class Frame extends JFrame {
         //OBS.: FALTA CRIAR OS CONTROLADORES DE MUITOS PAINEIS
         this.panelPacientes = new PanelPacientes();
         this.controladorPanelPacientes = new ControladorPanelPacientes(this.panelPacientes);
-        this.panelMedicos = new PanelMedicos(this);
+        this.panelMedicos = new PanelMedicos();
         this.controladorPanelMedicos = new ControladorPanelMedicos(this.panelMedicos);
         this.panelAgendar = new PanelAgendar(this);
 //      this.controladorPanelAgendar = new ControladorPanelAgendar(this.panelAgendar);
-        this.panelExame = new PanelExame(this);
+        this.panelExame = new PanelExame();
 //      this.controladorPanelExame = new ControladorPanelExame(this.panelExame);
         this.panelMateriais = new PanelMateriais();
         this.controladorPanelMateriais = new ControladorPanelMateriais(this.panelMateriais);

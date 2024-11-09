@@ -18,14 +18,14 @@ public class ControladorPanelExame implements ActionListener {
     }
     
     private void addEventos() {
-        this.panelExame.getButtonNovo().addActionListener(this);
-        this.panelExame.getButtonReagendar().addActionListener(this);
+        this.panelExame.getBTNNovo().addActionListener(this);
+        this.panelExame.getBTNEditar().addActionListener(this);
     }
     
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == panelExame.getButtonNovo()) {
+        if (e.getSource() == panelExame.getBTNNovo()) {
             new DialogCadastroExames(frame).setVisible(true);
-        } else if (e.getSource() == panelExame.getButtonReagendar()) {
+        } else if (e.getSource() == panelExame.getBTNEditar()) {
             new DialogReagendarExame(frame).setVisible(true);
         }
     }

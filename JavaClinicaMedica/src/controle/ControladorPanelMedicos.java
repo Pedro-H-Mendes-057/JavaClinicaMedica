@@ -24,16 +24,16 @@ public class ControladorPanelMedicos implements ActionListener {
     }
     
     public void addEventos() {
-        this.panelMedicos.getButtonNovo().addActionListener(this);
-        this.panelMedicos.getButtonCancelar().addActionListener(this);
+        this.panelMedicos.getBTNNovo().addActionListener(this);
+        this.panelMedicos.getBTNCancelar().addActionListener(this);
         
     }
     
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == this.panelMedicos.getButtonNovo()) {            
+        if (e.getSource() == this.panelMedicos.getBTNNovo()) {            
             this.cadastrarMedico = new DialogCadastrarMedico(ControladorFrame.frame);            
             this.controladorDialogCadastrarMedico = new ControladorDialogCadastrarMedico(this.cadastrarMedico);            
-        } else if (e.getSource() == this.panelMedicos.getButtonCancelar()) {
+        } else if (e.getSource() == this.panelMedicos.getBTNCancelar()) {
             this.panelMedicos.getMessageDialogCancelarItem(panelMedicos);
         }
     }
