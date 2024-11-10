@@ -8,7 +8,7 @@ import java.time.LocalDate;
 import java.time.format.TextStyle;
 import java.util.Locale;
 
-public class PanelAgendar extends TemplatePanel {
+public class Teste extends TemplatePanel {
     private Frame frame;
     private JTable tabelaSemana;
     private JButton btnAvancar, btnVoltar;
@@ -17,7 +17,7 @@ public class PanelAgendar extends TemplatePanel {
     private LocalDate dataAtual = LocalDate.now();
     private String[] horarios = { "08:00", "09:00", "10:00", "11:00", "13:00", "14:00", "15:00" };
 
-    public PanelAgendar(Frame frame) {
+    public Teste(Frame frame) {
         super();
         this.frame = frame;
         setLayout(null); // ainda permite o controle manual
