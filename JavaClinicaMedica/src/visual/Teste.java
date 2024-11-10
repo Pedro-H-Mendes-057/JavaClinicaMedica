@@ -2,11 +2,13 @@ package visual;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 import java.time.LocalDate;
 import java.time.format.TextStyle;
 import java.util.Locale;
 
-public class PanelAgendar extends TemplatePanel { // Alterado para herdar de JPanel
+public class PanelAgendar extends TemplatePanel {
     private Frame frame;
     private JTable tabelaSemana;
     private JButton btnAvancar, btnVoltar;
@@ -16,43 +18,56 @@ public class PanelAgendar extends TemplatePanel { // Alterado para herdar de JPa
     private String[] horarios = { "08:00", "09:00", "10:00", "11:00", "13:00", "14:00", "15:00" };
 
     public PanelAgendar(Frame frame) {
-    	super();
+        super();
         this.frame = frame;
-        setLayout(null); // usei o layout null pra editar o panel no windowbuilder :P
+        setLayout(null); // ainda permite o controle manual
 
-        labelTitulo = new JLabel("AGENDAMENTOS");
-        labelTitulo.setHorizontalAlignment(SwingConstants.CENTER);
+        // Inicializar componentes com proporções relativas
+        labelTitulo = new JLabel("AGENDAMENTOS", SwingConstants.CENTER);
         labelTitulo.setFont(new Font("Tahoma", Font.PLAIN, 16));
-        labelTitulo.setBounds(600, 21, 184, 20);
         add(labelTitulo);
 
         btnVoltar = new JButton("< Voltar ");
-        btnVoltar.setBounds(503, 51, 100, 30);
         add(btnVoltar);
 
         btnAvancar = new JButton(" Avançar >");
-        btnAvancar.setBounds(777, 51, 100, 30);
         add(btnAvancar);
 
-        labelMes = new JLabel();
-        labelMes.setHorizontalAlignment(SwingConstants.CENTER);
-        labelMes.setBounds(636, 51, 100, 30);
+        labelMes = new JLabel("", SwingConstants.CENTER);
         add(labelMes);
 
         tabelaSemana = new JTable();
         JScrollPane scrollPane = new JScrollPane(tabelaSemana);
-        scrollPane.setBounds(190, 109, 1094, 475);
         add(scrollPane);
 
         atualizarTabelaSemana();
 
-        // EVento dos botoes
         btnVoltar.addActionListener(e -> mudarSemana(-1));
         btnAvancar.addActionListener(e -> mudarSemana(1));
+
+        // Adicionar o ComponentListener para redimensionamento
+        addComponentListener(new ComponentAdapter() {
+            public void componentResized(ComponentEvent e) {
+                ajustarComponentes();
+            }
+        });
+
+        ajustarComponentes(); // chamada inicial
+    }
+
+    private void ajustarComponentes() {
+        int largura = getWidth();
+        int altura = getHeight();
+
+        labelTitulo.setBounds((int)(largura * 0.4), (int)(altura * 0.02), (int)(largura * 0.2), 30);
+        btnVoltar.setBounds((int)(largura * 0.3), (int)(altura * 0.1), 100, 30);
+        btnAvancar.setBounds((int)(largura * 0.6), (int)(altura * 0.1), 100, 30);
+        labelMes.setBounds((int)(largura * 0.45), (int)(altura * 0.1), 100, 30);
+        tabelaSemana.setBounds((int)(largura * 0.1), (int)(altura * 0.2), (int)(largura * 0.8), (int)(altura * 0.6));
     }
 
     private void atualizarTabelaSemana() {
-        // Atualiza o cabeçalho com os dias da semana
+        // Atualiza cabeçalho e conteúdo da tabela
         LocalDate inicioSemana = dataAtual.with(java.time.DayOfWeek.MONDAY);
         String[] colunas = new String[8];
         colunas[0] = "HORÁRIOS";
@@ -68,12 +83,13 @@ public class PanelAgendar extends TemplatePanel { // Alterado para herdar de JPa
         }
         tabelaSemana.setModel(modeloTabela);
 
-        // muda o Mes
+        // Atualiza o mês
         labelMes.setText(dataAtual.getMonth().getDisplayName(TextStyle.FULL, Locale.getDefault()).toUpperCase());
     }
 
     private void mudarSemana(int nav) {
-        dataAtual = dataAtual.plusWeeks(nav); // Muda a semana de acordo com navegaçao (-1 ou +1)
-        atualizarTabelaSemana(); // Atualiza a tabela pra mostrar semana nova
+        dataAtual = dataAtual.plusWeeks(nav); // Muda semana com base na navegação
+        atualizarTabelaSemana(); // Atualiza a tabela para mostrar nova semana
     }
 }
+
