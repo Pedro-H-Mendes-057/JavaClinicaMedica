@@ -1,5 +1,6 @@
 package visual;
 
+import controle.ControladorPanelAgendar;
 import controle.ControladorPanelMateriais;
 import javax.swing.*;
 import java.awt.*;
@@ -30,6 +31,7 @@ public class Frame extends JFrame {
     ControladorPanelMedicos controladorPanelMedicos; 
     ControladorPanelExame controladorPanelExame;
     ControladorPanelMateriais controladorPanelMateriais; 
+    ControladorPanelAgendar controladorPanelAgendar;
     
     
     public Frame() {
@@ -57,7 +59,7 @@ public class Frame extends JFrame {
         this.panelMedicos = new PanelMedicos();
         this.controladorPanelMedicos = new ControladorPanelMedicos(this.panelMedicos);
         this.panelAgendar = new PanelAgendar(this);
-//      this.controladorPanelAgendar = new ControladorPanelAgendar(this.panelAgendar);
+        this.controladorPanelAgendar = new ControladorPanelAgendar(this.panelAgendar);
         this.panelExame = new PanelExame();
 //      this.controladorPanelExame = new ControladorPanelExame(this.panelExame);
         this.panelMateriais = new PanelMateriais();
