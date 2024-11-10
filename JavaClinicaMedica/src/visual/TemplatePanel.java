@@ -75,32 +75,32 @@ public class TemplatePanel extends JPanel {
         return this.panelPesquisar;
     }
 
-public JPanel getPanelBotoes() {
-    if (this.panelBotoes == null) {
-        this.panelBotoes = new JPanel(new GridBagLayout());
+    public JPanel getPanelBotoes() {
+        if (this.panelBotoes == null) {
+            this.panelBotoes = new JPanel(new GridBagLayout());
 
-        GridBagConstraints c1 = new GridBagConstraints();
-        c1.insets = new Insets(0, 0, 0, 10);
-        c1.gridx = 0;
-        c1.ipady = 10;
-        c1.anchor = GridBagConstraints.LINE_START;
-        this.panelBotoes.add(getBTNNovo(), c1);
+            GridBagConstraints c1 = new GridBagConstraints();
+            c1.insets = new Insets(0, 0, 0, 10);
+            c1.gridx = 0;
+            c1.ipady = 10;
+            c1.anchor = GridBagConstraints.LINE_START;
+            this.panelBotoes.add(getBTNNovo(), c1);
 
-        GridBagConstraints c2 = new GridBagConstraints();
-        c2.insets = new Insets(0, 0, 0, 10);
-        c2.gridx = 1; 
-        c2.ipady = 10;
-        c2.anchor = GridBagConstraints.LINE_START;
-        this.panelBotoes.add(getBTNEditar(), c2);
+            GridBagConstraints c2 = new GridBagConstraints();
+            c2.insets = new Insets(0, 0, 0, 10);
+            c2.gridx = 1; 
+            c2.ipady = 10;
+            c2.anchor = GridBagConstraints.LINE_START;
+            this.panelBotoes.add(getBTNEditar(), c2);
 
-        GridBagConstraints c3 = new GridBagConstraints();
-        c3.gridx = 2;
-        c3.ipady = 10;
-        c3.anchor = GridBagConstraints.LINE_START;
-        this.panelBotoes.add(getBTNCancelar(), c3);
+            GridBagConstraints c3 = new GridBagConstraints();
+            c3.gridx = 2;
+            c3.ipady = 10;
+            c3.anchor = GridBagConstraints.LINE_START;
+            this.panelBotoes.add(getBTNCancelar(), c3);
+        }
+        return this.panelBotoes;
     }
-    return this.panelBotoes;
-}
 
 
     public JScrollPane getJScrollPane() {
