@@ -33,22 +33,30 @@ public class PanelAgendar extends JPanel { // Alterado para herdar de JPanel
         gbcPesquisar.anchor = GridBagConstraints.PAGE_START;
         gbcPesquisar.gridx = 0;
         gbcPesquisar.gridy = 0;
+        gbcPesquisar.weightx = 0.1;
         gbcPesquisar.fill = GridBagConstraints.HORIZONTAL;
+        gbcPesquisar.insets = new Insets(0, 100, 20, 100);
         this.add(getPanelPesquisar(), gbcPesquisar);
         
         GridBagConstraints gbcBotesAgenda = new GridBagConstraints();
         gbcBotesAgenda.gridx = 0;
         gbcBotesAgenda.gridy = 1;
+        gbcBotesAgenda.weightx = 0.1;
         add(getPanelBotesAgenda(), gbcBotesAgenda);  
         
         GridBagConstraints gbcTabelaAgendamento = new GridBagConstraints();
         gbcTabelaAgendamento.gridx = 0;
         gbcTabelaAgendamento.gridy = 2;
+        gbcTabelaAgendamento.weightx = 0.1;
+        gbcTabelaAgendamento.fill = GridBagConstraints.HORIZONTAL;
+        gbcTabelaAgendamento.insets = new Insets(20, 100, 0, 100);
         add(getJScrollPane(), gbcTabelaAgendamento);
         
         GridBagConstraints gbcBotes = new GridBagConstraints();
         gbcBotes.gridx = 0;
         gbcBotes.gridy = 3;
+        gbcBotes.weightx = 0.1;
+        gbcBotes.insets = new Insets(20, 100, 0, 100);
         add(getPanelBotoes(), gbcBotes);
 
         atualizarTabelaSemana();
