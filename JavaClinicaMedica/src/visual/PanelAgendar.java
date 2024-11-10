@@ -1,21 +1,11 @@
 package visual;
 
 import java.awt.Color;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.JButton;
-import javax.swing.SwingConstants;
+import javax.swing.JFrame;
 import javax.swing.table.DefaultTableModel;
-
-import java.awt.Font;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import javax.swing.JTextField;
 import javax.swing.JTable;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+
 
 public class PanelAgendar extends TemplatePanel {
    
@@ -38,8 +28,7 @@ public class PanelAgendar extends TemplatePanel {
         }
         return this.tableAgendar;
     }    
-    
-        
+            
     @Override
     public JButton getBTNEditar() {
         if (this.btnEditar == null) {
@@ -51,4 +40,4 @@ public class PanelAgendar extends TemplatePanel {
     }
     
     
-}// da classe
+}
