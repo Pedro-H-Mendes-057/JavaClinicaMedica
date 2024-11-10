@@ -1,7 +1,6 @@
 package visual;
 
 import java.awt.Color;
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JTable;
@@ -27,17 +26,5 @@ public class PanelAgendar extends TemplatePanel {
             
         }
         return this.tableAgendar;
-    }    
-            
-    @Override
-    public JButton getBTNEditar() {
-        if (this.btnEditar == null) {
-            this.btnEditar = new JButton("EDITAR");
-            this.btnEditar.setBackground(new Color(100, 149, 237));
-            this.btnEditar.setForeground(Color.WHITE);
-        }
-        return this.btnEditar;
-    }
-    
-    
+    }      
 }
