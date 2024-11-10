@@ -15,7 +15,7 @@ public class PanelAgendar extends JPanel { // Alterado para herdar de JPanel
     private JButton btnEditar;
     private JButton btnCancelar;
     private JButton btnPesquisar;
-    private JPanel panelBotoesAgenda;
+    private JPanel panelBotoesAgendar;
     private JPanel panelBotoes;
     private JPanel panelPesquisar;
     private JButton btnAvancar, btnVoltar;
@@ -28,16 +28,28 @@ public class PanelAgendar extends JPanel { // Alterado para herdar de JPanel
     public PanelAgendar(Frame frame) {
         this.frame = frame;
         setLayout(new GridBagLayout());
-        GridBagConstraints gbcPesquisar = new GridBagConstraints();
         
-        gbcPesquisar.anchor = GridBagConstraints.SOUTH;
-      
-        add(getPanelPesquisar());       
-        add(getBTNVoltar());
-        add(getBTNAvancar());       
-        add(getLabelMes());   
-        add(getJScrollPane());
-        add(getPanelBotoes());
+        GridBagConstraints gbcPesquisar = new GridBagConstraints();        
+        gbcPesquisar.anchor = GridBagConstraints.PAGE_START;
+        gbcPesquisar.gridx = 0;
+        gbcPesquisar.gridy = 0;
+        gbcPesquisar.fill = GridBagConstraints.HORIZONTAL;
+        this.add(getPanelPesquisar(), gbcPesquisar);
+        
+        GridBagConstraints gbcBotesAgenda = new GridBagConstraints();
+        gbcBotesAgenda.gridx = 0;
+        gbcBotesAgenda.gridy = 1;
+        add(getPanelBotesAgenda(), gbcBotesAgenda);  
+        
+        GridBagConstraints gbcTabelaAgendamento = new GridBagConstraints();
+        gbcTabelaAgendamento.gridx = 0;
+        gbcTabelaAgendamento.gridy = 2;
+        add(getJScrollPane(), gbcTabelaAgendamento);
+        
+        GridBagConstraints gbcBotes = new GridBagConstraints();
+        gbcBotes.gridx = 0;
+        gbcBotes.gridy = 3;
+        add(getPanelBotoes(), gbcBotes);
 
         atualizarTabelaSemana();
 
@@ -99,6 +111,16 @@ public class PanelAgendar extends JPanel { // Alterado para herdar de JPanel
             this.panelPesquisar.add(getBTNPesquisar(), c3);
         }
         return this.panelPesquisar;
+    }
+    
+     public JPanel getPanelBotesAgenda() {
+        if (this.panelBotoesAgendar == null) { 
+            this.panelBotoesAgendar = new JPanel();
+            this.panelBotoesAgendar.add(getBTNVoltar());
+            this.panelBotoesAgendar.add(getLabelMes());
+            this.panelBotoesAgendar.add(getBTNAvancar());
+        }
+        return this.panelBotoesAgendar;
     }
     
     public JLabel getLabelPesquisar() {
