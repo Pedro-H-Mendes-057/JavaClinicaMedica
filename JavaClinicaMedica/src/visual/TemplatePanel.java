@@ -43,7 +43,7 @@ public class TemplatePanel extends JPanel {
         gbcBotoes.insets = new Insets(15, 100, 20, 100);
         gbcBotoes.gridx = 0;
         gbcBotoes.gridy = 2;
-	    gbcBotoes.anchor = GridBagConstraints.NORTHWEST;
+	gbcBotoes.anchor = GridBagConstraints.NORTHWEST;
         this.add(getPanelBotoes(), gbcBotoes);
     }
 
@@ -113,7 +113,7 @@ public JPanel getPanelBotoes() {
     public JTable getTable() {
         if (this.table == null) {
             String[] colunas = {"NOME", "QTD ESTOQUE", "QTD MÍNIMA", "PREÇO", "FORNECEDOR"};
-            DefaultTableModel model = new DefaultTableModel(10, colunas.length);
+            DefaultTableModel model = new DefaultTableModel(0, colunas.length);
             model.setColumnIdentifiers(colunas);
             this.table = new JTable(model);
         }
