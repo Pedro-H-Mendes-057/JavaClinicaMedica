@@ -20,8 +20,9 @@ public class PanelAgendar extends JPanel { // Alterado para herdar de JPanel
     private JPanel panelPesquisar;
     private JButton btnAvancar, btnVoltar;
     private JLabel labelMes;
+    private JLabel labelAno;
     private JLabel labelTitulo;
-    JScrollPane scrollPane;
+    private JScrollPane scrollPane;
     private LocalDate dataAtual = LocalDate.now();
     private String[] horarios = { "08:00", "09:00", "10:00", "11:00", "13:00", "14:00", "15:00" };
 
@@ -86,6 +87,7 @@ public class PanelAgendar extends JPanel { // Alterado para herdar de JPanel
 
         // muda o Mes
         getLabelMes().setText(dataAtual.getMonth().getDisplayName(TextStyle.FULL, Locale.getDefault()).toUpperCase());
+        getLabelAno().setText(String.valueOf(dataAtual.getYear()));
     }
 
     private void mudarSemana(int nav) {
@@ -126,6 +128,7 @@ public class PanelAgendar extends JPanel { // Alterado para herdar de JPanel
             this.panelBotoesAgendar = new JPanel();
             this.panelBotoesAgendar.add(getBTNVoltar());
             this.panelBotoesAgendar.add(getLabelMes());
+            this.panelBotoesAgendar.add(getLabelAno());
             this.panelBotoesAgendar.add(getBTNAvancar());
         }
         return this.panelBotoesAgendar;
@@ -133,7 +136,7 @@ public class PanelAgendar extends JPanel { // Alterado para herdar de JPanel
     
     public JLabel getLabelPesquisar() {
         if (this.labelPesquisar == null) {
-            this.labelPesquisar = new JLabel("Pesquisar por agendamentos por médico:");
+            this.labelPesquisar = new JLabel("Pesquisar agendamentos por médico:");
         }
         return this.labelPesquisar;
     }
@@ -178,6 +181,14 @@ public class PanelAgendar extends JPanel { // Alterado para herdar de JPanel
         }
         
         return this.labelMes;
+    }
+    
+    public JLabel getLabelAno() {
+        if (this.labelAno == null) {
+            this.labelAno = new JLabel();
+        }
+        
+        return this.labelAno;
     }
     
     public JButton getBTNNovo() {
