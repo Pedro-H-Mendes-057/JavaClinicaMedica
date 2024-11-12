@@ -28,7 +28,7 @@ public class ControladorPanelPacientes implements ActionListener {
             
             controladorDialogCadastrarPaciente = new ControladorDialogCadastrarPaciente(dialogCadastrarPaciente);
 
-            dialogCadastrarPaciente.setVisible(true);
+            
             atualizarTabela();
         }
     }

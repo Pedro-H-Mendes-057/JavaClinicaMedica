@@ -25,8 +25,7 @@ public class ControladorPanelExames implements ActionListener {
     
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == panelExames.getBTNNovo()) {
-            System.out.println("TESTE");
+        if (e.getSource() == panelExames.getBTNNovo()) {            
             dialogCadastrarExames = new DialogCadastrarExames(ControladorFrame.frame);
             dialogCadastrarExames.setVisible(true);
             
