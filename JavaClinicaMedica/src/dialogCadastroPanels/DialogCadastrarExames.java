@@ -16,8 +16,7 @@ public class DialogCadastrarExames extends JDialog {
         super(parent, "Cadastrar Exame", true);
 
         this.setSize(1300, 650);
-        this.setResizable(false);
-        this.setVisible(true);;
+        this.setResizable(false);        
         this.setLocationRelativeTo(parent); // Centraliza o dialog no frame
         getContentPane().setLayout(null);
         

@@ -137,7 +137,7 @@ public class DialogCadastrarMedico extends JDialog {
     JLabel getLabelValor() {
         if (this.labelValor == null) {
             this.labelValor = new JLabel();
-            this.labelValor.setText("Valor:");
+            this.labelValor.setText("Valor da consulta:");
             this.labelValor.setFont(new Font("Tahoma", Font.PLAIN, 20));
             this.labelValor.setBounds(63, 332, 452, 29);            
         }

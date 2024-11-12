@@ -11,11 +11,10 @@ import javax.swing.JFrame;
 public class ControladorPanelExames implements ActionListener {
     private PanelExames panelExames;
     private DialogCadastrarExames dialogCadastrarExames;
-    private JFrame frame;
     
-    public ControladorPanelExames(PanelExames panelExames, JFrame frame) {
-        this.panelExames = panelExames;
-        this.frame = frame;
+    
+    public ControladorPanelExames(PanelExames panelExames) {
+        this.panelExames = panelExames;       
         addEventos();
     }
     
@@ -23,15 +22,17 @@ public class ControladorPanelExames implements ActionListener {
         this.panelExames.getBTNNovo().addActionListener(this);
         this.panelExames.getBTNEditar().addActionListener(this);
     }
+    
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == panelExames.getBTNNovo()) {
-           
+            System.out.println("TESTE");
             dialogCadastrarExames = new DialogCadastrarExames(ControladorFrame.frame);
             dialogCadastrarExames.setVisible(true);
             
+            
         } else if (e.getSource() == panelExames.getBTNEditar()) {
-            new DialogReagendarExames(frame).setVisible(true);
+            new DialogReagendarExames(ControladorFrame.frame).setVisible(true);
         }
     }//do actionperformed
 

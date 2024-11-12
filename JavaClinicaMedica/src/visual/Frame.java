@@ -61,7 +61,7 @@ public class Frame extends JFrame {
         this.panelAgendar = new PanelAgendar(this);
         this.controladorPanelAgendar = new ControladorPanelAgendar(this.panelAgendar);
         this.panelExames = new PanelExames();
-//      this.controladorPanelExame = new ControladorPanelExame(this.panelExame);
+        this.controladorPanelExames = new ControladorPanelExames(this.panelExames);
         this.panelMateriais = new PanelMateriais();
         this.controladorPanelMateriais = new ControladorPanelMateriais(this.panelMateriais);
         this.panelRelatorios = new PanelRelatorios(this);
