@@ -25,7 +25,7 @@ public class ControladorPanelMedicos implements ActionListener {
     
     public void addEventos() {
         this.panelMedicos.getBTNNovo().addActionListener(this);
-        this.panelMedicos.getBTNCancelar().addActionListener(this);
+        this.panelMedicos.getBTNExcluir().addActionListener(this);
         
     }
     
@@ -33,7 +33,7 @@ public class ControladorPanelMedicos implements ActionListener {
         if (e.getSource() == this.panelMedicos.getBTNNovo()) {            
             this.cadastrarMedico = new DialogCadastrarMedico(ControladorFrame.frame);            
             this.controladorDialogCadastrarMedico = new ControladorDialogCadastrarMedico(this.cadastrarMedico);            
-        } else if (e.getSource() == this.panelMedicos.getBTNCancelar()) {
+        } else if (e.getSource() == this.panelMedicos.getBTNExcluir()) {
             this.panelMedicos.getMessageDialogCancelarItem(panelMedicos);
         }
     }

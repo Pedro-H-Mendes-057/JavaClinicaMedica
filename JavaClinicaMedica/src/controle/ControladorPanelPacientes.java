@@ -18,7 +18,7 @@ public class ControladorPanelPacientes implements ActionListener {
 
     private void addEventos() {
         panelPacientes.getBTNNovo().addActionListener(this);
-        panelPacientes.getBTNCancelar().addActionListener(this);
+        panelPacientes.getBTNExcluir().addActionListener(this);
     }
 
     @Override

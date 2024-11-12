@@ -12,7 +12,7 @@ public class TemplatePanel extends JPanel {
     JTable table;
     JButton btnNovo;
     JButton btnEditar;
-    JButton btnCancelar;
+    JButton btnExcluir;
     JPanel panelBotoes;
     JPanel panelPesquisar;
     JScrollPane jscrollPane;
@@ -97,7 +97,7 @@ public class TemplatePanel extends JPanel {
             c3.gridx = 2;
             c3.ipady = 10;
             c3.anchor = GridBagConstraints.LINE_START;
-            this.panelBotoes.add(getBTNCancelar(), c3);
+            this.panelBotoes.add(getBTNExcluir(), c3);
         }
         return this.panelBotoes;
     }
@@ -164,13 +164,13 @@ public class TemplatePanel extends JPanel {
         return this.btnEditar;
     }
 
-    public JButton getBTNCancelar() {
-        if (this.btnCancelar == null) {
-            this.btnCancelar = new JButton("CANCELAR");
-            this.btnCancelar.setBackground(new Color(244, 0, 9));
-            this.btnCancelar.setForeground(Color.WHITE);
+    public JButton getBTNExcluir() {
+        if (this.btnExcluir == null) {
+            this.btnExcluir = new JButton("EXCLUIR");
+            this.btnExcluir.setBackground(new Color(244, 0, 9));
+            this.btnExcluir.setForeground(Color.WHITE);
         }
-        return this.btnCancelar;
+        return this.btnExcluir;
     }
     
       public boolean getMessageDialogCancelarItem(JPanel panel) {

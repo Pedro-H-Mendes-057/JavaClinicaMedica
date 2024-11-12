@@ -22,7 +22,7 @@ public class ControladorPanelMateriais implements ActionListener {
 
     public void addEventos() {
         this.panelMateriais.getBTNNovo().addActionListener(this);
-        this.panelMateriais.getBTNCancelar().addActionListener(this);
+        this.panelMateriais.getBTNExcluir().addActionListener(this);
 
     }
 
@@ -32,7 +32,7 @@ public class ControladorPanelMateriais implements ActionListener {
            this.controladorDialogCadastrarMaterial = new ControladorDialogCadastrarMaterial(this.dialogCadastrarMaterial);
            atualizarTabela();
 
-        } else if (e.getSource() == this.panelMateriais.getBTNCancelar()) {
+        } else if (e.getSource() == this.panelMateriais.getBTNExcluir()) {
             this.panelMateriais.getMessageDialogCancelarItem(panelMateriais);
         }
     }
