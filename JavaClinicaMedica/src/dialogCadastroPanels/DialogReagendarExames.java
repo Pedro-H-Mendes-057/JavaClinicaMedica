@@ -5,7 +5,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class DialogReagendarExame extends JDialog {
+public class DialogReagendarExames extends JDialog {
 	private JTextField txFNomeExame;
 	private JTextField txFDescricao;
 	private JTextField txFValor;
@@ -17,7 +17,7 @@ public class DialogReagendarExame extends JDialog {
 	private JTextField txFMedicoResponsavel;
 	private JTextField txFValorParticular;
  
-    public DialogReagendarExame(JFrame parent) {
+    public DialogReagendarExames(JFrame parent) {
         super(parent, "Reagendar Exame", true); // True para torná-lo modal
 
         this.setSize(1300, 650);

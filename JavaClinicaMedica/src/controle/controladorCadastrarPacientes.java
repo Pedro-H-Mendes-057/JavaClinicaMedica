@@ -1,13 +1,13 @@
-package ctrlRepositorios;
+package controle;
 
 import repositorio.RepositorioPacientes;
 import modelo.Endereco;
 import modelo.Paciente;
 
-public class controladorCadastroPacientes {
+public class controladorCadastrarPacientes {
     private RepositorioPacientes repositorioPacientes;
 
-    public controladorCadastroPacientes() {
+    public controladorCadastrarPacientes() {
         this.repositorioPacientes = new RepositorioPacientes();
     }
 

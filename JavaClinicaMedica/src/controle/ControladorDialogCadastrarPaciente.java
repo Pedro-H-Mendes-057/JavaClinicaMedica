@@ -5,42 +5,42 @@ import java.awt.event.ActionListener;
 
 import modelo.Paciente;
 import controle.ControladorPanelPacientes;
-import dialogCadastroPanels.DialogCadastroPaciente;
+import dialogCadastroPanels.DialogCadastrarPaciente;
 import repositorio.RepositorioPacientes;
 
 public class ControladorDialogCadastrarPaciente implements ActionListener {
-    private DialogCadastroPaciente dialogCadastroPaciente;
+    private DialogCadastrarPaciente dialogCadastrarPaciente;
     private Paciente paciente;
 
     // Construtor que recebe o DialogCadastroPaciente
-    public ControladorDialogCadastrarPaciente(DialogCadastroPaciente dialogCadastroPaciente) {
-        this.dialogCadastroPaciente = dialogCadastroPaciente;
+    public ControladorDialogCadastrarPaciente(DialogCadastrarPaciente dialogCadastrarPaciente) {
+        this.dialogCadastrarPaciente = dialogCadastrarPaciente;
         
         addEventos();
         
-        this.dialogCadastroPaciente.setVisible(true);
+        this.dialogCadastrarPaciente.setVisible(true);
     }
 
     void addEventos() {
-        this.dialogCadastroPaciente.getBtSalvar().addActionListener(this);
+        this.dialogCadastrarPaciente.getBtSalvar().addActionListener(this);
     }
 
     public void actionPerformed(ActionEvent e) {
-       if (e.getSource() == this.dialogCadastroPaciente.getBtSalvar()) {            
+       if (e.getSource() == this.dialogCadastrarPaciente.getBtSalvar()) {            
             addPaciente();
-            this.dialogCadastroPaciente.dispose();
+            this.dialogCadastrarPaciente.dispose();
         }
     }  
     
     public void addPaciente() {
         this.paciente = new Paciente();
-        this.paciente.setNome(this.dialogCadastroPaciente.getNomePaciente());
-        this.paciente.setDataNasc(this.dialogCadastroPaciente.getDataNascimento());
-        this.paciente.setContato(this.dialogCadastroPaciente.getContato());
-        this.paciente.setAltura(this.dialogCadastroPaciente.getAltura());
-        this.paciente.setTipoSang(this.dialogCadastroPaciente.getTipoSang());
-        this.paciente.setPeso(this.dialogCadastroPaciente.getPeso());
-        this.paciente.setConvenio(this.dialogCadastroPaciente.getConvenio());
+        this.paciente.setNome(this.dialogCadastrarPaciente.getNomePaciente());
+        this.paciente.setDataNasc(this.dialogCadastrarPaciente.getDataNascimento());
+        this.paciente.setContato(this.dialogCadastrarPaciente.getContato());
+        this.paciente.setAltura(this.dialogCadastrarPaciente.getAltura());
+        this.paciente.setTipoSang(this.dialogCadastrarPaciente.getTipoSang());
+        this.paciente.setPeso(this.dialogCadastrarPaciente.getPeso());
+        this.paciente.setConvenio(this.dialogCadastrarPaciente.getConvenio());
 
         ControladorFrame.repositorioPacientes.addPaciente(this.paciente);
     }

@@ -2,7 +2,7 @@ package dialogCadastroPanels;
 
 import javax.swing.*;
 
-import ctrlRepositorios.controladorCadastroPacientes;
+import controle.controladorCadastrarPacientes;
 import modelo.Endereco;
 import modelo.Paciente;
 import visual.Frame;
@@ -11,7 +11,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class DialogCadastroPaciente extends JDialog {
+public class DialogCadastrarPaciente extends JDialog {
     private JTextField txFNomePaciente;
     private JTextField txFDataNasc;
     private JTextField txFContato;
@@ -23,7 +23,7 @@ public class DialogCadastroPaciente extends JDialog {
     private JTextField txFConvenio;
     private JComboBox<String> cbConvenio;
     private JButton btSalvar; 
-    private controladorCadastroPacientes controlador;
+    private controladorCadastrarPacientes controlador;
     private JTextField txFNumero;
     private JTextField txFRua;
     private JTextField txFBairro;
@@ -34,7 +34,7 @@ public class DialogCadastroPaciente extends JDialog {
     /**
      * @wbp.parser.constructor
      */
-    public DialogCadastroPaciente(JFrame parent) {
+    public DialogCadastrarPaciente(JFrame parent) {
         super(parent, "Cadastrar Paciente", true);
         this.setSize(1300, 650);
         this.setResizable(false);
@@ -146,7 +146,7 @@ public class DialogCadastroPaciente extends JDialog {
                 Endereco endereco = null;
                 
                 controlador.cadastrarNovoPaciente(nome, dataNasc, contato, tipoSang, altura, peso, convenio, endereco);
-                JOptionPane.showMessageDialog(DialogCadastroPaciente.this, "Paciente salvo com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(DialogCadastrarPaciente.this, "Paciente salvo com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
                 dispose();
             }
         });

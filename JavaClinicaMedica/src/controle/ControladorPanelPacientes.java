@@ -4,11 +4,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.table.DefaultTableModel;
 import visual.PanelPacientes;
-import dialogCadastroPanels.DialogCadastroPaciente;
+import dialogCadastroPanels.DialogCadastrarPaciente;
 
 public class ControladorPanelPacientes implements ActionListener {
     private PanelPacientes panelPacientes;
-    private DialogCadastroPaciente dialogCadastroPaciente;
+    private DialogCadastrarPaciente dialogCadastrarPaciente;
     private ControladorDialogCadastrarPaciente controladorDialogCadastrarPaciente;
     
     public ControladorPanelPacientes(PanelPacientes panelPacientes) {
@@ -24,11 +24,11 @@ public class ControladorPanelPacientes implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == panelPacientes.getBTNNovo()) {
-            dialogCadastroPaciente = new DialogCadastroPaciente(ControladorFrame.frame);
+            dialogCadastrarPaciente = new DialogCadastrarPaciente(ControladorFrame.frame);
             
-            controladorDialogCadastrarPaciente = new ControladorDialogCadastrarPaciente(dialogCadastroPaciente);
+            controladorDialogCadastrarPaciente = new ControladorDialogCadastrarPaciente(dialogCadastrarPaciente);
 
-            dialogCadastroPaciente.setVisible(true);
+            dialogCadastrarPaciente.setVisible(true);
             atualizarTabela();
         }
     }

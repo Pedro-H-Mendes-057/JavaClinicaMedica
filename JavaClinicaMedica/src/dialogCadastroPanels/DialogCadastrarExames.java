@@ -5,18 +5,19 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class DialogCadastroExames extends JDialog {
+public class DialogCadastrarExames extends JDialog {
 	private JTextField txFNomeExame;
 	private JTextField txFDescricao;
 	private JTextField txFValor;
 	private JTextField txFMedico;
 
 	  
-    public DialogCadastroExames(JFrame parent) {
+    public DialogCadastrarExames(JFrame parent) {
         super(parent, "Cadastrar Exame", true);
 
         this.setSize(1300, 650);
         this.setResizable(false);
+        this.setVisible(true);;
         this.setLocationRelativeTo(parent); // Centraliza o dialog no frame
         getContentPane().setLayout(null);
         

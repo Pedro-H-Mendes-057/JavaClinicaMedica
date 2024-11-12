@@ -1,7 +1,7 @@
 package visual;
-import dialogCadastroPanels.DialogCadastroExames;
-import dialogCadastroPanels.DialogCadastroPaciente;
-import dialogCadastroPanels.DialogReagendarExame;
+import dialogCadastroPanels.DialogCadastrarExames;
+import dialogCadastroPanels.DialogCadastrarPaciente;
+import dialogCadastroPanels.DialogReagendarExames;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -10,9 +10,9 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class PanelExame extends TemplatePanel {
+public class PanelExames extends TemplatePanel {
 
-    public PanelExame() {
+    public PanelExames() {
         super();
         
         getLabelPesquisar().setText("Pesquisar por Exame:");

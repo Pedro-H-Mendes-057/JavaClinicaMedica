@@ -1,35 +1,31 @@
 package controle;
-import ctrlRepositorios.controladorCadastroPacientes;
+
 import repositorio.RepositorioMateriais;
 import repositorio.RepositorioPacientes;
- /*
- * import repositorio.RepositorioMedicos;
- * import repositorio.RepositorioExames;
- * import repositorio.RepositorioConsultas;
- * */
-import dialogCadastroPanels.DialogCadastroPaciente;
+import repositorio.RepositorioMedicos;
+import repositorio.RepositorioExames;
+import repositorio.RepositorioConsultas;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
-import javax.swing.JFrame;
+import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+
 import visual.Frame;
 
 public class ControladorFrame {
     public static Frame frame;
     public static RepositorioMateriais repositorioMateriais;
     public static RepositorioPacientes repositorioPacientes;
+    public static RepositorioMedicos repositorioMedicos;
+    public static RepositorioExames repositorioExames;
+    public static RepositorioConsultas repositorioConsultas;
 
     public ControladorFrame() {
         repositorioMateriais = new RepositorioMateriais();
         repositorioPacientes = new RepositorioPacientes();
-         /*
-         * repositorioMedicos = new RepositorioMedicos();
-         * repositorioExames = new RepositorioExames();
-         * repositorioConsultas = new RepositorioConsultas();
-         * */
+        repositorioMedicos = new RepositorioMedicos();
+        repositorioExames = new RepositorioExames();
+        repositorioConsultas = new RepositorioConsultas();
         frame = new Frame();
         
         addEventos();
@@ -69,7 +65,7 @@ public class ControladorFrame {
     }
 
     private void mudaRestoIcones(int selectedIndex) {
-        // Muda o icone das abas não selecionadas
+        // Muda o icone das abas q nao tao selecionadas
         if (selectedIndex != 1) {
             frame.getTabbedPane().setIconAt(1, frame.resizeIcon("resources/Pacientes.png", 30, 30));
         }
@@ -92,7 +88,7 @@ public class ControladorFrame {
 
     public static void main(String[] args) {
         new ControladorFrame();
-        controladorCadastroPacientes controlador = new controladorCadastroPacientes();
+        controladorCadastrarPacientes controlador = new controladorCadastrarPacientes();
         
        
     }

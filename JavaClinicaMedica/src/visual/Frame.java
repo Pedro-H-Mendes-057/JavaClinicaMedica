@@ -9,12 +9,12 @@ import java.net.URL;
 import visual.PanelPacientes;
 import visual.PanelMedicos;
 import visual.PanelAgendar;
-import visual.PanelExame;
+import visual.PanelExames;
 import visual.PanelMateriais;
 import visual.PanelRelatorios;
 import controle.ControladorPanelMedicos; //temporario 
 import controle.ControladorPanelPacientes;
-import controle.ControladorPanelExame;
+import controle.ControladorPanelExames;
 import controle.ControladorPanelMateriais;
 
 public class Frame extends JFrame {
@@ -24,12 +24,12 @@ public class Frame extends JFrame {
     PanelPacientes panelPacientes;
     PanelMedicos panelMedicos;
     PanelAgendar panelAgendar;
-    PanelExame panelExame;
+    PanelExames panelExames;
     PanelMateriais panelMateriais;
     PanelRelatorios panelRelatorios;
     ControladorPanelPacientes controladorPanelPacientes; 
     ControladorPanelMedicos controladorPanelMedicos; 
-    ControladorPanelExame controladorPanelExame;
+    ControladorPanelExames controladorPanelExames;
     ControladorPanelMateriais controladorPanelMateriais; 
     ControladorPanelAgendar controladorPanelAgendar;
     
@@ -60,7 +60,7 @@ public class Frame extends JFrame {
         this.controladorPanelMedicos = new ControladorPanelMedicos(this.panelMedicos);
         this.panelAgendar = new PanelAgendar(this);
         this.controladorPanelAgendar = new ControladorPanelAgendar(this.panelAgendar);
-        this.panelExame = new PanelExame();
+        this.panelExames = new PanelExames();
 //      this.controladorPanelExame = new ControladorPanelExame(this.panelExame);
         this.panelMateriais = new PanelMateriais();
         this.controladorPanelMateriais = new ControladorPanelMateriais(this.panelMateriais);
@@ -71,7 +71,7 @@ public class Frame extends JFrame {
         tabbedPane.addTab("Pacientes", resizeIcon("resources/Pacientes.png", 30, 30), this.panelPacientes);
         tabbedPane.addTab("Médicos", resizeIcon("resources/Medico.png", 30, 30), this.panelMedicos);
         tabbedPane.addTab("Agendar", resizeIcon("resources/Agenda.png", 30, 30), this.panelAgendar);
-        tabbedPane.addTab("Exames", resizeIcon("resources/Exames.png", 30, 30), this.panelExame);
+        tabbedPane.addTab("Exames", resizeIcon("resources/Exames.png", 30, 30), this.panelExames);
         tabbedPane.addTab("Materiais", resizeIcon("resources/Materiais.png", 30, 30), this.panelMateriais);
         tabbedPane.addTab("Relatórios", resizeIcon("resources/Relatorio.png", 30, 30), this.panelRelatorios, "Visualizar Relatórios");
 

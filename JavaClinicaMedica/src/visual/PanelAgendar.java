@@ -3,8 +3,8 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.time.LocalDate;
-import java.time.format.TextStyle;
 import java.util.Locale;
+import java.time.format.TextStyle;
 
 public class PanelAgendar extends JPanel { // Alterado para herdar de JPanel
     private Frame frame;
@@ -24,7 +24,7 @@ public class PanelAgendar extends JPanel { // Alterado para herdar de JPanel
     private JLabel labelTitulo;
     private JScrollPane scrollPane;
     private LocalDate dataAtual = LocalDate.now();
-    private String[] horarios = { "08:00", "09:00", "10:00", "11:00", "13:00", "14:00", "15:00" };
+    private String[] horarios = { "08:00", "09:00", "10:00", "11:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00" };
 
     public PanelAgendar(Frame frame) {
         this.frame = frame;
@@ -72,8 +72,7 @@ public class PanelAgendar extends JPanel { // Alterado para herdar de JPanel
        
     }
 
-    private void atualizarTabelaSemana() {
-        // Atualiza o cabeçalho com os dias da semana
+    private void atualizarTabelaSemana() {// atualizar o cabeçalho com os dias da semana
         LocalDate inicioSemana = dataAtual.with(java.time.DayOfWeek.MONDAY);
         String[] colunas = new String[8];
         colunas[0] = "HORÁRIOS";
@@ -90,13 +89,13 @@ public class PanelAgendar extends JPanel { // Alterado para herdar de JPanel
         getTableSemana().setModel(modeloTabela);
 
         // muda o Mes
-        getLabelMes().setText(dataAtual.getMonth().getDisplayName(TextStyle.FULL, Locale.getDefault()).toUpperCase());
+        getLabelMes().setText(dataAtual.getMonth().getDisplayName(TextStyle.FULL, Locale.getDefault()));
         getLabelAno().setText(String.valueOf(dataAtual.getYear()));
     }
 
     private void mudarSemana(int nav) {
         dataAtual = dataAtual.plusWeeks(nav); // Muda a semana de acordo com navegaçao (-1 ou +1)
-        atualizarTabelaSemana(); // Atualiza a tabela pra mostrar semana nova
+        atualizarTabelaSemana();
     }
     
     public JPanel getPanelPesquisar() {
