@@ -15,6 +15,7 @@ public class PanelAgendar extends JPanel { // Alterado para herdar de JPanel
     private JButton btnEditar;
     private JButton btnCancelar;
     private JButton btnPesquisar;
+     private JButton btnNovoExame;
     private JPanel panelBotoesAgendar;
     private JPanel panelBotoes;
     private JPanel panelPesquisar;
@@ -160,20 +161,27 @@ public class PanelAgendar extends JPanel { // Alterado para herdar de JPanel
             c1.gridx = 0;
             c1.ipady = 10;
             c1.anchor = GridBagConstraints.LINE_START;
-            this.panelBotoes.add(getBTNNovo(), c1);
-
+            this.panelBotoes.add(getBTNNovaConsulta(), c1);
+            
             GridBagConstraints c2 = new GridBagConstraints();
             c2.insets = new Insets(0, 0, 0, 10);
-            c2.gridx = 1; 
+            c2.gridx = 1;
             c2.ipady = 10;
             c2.anchor = GridBagConstraints.LINE_START;
-            this.panelBotoes.add(getBTNEditar(), c2);
+            this.panelBotoes.add(getBTNNovoExame(), c2);
 
             GridBagConstraints c3 = new GridBagConstraints();
-            c3.gridx = 2;
+            c3.insets = new Insets(0, 0, 0, 10);
+            c3.gridx = 2; 
             c3.ipady = 10;
             c3.anchor = GridBagConstraints.LINE_START;
-            this.panelBotoes.add(getBTNCancelar(), c3);
+            this.panelBotoes.add(getBTNEditar(), c3);
+
+            GridBagConstraints c4 = new GridBagConstraints();
+            c4.gridx = 3;
+            c4.ipady = 10;
+            c4.anchor = GridBagConstraints.LINE_START;
+            this.panelBotoes.add(getBTNCancelar(), c4);
         }
         return this.panelBotoes;
     }
@@ -194,13 +202,22 @@ public class PanelAgendar extends JPanel { // Alterado para herdar de JPanel
         return this.labelAno;
     }
     
-    public JButton getBTNNovo() {
+    public JButton getBTNNovaConsulta() {
         if (this.btnNovo == null) {
-            this.btnNovo = new JButton("NOVO");
+            this.btnNovo = new JButton("NOVA CONSULTA");
             this.btnNovo.setBackground(new Color(50, 205, 101));
             this.btnNovo.setForeground(Color.WHITE);
         }
         return this.btnNovo;
+    }
+    
+    public JButton getBTNNovoExame() {
+        if (this.btnNovoExame == null) {
+            this.btnNovoExame = new JButton("NOVO EXAME");
+            this.btnNovoExame.setBackground(new Color(50, 205, 101));
+            this.btnNovoExame.setForeground(Color.WHITE);
+        }
+        return this.btnNovoExame;
     }
     
     public JButton getBTNVoltar() {
