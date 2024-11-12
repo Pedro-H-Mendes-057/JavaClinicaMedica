@@ -14,7 +14,8 @@ public class PanelExames extends TemplatePanel {
 
     public PanelExames() {
         super();
-        
+         
+       
         getLabelPesquisar().setText("Pesquisar por Exame:");
     }
     
