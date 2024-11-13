@@ -22,7 +22,7 @@ public class PanelObjetos extends JPanel{
 		sol = new JLabel("");
 		sol.setBounds(225, 225, 57, 55);
 		
-		ImageIcon icsol = new ImageIcon("src/visual/sol.png");
+		ImageIcon icsol = new ImageIcon("src/visual/sol1.png");
         Image dimSol = icsol.getImage().getScaledInstance(57, 57, Image.SCALE_SMOOTH);
         sol.setIcon(new ImageIcon(dimSol));
 		add(sol);
@@ -31,7 +31,7 @@ public class PanelObjetos extends JPanel{
 		terra = new JLabel("");
 		terra.setBounds(203, 136, 36, 38);
 		
-		ImageIcon icTerra = new ImageIcon("src/visual/terra.png");
+		ImageIcon icTerra = new ImageIcon("src/visual/terra1.png");
         Image dimTerra = icTerra.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
         terra.setIcon(new ImageIcon(dimTerra));
 		add(terra);
@@ -40,7 +40,7 @@ public class PanelObjetos extends JPanel{
 		marte = new JLabel("");
 		marte.setBounds(203, 74, 36, 38);
 		
-		ImageIcon icMarte = new ImageIcon("src/visual/marte.png");
+		ImageIcon icMarte = new ImageIcon("src/visual/marte1.png");
         Image dimMarte = icMarte.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
         marte.setIcon(new ImageIcon(dimMarte));
 		add(marte);
