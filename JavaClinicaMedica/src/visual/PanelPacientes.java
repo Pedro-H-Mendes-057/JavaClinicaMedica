@@ -18,7 +18,7 @@ public class PanelPacientes extends TemplatePanel {
     public JTable getTable() {
         if (this.table == null) {
             String[] colunas = {"NOME", "DATA NASC", "CONTATO", "TIPO SANGU.", "CONVENIO"};
-            DefaultTableModel model = new DefaultTableModel(10, colunas.length);
+            DefaultTableModel model = new DefaultTableModel(0, colunas.length);
             model.setColumnIdentifiers(colunas);
             this.table = new JTable(model);
         }

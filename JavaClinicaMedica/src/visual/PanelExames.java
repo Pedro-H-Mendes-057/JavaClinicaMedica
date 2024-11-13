@@ -23,7 +23,7 @@ public class PanelExames extends TemplatePanel {
     public JTable getTable() {
         if (this.table == null) {
             String[] colunas = {"NOME DO PACIENTE", "TIPO DE EXAME", "VALOR", "DESCRICAO"};
-            DefaultTableModel model = new DefaultTableModel(10, colunas.length);
+            DefaultTableModel model = new DefaultTableModel(0, colunas.length);
             model.setColumnIdentifiers(colunas);
             this.table = new JTable(model);
         }
