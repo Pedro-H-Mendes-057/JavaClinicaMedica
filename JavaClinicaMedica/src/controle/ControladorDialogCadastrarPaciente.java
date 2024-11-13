@@ -31,39 +31,53 @@ public class ControladorDialogCadastrarPaciente implements ActionListener {
        if (e.getSource() == this.dialogCadastrarPaciente.getBtSalvar()) {            
             //addPaciente();
             //this.dialogCadastrarPaciente.dispose();
-    	    try {
-    	    	verifCampoVazio(); 
-    	        String nome = txFNomePaciente.getText();
-    	        String dataNasc = txFDataNasc.getText();
-    	        String contato = txFContato.getText();
-    	        String tipoSang = cbTipoSang.getSelectedItem().toString();
-    	        int altura = Integer.parseInt(txFAltura.getText());
-    	        if (altura <= 0) {
+    	    try { 
+    	        String nome = this.dialogCadastrarPaciente.getTxFNomePaciente().getText();
+    	        String dataNasc = this.dialogCadastrarPaciente.getTxFDataNasc().getText();
+    	        String contato = this.dialogCadastrarPaciente.getTxFContato().getText();
+    	        String tipoSang = this.dialogCadastrarPaciente.getTxFTipoSang().getText();
+    	        int altura = Integer.parseInt(this.dialogCadastrarPaciente.getTxFAltura().getText());
+    	        double peso = Double.parseDouble(this.dialogCadastrarPaciente.getTxFPeso().getText());
+    	        String convenio = this.dialogCadastrarPaciente.getCbConvenio().getSelectedItem().toString();
+    	        
+    	        if(verifCampoVazio()) {
+    	        	throw new IllegalArgumentException ("Preencha todos os campos!");
+    	        } else if (altura <= 0) {
     	        	throw new IllegalArgumentException("Altura inválida!");
-    	        }
-    	        double peso = Double.parseDouble(txFPeso.getText());
-    	        if (peso <= 0) {
+    	        } else if (peso <= 0) {
     	        	throw new IllegalArgumentException("Peso inválido!");
+    	        } else {
+    	        	JOptionPane.showMessageDialog(this.dialogCadastrarPaciente, 
+    	       		"Paciente salvo com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+    	        	this.dialogCadastrarPaciente.dispose();
     	        }
-    	        String convenio = cbConvenio.getSelectedItem().toString();
-
-    	        JOptionPane.showMessageDialog(DialogCadastrarPaciente.this, 
-    	        "Paciente salvo com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
-    	        this.dialogCadastrarPaciente.dispose();
-
-    	        } catch (NumberFormatException ex) {
-    	            JOptionPane.showMessageDialog(DialogCadastrarPaciente.this, 
-    	                "Preenchimento inválido! Altura e peso devem ser numéricos.", 
-    	                "Erro", JOptionPane.ERROR_MESSAGE);
     	        } catch (IllegalArgumentException ex) {
-    	            JOptionPane.showMessageDialog(DialogCadastrarPaciente.this, 
-    	                ex.getMessage(), 
-    	                "Preenchimento inválido!", JOptionPane.ERROR_MESSAGE);
-    	        }
-    	        }
-    	        });
-        }
-    }  
+    	            JOptionPane.showMessageDialog(this.dialogCadastrarPaciente, 
+    	                ex.getMessage(), "Preenchimento inválido!", JOptionPane.ERROR_MESSAGE);
+    	            	this.dialogCadastrarPaciente.dispose();
+    	        } /*catch (NumberFormatException ex) {
+    	            JOptionPane.showMessageDialog(dialogCadastrarPaciente, 
+        	                "Preenchimento inválido! Altura e peso devem ser numéricos.", 
+        	                "Erro", JOptionPane.ERROR_MESSAGE);
+        	            	this.dialogCadastrarPaciente.dispose();
+        	    }*/
+    	}
+    }
+    private boolean verifCampoVazio(){
+    		if(this.dialogCadastrarPaciente.getTxFNomePaciente().getText().trim().isEmpty()||
+    			this.dialogCadastrarPaciente.getTxFDataNasc().getText().trim().isEmpty() ||
+    			this.dialogCadastrarPaciente.getTxFContato().getText().trim().isEmpty()||
+    			this.dialogCadastrarPaciente.getTxFAltura().getText().trim().isEmpty()||
+    			this.dialogCadastrarPaciente.getTxFPeso().getText().trim().isEmpty()||
+    	        (this.dialogCadastrarPaciente.getCbTipoSang().getSelectedItem() == null || 
+    	        this.dialogCadastrarPaciente.getCbTipoSang().getSelectedItem().toString().trim().isEmpty())||
+    	        (this.dialogCadastrarPaciente.getCbConvenio().getSelectedItem() == null || 
+    	        this.dialogCadastrarPaciente.getCbConvenio().getSelectedItem().toString().trim().isEmpty())) {
+    			return true;
+    		}else {
+    			return false;
+    		}
+    }// do verifCampoVazio
     
     public void addPaciente() {
         this.paciente = new Paciente();

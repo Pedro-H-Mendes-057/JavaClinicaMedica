@@ -73,7 +73,7 @@ public class PanelAgendar extends JPanel { // Alterado para herdar de JPanel
        
     }
 
-    private void atualizarTabelaSemana() {// atualizar o cabeçalho com os dias da semana
+    private void atualizarTabelaSemana() {
         LocalDate inicioSemana = dataAtual.with(java.time.DayOfWeek.MONDAY);
         String[] colunas = new String[8];
         colunas[0] = "HORÁRIOS";

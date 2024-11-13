@@ -57,8 +57,9 @@ public class DialogCadastrarMedico extends JDialog {
         this.add(getButtonSalvar()); 
         this.add(getButtonCancelar());
         this.add(getScrollPaneHorarios());
+        
+        //getButtonSalvar().addActionListener(e -> validarPreench());
     }
-    
     JLabel getLabelNome() {
         if (this.labelNome == null) {
             this.labelNome = new JLabel();
