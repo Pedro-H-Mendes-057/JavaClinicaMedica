@@ -13,7 +13,7 @@ public class ControladorGeral extends Thread {
     public ControladorGeral(PanelObjetos panel) {
         terra = panel.getTerra();
         marte = panel.getMarte();
-
+ 
         this.start();
     }
 
