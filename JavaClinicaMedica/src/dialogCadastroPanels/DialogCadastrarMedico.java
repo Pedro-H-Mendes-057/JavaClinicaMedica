@@ -10,12 +10,19 @@ import controle.ControladorFrame;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridBagLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.text.MaskFormatter;
+import javax.swing.JFormattedTextField;
+
+import java.text.ParseException;
 
 /**
  *
@@ -25,7 +32,7 @@ public class DialogCadastrarMedico extends JDialog {
     JLabel labelNome;
     JTextField textFieldNome;
     JLabel labelContato;
-    JTextField textFieldContato;
+    JFormattedTextField textFieldContato;
     JLabel labelCRM;
     JTextField textFieldCRM;
     JLabel labelEspecialidade;
@@ -44,21 +51,31 @@ public class DialogCadastrarMedico extends JDialog {
         this.setResizable(false);
         this.setLocationRelativeTo(parent);         
         this.setLayout(null);       
-        this.add(getLabelNome()); 
-        this.add(getTextFieldNome()); 
-        this.add(getLabelContato()); 
-        this.add(getTextFieldContato()); 
-        this.add(getLabelCRM()); 
-        this.add(getTextFieldCRM()); 
-        this.add(getLabelEspecialidade()); 
-        this.add(getTextFieldEspecialidade());       
-        this.add(getLabelValor()); 
-        this.add(getTextFieldValor()); 
-        this.add(getButtonSalvar()); 
+        
+        this.add(getLabelNome());
+        this.add(getTextFieldNome());
+        this.add(getLabelContato());
+        this.add(getTextFieldContato());
+        this.add(getLabelCRM());
+        this.add(getTextFieldCRM());
+        this.add(getLabelEspecialidade());
+        this.add(getTextFieldEspecialidade());
+        this.add(getLabelValor());
+        this.add(getTextFieldValor());
+        this.add(getButtonSalvar());
         this.add(getButtonCancelar());
         this.add(getScrollPaneHorarios());
         
-        //getButtonSalvar().addActionListener(e -> validarPreench());
+        getButtonSalvar().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (verifCamposVazios()) {
+                    System.out.println("Médico cadastrado com sucesso!");
+                } else {
+                    System.out.println("Preencha todos os campos!");
+                }
+            }
+        });
     }
     JLabel getLabelNome() {
         if (this.labelNome == null) {
@@ -89,10 +106,16 @@ public class DialogCadastrarMedico extends JDialog {
         return this.labelContato;
     }
     
-    public JTextField getTextFieldContato() {
+public JFormattedTextField getTextFieldContato() {
         if (this.textFieldContato == null) {
-            this.textFieldContato = new JTextField();
-            this.textFieldContato.setBounds(63, 179, 520, 40);
+            try {
+                MaskFormatter mascaraContato = new MaskFormatter("(##) #####-####");
+                mascaraContato.setPlaceholderCharacter('_');
+                this.textFieldContato = new JFormattedTextField(mascaraContato);
+                this.textFieldContato.setBounds(63, 179, 520, 40);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
         }
         return this.textFieldContato;
     }
@@ -213,5 +236,22 @@ public class DialogCadastrarMedico extends JDialog {
         }
         return this.scrollPaneHorarios;
     }
-    
+    public boolean verifCamposVazios() {
+        if (getTextFieldNome().getText().isEmpty()) {
+            return false;
+        }
+        if (getTextFieldContato().getText().isEmpty()) {
+            return false;
+        }
+        if (getTextFieldCRM().getText().isEmpty()) {
+            return false;
+        }
+        if (getTextFieldEspecialidade().getText().isEmpty()) {
+            return false;
+        }
+        if (getTextFieldValor().getText().isEmpty()) {
+            return false;
+        }
+        return true;
+    }
 }
