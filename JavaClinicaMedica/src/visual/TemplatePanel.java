@@ -112,7 +112,7 @@ public class TemplatePanel extends JPanel {
 
     public JTable getTable() {
         if (this.table == null) {
-            String[] colunas = {"NOME", "QTD ESTOQUE", "QTD MÍNIMA", "PREÇO", "FORNECEDOR"};
+            String[] colunas = {"NOME", "QTD ESTOQUE", "QTD MÍNIMA", "FORNECEDOR", "PREÇO"};
             DefaultTableModel model = new DefaultTableModel(0, colunas.length);
             model.setColumnIdentifiers(colunas);
             this.table = new JTable(model);
