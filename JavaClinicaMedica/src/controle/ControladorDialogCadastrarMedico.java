@@ -8,7 +8,8 @@ package controle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JTable;
-import visual.DialogCadastrarMedico;
+
+import dialogCadastroPanels.DialogCadastrarMedico;
 
 
 /**

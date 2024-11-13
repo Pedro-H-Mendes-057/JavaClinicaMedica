@@ -5,10 +5,10 @@ public class Medico {
 	private String especialidade;
 	private String crm;
 	private String contato;
-	private String horasAtend;
+	private String[] horasAtend;
 	private int valorConsulta;
 	
-	public Medico(String nome, String especialidade, String crm, String contato, String horasAtend, int valorConsulta) {
+	public Medico(String nome, String especialidade, String crm, String contato, String[] horasAtend, int valorConsulta) {
 		super();
 		this.nome = nome;
 		this.especialidade = especialidade;
@@ -50,11 +50,11 @@ public class Medico {
 		this.contato = contato;
 	}
 
-	public String getHorasAtend() {
+	public String[] getHorasAtend() {
 		return horasAtend;
 	}
 
-	public void setHorasAtend(String horasAtend) {
+	public void setHorasAtend(String[] horasAtend) {
 		this.horasAtend = horasAtend;
 	}
 

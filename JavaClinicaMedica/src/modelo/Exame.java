@@ -1,17 +1,17 @@
 package modelo;
 
 public class Exame {
-	private Paciente paciente;
+	private String nomeExame;
 	private String descricao;
 	private String tipo;
 	private String valorParticular;
 	private String materiaisUsar; //seria interessante um ArrayList pra guardar os materiais necessarios no exame
 	private Medico medico;
 	
-	public Exame(Paciente paciente, String descricao, String tipo, String valorParticular, String materiaisUsar,
+	public Exame(String nomeExame, String descricao, String tipo, String valorParticular, String materiaisUsar,
 			Medico medico) {
 		super();
-		this.paciente = paciente;
+		this.nomeExame = nomeExame;
 		this.descricao = descricao;
 		this.tipo = tipo;
 		this.valorParticular = valorParticular;
@@ -19,12 +19,12 @@ public class Exame {
 		this.medico = medico;
 	}
 
-	public Paciente getPaciente() {
-		return paciente;
+	public String getNomeExame() {
+		return nomeExame;
 	}
 
-	public void setPaciente(Paciente paciente) {
-		this.paciente = paciente;
+	public void setNomeExame(String nomeExame) {
+		this.nomeExame = nomeExame;
 	}
 
 	public String getDescricao() {
