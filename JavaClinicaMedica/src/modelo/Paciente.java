@@ -4,7 +4,7 @@ public class Paciente {
 	private String nome;
 	private String dataNasc;
 	private String contato;
-	private String[] tipoSang;
+	private String tipoSang;
 	private int altura;
 	private double peso;
 	private HistMed histMed;
@@ -15,7 +15,7 @@ public class Paciente {
 
 	}
 	
-	public Paciente(String nome, String dataNasc, String contato, String[] tipoSang, int altura, double peso,
+	public Paciente(String nome, String dataNasc, String contato, String tipoSang, int altura, double peso,
 			HistMed histMed, String convenio, Endereco endereco) {
 		super();
 		this.nome = nome;
@@ -53,12 +53,12 @@ public class Paciente {
 		this.contato = contato;
 	}
 
-	public String[] getTipoSang() {
+	public String getTipoSang() {
 		return tipoSang;
 	}
 
-	public void setTipoSang(String[] tipoSang) {
-		this.tipoSang = tipoSang;
+	public void setTipoSang(String string) {
+		this.tipoSang = string;
 	}
 
 	public int getAltura() {

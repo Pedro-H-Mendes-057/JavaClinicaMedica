@@ -5,7 +5,15 @@ import javax.swing.*;
 import modelo.Endereco;
 import modelo.Paciente;
 import visual.Frame;
-
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import java.text.ParseException; 
+import javax.swing.JFormattedTextField; 
+import javax.swing.JOptionPane; 
+import javax.swing.text.MaskFormatter;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -55,33 +63,18 @@ public class DialogCadastrarPaciente extends JDialog {
         lblDataNasc.setBounds(64, 133, 452, 29);
         getContentPane().add(lblDataNasc);
         
-        /*txFDataNasc = new JTextField();
-        txFDataNasc.setColumns(10);
-        txFDataNasc.setBounds(63, 172, 493, 40);
-        getContentPane().add(txFDataNasc);*/
-        
-        if (getTxFDataNasc == null){ //aproveita pros tratamentos
-        try{
-            MaskFormatter mascara = new MaskFormatter ("  /  /    ");
-            txFDataNasc = new JFormattedTextField(mascara);
-           	txFDataNasc.setBounds(63,172, 493, 40);
-           	add(txFDataNasc);
-            
-        }//do try
-        }//do if
-        /*public JTextField getTextFieldDataNasc() {
-		if(formattedTextField_DataNasc == null) {
-			try {
-				formattedTextField_DataNasc = new JFormattedTextField(new MaskFormatter("##/##/####"));
-				formattedTextField_DataNasc.setBounds(150, 200, 144, 25);
-				formattedTextField_DataNasc.setFont(new Font("Tahoma", Font.PLAIN, 16));
-			} catch (ParseException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-		}
-		return formattedTextField_DataNasc;
-	}*/
+     
+        try {
+        	MaskFormatter mascara = new MaskFormatter("##/##/####");
+        	mascara.setPlaceholderCharacter(' ');
+    
+        	txFDataNasc = new JFormattedTextField(mascara);
+        	txFDataNasc.setBounds(63, 172, 493, 40);
+        	txFDataNasc.setFont(new Font("Tahoma", Font.PLAIN, 16));
+        	getContentPane().add(txFDataNasc);
+        } catch (ParseException e) {
+        	e.printStackTrace();
+        }
         
         JLabel lblContato = new JLabel("Contato");
         lblContato.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -140,14 +133,10 @@ public class DialogCadastrarPaciente extends JDialog {
         lblConvenio.setFont(new Font("Tahoma", Font.PLAIN, 20));
         lblConvenio.setBounds(278, 419, 204, 29);
         getContentPane().add(lblConvenio);
+        
         cbConvenio = new JComboBox<>(new String[] { "", "Mais Saúde", "Bem-Estar", "Premium Care", "Vida Melhor", "Saúde para Todos" });
         cbConvenio.setBounds(278, 458, 277, 40);
         getContentPane().add(cbConvenio);
-        
-        txFConvenio = new JTextField();
-        txFConvenio.setColumns(10);
-        txFConvenio.setBounds(278, 458, 277, 40);
-        getContentPane().add(txFConvenio);
         
         btSalvar = new JButton("SALVAR");
         btSalvar.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -155,21 +144,6 @@ public class DialogCadastrarPaciente extends JDialog {
         btSalvar.setForeground(new Color(255, 255, 255));
         btSalvar.setBounds(844, 538, 177, 55);
         getContentPane().add(btSalvar);
-        btSalvar.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                String nome = txFNomePaciente.getText();
-                String dataNasc = txFDataNasc.getText();
-                String contato = txFContato.getText();
-                String tipoSang = txFTipoSang.getText();
-                int altura = Integer.parseInt(txFAltura.getText());
-                double peso = Double.parseDouble(txFPeso.getText());
-                String convenio = txFConvenio.getText();
-                Endereco endereco = null;
-                verifCampoVazio();
-                JOptionPane.showMessageDialog(DialogCadastrarPaciente.this, "Paciente salvo com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
-                dispose();
-            }
-        });
         
         JButton btCancelar = new JButton("CANCELAR");
         btCancelar.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -201,6 +175,17 @@ public class DialogCadastrarPaciente extends JDialog {
         txFCEP.setColumns(10);
         txFCEP.setBounds(752, 261, 117, 40);
         getContentPane().add(txFCEP);
+         try {
+        	MaskFormatter mascara = new MaskFormatter("####");
+        	mascara.setPlaceholderCharacter(' ');
+    
+        	txFDataNasc = new JFormattedTextField(mascara);
+        	txFDataNasc.setBounds(63, 172, 493, 40);
+        	txFDataNasc.setFont(new Font("Tahoma", Font.PLAIN, 16));
+        	getContentPane().add(txFDataNasc);
+        } catch (ParseException e) {
+        	e.printStackTrace();
+        }
         
         txFEstado = new JTextField();
         txFEstado.setColumns(10);
@@ -244,31 +229,22 @@ public class DialogCadastrarPaciente extends JDialog {
     
     private void verifCampoVazio(){
         try {
-            if(txFNomePaciente.getText() == null ||
-            txFDataNasc.getText() == null ||
-            txFContato.getText() == null ||
-            txFAltura.getText() == null ||
-            txFPeso.getText() == null ||
-            cbTipoSang.getSelectedItem() == null ||
-            cbConvenio.getSelectedItem() == null ||
-            cbMedicos.getSelectedItem() == null){
+            if(txFNomePaciente.getText().trim().isEmpty()||
+            txFDataNasc.getText().trim().isEmpty() ||
+            txFContato.getText().trim().isEmpty()||
+            txFAltura.getText().trim().isEmpty()||
+            txFPeso.getText().trim().isEmpty()||
+            (cbTipoSang.getSelectedItem() == null || cbTipoSang.getSelectedItem().toString().trim().isEmpty())||
+            (cbConvenio.getSelectedItem() == null || cbConvenio.getSelectedItem().toString().trim().isEmpty())) {
                 throw new IllegalArgumentException ("Preencha todos os campos!");
             }//do if
         }//do try
-    }
-    /*public JTextField getTextFieldDataNasc() {
-		if(formattedTextField_DataNasc == null) {
-			try {
-				formattedTextField_DataNasc = new JFormattedTextField(new MaskFormatter("##/##/####"));
-				formattedTextField_DataNasc.setBounds(150, 200, 144, 25);
-				formattedTextField_DataNasc.setFont(new Font("Tahoma", Font.PLAIN, 16));
-			} catch (ParseException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-		}
-		return formattedTextField_DataNasc;
-	}*/
+        catch (IllegalArgumentException ex){
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "ERRO!!!", JOptionPane.ERROR_MESSAGE);
+        }
+    }// do verifCampoVazio
+    
+   
     public String getNomePaciente() { return txFNomePaciente.getText(); }
     public String getDataNascimento() { return txFDataNasc.getText(); }
     public String getContato() { return txFContato.getText(); }
