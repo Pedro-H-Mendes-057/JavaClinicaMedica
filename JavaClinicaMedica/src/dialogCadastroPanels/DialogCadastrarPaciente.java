@@ -29,14 +29,14 @@ public class DialogCadastrarPaciente extends JDialog {
     private JTextField txFHistMedic;
     private JTextField txFConvenio;
     private JComboBox<String> cbConvenio;
-    private JButton btSalvar;
     private JTextField txFNumero;
     private JTextField txFRua;
     private JTextField txFBairro;
     private JTextField txFCidade;
     private JTextField txFCEP;
-    private JTextField txFEstado;
-
+    private JComboBox<String> cbEstado;
+    private JButton btCancelar;
+    private JButton btSalvar;
     /**
      * @wbp.parser.constructor
      */
@@ -199,15 +199,11 @@ public class DialogCadastrarPaciente extends JDialog {
         lblCep.setBounds(754, 222, 117, 29);
         getContentPane().add(lblCep);
         
-        txFCEP = new JTextField();
-        txFCEP.setColumns(10);
-        txFCEP.setBounds(752, 261, 117, 40);
-        getContentPane().add(txFCEP);
 		         try {
 		    MaskFormatter mascaraCEP = new MaskFormatter("#####-###");
 		    mascaraCEP.setPlaceholderCharacter('_');
 		    txFCEP = new JFormattedTextField(mascaraCEP);
-		    txFCEP.setBounds(63, 261, 493, 40);
+		    txFCEP.setBounds(752, 261, 117, 40);
 		    getContentPane().add(txFCEP);
 		} catch (ParseException e) {
 		    e.printStackTrace();
@@ -219,10 +215,12 @@ public class DialogCadastrarPaciente extends JDialog {
         lblEstado.setBounds(904, 222, 152, 29);
         getContentPane().add(lblEstado);
         
-        txFEstado = new JTextField();
-        txFEstado.setColumns(10);
-        txFEstado.setBounds(904, 261, 117, 40);
-        getContentPane().add(txFEstado);
+        cbEstado = new JComboBox<>(new String[] {"", "Acre", "Alagoas", "Amapá", "Amazonas", "Bahia", "Ceará", "Espírito Santo",
+                                                 "Goiás", "Maranhão", "Mato Grosso", "Mato Grosso do Sul", "Minas Gerais",
+                                                 "Pará", "Paraíba", "Paraná", "Pernambuco", "Piauí", "Rio de Janeiro", "Rio Grande do Norte",
+                                                 "Rio Grande do Sul", "Rondônia", "Roraima", "Santa Catarina", "São Paulo", "Sergipe", "Tocantins"});
+        cbEstado.setBounds(904, 261, 117, 40);
+        getContentPane().add(cbEstado);
         
         //?????????????????????????
         JLabel lblNewLabel = new JLabel("LABELA DESCONHECIDA?");
@@ -238,12 +236,12 @@ public class DialogCadastrarPaciente extends JDialog {
         getContentPane().add(btSalvar);
         
         //BOTAO CANCELAR
-        JButton btCancelar = new JButton("CANCELAR");
+        btCancelar = new JButton("CANCELAR");
         btCancelar.setFont(new Font("Tahoma", Font.PLAIN, 20));
         btCancelar.setBackground(new Color(253, 2, 90));
         btCancelar.setBounds(1055, 538, 177, 55);
         getContentPane().add(btCancelar);
-    }    
+    }
    
     public String getNomePaciente() {
         return txFNomePaciente.getText(); }
@@ -263,8 +261,9 @@ public class DialogCadastrarPaciente extends JDialog {
         return (String) cbConvenio.getSelectedItem(); }
     public JButton getBtSalvar() {
         return btSalvar; }
-    
-    
+    public JButton getBtCancelar() {
+        return btCancelar;
+    }
     
     private int parseInt(String text, int defaultValue) {
         try { return Integer.parseInt(text); }
@@ -287,9 +286,6 @@ public class DialogCadastrarPaciente extends JDialog {
 
 	public JTextField getTxFAltura() {
 		return txFAltura;}
-
-	public JTextField getTxFTipoSang() {
-		return txFTipoSang;}
 
 	public JComboBox<String> getCbTipoSang() {
 		return cbTipoSang;}
@@ -321,8 +317,8 @@ public class DialogCadastrarPaciente extends JDialog {
 	public JTextField getTxFCEP() {
 		return txFCEP;}
 
-	public JTextField getTxFEstado() {
-		return txFEstado;}
+	public JComboBox getCBEstado() {
+		return cbEstado;}
 
 	
 }
