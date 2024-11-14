@@ -86,6 +86,7 @@ public class ControladorDialogCadastrarPaciente implements ActionListener {
         }
         String mascDataNasc = "  /  /    ";
         String mascContato = "(  )     -    ";
+        String mascCEP = "     -   ";
         if (dialogCadastrarPaciente.getTxFDataNasc().getText().equals(mascDataNasc)) {
         	  JOptionPane.showMessageDialog(dialogCadastrarPaciente, 
                       "Preencha todos os campos! (data nasc)", "Erro", 
@@ -97,6 +98,11 @@ public class ControladorDialogCadastrarPaciente implements ActionListener {
                     "Preencha todos os campos! (contato)", "Erro", 
                     JOptionPane.ERROR_MESSAGE);
         	return false;
+        }
+        if (dialogCadastrarPaciente.getTxFCEP().getText().equals(mascCEP)) {
+        	JOptionPane.showMessageDialog(dialogCadastrarPaciente, 
+                    "Preencha todos os campos! (cep)", "Erro", 
+                    JOptionPane.ERROR_MESSAGE);
         }
         return true;
     } 
