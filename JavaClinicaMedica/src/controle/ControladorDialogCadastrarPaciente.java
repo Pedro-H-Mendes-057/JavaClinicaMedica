@@ -29,11 +29,14 @@ public class ControladorDialogCadastrarPaciente implements ActionListener {
     }
 
     public void actionPerformed(ActionEvent e) {
-    	if(e.getSource() == this.dialogCadastrarPaciente.getBtCancelar(){
+    	if(e.getSource() == this.dialogCadastrarPaciente.getBtCancelar()){
     		this.dialogCadastrarPaciente.dispose();
-    		}
+    		};
        if (e.getSource() == this.dialogCadastrarPaciente.getBtSalvar()) {
     	    try { 
+    	    	if (verifCamposVazios() == false) {
+    	    		return;
+    	    	}
     	        String nome = this.dialogCadastrarPaciente.getTxFNomePaciente().getText();
     	        String dataNasc = this.dialogCadastrarPaciente.getTxFDataNasc().getText();
     	        String contato = this.dialogCadastrarPaciente.getTxFContato().getText();
@@ -77,13 +80,27 @@ public class ControladorDialogCadastrarPaciente implements ActionListener {
             dialogCadastrarPaciente.getTxFPeso().getText().isBlank() ||
             dialogCadastrarPaciente.getCbConvenio().getSelectedItem().toString().isBlank()) {
             JOptionPane.showMessageDialog(dialogCadastrarPaciente, 
-                                          "Preencha todos os campos obrigatórios!", 
-                                          "Erro", 
+                                          "Preencha todos os campos obrigatórios!", "Erro", 
                                           JOptionPane.ERROR_MESSAGE);
             return false;
         }
+        String mascDataNasc = "  /  /    ";
+        String mascContato = "(  )     -    ";
+        if (dialogCadastrarPaciente.getTxFDataNasc().getText().equals(mascDataNasc)) {
+        	  JOptionPane.showMessageDialog(dialogCadastrarPaciente, 
+                      "Preencha todos os campos! (data nasc)", "Erro", 
+                      JOptionPane.ERROR_MESSAGE);
+        	  return false;
+        }
+        else if (dialogCadastrarPaciente.getTxFContato().getText().equals(mascContato)) {
+        	JOptionPane.showMessageDialog(dialogCadastrarPaciente, 
+                    "Preencha todos os campos! (contato)", "Erro", 
+                    JOptionPane.ERROR_MESSAGE);
+        	return false;
+        }
         return true;
     } 
+    
     
     public void addPaciente() {
         this.paciente = new Paciente();

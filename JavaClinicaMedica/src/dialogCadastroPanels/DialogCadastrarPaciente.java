@@ -65,10 +65,10 @@ public class DialogCadastrarPaciente extends JDialog {
         getContentPane().add(lblDataNasc);
      
         try {
-        	MaskFormatter mascara = new MaskFormatter("##/##/####");
-        	mascara.setPlaceholderCharacter(' ');
+        	MaskFormatter mascDataNasc = new MaskFormatter("##/##/####");
+        	mascDataNasc.setPlaceholderCharacter(' ');
     
-        	txFDataNasc = new JFormattedTextField(mascara);
+        	txFDataNasc = new JFormattedTextField(mascDataNasc);
         	txFDataNasc.setBounds(63, 172, 493, 40);
         	txFDataNasc.setFont(new Font("Tahoma", Font.PLAIN, 16));
         	getContentPane().add(txFDataNasc);
@@ -83,9 +83,9 @@ public class DialogCadastrarPaciente extends JDialog {
         getContentPane().add(lblContato);
         
 		try {
-		    MaskFormatter mascaraContato = new MaskFormatter("(##) #####-####");
-		    mascaraContato.setPlaceholderCharacter('_');
-		    txFContato = new JFormattedTextField(mascaraContato);
+		    MaskFormatter mascContato = new MaskFormatter("(##) #####-####");
+		    mascContato.setPlaceholderCharacter('_');
+		    txFContato = new JFormattedTextField(mascContato);
 		    txFContato.setBounds(63, 261, 493, 40);
 		    getContentPane().add(txFContato);
 		} catch (ParseException e) {
@@ -200,9 +200,9 @@ public class DialogCadastrarPaciente extends JDialog {
         getContentPane().add(lblCep);
         
 		         try {
-		    MaskFormatter mascaraCEP = new MaskFormatter("#####-###");
-		    mascaraCEP.setPlaceholderCharacter('_');
-		    txFCEP = new JFormattedTextField(mascaraCEP);
+		    MaskFormatter mascCEP = new MaskFormatter("#####-###");
+		    mascCEP.setPlaceholderCharacter('_');
+		    txFCEP = new JFormattedTextField(mascCEP);
 		    txFCEP.setBounds(752, 261, 117, 40);
 		    getContentPane().add(txFCEP);
 		} catch (ParseException e) {
