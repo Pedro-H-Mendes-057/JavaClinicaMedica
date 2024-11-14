@@ -6,10 +6,13 @@ public class Medico {
 	private String crm;
 	private String contato;
 	private String[] horasAtend;
-	private int valorConsulta;
+	private double valorConsulta;
 	
-	public Medico(String nome, String especialidade, String crm, String contato, String[] horasAtend, int valorConsulta) {
-		super();
+	public Medico(){
+		
+	}
+	
+	public Medico(String nome, String especialidade, String crm, String contato, String[] horasAtend, double valorConsulta) {
 		this.nome = nome;
 		this.especialidade = especialidade;
 		this.crm = crm;
@@ -58,11 +61,11 @@ public class Medico {
 		this.horasAtend = horasAtend;
 	}
 
-	public int getValorConsulta() {
+	public double getValorConsulta() {
 		return valorConsulta;
 	}
 
-	public void setValorConsulta(int valorConsulta) {
+	public void setValorConsulta(double valorConsulta) {
 		this.valorConsulta = valorConsulta;
 	}
 	

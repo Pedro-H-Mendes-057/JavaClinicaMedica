@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package dialogCadastroPanels;
 
 import javax.swing.JDialog;
@@ -24,10 +20,6 @@ import javax.swing.JFormattedTextField;
 
 import java.text.ParseException;
 
-/**
- *
- * @author fonfon
- */
 public class DialogCadastrarMedico extends JDialog {
     JLabel labelNome;
     JTextField textFieldNome;
@@ -39,10 +31,10 @@ public class DialogCadastrarMedico extends JDialog {
     JTextField textFieldEspecialidade;
     JLabel labelValor;
     JTextField textFieldValor;
-    JButton buttonSalvar;
-    JButton buttonCancelar;
     JTable tableHorarios;
     JScrollPane scrollPaneHorarios;
+    JButton buttonSalvar;
+    JButton buttonCancelar;
     
     
     public DialogCadastrarMedico(JFrame parent) {
@@ -66,16 +58,7 @@ public class DialogCadastrarMedico extends JDialog {
         this.add(getButtonCancelar());
         this.add(getScrollPaneHorarios());
         
-        getButtonSalvar().addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (verifCamposVazios()) {
-                    System.out.println("Médico cadastrado com sucesso!");
-                } else {
-                    System.out.println("Preencha todos os campos!");
-                }
-            }
-        });
+      
     }
     JLabel getLabelNome() {
         if (this.labelNome == null) {

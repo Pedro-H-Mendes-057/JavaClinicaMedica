@@ -5,10 +5,13 @@ import java.awt.event.ActionListener;
 import javax.swing.JTable;
 import javax.swing.JOptionPane;
 import dialogCadastroPanels.DialogCadastrarMedico;
+import modelo.Medico;
+import modelo.Paciente;
 
 public class ControladorDialogCadastrarMedico implements ActionListener {
     DialogCadastrarMedico dialogCadastrarMedico;
     JTable tableHorarios;
+    private Medico medico;
 
     public ControladorDialogCadastrarMedico(DialogCadastrarMedico dialogCadastrarMedico) {
         this.dialogCadastrarMedico = dialogCadastrarMedico;
@@ -20,71 +23,24 @@ public class ControladorDialogCadastrarMedico implements ActionListener {
 
     void addEventos() {
         this.dialogCadastrarMedico.getButtonSalvar().addActionListener(this);
-
+    	this.dialogCadastrarMedico.getButtonCancelar().addActionListener(e-> {
+    		dialogCadastrarMedico.dispose();
+    	});
+    	    	
         tableHorarios.addMouseListener(new java.awt.event.MouseAdapter() {
             @Override
             public void mouseClicked(java.awt.event.MouseEvent e) {
                 int row = tableHorarios.rowAtPoint(e.getPoint());
                 int col = tableHorarios.columnAtPoint(e.getPoint());
 
-                System.out.println("teste 2");
+                System.out.println("teste tabela dialog cadastrar medico");
 
-                if (row >= 1 && col >= 0) {
+                if (row >= 0 && col >= 1) {
                     tableHorarios.getModel().setValueAt("  X  ", row, col);
-                }
-            }
-        });
-    }
-
-   
-    public boolean validarCampos() {
-        try {
-            
-            if (dialogCadastrarMedico.getTextFieldNome().getText().trim().isEmpty()) {
-                throw new IllegalArgumentException("Preencha o Nome!");
-            }
-
-            // Valida Contato
-            if (dialogCadastrarMedico.getTextFieldContato().getText().trim().isEmpty()) {
-                throw new IllegalArgumentException("Preencha o Contato!");
-            }
-            String contato = dialogCadastrarMedico.getTextFieldContato().getText().trim();
-            try {
-                Long.parseLong(contato);
-            } catch (NumberFormatException e) {
-                throw new IllegalArgumentException("Contato deve ser um número!");
-            }
-            if (dialogCadastrarMedico.getTextFieldCRM().getText().trim().isEmpty()) {
-                throw new IllegalArgumentException("Preencha o CRM!");
-            }
-            String crm = dialogCadastrarMedico.getTextFieldCRM().getText().trim();
-            try {
-                int crmNumber = Integer.parseInt(crm);
-                if (crmNumber <= 0) {
-                    throw new IllegalArgumentException("CRM inválido!");
-                }
-            } catch (NumberFormatException e) {
-                throw new IllegalArgumentException("CRM deve ser um número!");
-            }
-            if (dialogCadastrarMedico.getTextFieldEspecialidade().getText().trim().isEmpty()) {
-                throw new IllegalArgumentException("Preencha a Especialidade!");
-            }
-
-            if (dialogCadastrarMedico.getTextFieldValor().getText().trim().isEmpty()) {
-                throw new IllegalArgumentException("Preencha o Valor da Consulta!");
-            }
-            double valorConsulta = Double.parseDouble(dialogCadastrarMedico.getTextFieldValor().getText());
-            if (valorConsulta <= 0) {
-                throw new IllegalArgumentException("O valor da consulta deve ser maior que zero!");
-            }
-
-            return true;
-
-        } catch (IllegalArgumentException ex) {
-            JOptionPane.showMessageDialog(dialogCadastrarMedico, ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
-            return false;
-        }
-    }
+                }//do if de tabela
+            }//do mouseClicked
+        });//do tabelHorarios
+    }//do AddEventos
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -96,21 +52,93 @@ public class ControladorDialogCadastrarMedico implements ActionListener {
                 String especialidade = this.dialogCadastrarMedico.getTextFieldEspecialidade().getText();
                 double valorConsulta = Double.parseDouble(this.dialogCadastrarMedico.getTextFieldValor().getText());
 
-                if (!validarCampos()) {
+                if (ValidosCamposVazios() == false) {
                     return;
                 } else {
                     JOptionPane.showMessageDialog(this.dialogCadastrarMedico,
                             "Médico salvo com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
-                    addMedico(nome, contato, crm, especialidade, valorConsulta);
+                    addMedico(/*nome, contato, crm, especialidade, valorConsulta*/);
                     this.dialogCadastrarMedico.dispose();
                 }
+            } catch (NumberFormatException ex) {
+                JOptionPane.showMessageDialog(this.dialogCadastrarMedico, 
+                        "Preenchimento inválido!");
             } catch (IllegalArgumentException ex) {
                 JOptionPane.showMessageDialog(this.dialogCadastrarMedico, 
-                        "Preenchimento inválido!", JOptionPane.ERROR_MESSAGE);
-            } /*catch (NumberFormatException ex) {
-                JOptionPane.showMessageDialog(this.dialogCadastrarMedico, 
-                        "Preenchimento inválido!", JOptionPane.ERROR_MESSAGE);
-            }*/
+                        "Preenchimento inválido!");
+            }
+        } 
+    } //actionPerformed
+    
+    private boolean ValidosCamposVazios() {
+        if (dialogCadastrarMedico.getTextFieldNome().getText().trim().isEmpty()) {
+        	JOptionPane.showMessageDialog(dialogCadastrarMedico, "Preencha todos os campos!");
+            return false;
         }
+
+        String contato = dialogCadastrarMedico.getTextFieldContato().getText().trim();
+        if (contato.isEmpty() || contato.contains("_")) {
+        	JOptionPane.showMessageDialog(dialogCadastrarMedico, "Preencha todos os campos!");
+            return false;
+        }
+
+        String crm = dialogCadastrarMedico.getTextFieldCRM().getText().trim();
+        if (crm.isEmpty()) {
+        	JOptionPane.showMessageDialog(dialogCadastrarMedico, "Preencha todos os campos!");
+            return false;
+        }
+        try {
+            int crmNumber = Integer.parseInt(crm);
+            if (crmNumber <= 0) {
+            	JOptionPane.showMessageDialog(dialogCadastrarMedico, "CRM Invalido!");
+                return false;
+            }
+        } catch (NumberFormatException e) {
+        	JOptionPane.showMessageDialog(dialogCadastrarMedico, "CRM deve conter numeros!");
+            return false;
+        }
+
+        if (dialogCadastrarMedico.getTextFieldEspecialidade().getText().trim().isEmpty()) {
+        	JOptionPane.showMessageDialog(dialogCadastrarMedico, "Preencha todos os campos!");
+            return false;
+        }
+
+        String valorConsultaStr = dialogCadastrarMedico.getTextFieldValor().getText().trim();
+        if (valorConsultaStr.isEmpty()) {
+        	JOptionPane.showMessageDialog(dialogCadastrarMedico, "Preencha todos os campos!");
+            return false;
+        }
+        try {
+            double valorConsulta = Double.parseDouble(valorConsultaStr);
+            if (valorConsulta <= 0) {
+            	JOptionPane.showMessageDialog(dialogCadastrarMedico, "Preenchimento inválido!");
+                return false;
+            }
+        } catch (NumberFormatException e) {
+        	JOptionPane.showMessageDialog(dialogCadastrarMedico, "Valor deve ser um número!");
+            return false;
+        }
+        return true;
+    }
+
+    public void addMedico() {
+        this.medico = new Medico();
+        this.medico.setNome(this.dialogCadastrarMedico.getTextFieldNome().getText().trim());
+        this.medico.setContato(this.dialogCadastrarMedico.getTextFieldContato().getText().trim());
+        this.medico.setCrm(this.dialogCadastrarMedico.getTextFieldCRM().getText().trim());
+        this.medico.setEspecialidade(this.dialogCadastrarMedico.getTextFieldEspecialidade().getText().trim());
+        this.medico.setValorConsulta(Double.parseDouble(this.dialogCadastrarMedico.getTextFieldValor().getText().trim()));
+        ControladorFrame.repositorioMedicos.addMedico(this.medico);
+        
+        
+        /*
+        this.medico = new Paciente();
+        this.medico.setNome(this.dialogCadastrarMedico.getNome());
+        this.medico.setContato(this.dialogCadastrarMedico.getContato());
+        this.medico.setCrm(this.dialogCadastrarMedico.getCrm());
+        this.medico.setEspecialidade(this.dialogCadastrarMedico.getEspecialidade());
+        this.medico.setValorConsulta(this.dialogCadastrarMedico.getValorConsulta());
+        ControladorFrame.repositorioMedicos.addMedico(medico);
+        */
     }
 }

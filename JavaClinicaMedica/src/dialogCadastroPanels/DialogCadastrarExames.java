@@ -54,8 +54,10 @@ public class DialogCadastrarExames extends JDialog {
         getContentPane().add(lblDescricao);
         
         JComboBox comboBoxTipo = new JComboBox();
+        comboBoxTipo = new JComboBox<>(new String[] { "", "Exame físico", "Exame laboratorial", "Imagem", "Biópsia", "Patologia", "Análise clínica" });
         comboBoxTipo.setBounds(63, 370, 240, 40);
         getContentPane().add(comboBoxTipo);
+        
         
         JLabel lblTipo = new JLabel("Tipo:");
         lblTipo.setFont(new Font("Tahoma", Font.PLAIN, 20));
