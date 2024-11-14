@@ -83,8 +83,8 @@ public class DialogCadastrarPaciente extends JDialog {
         getContentPane().add(lblContato);
         
 		try {
-		    MaskFormatter mascContato = new MaskFormatter("(##) #####-####");
-		    mascContato.setPlaceholderCharacter('_');
+		    MaskFormatter mascContato = new MaskFormatter("(##)#####-####");
+		    mascContato.setPlaceholderCharacter(' ');
 		    txFContato = new JFormattedTextField(mascContato);
 		    txFContato.setBounds(63, 261, 493, 40);
 		    getContentPane().add(txFContato);

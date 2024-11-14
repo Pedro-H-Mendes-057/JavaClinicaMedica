@@ -92,7 +92,7 @@ public class ControladorDialogCadastrarPaciente implements ActionListener {
                       JOptionPane.ERROR_MESSAGE);
         	  return false;
         }
-        else if (dialogCadastrarPaciente.getTxFContato().getText().equals(mascContato)) {
+        if (dialogCadastrarPaciente.getTxFContato().getText().equals(mascContato)) {
         	JOptionPane.showMessageDialog(dialogCadastrarPaciente, 
                     "Preencha todos os campos! (contato)", "Erro", 
                     JOptionPane.ERROR_MESSAGE);
