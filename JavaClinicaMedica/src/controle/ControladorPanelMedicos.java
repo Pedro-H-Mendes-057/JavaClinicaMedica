@@ -36,8 +36,16 @@ public class ControladorPanelMedicos implements ActionListener {
             this.cadastrarMedico = new DialogCadastrarMedico(ControladorFrame.frame);            
             this.controladorDialogCadastrarMedico = new ControladorDialogCadastrarMedico(this.cadastrarMedico); 
             atualizarTabela();
-        } else if (e.getSource() == this.panelMedicos.getBTNExcluir()) {
-            this.panelMedicos.getMessageDialogCancelarItem(panelMedicos);
+        }
+        
+        if (e.getSource() == this.panelMedicos.getBTNExcluir()) {
+            if(this.panelMedicos.getMessageDialogExcluirItem(panelMedicos) &&
+            		(this.panelMedicos.getTable().getSelectedRowCount()) == 1) {
+            	ControladorFrame.repositorioMedicos.getMedicos().remove(this.panelMedicos.getTable().getSelectedRow());
+            	atualizarTabela();
+            	if(ControladorFrame.repositorioMedicos.getMedicos().isEmpty()) System.out.println("Tá apagando mesmo");
+            }
+            
         }
     }
     

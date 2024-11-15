@@ -123,6 +123,10 @@ public class ControladorDialogCadastrarMedico implements ActionListener {
         this.medico.setCrm(this.dialogCadastrarMedico.getTextFieldCRM().getText().trim());
         this.medico.setEspecialidade(this.dialogCadastrarMedico.getTextFieldEspecialidade().getText().trim());
         this.medico.setValorConsulta(Double.parseDouble(this.dialogCadastrarMedico.getTextFieldValor().getText().trim()));
-        ControladorFrame.repositorioMedicos.addMedico(this.medico);      
+        ControladorFrame.repositorioMedicos.addMedico(this.medico);
+        
+        ControladorFrame.frame.getPanelExames().getBTNNovo().setEnabled(true);
+        ControladorFrame.frame.getPanelExames().getBTNEditar().setEnabled(true);
+        ControladorFrame.frame.getPanelExames().getBTNExcluir().setEnabled(true);
     }
 }

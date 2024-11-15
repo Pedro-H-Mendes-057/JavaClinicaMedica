@@ -30,6 +30,15 @@ public class ControladorPanelPacientes implements ActionListener {
             
             atualizarTabela();
         }
+        
+        if (e.getSource() == this.panelPacientes.getBTNExcluir()) {
+            if(this.panelPacientes.getMessageDialogExcluirItem(panelPacientes) &&
+            		(this.panelPacientes.getTable().getSelectedRowCount()) == 1) {
+            	ControladorFrame.repositorioPacientes.getPacientes().remove(this.panelPacientes.getTable().getSelectedRow());
+            	atualizarTabela();
+            }
+            
+        }
     }
     
     private void atualizarTabela() {

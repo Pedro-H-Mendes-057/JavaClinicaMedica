@@ -27,6 +27,7 @@ public class ControladorFrame {
         repositorioExames = new RepositorioExames();
         repositorioConsultas = new RepositorioConsultas();
         frame = new Frame();
+        frame.getTabbedPane().setIconAt(0, frame.resizeIcon("resources/Pintados/Pacientes2.png", 30, 30));
         
         addEventos();
     }
@@ -40,7 +41,7 @@ public class ControladorFrame {
     }
 
     private void atualizIconPintado(int abaSelecionada) {
-        if (abaSelecionada < 1) return; // Ignora a Home
+        if (abaSelecionada < 1) frame.getTabbedPane().setIconAt(0, frame.resizeIcon("resources/Pintados/Pacientes2.png", 30, 30));
         switch (abaSelecionada) {
             case 1: // Pacientes
                 frame.getTabbedPane().setIconAt(1, frame.resizeIcon("resources/Pintados/Pacientes2.png", 30, 30));
@@ -66,6 +67,9 @@ public class ControladorFrame {
 
     private void mudaRestoIcones(int selectedIndex) {
         // Muda o icone das abas q nao tao selecionadas
+    	if (selectedIndex != 0) {
+    		frame.getTabbedPane().setIconAt(0, frame.resizeIcon("resources/Pacientes.png", 30, 30));
+    	}
         if (selectedIndex != 1) {
             frame.getTabbedPane().setIconAt(1, frame.resizeIcon("resources/Pacientes.png", 30, 30));
         }

@@ -15,7 +15,7 @@ public class RepositorioExames {
         repositorioExames.add(exame);
     }
 
-    public ArrayList<Exame> getListaExames() {
+    public ArrayList<Exame> getExames() {
         return this.repositorioExames;
     }
 }

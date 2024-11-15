@@ -1,6 +1,9 @@
 package dialogCadastroPanels;
 
 import javax.swing.*;
+
+import controle.ControladorFrame;
+
 import java.awt.*;
 
 public class DialogCadastrarExames extends JDialog {
@@ -101,7 +104,7 @@ public class DialogCadastrarExames extends JDialog {
 	    
 	    public JComboBox<String> getCBMedico() {
 	        if (this.cbMedico == null) {
-	            this.cbMedico = new JComboBox<>(new String[]{"", "a", "b"});
+	            this.cbMedico = new JComboBox<>(ControladorFrame.repositorioMedicos.getNomesMedicos());
 	            this.cbMedico.setBounds(355, 370, 335, 40);
 	            getContentPane().add(this.cbMedico);
 	        }

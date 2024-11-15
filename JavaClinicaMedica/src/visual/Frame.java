@@ -67,7 +67,7 @@ public class Frame extends JFrame {
         this.panelRelatorios = new PanelRelatorios(this);
 //      this.controladorPanelRelatorios = new ControladorPanelRelatorios(this.panelRelatorios);
         
-        tabbedPane.addTab("Home", resizeIcon("resources/Pacientes.png", 30, 30), this.panelInicial, "BEM VINDE A ZELOCUIDAR");
+        tabbedPane.addTab("Home", resizeIcon("resources/Pacientes.png", 30, 30), this.panelInicial, "BEM VINDO(A) À ZELOCUIDAR");
         tabbedPane.addTab("Pacientes", resizeIcon("resources/Pacientes.png", 30, 30), this.panelPacientes);
         tabbedPane.addTab("Médicos", resizeIcon("resources/Medico.png", 30, 30), this.panelMedicos);
         tabbedPane.addTab("Agendar", resizeIcon("resources/Agenda.png", 30, 30), this.panelAgendar);
@@ -111,5 +111,11 @@ public class Frame extends JFrame {
         }
         return null;
     }
+
+	public PanelExames getPanelExames() {
+		return panelExames;
+	}
+    
+    
 
   }

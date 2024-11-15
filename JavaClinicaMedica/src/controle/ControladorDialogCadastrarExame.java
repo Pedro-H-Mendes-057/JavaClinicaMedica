@@ -6,11 +6,12 @@ import javax.swing.JTable;
 import javax.swing.JOptionPane;
 import dialogCadastroPanels.DialogCadastrarExames;
 import modelo.Exame;
+import modelo.Medico;
 import modelo.Paciente;
 
 public class ControladorDialogCadastrarExame implements ActionListener {
     DialogCadastrarExames dialogCadastrarExames;
-    private Exame exame;
+    //private Exame exame;
 
     public ControladorDialogCadastrarExame(DialogCadastrarExames dialogCadastrarExames) {
         this.dialogCadastrarExames = dialogCadastrarExames;
@@ -32,16 +33,10 @@ public class ControladorDialogCadastrarExame implements ActionListener {
     		};
         if (e.getSource() == this.dialogCadastrarExames.getBTSalvar()) {
             try {
-            	//Nome, descrição, tipo, valor, medico, materiais usados
-                String nomeExame = this.dialogCadastrarExames.getTxFNomeExame().getText();
-                String descricao = this.dialogCadastrarExames.getTxFDescricao().getText();
-                String tipo = this.dialogCadastrarExames.getComboBoxTipo().getSelectedItem().toString();
-                int valorParticular = Integer.parseInt(this.dialogCadastrarExames.getTxFValor().getText());
-                String medico = this.dialogCadastrarExames.getCBMedico().getSelectedItem().toString();
               //String materiaisUsar = this.dialogCadastrarExames.getCBMateriaisUsar().getSelectedItem().toString();
 
                 if (ValidosCamposVazios() == false) {
-                    return;
+                    addExame();
                 } else {
                     JOptionPane.showMessageDialog(this.dialogCadastrarExames,
                             "Exame salvo com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
@@ -85,15 +80,28 @@ public class ControladorDialogCadastrarExame implements ActionListener {
     }//fim do validarcampos
 
     public void addExame() {
-    	this.exame = new Exame();
-        this.exame.setNomeExame(this.dialogCadastrarExames.getTxFNomeExame().getText());
-        this.exame.setTipo(this.dialogCadastrarExames.getComboBoxTipo().getSelectedItem().toString());
-        this.exame.setValorParticular(Integer.parseInt(this.dialogCadastrarExames.getTxFValor().getText()));
+    	Exame exame = new Exame();
+        exame.setNomeExame(this.dialogCadastrarExames.getTxFNomeExame().getText());
+        exame.setTipo(this.dialogCadastrarExames.getComboBoxTipo().getSelectedItem().toString());
+        exame.setValorParticular(Integer.parseInt(this.dialogCadastrarExames.getTxFValor().getText()));
+        exame.setMedico(atribuiMedico());
+        exame.setMateriasUsar(null);
+        exame.setDescricao(this.dialogCadastrarExames.getTxFDescricao().getText());
         //this.exame.setMedico(this.dialogCadastrarExames.getCBMedico().getSelectedItem().toString());
         // this.exame.setMateriaisUsar(this.dialogCadastrarExames.getComboBoxMateriaisUsar().getSelectedItem().toString());
 
-        ControladorFrame.repositorioExames.addExame(this.exame);
+        ControladorFrame.repositorioExames.addExame(exame);
     }
+
+	private Medico atribuiMedico() {
+		for(int i = 0; i<ControladorFrame.repositorioExames.getExames().size();i++) {
+			if(ControladorFrame.repositorioMedicos.getMedicos().get(i).getNome() == 
+					this.dialogCadastrarExames.getCBMedico().getSelectedItem()) {
+				return ControladorFrame.repositorioMedicos.getMedicos().get(i);
+			}
+		}
+		return null;
+	}
     
 
 }

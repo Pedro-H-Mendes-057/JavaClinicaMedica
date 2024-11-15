@@ -7,6 +7,7 @@ import dialogCadastroPanels.DialogCadastrarPaciente;
 import dialogCadastroPanels.DialogReagendarExames;
 import visual.PanelExames;
 import javax.swing.JFrame;
+import javax.swing.table.DefaultTableModel;
 
 public class ControladorPanelExames implements ActionListener {
     private PanelExames panelExames;
@@ -28,12 +29,40 @@ public class ControladorPanelExames implements ActionListener {
         if (e.getSource() == panelExames.getBTNNovo()) {            
             dialogCadastrarExames = new DialogCadastrarExames(ControladorFrame.frame);
             dialogCadastrarExames.setVisible(true);
+            atualizarTabela();
             
+        }
+        
+        if (e.getSource() == this.panelExames.getBTNExcluir()) {
+            if(this.panelExames.getMessageDialogExcluirItem(panelExames) &&
+            		(this.panelExames.getTable().getSelectedRowCount()) == 1) {
+            	ControladorFrame.repositorioExames.getExames().remove(this.panelExames.getTable().getSelectedRow());
+            	atualizarTabela();
+            }
             
-        } else if (e.getSource() == panelExames.getBTNEditar()) {
+        }
+        
+        if(e.getSource() == panelExames.getBTNEditar()) {
             new DialogReagendarExames(ControladorFrame.frame).setVisible(true);
         }
     }//do actionperformed
+
+    private void atualizarTabela() {
+        DefaultTableModel model = (DefaultTableModel) this.panelExames.getTable().getModel(); 
+        
+        model.setRowCount(0); // apaga todos os itens da tabela para que ela seja refeita
+        
+        for (int i = 0; i < ControladorFrame.repositorioExames.getExames().size(); i++) {
+            //System.out.println("OI " + i);
+            model.addRow(new Object [] {
+                ControladorFrame.repositorioExames.getExames().get(i).getNomeExame(),
+                ControladorFrame.repositorioExames.getExames().get(i).getDescricao(),
+                String.valueOf(ControladorFrame.repositorioExames.getExames().get(i).getValorParticular()),
+                ControladorFrame.repositorioExames.getExames().get(i).getMedico(),
+                ControladorFrame.repositorioExames.getExames().get(i).getTipo(),
+            });
+        }    
+    }
 
     
 

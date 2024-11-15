@@ -17,12 +17,15 @@ public class PanelExames extends TemplatePanel {
          
        
         getLabelPesquisar().setText("Pesquisar por Exame:");
+        getBTNNovo().setEnabled(false);
+        getBTNEditar().setEnabled(false);
+        getBTNExcluir().setEnabled(false);
     }
     
     @Override
     public JTable getTable() {
         if (this.table == null) {
-            String[] colunas = {"NOME DO PACIENTE", "TIPO DE EXAME", "VALOR", "DESCRICAO"};
+            String[] colunas = {"NOME DO EXAME", "TIPO DE EXAME", "VALOR", "DESCRICAO"};
             DefaultTableModel model = new DefaultTableModel(0, colunas.length);
             model.setColumnIdentifiers(colunas);
             this.table = new JTable(model);

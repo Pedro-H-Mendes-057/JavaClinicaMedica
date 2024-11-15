@@ -174,8 +174,8 @@ public class TemplatePanel extends JPanel {
         return this.btnExcluir;
     }
     
-      public boolean getMessageDialogCancelarItem(JPanel panel) {
-        	int resposta = JOptionPane.showConfirmDialog(panel, "Tem certeza que deseja apagar este item?");
+      public boolean getMessageDialogExcluirItem(JPanel panel) {
+        	int resposta = JOptionPane.showConfirmDialog(panel, "Tem certeza que deseja excluir este item?");
         
         	if (resposta == JOptionPane.YES_OPTION){  
         		return true;  

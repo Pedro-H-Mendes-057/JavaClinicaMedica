@@ -16,7 +16,7 @@ public class PanelMedicos extends TemplatePanel {
     @Override
     public JTable getTable() {
         if (this.table == null) {
-            String[] colunas = {"CRM", "NOME", "ESPECIALIDADE ","VALOR DA CONSULTA", "CONTATO"};
+            String[] colunas = {"NOME", "ESPECIALIDADE", "CRM","CONTATO", "VALOR DO ATENDIMENTO"};
             DefaultTableModel model = new DefaultTableModel(0, colunas.length);
             model.setColumnIdentifiers(colunas);
             this.table = new JTable(model);

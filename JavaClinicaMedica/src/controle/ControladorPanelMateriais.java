@@ -32,8 +32,15 @@ public class ControladorPanelMateriais implements ActionListener {
            this.controladorDialogCadastrarMaterial = new ControladorDialogCadastrarMaterial(this.dialogCadastrarMaterial);
            atualizarTabela();
 
-        } else if (e.getSource() == this.panelMateriais.getBTNExcluir()) {
-            this.panelMateriais.getMessageDialogCancelarItem(panelMateriais);
+        }
+        
+        if (e.getSource() == this.panelMateriais.getBTNExcluir()) {
+            if(this.panelMateriais.getMessageDialogExcluirItem(panelMateriais) &&
+            		(this.panelMateriais.getTable().getSelectedRowCount()) == 1) {
+            	ControladorFrame.repositorioMateriais.getMateriais().remove(this.panelMateriais.getTable().getSelectedRow());
+            	atualizarTabela();
+            }
+            
         }
     }
     
