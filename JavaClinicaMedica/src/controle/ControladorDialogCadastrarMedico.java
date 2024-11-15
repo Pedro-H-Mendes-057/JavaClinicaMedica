@@ -9,14 +9,14 @@ import modelo.Medico;
 import modelo.Paciente;
 
 public class ControladorDialogCadastrarMedico implements ActionListener {
-    DialogCadastrarMedico dialogCadastrarMedico;
-    JTable tableHorarios;
+    private DialogCadastrarMedico dialogCadastrarMedico;
+    private JTable tableHorarios;
     private Medico medico;
 
     public ControladorDialogCadastrarMedico(DialogCadastrarMedico dialogCadastrarMedico) {
         this.dialogCadastrarMedico = dialogCadastrarMedico;
         tableHorarios = this.dialogCadastrarMedico.getTableHorarios();        
-        addEventos();
+        addEventos();        
         this.dialogCadastrarMedico.setVisible(true);
     }
 
@@ -42,24 +42,17 @@ public class ControladorDialogCadastrarMedico implements ActionListener {
             }
            
         });
-    }
-    
+    }    
     
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == this.dialogCadastrarMedico.getButtonSalvar()) {
-            try {
-                String nome = this.dialogCadastrarMedico.getTextFieldNome().getText();
-                String contato = this.dialogCadastrarMedico.getTextFieldContato().getText();
-                String crm = this.dialogCadastrarMedico.getTextFieldCRM().getText();
-                String especialidade = this.dialogCadastrarMedico.getTextFieldEspecialidade().getText();
-                double valorConsulta = Double.parseDouble(this.dialogCadastrarMedico.getTextFieldValor().getText());
-
-                if (ValidosCamposVazios() == false) {
+            try {              
+                if (validosCamposVazios() == false) {
                     return;
                 } else {
                     JOptionPane.showMessageDialog(this.dialogCadastrarMedico,
                             "Médico salvo com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
-                    addMedico(/*nome, contato, crm, especialidade, valorConsulta*/);
+                    addMedico();
                     this.dialogCadastrarMedico.dispose();
                 }
             } catch (NumberFormatException ex) {
@@ -70,9 +63,9 @@ public class ControladorDialogCadastrarMedico implements ActionListener {
                         "Preenchimento inválido!");
             }
         } 
-    } //actionPerformed
+    } 
     
-    private boolean ValidosCamposVazios() {
+    private boolean validosCamposVazios() {
         if (dialogCadastrarMedico.getTextFieldNome().getText().trim().isEmpty()) {
         	JOptionPane.showMessageDialog(dialogCadastrarMedico, "Preencha todos os campos!");
             return false;
@@ -130,17 +123,6 @@ public class ControladorDialogCadastrarMedico implements ActionListener {
         this.medico.setCrm(this.dialogCadastrarMedico.getTextFieldCRM().getText().trim());
         this.medico.setEspecialidade(this.dialogCadastrarMedico.getTextFieldEspecialidade().getText().trim());
         this.medico.setValorConsulta(Double.parseDouble(this.dialogCadastrarMedico.getTextFieldValor().getText().trim()));
-        ControladorFrame.repositorioMedicos.addMedico(this.medico);
-        
-        
-        /*
-        this.medico = new Paciente();
-        this.medico.setNome(this.dialogCadastrarMedico.getNome());
-        this.medico.setContato(this.dialogCadastrarMedico.getContato());
-        this.medico.setCrm(this.dialogCadastrarMedico.getCrm());
-        this.medico.setEspecialidade(this.dialogCadastrarMedico.getEspecialidade());
-        this.medico.setValorConsulta(this.dialogCadastrarMedico.getValorConsulta());
-        ControladorFrame.repositorioMedicos.addMedico(medico);
-        */
+        ControladorFrame.repositorioMedicos.addMedico(this.medico);      
     }
 }

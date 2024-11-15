@@ -15,7 +15,7 @@ public class RepositorioMedicos {
         repositorioMedicos.add(medico);
     }
 
-    public ArrayList<Medico> getListaMedicos() {
+    public ArrayList<Medico> getMedicos() {
         return this.repositorioMedicos;
     }
 }

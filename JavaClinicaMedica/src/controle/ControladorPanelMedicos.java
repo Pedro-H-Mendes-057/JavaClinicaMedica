@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import dialogCadastroPanels.DialogCadastrarMedico;
+import javax.swing.table.DefaultTableModel;
 import visual.PanelMedicos;
 
 /**
@@ -33,9 +34,28 @@ public class ControladorPanelMedicos implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == this.panelMedicos.getBTNNovo()) {            
             this.cadastrarMedico = new DialogCadastrarMedico(ControladorFrame.frame);            
-            this.controladorDialogCadastrarMedico = new ControladorDialogCadastrarMedico(this.cadastrarMedico);            
+            this.controladorDialogCadastrarMedico = new ControladorDialogCadastrarMedico(this.cadastrarMedico); 
+            atualizarTabela();
         } else if (e.getSource() == this.panelMedicos.getBTNExcluir()) {
             this.panelMedicos.getMessageDialogCancelarItem(panelMedicos);
         }
+    }
+    
+    public void atualizarTabela() {
+        DefaultTableModel model = (DefaultTableModel) this.panelMedicos.getTable().getModel(); 
+        
+        //System.out.println("size = " + ControladorFrame.repositorioMateriais.getMateriais().size());
+        model.setRowCount(0); // apaga todos os itens da tabela para que ela seja refeita
+        
+        for (int i = 0; i < ControladorFrame.repositorioMedicos.getMedicos().size(); i++) {
+            //System.out.println("OI " + i);
+            model.addRow(new Object [] {
+                ControladorFrame.repositorioMedicos.getMedicos().get(i).getNome(),
+                String.valueOf(ControladorFrame.repositorioMedicos.getMedicos().get(i).getEspecialidade()),
+                String.valueOf(ControladorFrame.repositorioMedicos.getMedicos().get(i).getCrm()),
+                ControladorFrame.repositorioMedicos.getMedicos().get(i).getContato(),
+                ControladorFrame.repositorioMedicos.getMedicos().get(i).getValorConsulta(),
+            });
+        }    
     }
 }
