@@ -121,10 +121,10 @@ public class TemplatePanel extends JPanel {
         return this.table;
     }
     
-	public void setTableColunas(String[] colunas) {
-	    DefaultTableModel model = (DefaultTableModel) getTable().getModel();
-	    model.setColumnIdentifiers(colunas);
-	}
+    public void setTableColunas(String[] colunas) {
+        DefaultTableModel model = (DefaultTableModel) getTable().getModel();
+        model.setColumnIdentifiers(colunas);
+    }
 
     public JLabel getLabelPesquisar() {
         if (this.labelPesquisar == null) {

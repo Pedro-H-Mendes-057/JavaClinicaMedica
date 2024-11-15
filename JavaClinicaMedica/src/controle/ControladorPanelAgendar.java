@@ -25,6 +25,7 @@ public class ControladorPanelAgendar implements ActionListener {
     public void addEventos() {
         this.panelAgendar.getBTNNovaConsulta().addActionListener(this);
         this.panelAgendar.getBTNNovoExame().addActionListener(this);
+        this.panelAgendar.getBTNBuscar().addActionListener(this);
         
     }
     
@@ -32,6 +33,8 @@ public class ControladorPanelAgendar implements ActionListener {
         if (e.getSource() ==  this.panelAgendar.getBTNNovaConsulta()) {            
             dialogCadastrarConsulta = new DialogCadastrarConsulta(ControladorFrame.frame);
         } else if (e.getSource() == this.panelAgendar.getBTNNovoExame()) {
+            
+        } else if (e.getSource() ==  this.panelAgendar.getBTNBuscar()) {
             
         }
     }

@@ -122,7 +122,7 @@ public class PanelAgendar extends JPanel { // Alterado para herdar de JPanel
             c3.gridx = 1;
             c3.gridy = 1;
             c3.fill = GridBagConstraints.BOTH;
-            this.panelPesquisar.add(getBTNPesquisar(), c3);
+            this.panelPesquisar.add(getBTNBuscar(), c3);
         }
         return this.panelPesquisar;
     }
@@ -140,7 +140,7 @@ public class PanelAgendar extends JPanel { // Alterado para herdar de JPanel
     
     public JLabel getLabelPesquisar() {
         if (this.labelPesquisar == null) {
-            this.labelPesquisar = new JLabel("Pesquisar agendamentos por médico:");
+            this.labelPesquisar = new JLabel("Médico: ");
         }
         return this.labelPesquisar;
     }
@@ -148,6 +148,7 @@ public class PanelAgendar extends JPanel { // Alterado para herdar de JPanel
     public JTextField getTxFPesquisar() {
         if (this.txFPesquisar == null) {
             this.txFPesquisar = new JTextField();
+            this.txFPesquisar.setEditable(false);
         }
         return this.txFPesquisar;
     }
@@ -252,16 +253,21 @@ public class PanelAgendar extends JPanel { // Alterado para herdar de JPanel
         return this.btnCancelar;
     }
     
-     public JButton getBTNPesquisar() {
+     public JButton getBTNBuscar() {
         if (this.btnPesquisar == null) {
-            this.btnPesquisar = new JButton("PESQUISAR");
+            this.btnPesquisar = new JButton("BUSCAR");
         }
         return this.btnPesquisar;
     }
      
     public JTable getTableSemana() {
         if (this.tabelaSemana == null) {            
-            this.tabelaSemana = new JTable();
+            this.tabelaSemana = new JTable() {
+                @Override 
+                public boolean isCellEditable(int row, int column) {
+                    return false;
+                }
+            };
         }
         return this.tabelaSemana;
     }

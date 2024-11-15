@@ -203,14 +203,18 @@ public JFormattedTextField getTextFieldContato() {
             model.addRow(new String[] {"17h", "", "", "" ,"", ""});
             model.addRow(new String[] {"18h", "", "", "" ,"", ""});
             
-            this.tableHorarios = new JTable(model);
+            this.tableHorarios = new JTable(model) {
+                @Override 
+                public boolean isCellEditable(int row, int column) {
+                    return false;
+                }
+            };
         }
         
         return this.tableHorarios;
     
     }  
-    
-    
+        
     public JScrollPane getScrollPaneHorarios() {
         if (this.scrollPaneHorarios == null) {
             this.scrollPaneHorarios = new JScrollPane(getTableHorarios());
@@ -219,6 +223,7 @@ public JFormattedTextField getTextFieldContato() {
         }
         return this.scrollPaneHorarios;
     }
+    
     public boolean verifCamposVazios() {
         if (getTextFieldNome().getText().isEmpty()) {
             return false;
