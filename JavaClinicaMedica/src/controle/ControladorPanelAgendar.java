@@ -4,6 +4,7 @@
  */
 package controle;
 
+import dialogCadastroPanels.DialogBuscarMedico;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import visual.PanelAgendar;
@@ -16,6 +17,8 @@ import dialogCadastroPanels.DialogCadastrarConsulta;
 public class ControladorPanelAgendar implements ActionListener {
     PanelAgendar panelAgendar;
     DialogCadastrarConsulta dialogCadastrarConsulta;
+    DialogBuscarMedico dialogBuscarMedico;
+    ControladorDialogBuscarMedico controladorDialogBuscarMedico;
     
     public ControladorPanelAgendar(PanelAgendar panelAgendar) {
         this.panelAgendar = panelAgendar;
@@ -35,7 +38,8 @@ public class ControladorPanelAgendar implements ActionListener {
         } else if (e.getSource() == this.panelAgendar.getBTNNovoExame()) {
             
         } else if (e.getSource() ==  this.panelAgendar.getBTNBuscar()) {
-            
+            dialogBuscarMedico = new DialogBuscarMedico(ControladorFrame.frame);
+            controladorDialogBuscarMedico = new ControladorDialogBuscarMedico(dialogBuscarMedico);
         }
     }
 }

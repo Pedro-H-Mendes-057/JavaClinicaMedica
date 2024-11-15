@@ -5,11 +5,15 @@
 package dialogCadastroPanels;
 
 import java.awt.Color;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -19,11 +23,24 @@ import javax.swing.table.DefaultTableModel;
 public class DialogBuscarMedico extends JDialog {
     JTable buscarMedicos;
     JScrollPane jscrollPane;
-    JButton buttonSelecionarMedico;
     
     public DialogBuscarMedico(JFrame parent) {
         super(parent, "Buscar Médico", true);        
+        this.setSize(1000, 650);
+        this.setResizable(false);
+        this.setLocationRelativeTo(parent);        
+        this.setLayout(new GridBagLayout());       
+        GridBagConstraints constraints = new GridBagConstraints();
+        constraints.weightx=1;
+        constraints.weighty=1;
+        constraints.fill=GridBagConstraints.HORIZONTAL;
+        constraints.insets = new Insets(10,5,10,5); // espaçamentos entre as células
         
+        constraints.gridx=0; // coluna 0
+        constraints.gridy=0; // linha 0
+        this.add(getJScrollPane(), constraints);        
+        
+        pack();
     }
     
      public JScrollPane getJScrollPane() {
@@ -35,7 +52,7 @@ public class DialogBuscarMedico extends JDialog {
 
     public JTable getTable() {
         if (this.buscarMedicos == null) {
-            String[] colunas = {"NOME", "CRM"};
+            String[] colunas = {"NOME"};
             DefaultTableModel model = new DefaultTableModel(0, colunas.length);
             model.setColumnIdentifiers(colunas);
             this.buscarMedicos = new JTable(model) {
@@ -46,14 +63,5 @@ public class DialogBuscarMedico extends JDialog {
             };            
         }
         return this.buscarMedicos;
-    }
-    
-    public JButton getBTNNovaConsulta() {
-        if (this.buttonSelecionarMedico == null) {
-            this.buttonSelecionarMedico = new JButton("SELECIONAR");
-            this.buttonSelecionarMedico.setBackground(new Color(50, 205, 101));
-            this.buttonSelecionarMedico.setForeground(Color.WHITE);
-        }
-        return this.buttonSelecionarMedico;
     }
 }
