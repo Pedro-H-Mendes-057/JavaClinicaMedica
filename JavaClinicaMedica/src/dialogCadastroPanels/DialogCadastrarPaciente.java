@@ -2,11 +2,18 @@ package dialogCadastroPanels;
 
 import javax.swing.*;
 
-import controle.controladorCadastrarPacientes;
 import modelo.Endereco;
 import modelo.Paciente;
 import visual.Frame;
-
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import java.text.ParseException; 
+import javax.swing.JFormattedTextField; 
+import javax.swing.JOptionPane; 
+import javax.swing.text.MaskFormatter;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -22,15 +29,14 @@ public class DialogCadastrarPaciente extends JDialog {
     private JTextField txFHistMedic;
     private JTextField txFConvenio;
     private JComboBox<String> cbConvenio;
-    private JButton btSalvar; 
-    private controladorCadastrarPacientes controlador;
     private JTextField txFNumero;
     private JTextField txFRua;
     private JTextField txFBairro;
     private JTextField txFCidade;
     private JTextField txFCEP;
-    private JTextField txFEstado;
-
+    private JComboBox<String> cbEstado;
+    private JButton btCancelar;
+    private JButton btSalvar;
     /**
      * @wbp.parser.constructor
      */
@@ -41,7 +47,7 @@ public class DialogCadastrarPaciente extends JDialog {
         this.setLocationRelativeTo(parent);
         getContentPane().setLayout(null);
 
-        
+        //NOME PACIENTE
         JLabel lblNomePaciente = new JLabel("Nome do Paciente:");
         lblNomePaciente.setFont(new Font("Tahoma", Font.PLAIN, 20));
         lblNomePaciente.setBounds(63, 44, 452, 29);
@@ -52,26 +58,41 @@ public class DialogCadastrarPaciente extends JDialog {
         getContentPane().add(txFNomePaciente);
         txFNomePaciente.setColumns(10);
         
-        txFDataNasc = new JTextField();
-        txFDataNasc.setColumns(10);
-        txFDataNasc.setBounds(63, 172, 493, 40);
-        getContentPane().add(txFDataNasc);
-        
+        //DATA NASCIMENTO
         JLabel lblDataNasc = new JLabel("Data de Nascimento");
         lblDataNasc.setFont(new Font("Tahoma", Font.PLAIN, 20));
         lblDataNasc.setBounds(64, 133, 452, 29);
         getContentPane().add(lblDataNasc);
+     
+        try {
+        	MaskFormatter mascDataNasc = new MaskFormatter("##/##/####");
+        	mascDataNasc.setPlaceholderCharacter(' ');
+    
+        	txFDataNasc = new JFormattedTextField(mascDataNasc);
+        	txFDataNasc.setBounds(63, 172, 493, 40);
+        	txFDataNasc.setFont(new Font("Tahoma", Font.PLAIN, 16));
+        	getContentPane().add(txFDataNasc);
+        } catch (ParseException e) {
+        	e.printStackTrace();
+        }
         
+        //CONTATO
         JLabel lblContato = new JLabel("Contato");
         lblContato.setFont(new Font("Tahoma", Font.PLAIN, 20));
         lblContato.setBounds(64, 222, 452, 29);
         getContentPane().add(lblContato);
         
-        txFContato = new JTextField();
-        txFContato.setColumns(10);
-        txFContato.setBounds(63, 261, 493, 40);
-        getContentPane().add(txFContato);
+		try {
+		    MaskFormatter mascContato = new MaskFormatter("(##)#####-####");
+		    mascContato.setPlaceholderCharacter(' ');
+		    txFContato = new JFormattedTextField(mascContato);
+		    txFContato.setBounds(63, 261, 493, 40);
+		    getContentPane().add(txFContato);
+		} catch (ParseException e) {
+		    e.printStackTrace();
+		}
         
+        //ALTURA
         JLabel lblAltura = new JLabel("Altura:");
         lblAltura.setFont(new Font("Tahoma", Font.PLAIN, 20));
         lblAltura.setBounds(64, 330, 204, 29);
@@ -81,12 +102,13 @@ public class DialogCadastrarPaciente extends JDialog {
         txFAltura.setColumns(10);
         txFAltura.setBounds(63, 369, 205, 40);
         getContentPane().add(txFAltura);
-        
+
+		//TIPO SANGUINEO
         JLabel lblTipoSang = new JLabel("Tipo Sanguíneo:");
         lblTipoSang.setFont(new Font("Tahoma", Font.PLAIN, 20));
         lblTipoSang.setBounds(278, 330, 204, 29);
         getContentPane().add(lblTipoSang);
-        cbTipoSang = new JComboBox<>(new String[] { "A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-" });
+        cbTipoSang = new JComboBox<>(new String[] { "", "A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-" });
         cbTipoSang.setBounds(278, 369, 277, 40);
         getContentPane().add(cbTipoSang);
         
@@ -95,6 +117,7 @@ public class DialogCadastrarPaciente extends JDialog {
         txFTipoSang.setBounds(278, 369, 277, 40);
         getContentPane().add(txFTipoSang);
         
+        //PESO
         JLabel lblPeso = new JLabel("Peso:");
         lblPeso.setFont(new Font("Tahoma", Font.PLAIN, 20));
         lblPeso.setBounds(64, 419, 204, 29);
@@ -105,6 +128,7 @@ public class DialogCadastrarPaciente extends JDialog {
         txFPeso.setBounds(63, 458, 205, 40);
         getContentPane().add(txFPeso);
         
+        //HISTORICO MEDICO
         JLabel lblHistMedic = new JLabel("Histórico Médico:");
         lblHistMedic.setFont(new Font("Tahoma", Font.PLAIN, 20));
         lblHistMedic.setBounds(634, 330, 710, 29);
@@ -115,122 +139,131 @@ public class DialogCadastrarPaciente extends JDialog {
         txFHistMedic.setBounds(634, 369, 598, 159);
         getContentPane().add(txFHistMedic);
         
+        //CONVENIO
         JLabel lblConvenio = new JLabel("Convenio:");
         lblConvenio.setFont(new Font("Tahoma", Font.PLAIN, 20));
         lblConvenio.setBounds(278, 419, 204, 29);
         getContentPane().add(lblConvenio);
-        cbConvenio = new JComboBox<>(new String[] { "Convênio Saúde", "Bem-Estar", "Premium Care", "Vida Melhor", "Saúde para Todos" });
+        
+        cbConvenio = new JComboBox<>(new String[] { "", "Mais Saúde", "Bem-Estar", "Premium Care", "Vida Melhor", "Saúde para Todos" });
         cbConvenio.setBounds(278, 458, 277, 40);
         getContentPane().add(cbConvenio);
         
-        txFConvenio = new JTextField();
-        txFConvenio.setColumns(10);
-        txFConvenio.setBounds(278, 458, 277, 40);
-        getContentPane().add(txFConvenio);
-        
-        btSalvar = new JButton("SALVAR");
-        btSalvar.setFont(new Font("Tahoma", Font.PLAIN, 20));
-        btSalvar.setBackground(new Color(50, 205, 101));
-        btSalvar.setForeground(new Color(255, 255, 255));
-        btSalvar.setBounds(844, 538, 177, 55);
-        getContentPane().add(btSalvar);
-        btSalvar.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                String nome = txFNomePaciente.getText();
-                String dataNasc = txFDataNasc.getText();
-                String contato = txFContato.getText();
-                String tipoSang = txFTipoSang.getText();
-                int altura = Integer.parseInt(txFAltura.getText());
-                double peso = Double.parseDouble(txFPeso.getText());
-                String convenio = txFConvenio.getText();
-                Endereco endereco = null;
-                
-                controlador.cadastrarNovoPaciente(nome, dataNasc, contato, tipoSang, altura, peso, convenio, endereco);
-                JOptionPane.showMessageDialog(DialogCadastrarPaciente.this, "Paciente salvo com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
-                dispose();
-            }
-        });
-        
-        JButton btCancelar = new JButton("CANCELAR");
-        btCancelar.setFont(new Font("Tahoma", Font.PLAIN, 20));
-        btCancelar.setBackground(new Color(253, 2, 90));
-        btCancelar.setBounds(1055, 538, 177, 55);
-        getContentPane().add(btCancelar);
+        //NUMERO
+        JLabel lblNumero = new JLabel("Numero:");
+        lblNumero.setFont(new Font("Tahoma", Font.PLAIN, 20));
+        lblNumero.setBounds(612, 133, 80, 29);
+        getContentPane().add(lblNumero);
         
         txFNumero = new JTextField();
         txFNumero.setBounds(612, 172, 80, 40);
         getContentPane().add(txFNumero);
         txFNumero.setColumns(10);
         
+        //RUA
+         JLabel lblRua = new JLabel("Rua:");
+        lblRua.setFont(new Font("Tahoma", Font.PLAIN, 20));
+        lblRua.setBounds(717, 133, 152, 29);
+        getContentPane().add(lblRua);
+        
         txFRua = new JTextField();
         txFRua.setColumns(10);
         txFRua.setBounds(717, 172, 228, 40);
         getContentPane().add(txFRua);
+        
+        //BAIRRO
+        JLabel lblBairro = new JLabel("Bairro:");
+        lblBairro.setFont(new Font("Tahoma", Font.PLAIN, 20));
+        lblBairro.setBounds(969, 133, 152, 29);
+        getContentPane().add(lblBairro);
         
         txFBairro = new JTextField();
         txFBairro.setColumns(10);
         txFBairro.setBounds(969, 172, 263, 40);
         getContentPane().add(txFBairro);
         
+        //CIDADE
         txFCidade = new JTextField();
         txFCidade.setColumns(10);
         txFCidade.setBounds(612, 261, 117, 40);
         getContentPane().add(txFCidade);
-        
-        txFCEP = new JTextField();
-        txFCEP.setColumns(10);
-        txFCEP.setBounds(752, 261, 117, 40);
-        getContentPane().add(txFCEP);
-        
-        txFEstado = new JTextField();
-        txFEstado.setColumns(10);
-        txFEstado.setBounds(904, 261, 117, 40);
-        getContentPane().add(txFEstado);
-        
-        JLabel lblNewLabel = new JLabel("New label");
-        lblNewLabel.setBounds(608, 160, 60, -10);
-        getContentPane().add(lblNewLabel);
-        
-        JLabel lblNumero = new JLabel("Numero:");
-        lblNumero.setFont(new Font("Tahoma", Font.PLAIN, 20));
-        lblNumero.setBounds(612, 133, 80, 29);
-        getContentPane().add(lblNumero);
-        
-        JLabel lblRua = new JLabel("Rua:");
-        lblRua.setFont(new Font("Tahoma", Font.PLAIN, 20));
-        lblRua.setBounds(717, 133, 152, 29);
-        getContentPane().add(lblRua);
-        
-        JLabel lblBairro = new JLabel("Bairro:");
-        lblBairro.setFont(new Font("Tahoma", Font.PLAIN, 20));
-        lblBairro.setBounds(969, 133, 152, 29);
-        getContentPane().add(lblBairro);
         
         JLabel lblCidade = new JLabel("Cidade:");
         lblCidade.setFont(new Font("Tahoma", Font.PLAIN, 20));
         lblCidade.setBounds(612, 222, 117, 29);
         getContentPane().add(lblCidade);
         
+        //CEP
         JLabel lblCep = new JLabel("CEP:");
         lblCep.setFont(new Font("Tahoma", Font.PLAIN, 20));
         lblCep.setBounds(754, 222, 117, 29);
         getContentPane().add(lblCep);
         
+		         try {
+		    MaskFormatter mascCEP = new MaskFormatter("#####-###");
+		    mascCEP.setPlaceholderCharacter('_');
+		    txFCEP = new JFormattedTextField(mascCEP);
+		    txFCEP.setBounds(752, 261, 117, 40);
+		    getContentPane().add(txFCEP);
+		} catch (ParseException e) {
+		    e.printStackTrace();
+		}
+       
+       //ESTADO
         JLabel lblEstado = new JLabel("Estado:");
         lblEstado.setFont(new Font("Tahoma", Font.PLAIN, 20));
         lblEstado.setBounds(904, 222, 152, 29);
         getContentPane().add(lblEstado);
+        
+        cbEstado = new JComboBox<>(new String[] {"", "Acre", "Alagoas", "Amapá", "Amazonas", "Bahia", "Ceará", "Espírito Santo",
+                                                 "Goiás", "Maranhão", "Mato Grosso", "Mato Grosso do Sul", "Minas Gerais",
+                                                 "Pará", "Paraíba", "Paraná", "Pernambuco", "Piauí", "Rio de Janeiro", "Rio Grande do Norte",
+                                                 "Rio Grande do Sul", "Rondônia", "Roraima", "Santa Catarina", "São Paulo", "Sergipe", "Tocantins"});
+        cbEstado.setBounds(904, 261, 117, 40);
+        getContentPane().add(cbEstado);
+        
+        //?????????????????????????
+        JLabel lblNewLabel = new JLabel("LABELA DESCONHECIDA?");
+        lblNewLabel.setBounds(608, 160, 60, -10);
+        getContentPane().add(lblNewLabel);
+        
+        //BOTAO SALVAR
+        btSalvar = new JButton("SALVAR");
+        btSalvar.setFont(new Font("Tahoma", Font.PLAIN, 20));
+        btSalvar.setBackground(new Color(50, 205, 101));
+        btSalvar.setForeground(new Color(255, 255, 255));
+        btSalvar.setBounds(844, 538, 177, 55);
+        getContentPane().add(btSalvar);
+        
+        //BOTAO CANCELAR
+        btCancelar = new JButton("CANCELAR");
+        btCancelar.setFont(new Font("Tahoma", Font.PLAIN, 20));
+        btCancelar.setBackground(new Color(253, 2, 90));
+        btCancelar.setBounds(1055, 538, 177, 55);
+        getContentPane().add(btCancelar);
     }
-    
-    public String getNomePaciente() { return txFNomePaciente.getText(); }
-    public String getDataNascimento() { return txFDataNasc.getText(); }
-    public String getContato() { return txFContato.getText(); }
-    public int getAltura() { return parseInt(txFAltura.getText(), 0); }
-    public String getTipoSang() { return (String) cbTipoSang.getSelectedItem(); }
-    public double getPeso() { return parseDouble(txFPeso.getText(), 0.0); }
-    public String getHistoricoMedico() { return txFHistMedic.getText(); }
-    public String getConvenio() { return (String) cbConvenio.getSelectedItem(); }
-    public JButton getBtSalvar() { return btSalvar; }
+   
+    public String getNomePaciente() {
+        return txFNomePaciente.getText(); }
+    public String getDataNascimento() {
+        return txFDataNasc.getText(); }
+    public String getContato() {
+        return txFContato.getText(); }
+    public int getAltura() {
+        return parseInt(txFAltura.getText(), 0); }
+    public String getTipoSang() {
+        return (String) cbTipoSang.getSelectedItem(); }
+    public double getPeso() {
+        return parseDouble(txFPeso.getText(), 0.0); }
+    public String getHistoricoMedico() {
+        return txFHistMedic.getText(); }
+    public String getConvenio() {
+        return (String) cbConvenio.getSelectedItem(); }
+    public JButton getBtSalvar() {
+        return btSalvar; }
+    public JButton getBtCancelar() {
+        return btCancelar;
+    }
     
     private int parseInt(String text, int defaultValue) {
         try { return Integer.parseInt(text); }
@@ -241,4 +274,51 @@ public class DialogCadastrarPaciente extends JDialog {
         try { return Double.parseDouble(text); }
         catch (NumberFormatException e) { return defaultValue; }
     }
+
+	public JTextField getTxFNomePaciente() {
+		return txFNomePaciente;}
+
+	public JTextField getTxFDataNasc() {
+		return txFDataNasc;}
+
+	public JTextField getTxFContato() {
+		return txFContato;}
+
+	public JTextField getTxFAltura() {
+		return txFAltura;}
+
+	public JComboBox<String> getCbTipoSang() {
+		return cbTipoSang;}
+
+	public JTextField getTxFPeso() {
+		return txFPeso;}
+
+	public JTextField getTxFHistMedic() {
+		return txFHistMedic;}
+
+	public JTextField getTxFConvenio() {
+		return txFConvenio;}
+
+	public JComboBox<String> getCbConvenio() {
+		return cbConvenio;}
+
+	public JTextField getTxFNumero() {
+		return txFNumero;}
+
+	public JTextField getTxFRua() {
+		return txFRua;}
+
+	public JTextField getTxFBairro() {
+		return txFBairro;}
+
+	public JTextField getTxFCidade() {
+		return txFCidade;}
+
+	public JTextField getTxFCEP() {
+		return txFCEP;}
+
+	public JComboBox getCBEstado() {
+		return cbEstado;}
+
+	
 }

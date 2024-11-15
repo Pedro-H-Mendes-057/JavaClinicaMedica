@@ -5,7 +5,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import modelo.Material;
-import visual.DialogCadastrarMaterial;
+import dialogCadastroPanels.DialogCadastrarMaterial;
 
 /**
  *

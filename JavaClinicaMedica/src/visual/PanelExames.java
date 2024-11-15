@@ -26,6 +26,7 @@ public class PanelExames extends TemplatePanel {
             DefaultTableModel model = new DefaultTableModel(0, colunas.length);
             model.setColumnIdentifiers(colunas);
             this.table = new JTable(model);
+            this.table.setDefaultEditor(Object.class, null);
         }
         return this.table;
     }

@@ -6,8 +6,9 @@ package controle;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+import dialogCadastroPanels.DialogCadastrarMedico;
 import visual.PanelMedicos;
-import visual.DialogCadastrarMedico;
 
 /**
  *

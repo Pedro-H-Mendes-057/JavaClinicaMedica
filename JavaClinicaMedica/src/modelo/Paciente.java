@@ -57,8 +57,8 @@ public class Paciente {
 		return tipoSang;
 	}
 
-	public void setTipoSang(String tipoSang) {
-		this.tipoSang = tipoSang;
+	public void setTipoSang(String string) {
+		this.tipoSang = string;
 	}
 
 	public int getAltura() {
