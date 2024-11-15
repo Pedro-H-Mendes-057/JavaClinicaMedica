@@ -17,14 +17,16 @@ import javax.swing.JTextField;
  * @author fonfon
  */
 public class DialogCadastrarConsulta extends JDialog {
-    JLabel labelNomePaciente;
-    JTextField textFieldNomePaciente;
-    JButton buttonBuscarPaciente;
-    JLabel labelNomeMedico;
-    JTextField textFieldNomeMedico;
-    JButton buttonBuscarMedico;
-    JButton buttonSalvar;
-    JButton buttonCancelar;
+    private JLabel labelNomePaciente;
+    private JTextField textFieldNomePaciente;
+    private JButton buttonBuscarPaciente;
+    private JLabel labelNomeMedico;
+    private JTextField textFieldNomeMedico;
+    private JButton buttonBuscarMedico;
+    private JButton buttonSalvar;
+    private JButton buttonCancelar;    
+    private String[] horarios = { "08:00", "09:00", "10:00", "11:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00" };
+    
     
     public DialogCadastrarConsulta(JFrame parent) {
         super(parent, "Cadastrar Consulta", true);
@@ -55,6 +57,7 @@ public class DialogCadastrarConsulta extends JDialog {
         if (this.textFieldNomePaciente == null) {
             this.textFieldNomePaciente = new JTextField();
             this.textFieldNomePaciente.setBounds(43, 83, 450, 40);
+            this.textFieldNomePaciente.setEditable(false);
         }
         return this.textFieldNomePaciente;
     }
@@ -83,6 +86,7 @@ public class DialogCadastrarConsulta extends JDialog {
         if (this.textFieldNomeMedico == null) {
             this.textFieldNomeMedico = new JTextField();
             this.textFieldNomeMedico.setBounds(700, 83, 450, 40);
+            this.textFieldNomeMedico.setEditable(false);
         }
         return this.textFieldNomeMedico;
     }
@@ -96,5 +100,6 @@ public class DialogCadastrarConsulta extends JDialog {
         }
         return this.buttonBuscarMedico;
     }
+    
     
 }

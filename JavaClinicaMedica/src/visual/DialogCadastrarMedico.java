@@ -196,7 +196,12 @@ public class DialogCadastrarMedico extends JDialog {
             model.addRow(new String[] {"17h", "", "", "" ,"", ""});
             model.addRow(new String[] {"18h", "", "", "" ,"", ""});
             
-            this.tableHorarios = new JTable(model);
+            this.tableHorarios = new JTable(model) {
+                @Override 
+                public boolean isCellEditable(int row, int column) {
+                    return false;
+                }
+            };
         }
         
         return this.tableHorarios;

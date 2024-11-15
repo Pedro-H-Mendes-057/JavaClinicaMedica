@@ -21,8 +21,7 @@ public class ControladorDialogCadastrarMedico implements ActionListener {
     
     public ControladorDialogCadastrarMedico(DialogCadastrarMedico dialogCadastrarMedico) {
         this.dialogCadastrarMedico = dialogCadastrarMedico;
-        tableHorarios = this.dialogCadastrarMedico.getTableHorarios();
-        System.out.println("teste CONTROLADOR ");
+        tableHorarios = this.dialogCadastrarMedico.getTableHorarios();        
         addEventos();
         this.dialogCadastrarMedico.setVisible(true);
     }
@@ -32,12 +31,14 @@ public class ControladorDialogCadastrarMedico implements ActionListener {
             @Override
             public void mouseClicked(java.awt.event.MouseEvent e) {
                 int row = tableHorarios.rowAtPoint(e.getPoint());
-                int col = tableHorarios.columnAtPoint(e.getPoint());
-                
-                System.out.println("teste 2");
-                
-                if (row >= 0 && col >= 0) {
-                    tableHorarios.getModel().setValueAt("X", row, col);
+                int col = tableHorarios.columnAtPoint(e.getPoint());              
+                               
+                if (row >= 0 && col >= 1) {
+                    if (tableHorarios.getModel().getValueAt(row, col) == "X") {
+                        tableHorarios.getModel().setValueAt("", row, col);
+                    } else {
+                        tableHorarios.getModel().setValueAt("X", row, col);
+                    }
                 }
             }
            
