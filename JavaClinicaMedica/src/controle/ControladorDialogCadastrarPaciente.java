@@ -69,7 +69,7 @@ public class ControladorDialogCadastrarPaciente implements ActionListener {
                     ex.getMessage(), "Preenchimento inválido!", JOptionPane.ERROR_MESSAGE);
               //this.dialogCadastrarPaciente.dispose();
             }
-        }
+        }//DO SALVAR
     }
     
     private boolean verifCamposVazios() {

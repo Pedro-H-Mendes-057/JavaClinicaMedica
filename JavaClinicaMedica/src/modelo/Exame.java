@@ -4,11 +4,15 @@ public class Exame {
 	private String nomeExame;
 	private String descricao;
 	private String tipo;
-	private String valorParticular;
+	private int valorParticular;
 	private String materiaisUsar; //seria interessante um ArrayList pra guardar os materiais necessarios no exame
 	private Medico medico;
 	
-	public Exame(String nomeExame, String descricao, String tipo, String valorParticular, String materiaisUsar,
+	public Exame() {
+		
+	}
+	
+	public Exame(String nomeExame, String descricao, String tipo, int valorParticular, String materiaisUsar,
 			Medico medico) {
 		super();
 		this.nomeExame = nomeExame;
@@ -43,11 +47,11 @@ public class Exame {
 		this.tipo = tipo;
 	}
 
-	public String getValorParticular() {
+	public int getValorParticular() {
 		return valorParticular;
 	}
 
-	public void setValorParticular(String valorParticular) {
+	public void setValorParticular(int valorParticular) {
 		this.valorParticular = valorParticular;
 	}
 
