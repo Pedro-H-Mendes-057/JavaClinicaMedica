@@ -5,19 +5,19 @@ public class Medico {
 	private String especialidade;
 	private String crm;
 	private String contato;
-	private String[] horasAtend;
+	private int[][] horariosAtendimento; // 1 == atende neste dia e neste horario  0 == não atende
 	private double valorConsulta;
 	
 	public Medico(){
 		
 	}
 	
-	public Medico(String nome, String especialidade, String crm, String contato, String[] horasAtend, double valorConsulta) {
+	public Medico(String nome, String especialidade, String crm, String contato, int[][] horariosAtendimento, double valorConsulta) {
 		this.nome = nome;
 		this.especialidade = especialidade;
 		this.crm = crm;
 		this.contato = contato;
-		this.horasAtend = horasAtend;
+		this.horariosAtendimento = horariosAtendimento;
 		this.valorConsulta = valorConsulta;
 	}
 
@@ -53,12 +53,16 @@ public class Medico {
 		this.contato = contato;
 	}
 
-	public String[] getHorasAtend() {
-		return horasAtend;
+	public int[][] getHorasAtend() {
+            if (this.horariosAtendimento == null) {
+                this.horariosAtendimento = new int[11][5]; 
+            }
+            
+            return this.horariosAtendimento;
 	}
 
-	public void setHorasAtend(String[] horasAtend) {
-		this.horasAtend = horasAtend;
+	public void setHorasAtend(int[][] horasAtend) {
+		this.horariosAtendimento = horasAtend;
 	}
 
 	public double getValorConsulta() {

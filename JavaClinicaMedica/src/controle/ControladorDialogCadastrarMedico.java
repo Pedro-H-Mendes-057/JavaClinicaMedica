@@ -12,10 +12,12 @@ public class ControladorDialogCadastrarMedico implements ActionListener {
     private DialogCadastrarMedico dialogCadastrarMedico;
     private JTable tableHorarios;
     private Medico medico;
+    private int qtdHorasAtend;
 
     public ControladorDialogCadastrarMedico(DialogCadastrarMedico dialogCadastrarMedico) {
         this.dialogCadastrarMedico = dialogCadastrarMedico;
-        tableHorarios = this.dialogCadastrarMedico.getTableHorarios();        
+        tableHorarios = this.dialogCadastrarMedico.getTableHorarios();  
+        this.qtdHorasAtend = 0;
         addEventos();        
         this.dialogCadastrarMedico.setVisible(true);
     }
@@ -35,10 +37,13 @@ public class ControladorDialogCadastrarMedico implements ActionListener {
                 if (row >= 0 && col >= 1) {
                     if (tableHorarios.getModel().getValueAt(row, col) == "X") {
                         tableHorarios.getModel().setValueAt("", row, col);
-                    } else {
+                        qtdHorasAtend--;
+                    } else if (tableHorarios.getModel().getValueAt(row, col) != "X") {
                         tableHorarios.getModel().setValueAt("X", row, col);
+                        qtdHorasAtend++;
                     }
                 }
+                //System.out.println(qtdHorasAtend);
             }
            
         });
@@ -54,6 +59,7 @@ public class ControladorDialogCadastrarMedico implements ActionListener {
                             "Médico salvo com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
                     addMedico();
                     this.dialogCadastrarMedico.dispose();
+                   // System.out.println(this.qtdHorasAtend);
                 }
             } catch (NumberFormatException ex) {
                 JOptionPane.showMessageDialog(this.dialogCadastrarMedico, 
@@ -113,6 +119,11 @@ public class ControladorDialogCadastrarMedico implements ActionListener {
         	JOptionPane.showMessageDialog(dialogCadastrarMedico, "Valor deve ser um número!");
             return false;
         }
+        
+        if (this.qtdHorasAtend == 0) {
+            JOptionPane.showMessageDialog(dialogCadastrarMedico, "Selecione os horários de atendimento do médico!");
+            return false;
+        }
         return true;
     }
 
@@ -124,6 +135,24 @@ public class ControladorDialogCadastrarMedico implements ActionListener {
         this.medico.setEspecialidade(this.dialogCadastrarMedico.getTextFieldEspecialidade().getText().trim());
         this.medico.setValorConsulta(Double.parseDouble(this.dialogCadastrarMedico.getTextFieldValor().getText().trim()));
         ControladorFrame.repositorioMedicos.addMedico(this.medico);
+        
+        
+        for (int row = 0; row < 11; row++) { 
+            for (int col = 1; col < 6; col++) {         
+                if (tableHorarios.getModel().getValueAt(row, col) == "X") {
+                    this.medico.getHorasAtend()[row][col - 1] = 1;
+                } else if (tableHorarios.getModel().getValueAt(row, col) != "X") {
+                    this.medico.getHorasAtend()[row][col - 1] = 0;
+                }
+            }
+        }
+        
+        /*for (int row = 0; row < 11; row++) { 
+            for (int col = 0; col < 5; col++) {         
+                System.out.print(this.medico.getHorasAtend()[row][col] + " ");
+            }
+            System.out.println();
+        }*/
         
         ControladorFrame.frame.getPanelExames().getBTNNovo().setEnabled(true);
         ControladorFrame.frame.getPanelExames().getBTNEditar().setEnabled(true);
