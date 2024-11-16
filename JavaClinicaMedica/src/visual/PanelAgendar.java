@@ -151,8 +151,8 @@ public class PanelAgendar extends JPanel { // Alterado para herdar de JPanel
             this.txFPesquisar.setEditable(false);
         }
         return this.txFPesquisar;
-    }
-    
+    }    
+       
     public JPanel getPanelBotoes() {
         if (this.panelBotoes == null) {
             this.panelBotoes = new JPanel(new GridBagLayout());

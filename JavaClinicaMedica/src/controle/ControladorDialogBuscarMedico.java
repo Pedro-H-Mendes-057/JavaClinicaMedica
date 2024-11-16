@@ -15,7 +15,8 @@ import javax.swing.table.DefaultTableModel;
  * @author fonfon
  */
 public class ControladorDialogBuscarMedico implements EventListener {
-    DialogBuscarMedico dialogBuscarMedico;
+    private DialogBuscarMedico dialogBuscarMedico;
+    private int indexMedico;
     
     public ControladorDialogBuscarMedico(DialogBuscarMedico dialogBuscarMedico) {
         this.dialogBuscarMedico = dialogBuscarMedico;
@@ -25,7 +26,15 @@ public class ControladorDialogBuscarMedico implements EventListener {
     }
     
     void addEventos() {
-        
+        this.dialogBuscarMedico.getTable().addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
+            public void mouseClicked(java.awt.event.MouseEvent e) {
+                int row = dialogBuscarMedico.getTable().rowAtPoint(e.getPoint());
+                setIndexMedico((Integer) dialogBuscarMedico.getTable().getModel().getValueAt(row, 1)) ;
+                dialogBuscarMedico.dispose();
+            }
+           
+        });
     }
     
     public void actionPerformed(ActionEvent e) {
@@ -39,9 +48,21 @@ public class ControladorDialogBuscarMedico implements EventListener {
         
         for (int i = 0; i < ControladorFrame.repositorioMedicos.getMedicos().size(); i++) {            
             model.addRow(new Object [] {
-                ControladorFrame.repositorioMedicos.getMedicos().get(i).getNome()
+                ControladorFrame.repositorioMedicos.getMedicos().get(i).getNome(),
+                i
             });
-        }    
-   
+        }
+        
+        // a coluna POSICAO guarda o index do objeto 
+        this.dialogBuscarMedico.getTable().removeColumn(this.dialogBuscarMedico.getTable().getColumn("POSICAO"));
     }
+    
+    public void setIndexMedico(int indexMedico) {
+        this.indexMedico = indexMedico;
+    }    
+    
+    public int getIndexMedico() {
+        return this.indexMedico;
+    }
+    
 }

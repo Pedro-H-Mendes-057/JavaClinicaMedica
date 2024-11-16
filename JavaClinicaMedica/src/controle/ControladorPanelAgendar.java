@@ -19,9 +19,11 @@ public class ControladorPanelAgendar implements ActionListener {
     DialogCadastrarConsulta dialogCadastrarConsulta;
     DialogBuscarMedico dialogBuscarMedico;
     ControladorDialogBuscarMedico controladorDialogBuscarMedico;
+    private int indexMedico;
     
     public ControladorPanelAgendar(PanelAgendar panelAgendar) {
         this.panelAgendar = panelAgendar;
+        indexMedico = -1; 
         addEventos();
     }
     
@@ -40,6 +42,15 @@ public class ControladorPanelAgendar implements ActionListener {
         } else if (e.getSource() ==  this.panelAgendar.getBTNBuscar()) {
             dialogBuscarMedico = new DialogBuscarMedico(ControladorFrame.frame);
             controladorDialogBuscarMedico = new ControladorDialogBuscarMedico(dialogBuscarMedico);
+            indexMedico = controladorDialogBuscarMedico.getIndexMedico();
+            atualizarAgenda(indexMedico);
         }
     }
+    
+    // depois que o usuario escolhe um medico, o nome do medico sera atualizado aqui
+    void atualizarAgenda(int indexMedico) {
+        if (indexMedico >= 0) {
+            this.panelAgendar.getTxFPesquisar().setText(ControladorFrame.repositorioMedicos.getMedicos().get(indexMedico).getNome());
+        }
+    }    
 }
