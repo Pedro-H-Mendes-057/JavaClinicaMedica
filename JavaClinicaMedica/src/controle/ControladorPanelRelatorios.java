@@ -46,7 +46,7 @@ public class ControladorPanelRelatorios implements ActionListener{
     }
 
     private void CorNormal() {
-        // Reseta a cor dos botões para o padrão
+        // Resetar a cor dos botoes pro normal
         panelRelatorios.getBTConsultas().setBackground(null);
         panelRelatorios.getBTExames().setBackground(null);
         panelRelatorios.getBTFinan().setBackground(null);

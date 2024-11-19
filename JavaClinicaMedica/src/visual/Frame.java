@@ -2,6 +2,7 @@ package visual;
 
 import controle.ControladorPanelAgendar;
 import controle.ControladorPanelMateriais;
+import controle.ControladorPanelRelatorios;
 import javax.swing.*;
 import java.awt.*;
 import java.net.URL;
@@ -32,6 +33,7 @@ public class Frame extends JFrame {
     ControladorPanelExames controladorPanelExames;
     ControladorPanelMateriais controladorPanelMateriais; 
     ControladorPanelAgendar controladorPanelAgendar;
+    ControladorPanelRelatorios controladorPanelRelatorios;
     
     
     public Frame() {
@@ -65,7 +67,7 @@ public class Frame extends JFrame {
         this.panelMateriais = new PanelMateriais();
         this.controladorPanelMateriais = new ControladorPanelMateriais(this.panelMateriais);
         this.panelRelatorios = new PanelRelatorios(this);
-//      this.controladorPanelRelatorios = new ControladorPanelRelatorios(this.panelRelatorios);
+        this.controladorPanelRelatorios = new ControladorPanelRelatorios(this.panelRelatorios);
         
         tabbedPane.addTab("Home", resizeIcon("resources/Pacientes.png", 30, 30), this.panelInicial, "BEM VINDO(A) À ZELOCUIDAR");
         tabbedPane.addTab("Pacientes", resizeIcon("resources/Pacientes.png", 30, 30), this.panelPacientes);
