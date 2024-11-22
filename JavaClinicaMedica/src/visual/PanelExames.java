@@ -17,7 +17,7 @@ public class PanelExames extends TemplatePanel {
          
        
         getLabelPesquisar().setText("Pesquisar por Exame:");
-        getBTNNovo().setEnabled(false);
+        getBTNNovo().setEnabled(true);
         getBTNEditar().setEnabled(false);
         getBTNExcluir().setEnabled(false);
     }

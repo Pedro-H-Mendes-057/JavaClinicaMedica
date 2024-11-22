@@ -1,6 +1,7 @@
 package controle;
 
 import java.awt.event.ActionEvent;
+import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionListener;
 import javax.swing.JTable;
 import javax.swing.JOptionPane;
@@ -16,6 +17,7 @@ public class ControladorDialogCadastrarExame implements ActionListener {
     public ControladorDialogCadastrarExame(DialogCadastrarExames dialogCadastrarExames) {
         this.dialogCadastrarExames = dialogCadastrarExames;
         
+     
         
         addEventos();
         this.dialogCadastrarExames.setVisible(true);
@@ -35,7 +37,7 @@ public class ControladorDialogCadastrarExame implements ActionListener {
             try {
               //String materiaisUsar = this.dialogCadastrarExames.getCBMateriaisUsar().getSelectedItem().toString();
 
-                if (ValidosCamposVazios() == false) {
+                if (ValidosCamposVazios() == true) {
                     addExame();
                 } else {
                     JOptionPane.showMessageDialog(this.dialogCadastrarExames,
@@ -57,8 +59,8 @@ public class ControladorDialogCadastrarExame implements ActionListener {
     String nomeExame = dialogCadastrarExames.getTxFNomeExame().getText().trim();
     String tipo = dialogCadastrarExames.getComboBoxTipo().getSelectedItem().toString().trim();
     String descricao = dialogCadastrarExames.getTxFDescricao().getText().trim();
-    int valorParticular = Integer.parseInt(this.dialogCadastrarExames.getTxFValor().getText());
     String medico = dialogCadastrarExames.getCBMedico().getSelectedItem().toString().trim();
+    int valorParticular = Integer.parseInt(this.dialogCadastrarExames.getTxFValor().getText());
     //String materiaisUsar = dialogCadastrarExames.getCBMateriaisUsar().getSelectedItem().toString().trim();
         
         		//Depois adicione materiaisUsados.isEmpty()
@@ -91,7 +93,10 @@ public class ControladorDialogCadastrarExame implements ActionListener {
         // this.exame.setMateriaisUsar(this.dialogCadastrarExames.getComboBoxMateriaisUsar().getSelectedItem().toString());
 
         ControladorFrame.repositorioExames.addExame(exame);
+        //ControladorFrame.atualizarTabelas(); /////////////////////////
     }
+
+
 
 	private Medico atribuiMedico() {
 		for(int i = 0; i<ControladorFrame.repositorioExames.getExames().size();i++) {
