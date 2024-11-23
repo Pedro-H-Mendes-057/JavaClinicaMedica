@@ -3,6 +3,7 @@ package controle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import modelo.Material;
 import dialogCadastroPanels.DialogCadastrarMaterial;
@@ -31,10 +32,14 @@ public class ControladorDialogCadastrarMaterial implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == this.dialogCadastrarMaterial.getButtonUpload()) {
             uploadImage();
-        } else if (e.getSource() == this.dialogCadastrarMaterial.getButtonSalvar()) {            
+        } else if (e.getSource() == this.dialogCadastrarMaterial.getButtonSalvar()) { 
+        	if(camposValidos() == true) {
             addMaterial();
+            JOptionPane.showMessageDialog(this.dialogCadastrarMaterial, "Material salvo com sucesso!");
+ 
             this.dialogCadastrarMaterial.dispose();
             //System.out.println("TESTE AQUI");
+        	}
         }
     }  
 
@@ -43,6 +48,35 @@ public class ControladorDialogCadastrarMaterial implements ActionListener {
         FileNameExtensionFilter filter = new FileNameExtensionFilter("JPG Imagens", "jpg");
         chooser.setFileFilter(filter);
         int returnVal = chooser.showOpenDialog(this.dialogCadastrarMaterial);
+    }
+    
+    public boolean camposValidos() {
+        String nome = this.dialogCadastrarMaterial.getTextFieldNome().getText().trim();
+        String fornecedor = this.dialogCadastrarMaterial.getTextFieldFornecedor().getText().trim();
+        String quantString = this.dialogCadastrarMaterial.getTextFieldQtdEstoque().getText().trim();
+        String quantMinString = this.dialogCadastrarMaterial.getTextFieldQtdMinima().getText().trim();
+        String precoString = this.dialogCadastrarMaterial.getTextFieldPreco().getText().trim();
+
+        if (nome.isEmpty() || fornecedor.isEmpty() || quantString.isEmpty() || quantMinString.isEmpty() || precoString.isEmpty()) {
+            JOptionPane.showMessageDialog(dialogCadastrarMaterial, "Preencha todos os campos!");
+            return false;
+        }
+
+        try {
+            int quant = Integer.parseInt(quantString);
+            int quantMin = Integer.parseInt(quantMinString);  //se o campo como STRING não tiver vazio (pq não fucniona o .isEmpty pra numeros)
+            double preco = Double.parseDouble(precoString);   // converte pra Int/Double pra validar os valores numericos
+
+            if (quant <= 0 || quantMin <= 0 || preco <= 0) {
+                JOptionPane.showMessageDialog(dialogCadastrarMaterial, "Quantidade e preço devem ser maiores que zero!");
+                return false;
+            }
+
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(dialogCadastrarMaterial, "Preenchimento inválido!");
+            return false;
+        }
+        return true;
     }
 
     public void addMaterial() {

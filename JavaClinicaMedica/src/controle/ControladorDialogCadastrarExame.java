@@ -16,9 +16,7 @@ public class ControladorDialogCadastrarExame implements ActionListener {
 
     public ControladorDialogCadastrarExame(DialogCadastrarExames dialogCadastrarExames) {
         this.dialogCadastrarExames = dialogCadastrarExames;
-        
-     
-        
+       
         addEventos();
         this.dialogCadastrarExames.setVisible(true);
     }
@@ -37,12 +35,10 @@ public class ControladorDialogCadastrarExame implements ActionListener {
             try {
               //String materiaisUsar = this.dialogCadastrarExames.getCBMateriaisUsar().getSelectedItem().toString();
 
-                if (ValidosCamposVazios() == true) {
+            	if (ValidosCamposVazios()) {
                     addExame();
-                } else {
                     JOptionPane.showMessageDialog(this.dialogCadastrarExames,
                             "Exame salvo com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
-                    addExame();
                     this.dialogCadastrarExames.dispose();
                 }
             } catch (NumberFormatException ex) {
@@ -87,7 +83,7 @@ public class ControladorDialogCadastrarExame implements ActionListener {
         exame.setTipo(this.dialogCadastrarExames.getComboBoxTipo().getSelectedItem().toString());
         exame.setValorParticular(Integer.parseInt(this.dialogCadastrarExames.getTxFValor().getText()));
         exame.setMedico(atribuiMedico());
-        exame.setMateriasUsar(null);
+        //exame.setMateriasUsar(null);
         exame.setDescricao(this.dialogCadastrarExames.getTxFDescricao().getText());
         //this.exame.setMedico(this.dialogCadastrarExames.getCBMedico().getSelectedItem().toString());
         // this.exame.setMateriaisUsar(this.dialogCadastrarExames.getComboBoxMateriaisUsar().getSelectedItem().toString());
