@@ -3,26 +3,26 @@ package modelo;
 public class Consulta {
 	private String data;
 	private String hora;
-	private Medico medico;
-	private Paciente paciente;
+	private int chaveMedico;
+	private int chavePaciente;
 	private String queixa;
 	private String tipoConsulta;
 	private String convenio;
 	private String observacoes;
-	private String materiaisUsar; //tambem interessante usar ArrayList
+	private int [] chaveMateriais;
 	
-	public Consulta(String data, String hora, Medico medico, Paciente paciente, String queixa, String tipoConsulta,
-			String convenio, String observacoes, String materiaisUsar) {
+	public Consulta(String data, String hora, int chaveMedico, int chavePaciente, String queixa, String tipoConsulta,
+			String convenio, String observacoes, int [] chaveMateriais) {
 		super();
 		this.data = data;
 		this.hora = hora;
-		this.medico = medico;
-		this.paciente = paciente;
+		this.chaveMedico = chaveMedico;
+		this.chavePaciente = chavePaciente;
 		this.queixa = queixa;
 		this.tipoConsulta = tipoConsulta;
 		this.convenio = convenio;
 		this.observacoes = observacoes;
-		this.materiaisUsar = materiaisUsar;
+		this.chaveMateriais = chaveMateriais;
 	}
 
 	public String getData() {
@@ -41,20 +41,20 @@ public class Consulta {
 		this.hora = hora;
 	}
 
-	public Medico getMedico() {
-		return medico;
+	public int getMedico() {
+		return this.chaveMedico;
 	}
 
-	public void setMedico(Medico medico) {
-		this.medico = medico;
+	public void setMedico(int chaveMedico) {
+		this.chaveMedico = chaveMedico;
 	}
 
-	public Paciente getPaciente() {
-		return paciente;
+	public int getPaciente() {
+		return this.chavePaciente;
 	}
 
-	public void setPaciente(Paciente paciente) {
-		this.paciente = paciente;
+	public void setPaciente(int chavePaciente) {
+		this.chavePaciente = chavePaciente;
 	}
 
 	public String getQueixa() {
@@ -89,12 +89,12 @@ public class Consulta {
 		this.observacoes = observacoes;
 	}
 
-	public String getMateriaisUsar() {
-		return materiaisUsar;
+	public int[] getMateriaisUsar() {
+		return this.chaveMateriais;
 	}
 
-	public void setMateriaisUsar(String materiaisUsar) {
-		this.materiaisUsar = materiaisUsar;
+	public void setMateriaisUsar(int[] chaveMateriais) {
+		this.chaveMateriais = chaveMateriais;
 	}
 	
 	
