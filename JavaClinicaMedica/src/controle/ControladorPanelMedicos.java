@@ -9,6 +9,7 @@ import java.awt.event.ActionListener;
 
 import dialogCadastroPanels.DialogCadastrarMedico;
 import javax.swing.table.DefaultTableModel;
+import modelo.Medico;
 import visual.PanelMedicos;
 
 /**
@@ -41,9 +42,13 @@ public class ControladorPanelMedicos implements ActionListener {
         if (e.getSource() == this.panelMedicos.getBTNExcluir()) {
             if(this.panelMedicos.getMessageDialogExcluirItem(panelMedicos) &&
             		(this.panelMedicos.getTable().getSelectedRowCount()) == 1) {
-            	ControladorFrame.repositorioMedicos.getMedicos().remove(this.panelMedicos.getTable().getSelectedRow());
+                int linhaSelecionada = this.panelMedicos.getTable().getSelectedRow();
+                int colunaChave = 5;
+                DefaultTableModel model = (DefaultTableModel) this.panelMedicos.getTable().getModel();                
+            	ControladorFrame.repositorioMedicos.getMedicos().remove((int) this.panelMedicos.getTable().getModel().getValueAt(linhaSelecionada, colunaChave));
             	atualizarTabela();
-            	if(ControladorFrame.repositorioMedicos.getMedicos().isEmpty()) System.out.println("Tá apagando mesmo");
+                if(ControladorFrame.repositorioMedicos.getMedicos().isEmpty()) System.out.println("Tá apagando mesmo");                
+                
             }
             
         }
@@ -53,9 +58,22 @@ public class ControladorPanelMedicos implements ActionListener {
         DefaultTableModel model = (DefaultTableModel) this.panelMedicos.getTable().getModel(); 
         
         //System.out.println("size = " + ControladorFrame.repositorioMateriais.getMateriais().size());
-        model.setRowCount(0); // apaga todos os itens da tabela para que ela seja refeita
+        model.setRowCount(0); // apaga todos os itens da tabela para que ela seja refeita                       
+                 
+        for (Integer chave : ControladorFrame.repositorioMedicos.getMedicos().keySet()) {
+           model.addRow(new Object [] {
+               ControladorFrame.repositorioMedicos.getMedicos().get(chave).getNome(),                
+               String.valueOf(ControladorFrame.repositorioMedicos.getMedicos().get(chave).getEspecialidade()),
+               String.valueOf(ControladorFrame.repositorioMedicos.getMedicos().get(chave).getCrm()),
+               ControladorFrame.repositorioMedicos.getMedicos().get(chave).getContato(),
+               ControladorFrame.repositorioMedicos.getMedicos().get(chave).getValorConsulta(),
+               chave
+           });
+        }
         
-        for (int i = 0; i < ControladorFrame.repositorioMedicos.getMedicos().size(); i++) {
+        //this.panelMedicos.getTable().removeColumn(this.panelMedicos.getTable().getColumn("CHAVE"));
+        
+        /*for (int i = 0; i < ControladorFrame.repositorioMedicos.getMedicos().size(); i++) {
             //System.out.println("OI " + i);
             model.addRow(new Object [] {
                 ControladorFrame.repositorioMedicos.getMedicos().get(i).getNome(),
@@ -64,6 +82,6 @@ public class ControladorPanelMedicos implements ActionListener {
                 ControladorFrame.repositorioMedicos.getMedicos().get(i).getContato(),
                 ControladorFrame.repositorioMedicos.getMedicos().get(i).getValorConsulta(),
             });
-        }    
+        }*/    
     }
 }

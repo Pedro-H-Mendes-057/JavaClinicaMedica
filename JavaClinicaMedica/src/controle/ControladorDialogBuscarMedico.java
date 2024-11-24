@@ -46,7 +46,16 @@ public class ControladorDialogBuscarMedico implements EventListener {
        
         model.setRowCount(0);
         
-        for (int i = 0; i < ControladorFrame.repositorioMedicos.getMedicos().size(); i++) {            
+        for (Integer chave : ControladorFrame.repositorioMedicos.getMedicos().keySet()) {
+            model.addRow(new Object [] {
+                ControladorFrame.repositorioMedicos.getMedicos().get(chave).getNome(),
+                chave
+            });
+        }
+        
+        this.dialogBuscarMedico.getTable().removeColumn(this.dialogBuscarMedico.getTable().getColumn("CHAVE"));
+        
+        /*for (int i = 0; i < ControladorFrame.repositorioMedicos.getMedicos().size(); i++) {            
             model.addRow(new Object [] {
                 ControladorFrame.repositorioMedicos.getMedicos().get(i).getNome(),
                 i
@@ -54,7 +63,7 @@ public class ControladorDialogBuscarMedico implements EventListener {
         }
         
         // a coluna POSICAO guarda o index do objeto 
-        this.dialogBuscarMedico.getTable().removeColumn(this.dialogBuscarMedico.getTable().getColumn("POSICAO"));
+        this.dialogBuscarMedico.getTable().removeColumn(this.dialogBuscarMedico.getTable().getColumn("POSICAO")); */
     }
     
     public void setIndexMedico(int indexMedico) {

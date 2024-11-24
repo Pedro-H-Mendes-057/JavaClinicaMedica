@@ -52,7 +52,7 @@ public class DialogBuscarMedico extends JDialog {
 
     public JTable getTable() {
         if (this.buscarMedicos == null) {
-            String[] colunas = {"NOME", "POSICAO"}; // a coluna POSICAO guarda o index do objeto 
+            String[] colunas = {"NOME", "CHAVE"}; // a coluna POSICAO guarda o index do objeto 
             DefaultTableModel model = new DefaultTableModel(0, colunas.length);
             model.setColumnIdentifiers(colunas);
             this.buscarMedicos = new JTable(model) {
