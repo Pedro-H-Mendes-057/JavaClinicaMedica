@@ -4,12 +4,14 @@
  */
 package dialogCadastroPanels;
 
+import controle.DateLabelFormatter;
 import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.util.Properties;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
@@ -21,6 +23,9 @@ import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
+import org.jdatepicker.impl.JDatePanelImpl;
+import org.jdatepicker.impl.JDatePickerImpl;
+import org.jdatepicker.impl.UtilDateModel;
 
 
 /**
@@ -50,8 +55,11 @@ public class DialogCadastrarConsulta extends JDialog {
     private JTextArea textAreaObservacoes;
     private JScrollPane scrollPane;
     private JPanel panelSalvarCancelar; 
-    
-    private String[] horarios = { "08:00", "09:00", "10:00", "11:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00" };
+    private JDatePickerImpl datePicker;
+    private JComboBox<String> jComboBoxHorario;       
+    private JPanel panelDataHorario; 
+    private JLabel labelData;
+    private JLabel labelHorario;
     
     
     public DialogCadastrarConsulta(JFrame parent) {
@@ -89,34 +97,37 @@ public class DialogCadastrarConsulta extends JDialog {
         constraints.gridy=4; // linha 4
         this.add(getPanelConsultaConvenio(), constraints);
         
-        
         constraints.gridx=0; // coluna 0
         constraints.gridy=5; // linha 5
-        this.add(getLabelAreaQueixa(), constraints);
+        this.add(getPanelDataHorario(), constraints);
         
         constraints.gridx=0; // coluna 0
         constraints.gridy=6; // linha 6
-        this.add(getTextAreaQueixa(), constraints);    
+        this.add(getLabelAreaQueixa(), constraints);
         
         constraints.gridx=0; // coluna 0
         constraints.gridy=7; // linha 7
-        this.add(getButtonBuscarMateriais(), constraints);    
+        this.add(getTextAreaQueixa(), constraints);    
         
         constraints.gridx=0; // coluna 0
         constraints.gridy=8; // linha 8
+        this.add(getButtonBuscarMateriais(), constraints);    
+        
+        constraints.gridx=0; // coluna 0
+        constraints.gridy=9; // linha 9
         this.add(getJScrollPane(), constraints);
         
        
         constraints.gridx=0; // coluna 0
-        constraints.gridy=9; // linha 9
+        constraints.gridy=10; // linha 10
         this.add(getLabelObservacoes(), constraints);
         
         constraints.gridx=0; // coluna 0
-        constraints.gridy=10; // linha 10
+        constraints.gridy=11; // linha 11
         this.add(getTextAreaObservacoes(), constraints);
        
         constraints.gridx=0; // coluna 0
-        constraints.gridy=11; // linha 11
+        constraints.gridy=12; // linha 12
         this.add(getPanelSalvarCancelar(), constraints);
         
         this.setVisible(true);
@@ -339,4 +350,77 @@ public class DialogCadastrarConsulta extends JDialog {
         } 
         return this.panelSalvarCancelar;
     }
+    
+    public JDatePickerImpl getJDatePicker() {
+        if (this.datePicker == null) {
+            UtilDateModel model = new UtilDateModel();
+            Properties properties = new Properties();
+            properties.put("text.today", "Hoje");
+            properties.put("text.month", "Mês");
+            properties.put("text.year", "Ano");
+            
+            JDatePanelImpl datePanel = new JDatePanelImpl(model, properties);
+            this.datePicker = new JDatePickerImpl(datePanel, new DateLabelFormatter());
+        }
+        
+        return this.datePicker;
+    }
+    
+     public JComboBox<String> getjComboBoxHorario() {
+        if (this.jComboBoxHorario == null) {
+            String[] options = { "08:00", "09:00", "10:00", "11:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00" };
+            this.jComboBoxHorario = new JComboBox<>(options);
+        }
+                
+        return this.jComboBoxHorario;
+    }
+     
+     JLabel getLabelData() {
+        if (this.labelData == null) {
+            this.labelData = new JLabel();
+            this.labelData.setText("Selecione a data"); 
+            this.labelData.setFont(new Font("Tahoma", Font.PLAIN, 20));            
+        }
+        return this.labelData;
+    }
+          
+    JLabel getLabelHorario() {
+        if (this.labelHorario == null) {
+            this.labelHorario = new JLabel();
+            this.labelHorario.setText("Selecione o horário"); 
+            this.labelHorario.setFont(new Font("Tahoma", Font.PLAIN, 20));            
+        }
+        return this.labelHorario;
+    }
+    
+    public JPanel getPanelDataHorario() {
+        if (this.panelDataHorario == null) {
+            this.panelDataHorario = new JPanel();
+            this.panelDataHorario.setLayout(new GridBagLayout());        
+            GridBagConstraints constraints = new GridBagConstraints();
+            constraints.weightx=1;
+            constraints.weighty=1;
+            constraints.fill=GridBagConstraints.HORIZONTAL;        
+
+            constraints.gridx=0; // coluna 0
+            constraints.gridy=0; // linha 0           
+            this.panelDataHorario.add(getLabelData(), constraints);
+           
+            constraints.gridx=1; // coluna 1
+            constraints.gridy=0; // linha 0            
+            this.panelDataHorario.add(getLabelHorario(), constraints);
+            
+            constraints.gridx=0; // coluna 0
+            constraints.gridy=1; // linha 1            
+            this.panelDataHorario.add(getJDatePicker(), constraints);
+            
+            constraints.gridx=1; // coluna 1
+            constraints.gridy=1; // linha 1 
+            this.panelDataHorario.add(getjComboBoxHorario(), constraints);
+        } 
+        
+        return this.panelDataHorario;        
+    }
 }
+
+
