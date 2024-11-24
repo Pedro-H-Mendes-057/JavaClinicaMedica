@@ -53,18 +53,20 @@ public class DialogCadastrarConsulta extends JDialog {
     private JTextArea textAreaQueixa;
     private JLabel labelObservacoes;
     private JTextArea textAreaObservacoes;
-    private JScrollPane scrollPane;
+    private JScrollPane scrollPaneTable;
     private JPanel panelSalvarCancelar; 
     private JDatePickerImpl datePicker;
     private JComboBox<String> jComboBoxHorario;       
     private JPanel panelDataHorario; 
     private JLabel labelData;
     private JLabel labelHorario;
+    private JScrollPane scrollPaneQueixa;
+    private JScrollPane scrollPaneObservacoes;
     
     
     public DialogCadastrarConsulta(JFrame parent) {
         super(parent, "Cadastrar Consulta", true);
-        this.setSize(1350, 650);
+        this.setSize(1500, 650);
         this.setResizable(false);
         this.setLocationRelativeTo(parent);         
         
@@ -72,7 +74,7 @@ public class DialogCadastrarConsulta extends JDialog {
         this.setLayout(new GridBagLayout());        
         GridBagConstraints constraints = new GridBagConstraints();
         constraints.weightx=1;
-        constraints.weighty=1;
+        constraints.weighty=0.1;
         constraints.fill=GridBagConstraints.HORIZONTAL;
         constraints.insets = new Insets(0, 50,0, 50);
         
@@ -81,14 +83,17 @@ public class DialogCadastrarConsulta extends JDialog {
         constraints.gridy=0; // linha 0
         this.add(getLabelNomeMedico(), constraints);
         
+        constraints.weighty=0.9;
         constraints.gridx=0; // coluna 0
         constraints.gridy=1; // linha 1
         this.add(getTextFieldNomeMedico(), constraints);
         
+        constraints.weighty=0.1;
         constraints.gridx=0; // coluna 0
         constraints.gridy=2; // linha 2
         this.add(getLabelNomePaciente(), constraints);
         
+        constraints.weighty=0.9;
         constraints.gridx=0; // coluna 0
         constraints.gridy=3; // linha 3
         this.add(getPanelPaciente(), constraints);
@@ -101,31 +106,43 @@ public class DialogCadastrarConsulta extends JDialog {
         constraints.gridy=5; // linha 5
         this.add(getPanelDataHorario(), constraints);
         
+        constraints.weighty=0.1;
         constraints.gridx=0; // coluna 0
         constraints.gridy=6; // linha 6
         this.add(getLabelAreaQueixa(), constraints);
         
+        constraints.fill=GridBagConstraints.BOTH;
+        constraints.weighty=1;
         constraints.gridx=0; // coluna 0
         constraints.gridy=7; // linha 7
-        this.add(getTextAreaQueixa(), constraints);    
-        
+        this.add(getJScrollPaneQueixa(), constraints);  
+               
+        constraints.insets = new Insets(20, 50, 0, 50);
         constraints.gridx=0; // coluna 0
         constraints.gridy=8; // linha 8
-        this.add(getButtonBuscarMateriais(), constraints);    
+        constraints.weighty=1;
+        this.add(getJScrollPaneTable(), constraints);
         
+        constraints.insets = new Insets(0, 50,0, 50);
+        constraints.fill=GridBagConstraints.HORIZONTAL;
+        constraints.weighty=0.9;
         constraints.gridx=0; // coluna 0
         constraints.gridy=9; // linha 9
-        this.add(getJScrollPane(), constraints);
+        this.add(getButtonBuscarMateriais(), constraints); 
         
-       
+        constraints.fill=GridBagConstraints.HORIZONTAL;
+        constraints.weighty=0.1;
         constraints.gridx=0; // coluna 0
         constraints.gridy=10; // linha 10
         this.add(getLabelObservacoes(), constraints);
         
+        constraints.fill=GridBagConstraints.BOTH;
+        constraints.weighty=0.9;
         constraints.gridx=0; // coluna 0
         constraints.gridy=11; // linha 11
-        this.add(getTextAreaObservacoes(), constraints);
+        this.add(getJScrollPaneObservacoes(), constraints);
        
+        constraints.insets = new Insets(0, 30,0, 0);
         constraints.gridx=0; // coluna 0
         constraints.gridy=12; // linha 12
         this.add(getPanelSalvarCancelar(), constraints);
@@ -136,8 +153,7 @@ public class DialogCadastrarConsulta extends JDialog {
     JLabel getLabelNomePaciente() {
         if (this.labelNomePaciente == null) {
             this.labelNomePaciente = new JLabel();
-            this.labelNomePaciente.setText("Paciente"); 
-            this.labelNomePaciente.setFont(new Font("Tahoma", Font.PLAIN, 20));            
+            this.labelNomePaciente.setText("Paciente");                        
         }
         return this.labelNomePaciente;
     }
@@ -152,8 +168,7 @@ public class DialogCadastrarConsulta extends JDialog {
     
     public JButton getButtonBuscarPaciente() {
         if (this.buttonBuscarPaciente == null) {
-            this.buttonBuscarPaciente = new JButton("BUSCAR");
-            this.buttonBuscarPaciente.setFont(new Font("Tahoma", Font.PLAIN, 20));          
+            this.buttonBuscarPaciente = new JButton("BUSCAR");                 
         }
         return this.buttonBuscarPaciente;
     }
@@ -161,8 +176,7 @@ public class DialogCadastrarConsulta extends JDialog {
     JLabel getLabelNomeMedico() {
         if (this.labelNomeMedico == null) {
             this.labelNomeMedico = new JLabel();
-            this.labelNomeMedico.setText("Médico"); 
-            this.labelNomeMedico.setFont(new Font("Tahoma", Font.PLAIN, 20));            
+            this.labelNomeMedico.setText("Médico");                        
         }
         return this.labelNomeMedico;
     }
@@ -187,6 +201,7 @@ public class DialogCadastrarConsulta extends JDialog {
             constraints.gridy=0; // linha 0           
             this.panelPaciente.add(getTextFieldNomePaciente(), constraints);
 
+            constraints.insets = new Insets(0, 50,0, 0);
             constraints.weightx=0.25;
             constraints.gridx=1; // coluna 4
             constraints.gridy=0; // linha 0            
@@ -244,14 +259,17 @@ public class DialogCadastrarConsulta extends JDialog {
             constraints.gridy=0; // linha 0           
             this.panelConsultaConvenio.add(getLabelTipoConsulta(), constraints);
            
+            constraints.insets = new Insets(0, 50,0,0);
             constraints.gridx=1; // coluna 1
             constraints.gridy=0; // linha 0            
             this.panelConsultaConvenio.add(getLabelConvenio(), constraints);
             
+            constraints.insets = new Insets(0, 0,0,0);
             constraints.gridx=0; // coluna 0
             constraints.gridy=1; // linha 1            
             this.panelConsultaConvenio.add(getjComboBoxTipoConsulta(), constraints);
             
+            constraints.insets = new Insets(0, 50,0,0);
             constraints.gridx=1; // coluna 1
             constraints.gridy=1; // linha 1 
             this.panelConsultaConvenio.add(getTextFielConvenio(), constraints);
@@ -263,8 +281,7 @@ public class DialogCadastrarConsulta extends JDialog {
     
     public JButton getButtonBuscarMateriais() {
         if (this.buttonBuscarMateriais == null) {
-            this.buttonBuscarMateriais = new JButton("BUSCAR MATERIAIS");
-            this.buttonBuscarMateriais.setFont(new Font("Tahoma", Font.PLAIN, 20));          
+            this.buttonBuscarMateriais = new JButton("BUSCAR MATERIAIS");                     
         }
         return this.buttonBuscarMateriais;   
     }
@@ -284,13 +301,27 @@ public class DialogCadastrarConsulta extends JDialog {
         return this.tableBuscarMateriais;        
     }
     
-    public JScrollPane getJScrollPane() {
-        if (this.scrollPane == null) {
-            this.scrollPane = new JScrollPane(getTableBuscarMateriais());
+    public JScrollPane getJScrollPaneTable() {
+        if (this.scrollPaneTable == null) {
+            this.scrollPaneTable = new JScrollPane(getTableBuscarMateriais());
         }
-        return this.scrollPane;
+        return this.scrollPaneTable;
     }
 
+    public JScrollPane getJScrollPaneQueixa() {
+        if (this.scrollPaneQueixa == null) {
+            this.scrollPaneQueixa = new JScrollPane(getTextAreaQueixa());
+        }
+        return this.scrollPaneQueixa;
+    }
+    
+    public JScrollPane getJScrollPaneObservacoes() {
+        if (this.scrollPaneObservacoes == null) {
+            this.scrollPaneObservacoes = new JScrollPane(getTextAreaObservacoes());
+        }
+        return this.scrollPaneObservacoes;
+    }
+    
     public JTextArea getTextAreaQueixa() {
         if (this.textAreaQueixa == null) {
             this.textAreaQueixa = new JTextArea();           
@@ -343,7 +374,7 @@ public class DialogCadastrarConsulta extends JDialog {
     public JPanel getPanelSalvarCancelar() {
         if (this.panelSalvarCancelar == null) {
             this.panelSalvarCancelar = new JPanel();
-            this.panelSalvarCancelar.setLayout(new FlowLayout(FlowLayout.LEFT));        
+            this.panelSalvarCancelar.setLayout(new FlowLayout(FlowLayout.LEFT, 20, 10));        
                     
             this.panelSalvarCancelar.add(getButtonSalvar());                   
             this.panelSalvarCancelar.add(getButtonCancelar());
@@ -378,8 +409,7 @@ public class DialogCadastrarConsulta extends JDialog {
      JLabel getLabelData() {
         if (this.labelData == null) {
             this.labelData = new JLabel();
-            this.labelData.setText("Selecione a data"); 
-            this.labelData.setFont(new Font("Tahoma", Font.PLAIN, 20));            
+            this.labelData.setText("Selecione a data");                         
         }
         return this.labelData;
     }
@@ -387,8 +417,7 @@ public class DialogCadastrarConsulta extends JDialog {
     JLabel getLabelHorario() {
         if (this.labelHorario == null) {
             this.labelHorario = new JLabel();
-            this.labelHorario.setText("Selecione o horário"); 
-            this.labelHorario.setFont(new Font("Tahoma", Font.PLAIN, 20));            
+            this.labelHorario.setText("Selecione o horário");                        
         }
         return this.labelHorario;
     }
@@ -406,14 +435,17 @@ public class DialogCadastrarConsulta extends JDialog {
             constraints.gridy=0; // linha 0           
             this.panelDataHorario.add(getLabelData(), constraints);
            
+            constraints.insets = new Insets(0, 50,0,0);
             constraints.gridx=1; // coluna 1
             constraints.gridy=0; // linha 0            
             this.panelDataHorario.add(getLabelHorario(), constraints);
             
+            constraints.insets = new Insets(0,0,0,0);
             constraints.gridx=0; // coluna 0
             constraints.gridy=1; // linha 1            
             this.panelDataHorario.add(getJDatePicker(), constraints);
             
+            constraints.insets = new Insets(0, 50,0,0);
             constraints.gridx=1; // coluna 1
             constraints.gridy=1; // linha 1 
             this.panelDataHorario.add(getjComboBoxHorario(), constraints);
