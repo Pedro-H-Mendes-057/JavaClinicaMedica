@@ -5,12 +5,23 @@
 package dialogCadastroPanels;
 
 import java.awt.Color;
+import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
+
 
 /**
  *
@@ -25,6 +36,21 @@ public class DialogCadastrarConsulta extends JDialog {
     private JButton buttonBuscarMedico;
     private JButton buttonSalvar;
     private JButton buttonCancelar;    
+    private JPanel panelPaciente;
+    private JLabel labelConvenio;
+    private JTextField textFielConvenio;
+    private JLabel labelTipoConsulta;
+    private JComboBox<String> jComboBoxTipoConsulta;
+    private JPanel panelConsultaConvenio;
+    private JButton buttonBuscarMateriais;
+    private JTable tableBuscarMateriais;
+    private JLabel labelAreaQueixa;   
+    private JTextArea textAreaQueixa;
+    private JLabel labelObservacoes;
+    private JTextArea textAreaObservacoes;
+    private JScrollPane scrollPane;
+    private JPanel panelSalvarCancelar; 
+    
     private String[] horarios = { "08:00", "09:00", "10:00", "11:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00" };
     
     
@@ -33,13 +59,66 @@ public class DialogCadastrarConsulta extends JDialog {
         this.setSize(1350, 650);
         this.setResizable(false);
         this.setLocationRelativeTo(parent);         
-        this.setLayout(null);
-        this.add(getLabelNomePaciente()); 
-        this.add(getTextFieldNomePaciente());
-        this.add(getButtonBuscarPaciente());
-        this.add(getLabelNomeMedico()); 
-        this.add(getTextFieldNomeMedico());
-        this.add(getButtonBuscarMedico());
+        
+        // definicao do layout
+        this.setLayout(new GridBagLayout());        
+        GridBagConstraints constraints = new GridBagConstraints();
+        constraints.weightx=1;
+        constraints.weighty=1;
+        constraints.fill=GridBagConstraints.HORIZONTAL;
+        constraints.insets = new Insets(0, 50,0, 50);
+        
+        // adição dos componentes na janela
+        constraints.gridx=0; // coluna 0
+        constraints.gridy=0; // linha 0
+        this.add(getLabelNomeMedico(), constraints);
+        
+        constraints.gridx=0; // coluna 0
+        constraints.gridy=1; // linha 1
+        this.add(getTextFieldNomeMedico(), constraints);
+        
+        constraints.gridx=0; // coluna 0
+        constraints.gridy=2; // linha 2
+        this.add(getLabelNomePaciente(), constraints);
+        
+        constraints.gridx=0; // coluna 0
+        constraints.gridy=3; // linha 3
+        this.add(getPanelPaciente(), constraints);
+        
+        constraints.gridx=0; // coluna 0
+        constraints.gridy=4; // linha 4
+        this.add(getPanelConsultaConvenio(), constraints);
+        
+        
+        constraints.gridx=0; // coluna 0
+        constraints.gridy=5; // linha 5
+        this.add(getLabelAreaQueixa(), constraints);
+        
+        constraints.gridx=0; // coluna 0
+        constraints.gridy=6; // linha 6
+        this.add(getTextAreaQueixa(), constraints);    
+        
+        constraints.gridx=0; // coluna 0
+        constraints.gridy=7; // linha 7
+        this.add(getButtonBuscarMateriais(), constraints);    
+        
+        constraints.gridx=0; // coluna 0
+        constraints.gridy=8; // linha 8
+        this.add(getJScrollPane(), constraints);
+        
+       
+        constraints.gridx=0; // coluna 0
+        constraints.gridy=9; // linha 9
+        this.add(getLabelObservacoes(), constraints);
+        
+        constraints.gridx=0; // coluna 0
+        constraints.gridy=10; // linha 10
+        this.add(getTextAreaObservacoes(), constraints);
+       
+        constraints.gridx=0; // coluna 0
+        constraints.gridy=11; // linha 11
+        this.add(getPanelSalvarCancelar(), constraints);
+        
         this.setVisible(true);
     }
     
@@ -47,16 +126,14 @@ public class DialogCadastrarConsulta extends JDialog {
         if (this.labelNomePaciente == null) {
             this.labelNomePaciente = new JLabel();
             this.labelNomePaciente.setText("Paciente"); 
-            this.labelNomePaciente.setFont(new Font("Tahoma", Font.PLAIN, 20));
-            this.labelNomePaciente.setBounds(43, 44, 452, 29);
+            this.labelNomePaciente.setFont(new Font("Tahoma", Font.PLAIN, 20));            
         }
         return this.labelNomePaciente;
     }
     
     public JTextField getTextFieldNomePaciente() {
         if (this.textFieldNomePaciente == null) {
-            this.textFieldNomePaciente = new JTextField();
-            this.textFieldNomePaciente.setBounds(43, 83, 450, 40);
+            this.textFieldNomePaciente = new JTextField();            
             this.textFieldNomePaciente.setEditable(false);
         }
         return this.textFieldNomePaciente;
@@ -65,9 +142,7 @@ public class DialogCadastrarConsulta extends JDialog {
     public JButton getButtonBuscarPaciente() {
         if (this.buttonBuscarPaciente == null) {
             this.buttonBuscarPaciente = new JButton("BUSCAR");
-            this.buttonBuscarPaciente.setFont(new Font("Tahoma", Font.PLAIN, 20));            
-            this.buttonBuscarPaciente.setBounds(493, 83, 150, 40);
-           
+            this.buttonBuscarPaciente.setFont(new Font("Tahoma", Font.PLAIN, 20));          
         }
         return this.buttonBuscarPaciente;
     }
@@ -76,30 +151,192 @@ public class DialogCadastrarConsulta extends JDialog {
         if (this.labelNomeMedico == null) {
             this.labelNomeMedico = new JLabel();
             this.labelNomeMedico.setText("Médico"); 
-            this.labelNomeMedico.setFont(new Font("Tahoma", Font.PLAIN, 20));
-            this.labelNomeMedico.setBounds(700, 44, 452, 29);
+            this.labelNomeMedico.setFont(new Font("Tahoma", Font.PLAIN, 20));            
         }
         return this.labelNomeMedico;
     }
     
     public JTextField getTextFieldNomeMedico() {
         if (this.textFieldNomeMedico == null) {
-            this.textFieldNomeMedico = new JTextField();
-            this.textFieldNomeMedico.setBounds(700, 83, 450, 40);
+            this.textFieldNomeMedico = new JTextField();            
             this.textFieldNomeMedico.setEditable(false);
         }
         return this.textFieldNomeMedico;
+    }    
+    
+    public JPanel getPanelPaciente() {
+        if (this.panelPaciente == null) {
+            this.panelPaciente = new JPanel();
+            this.panelPaciente.setLayout(new GridBagLayout());        
+            GridBagConstraints constraints = new GridBagConstraints();
+            constraints.weightx=1;
+            constraints.weighty=1;
+            constraints.fill=GridBagConstraints.HORIZONTAL;      
+            constraints.gridx=0; // coluna 0
+            constraints.gridy=0; // linha 0           
+            this.panelPaciente.add(getTextFieldNomePaciente(), constraints);
+
+            constraints.weightx=0.25;
+            constraints.gridx=1; // coluna 4
+            constraints.gridy=0; // linha 0            
+            this.panelPaciente.add(getButtonBuscarPaciente(), constraints);
+        } 
+        return this.panelPaciente;
     }
     
-    public JButton getButtonBuscarMedico() {
-        if (this.buttonBuscarMedico == null) {
-            this.buttonBuscarMedico = new JButton("BUSCAR");
-            this.buttonBuscarMedico.setFont(new Font("Tahoma", Font.PLAIN, 20));            
-            this.buttonBuscarMedico.setBounds(1150, 83, 150, 40);
-           
+    public JLabel getLabelConvenio() {
+        if (this.labelConvenio == null) {
+            this.labelConvenio = new JLabel();
+            this.labelConvenio.setText("Convênio");
         }
-        return this.buttonBuscarMedico;
+        return this.labelConvenio;
+    }
+    
+
+    public JTextField getTextFielConvenio() {
+        if (this.textFielConvenio == null) {
+            this.textFielConvenio = new JTextField();            
+            this.textFielConvenio.setEditable(false);
+        }
+        return this.textFielConvenio; 
+    }
+    
+
+    public JLabel getLabelTipoConsulta() {
+        if (this.labelTipoConsulta == null) {
+            this.labelTipoConsulta = new JLabel();
+            this.labelTipoConsulta.setText("Tipo de Consulta");
+        }
+        return this.labelTipoConsulta;
+    }
+    
+    public JComboBox<String> getjComboBoxTipoConsulta() {
+        if (this.jComboBoxTipoConsulta == null) {
+            String[] options = {"Emergencial", "Agendamento"};
+            this.jComboBoxTipoConsulta = new JComboBox<>(options);
+        }
+        
+        
+        return this.jComboBoxTipoConsulta;
+    }    
+
+    public JPanel getPanelConsultaConvenio() {
+        if (this.panelConsultaConvenio == null) {
+            this.panelConsultaConvenio = new JPanel();
+            this.panelConsultaConvenio.setLayout(new GridBagLayout());        
+            GridBagConstraints constraints = new GridBagConstraints();
+            constraints.weightx=1;
+            constraints.weighty=1;
+            constraints.fill=GridBagConstraints.HORIZONTAL;        
+
+            constraints.gridx=0; // coluna 0
+            constraints.gridy=0; // linha 0           
+            this.panelConsultaConvenio.add(getLabelTipoConsulta(), constraints);
+           
+            constraints.gridx=1; // coluna 1
+            constraints.gridy=0; // linha 0            
+            this.panelConsultaConvenio.add(getLabelConvenio(), constraints);
+            
+            constraints.gridx=0; // coluna 0
+            constraints.gridy=1; // linha 1            
+            this.panelConsultaConvenio.add(getjComboBoxTipoConsulta(), constraints);
+            
+            constraints.gridx=1; // coluna 1
+            constraints.gridy=1; // linha 1 
+            this.panelConsultaConvenio.add(getTextFielConvenio(), constraints);
+        } 
+        
+        return this.panelConsultaConvenio;        
     }
     
     
+    public JButton getButtonBuscarMateriais() {
+        if (this.buttonBuscarMateriais == null) {
+            this.buttonBuscarMateriais = new JButton("BUSCAR MATERIAIS");
+            this.buttonBuscarMateriais.setFont(new Font("Tahoma", Font.PLAIN, 20));          
+        }
+        return this.buttonBuscarMateriais;   
+    }
+
+    public JTable getTableBuscarMateriais() {
+        if (this.tableBuscarMateriais == null) { 
+            String[] colunas = {"MATERIAL", "QUANTIDADE"};
+            DefaultTableModel model = new DefaultTableModel(0, colunas.length);
+            model.setColumnIdentifiers(colunas);
+            this.tableBuscarMateriais = new JTable(model) {
+                @Override 
+                public boolean isCellEditable(int row, int column) {
+                    return false;
+                }
+            };
+        }
+        return this.tableBuscarMateriais;        
+    }
+    
+    public JScrollPane getJScrollPane() {
+        if (this.scrollPane == null) {
+            this.scrollPane = new JScrollPane(getTableBuscarMateriais());
+        }
+        return this.scrollPane;
+    }
+
+    public JTextArea getTextAreaQueixa() {
+        if (this.textAreaQueixa == null) {
+            this.textAreaQueixa = new JTextArea();           
+        }
+       
+        return this.textAreaQueixa;
+    }
+
+    public JTextArea getTextAreaObservacoes() {
+        if (this.textAreaObservacoes == null) {
+            this.textAreaObservacoes = new JTextArea();           
+        }
+       
+        return this.textAreaObservacoes;
+    }
+    
+    public JLabel getLabelAreaQueixa() {
+         if (this.labelAreaQueixa == null) {
+            this.labelAreaQueixa = new JLabel();
+            this.labelAreaQueixa.setText("Queixa do Paciente");
+        }
+        return this.labelAreaQueixa;
+    }
+
+    public JLabel getLabelObservacoes() {
+        if (this.labelObservacoes == null) {
+            this.labelObservacoes = new JLabel();
+            this.labelObservacoes.setText("Observações");
+        }        
+        return this.labelObservacoes;
+    }
+    
+    public JButton getButtonSalvar() {
+         if (this.buttonSalvar == null) {
+            this.buttonSalvar = new JButton("SALVAR");
+            this.buttonSalvar.setFont(new Font("Tahoma", Font.PLAIN, 20));          
+        }
+        return this.buttonSalvar;
+    }
+
+    public JButton getButtonCancelar() {
+         if (this.buttonCancelar == null) {
+            this.buttonCancelar = new JButton("CANCELAR");
+            this.buttonCancelar.setFont(new Font("Tahoma", Font.PLAIN, 20));          
+        }
+        return this.buttonCancelar;
+    }
+    
+    
+    public JPanel getPanelSalvarCancelar() {
+        if (this.panelSalvarCancelar == null) {
+            this.panelSalvarCancelar = new JPanel();
+            this.panelSalvarCancelar.setLayout(new FlowLayout(FlowLayout.LEFT));        
+                    
+            this.panelSalvarCancelar.add(getButtonSalvar());                   
+            this.panelSalvarCancelar.add(getButtonCancelar());
+        } 
+        return this.panelSalvarCancelar;
+    }
 }
