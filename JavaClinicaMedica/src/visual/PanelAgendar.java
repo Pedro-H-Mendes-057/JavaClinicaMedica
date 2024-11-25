@@ -25,7 +25,7 @@ public class PanelAgendar extends JPanel { // Alterado para herdar de JPanel
     private JLabel labelTitulo;
     private JScrollPane scrollPane;
     private LocalDate dataAtual = LocalDate.now();
-    private String[] horarios = { "08:00", "09:00", "10:00", "11:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00" };
+    private String[] horarios = { "08:00", "09:00", "10:00", "11:00", "12:00","13:00", "14:00", "15:00", "16:00", "17:00", "18:00" };
 
     public PanelAgendar(Frame frame) {
         this.frame = frame;
@@ -66,11 +66,6 @@ public class PanelAgendar extends JPanel { // Alterado para herdar de JPanel
         add(getPanelBotoes(), gbcBotes);
 
         atualizarTabelaSemana();
-
-        // EVento dos botoes
-        btnVoltar.addActionListener(e -> mudarSemana(-1));
-        btnAvancar.addActionListener(e -> mudarSemana(1));
-       
     }
 
     private void atualizarTabelaSemana() {
@@ -94,7 +89,7 @@ public class PanelAgendar extends JPanel { // Alterado para herdar de JPanel
         getLabelAno().setText(String.valueOf(dataAtual.getYear()));
     }
 
-    private void mudarSemana(int nav) {
+    public void mudarSemana(int nav) {
         dataAtual = dataAtual.plusWeeks(nav); // Muda a semana de acordo com navegaçao (-1 ou +1)
         atualizarTabelaSemana();
     }

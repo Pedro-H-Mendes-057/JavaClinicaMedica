@@ -16,7 +16,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class ControladorDialogBuscarMedico implements EventListener {
     private DialogBuscarMedico dialogBuscarMedico;
-    private int indexMedico;
+    private int chaveMedico;
     
     public ControladorDialogBuscarMedico(DialogBuscarMedico dialogBuscarMedico) {
         this.dialogBuscarMedico = dialogBuscarMedico;
@@ -30,7 +30,7 @@ public class ControladorDialogBuscarMedico implements EventListener {
             @Override
             public void mouseClicked(java.awt.event.MouseEvent e) {
                 int row = dialogBuscarMedico.getTable().rowAtPoint(e.getPoint());
-                setIndexMedico((Integer) dialogBuscarMedico.getTable().getModel().getValueAt(row, 1)) ;
+                setChaveMedico((Integer) dialogBuscarMedico.getTable().getModel().getValueAt(row, 1)) ;
                 dialogBuscarMedico.dispose();
             }
            
@@ -66,12 +66,12 @@ public class ControladorDialogBuscarMedico implements EventListener {
         this.dialogBuscarMedico.getTable().removeColumn(this.dialogBuscarMedico.getTable().getColumn("POSICAO")); */
     }
     
-    public void setIndexMedico(int indexMedico) {
-        this.indexMedico = indexMedico;
+    public void setChaveMedico(int indexMedico) {
+        this.chaveMedico = indexMedico;
     }    
     
-    public int getIndexMedico() {
-        return this.indexMedico;
+    public int getChaveMedico() {
+        return this.chaveMedico;
     }
     
 }
