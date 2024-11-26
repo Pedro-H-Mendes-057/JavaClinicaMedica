@@ -163,7 +163,7 @@ public class DialogCadastrarExames extends JDialog {
 	        getContentPane().add(lblValor);
 	        return lblValor;
 	    }
-	
+	  
 	    public JTextField getTxFValor() {
 	        if (this.txFValor == null) {
 	            this.txFValor = new JTextField();
