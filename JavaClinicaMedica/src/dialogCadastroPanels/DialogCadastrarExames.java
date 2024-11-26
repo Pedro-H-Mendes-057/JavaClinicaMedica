@@ -154,7 +154,7 @@ public class DialogCadastrarExames extends JDialog {
 	            getContentPane().add(scrollPane);
 	        }
 	        return this.table;
-	    }
+	    } 
 	
 	    public JLabel getLblValor() {
 	        JLabel lblValor = new JLabel("Valor Particular:");
