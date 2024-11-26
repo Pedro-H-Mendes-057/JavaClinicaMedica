@@ -1,5 +1,6 @@
 package controle;
 
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionListener;
@@ -24,6 +25,7 @@ public class ControladorDialogCadastrarExame implements ActionListener {
     void addEventos() {
         this.dialogCadastrarExames.getBTSalvar().addActionListener(this);
     	this.dialogCadastrarExames.getBTCancelar().addActionListener(this);
+    	this.dialogCadastrarExames.getBTConfSelect().addActionListener(this);
     }//do AddEventos
     
     @Override
@@ -49,6 +51,9 @@ public class ControladorDialogCadastrarExame implements ActionListener {
                         "Preenchimento inválido!");
             }
         }//Do salvar
+        if (e.getSource() == this.dialogCadastrarExames.getBTConfSelect()) {
+            //atualizCor();
+        }
     } //actionPerformed
     
     private boolean ValidosCamposVazios() {

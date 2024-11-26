@@ -20,7 +20,7 @@ public class Teste extends TemplatePanel {
     public Teste(Frame frame) {
         super();
         this.frame = frame;
-        setLayout(null); // ainda permite o controle manual
+        setLayout(null); // ainda no controle manual
 
         // Inicializar componentes com proporções relativas
         labelTitulo = new JLabel("AGENDAMENTOS", SwingConstants.CENTER);
@@ -45,14 +45,13 @@ public class Teste extends TemplatePanel {
         btnVoltar.addActionListener(e -> mudarSemana(-1));
         btnAvancar.addActionListener(e -> mudarSemana(1));
 
-        // Adicionar o ComponentListener para redimensionamento
         addComponentListener(new ComponentAdapter() {
             public void componentResized(ComponentEvent e) {
                 ajustarComponentes();
             }
         });
 
-        ajustarComponentes(); // chamada inicial
+        ajustarComponentes();
     }
 
     private void ajustarComponentes() {
@@ -67,7 +66,7 @@ public class Teste extends TemplatePanel {
     }
 
     private void atualizarTabelaSemana() {
-        // Atualiza cabeçalho e conteúdo da tabela
+        // Atualiza cabeçalho e tabela
         LocalDate inicioSemana = dataAtual.with(java.time.DayOfWeek.MONDAY);
         String[] colunas = new String[8];
         colunas[0] = "HORÁRIOS";
