@@ -12,7 +12,7 @@ import javax.swing.table.DefaultTableModel;
 public class ControladorPanelExames implements ActionListener {
     private PanelExames panelExames;
     private DialogCadastrarExames dialogCadastrarExames;
-    
+    private ControladorDialogCadastrarExame controladorDialogCadastrarExame;
     
     public ControladorPanelExames(PanelExames panelExames) {
         this.panelExames = panelExames;       
@@ -26,9 +26,10 @@ public class ControladorPanelExames implements ActionListener {
     
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == panelExames.getBTNNovo()) {            
+        if (e.getSource() == panelExames.getBTNNovo()) {   
+           
             dialogCadastrarExames = new DialogCadastrarExames(ControladorFrame.frame);
-            dialogCadastrarExames.setVisible(true);
+            controladorDialogCadastrarExame = new ControladorDialogCadastrarExame(this.dialogCadastrarExames);           
             atualizarTabela();
             
         }

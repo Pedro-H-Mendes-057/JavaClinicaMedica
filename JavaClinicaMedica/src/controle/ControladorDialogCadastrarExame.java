@@ -16,8 +16,7 @@ public class ControladorDialogCadastrarExame implements ActionListener {
     //private Exame exame;
 
     public ControladorDialogCadastrarExame(DialogCadastrarExames dialogCadastrarExames) {
-        this.dialogCadastrarExames = dialogCadastrarExames;
-       
+        this.dialogCadastrarExames = dialogCadastrarExames;        
         addEventos();
         this.dialogCadastrarExames.setVisible(true);
     }
@@ -32,8 +31,8 @@ public class ControladorDialogCadastrarExame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
     	if(e.getSource() == this.dialogCadastrarExames.getBTCancelar()){
     		this.dialogCadastrarExames.dispose();
-    		};
-        if (e.getSource() == this.dialogCadastrarExames.getBTSalvar()) {
+        }
+        if (e.getSource() == this.dialogCadastrarExames.getBTSalvar()) {           
             try {
               //String materiaisUsar = this.dialogCadastrarExames.getCBMateriaisUsar().getSelectedItem().toString();
 
@@ -57,15 +56,21 @@ public class ControladorDialogCadastrarExame implements ActionListener {
     } //actionPerformed
     
     private boolean ValidosCamposVazios() {
-    String nomeExame = dialogCadastrarExames.getTxFNomeExame().getText().trim();
-    String tipo = dialogCadastrarExames.getComboBoxTipo().getSelectedItem().toString().trim();
-    String descricao = dialogCadastrarExames.getTxFDescricao().getText().trim();
-    String medico = dialogCadastrarExames.getCBMedico().getSelectedItem().toString().trim();
-    int valorParticular = Integer.parseInt(this.dialogCadastrarExames.getTxFValor().getText());
+        int valorParticular = Integer.parseInt(this.dialogCadastrarExames.getTxFValor().getText());
+        String nomeExame = dialogCadastrarExames.getTxFNomeExame().getText().trim();
+        String descricao = dialogCadastrarExames.getTxFDescricao().getText().trim();
+        try {            
+            String tipo = dialogCadastrarExames.getComboBoxTipo().getSelectedItem().toString().trim();            
+            String medico = dialogCadastrarExames.getCBMedico().getSelectedItem().toString().trim();            
+        } catch (NullPointerException e) {
+            JOptionPane.showMessageDialog(dialogCadastrarExames, "Preencha todos os campos!");
+            return false;
+        }
+   
     //String materiaisUsar = dialogCadastrarExames.getCBMateriaisUsar().getSelectedItem().toString().trim();
         
         		//Depois adicione materiaisUsados.isEmpty()
-        if (nomeExame.isEmpty() || descricao.isEmpty() || tipo.isEmpty() || medico.isEmpty()) {
+        if (nomeExame.isEmpty() || descricao.isEmpty()) {
             JOptionPane.showMessageDialog(dialogCadastrarExames, "Preencha todos os campos!");
             return false;
         }
