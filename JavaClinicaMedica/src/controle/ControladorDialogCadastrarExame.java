@@ -10,6 +10,9 @@ import dialogCadastroPanels.DialogCadastrarExames;
 import modelo.Exame;
 import modelo.Medico;
 import modelo.Paciente;
+import java.awt.Component;
+import javax.swing.*;
+import javax.swing.table.DefaultTableCellRenderer;
 
 public class ControladorDialogCadastrarExame implements ActionListener {
     DialogCadastrarExames dialogCadastrarExames;
@@ -51,7 +54,7 @@ public class ControladorDialogCadastrarExame implements ActionListener {
             }
         }//Do salvar
         if (e.getSource() == this.dialogCadastrarExames.getBTConfSelect()) {
-            //atualizCor();
+            atualizarCoresLinha();
         }
     } //actionPerformed
     
@@ -87,6 +90,43 @@ public class ControladorDialogCadastrarExame implements ActionListener {
         return true;
     }//fim do validarcampos
 
+    public void atualizarCoresLinha() { ////////////////////
+        JTable tabela = this.dialogCadastrarExames.getTabela();
+        DefaultTableModel modeloTabela = (DefaultTableModel) tabela.getModel();
+        
+        tabela.setDefaultRenderer(Object.class, new DefaultTableCellRenderer() {
+            @Override
+            public Component getTableCellRendererComponent(JTable tabela, Object qnt, boolean selecionado,
+                                                           boolean foco, int linha, int coluna) {
+                Component cell = super.getTableCellRendererComponent(tabela, qnt, selecionado, foco, linha, coluna);
+                
+                if (coluna == 1) {
+                    try {
+                        int quantidade = Integer.parseInt(qnt.toString());
+                        if (quantidade > 0) {
+                            cell.setBackground(new Color(100, 149, 237)); 
+                            cell.setForeground(Color.WHITE); 
+                        } else {
+                            throw new NumberFormatException(); 
+                        }
+                    } catch (NumberFormatException e) {
+                        cell.setBackground(Color.WHITE);
+                        cell.setForeground(Color.BLACK); 
+                    }
+                } else {
+                    cell.setBackground(Color.WHITE);
+                    cell.setForeground(Color.BLACK); 
+                }
+
+                return cell;
+            }
+        }); 
+
+        tabela.repaint();
+    } // atualizarCoresLinha
+    	            
+    
+    
     public void addExame() {
     	Exame exame = new Exame();
         exame.setNomeExame(this.dialogCadastrarExames.getTxFNomeExame().getText());

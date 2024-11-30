@@ -49,8 +49,6 @@ public class DialogCadastrarExames extends JDialog {
 	        getBTCancelar();
 	        getTabela();
 	        getBTConfSelect();
-	        
-	       
     }
 	    public JLabel getLblNomeExame() {
 	        JLabel lblNomeExame = new JLabel("Nome do Exame:");
@@ -146,9 +144,26 @@ public class DialogCadastrarExames extends JDialog {
 
 	            this.table = new JTable(modeloTabela);
 
-	            //
-	            //ADICIONAR A LOGICA PRA LINHA MUDAR DE COR (atualizCor(); SE QNT < 0
-	            //
+	            this.table.getModel().addTableModelListener(e-> {
+	            	int coluna = e.getColumn();
+	            	int linha = e.getFirstRow();
+	            	
+	            	if (coluna == 1) {
+	            		Object valor = modeloTabela.getValueAt(linha,  coluna);
+	            		try {
+	            			int qnt = Integer.parseInt(valor.toString());
+	            			if (qnt < 0) {
+	            			throw new IllegalArgumentException ("Preenchimento inválido!");
+	            			
+	            			}
+	            		} catch (IllegalArgumentException ex) {
+	            			JOptionPane.showMessageDialog(this.table, "Preenchimento inválido!", "Erro!",
+	            											JOptionPane.ERROR_MESSAGE);
+	            		}
+	            	}
+	            });
+	            
+	            
 	            JScrollPane scrollPane = new JScrollPane(this.table);
 	            scrollPane.setBounds(547, 172, 684, 298);
 	            getContentPane().add(scrollPane);
