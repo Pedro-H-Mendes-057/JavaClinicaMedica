@@ -1,10 +1,27 @@
 package repositorio;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import modelo.Consulta;
 
 public class RepositorioConsultas {
-    private ArrayList<Consulta> repositorioConsultas;
+    static String chave; 
+    LinkedHashMap<Integer, Consulta> repositorioConsultas;
+    
+    
+    public RepositorioConsultas() {        
+        this.repositorioConsultas = new LinkedHashMap<>();        
+    }
+    
+     public void addEconsulta(Consulta consulta) {
+         
+        //repositorioConsultas.put(, consulta);
+    }
+    
+    public LinkedHashMap<Integer, Consulta> getConsultas() {
+        return this.repositorioConsultas;
+    }
+    /*private ArrayList<Consulta> repositorioConsultas;
 
     // Construtor
     public RepositorioConsultas() {
@@ -17,5 +34,5 @@ public class RepositorioConsultas {
 
     public ArrayList<Consulta> getListaConsultas() {
         return this.repositorioConsultas;
-    }
+    } */
 }

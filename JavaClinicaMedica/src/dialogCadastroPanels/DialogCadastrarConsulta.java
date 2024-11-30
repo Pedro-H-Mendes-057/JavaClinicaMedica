@@ -145,9 +145,8 @@ public class DialogCadastrarConsulta extends JDialog {
         constraints.insets = new Insets(0, 30,0, 0);
         constraints.gridx=0; // coluna 0
         constraints.gridy=12; // linha 12
-        this.add(getPanelSalvarCancelar(), constraints);
+        this.add(getPanelSalvarCancelar(), constraints);        
         
-        this.setVisible(true);
     }
     
     JLabel getLabelNomePaciente() {
@@ -399,7 +398,7 @@ public class DialogCadastrarConsulta extends JDialog {
     
      public JComboBox<String> getjComboBoxHorario() {
         if (this.jComboBoxHorario == null) {
-            String[] options = { "08:00", "09:00", "10:00", "11:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00" };
+            String[] options = { "08:00", "09:00", "10:00", "11:00", "13:00", "12:00", "14:00", "15:00", "16:00", "17:00", "18:00" };
             this.jComboBoxHorario = new JComboBox<>(options);
         }
                 

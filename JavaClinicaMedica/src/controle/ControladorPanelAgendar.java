@@ -29,6 +29,7 @@ public class ControladorPanelAgendar implements ActionListener {
     DialogCadastrarConsulta dialogCadastrarConsulta;
     DialogBuscarMedico dialogBuscarMedico;
     ControladorDialogBuscarMedico controladorDialogBuscarMedico;
+    ControladorDialogCadastrarConsulta controladorDialogCadastrarConsulta;
     private int chaveMedico;
     
     public ControladorPanelAgendar(PanelAgendar panelAgendar) {
@@ -48,6 +49,7 @@ public class ControladorPanelAgendar implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() ==  this.panelAgendar.getBTNNovaConsulta()) {            
             dialogCadastrarConsulta = new DialogCadastrarConsulta(ControladorFrame.frame);
+            controladorDialogCadastrarConsulta = new ControladorDialogCadastrarConsulta(dialogCadastrarConsulta, chaveMedico);
         } else if (e.getSource() == this.panelAgendar.getBTNNovoExame()) {
             
         } else if (e.getSource() ==  this.panelAgendar.getBTNBuscar()) {
