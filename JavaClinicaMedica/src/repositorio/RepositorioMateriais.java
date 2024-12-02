@@ -10,6 +10,8 @@ import modelo.Material;
 public class RepositorioMateriais {
     private ArrayList<Material> repositorioMateriais;
     
+    
+    
     public RepositorioMateriais() {
         this.repositorioMateriais = new ArrayList<Material>();
     }    

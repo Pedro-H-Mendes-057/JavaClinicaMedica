@@ -1,5 +1,6 @@
 package visual;
 
+import controle.ControladorFrame;
 import controle.ControladorPanelAgendar;
 import controle.ControladorPanelMateriais;
 import controle.ControladorPanelRelatorios;
@@ -65,7 +66,7 @@ public class Frame extends JFrame {
         this.panelExames = new PanelExames();
         this.controladorPanelExames = new ControladorPanelExames(this.panelExames);
         this.panelMateriais = new PanelMateriais();
-        this.controladorPanelMateriais = new ControladorPanelMateriais(this.panelMateriais);
+        this.controladorPanelMateriais = new ControladorPanelMateriais(this.panelMateriais, ControladorFrame.repositorioMateriais); 
         this.panelRelatorios = new PanelRelatorios(this);
         this.controladorPanelRelatorios = new ControladorPanelRelatorios(this.panelRelatorios);
         

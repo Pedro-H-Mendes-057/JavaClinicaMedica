@@ -15,6 +15,8 @@ import modelo.Exame;
 import modelo.Medico;
 import modelo.Material;
 import modelo.Paciente;
+import visual.PanelMateriais;
+import controle.ControladorPanelMateriais;
 import java.awt.Component;
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -203,13 +205,16 @@ public class ControladorDialogCadastrarExame implements ActionListener {
         exame.setTipo(this.dialogCadastrarExames.getComboBoxTipo().getSelectedItem().toString());
         exame.setValorParticular(Integer.parseInt(this.dialogCadastrarExames.getTxFValor().getText()));
         exame.setMedico(atribuiMedico());
+        
         List<Material> materiaisUsados = getMateriaisUsados();
+        ControladorPanelMateriais controladorMateriais = new ControladorPanelMateriais(new PanelMateriais(), ControladorFrame.repositorioMateriais);
+        controladorMateriais.atualizarEstoque(materiaisUsados);
         exame.setMateriasUsar(materiaisUsados);
+        
         exame.setDescricao(this.dialogCadastrarExames.getTxArDescricao().getText());
         ControladorFrame.repositorioExames.addExame(exame);
         //ControladorFrame.atualizarTabelaEstoque(materiaisUsar); /////////////////////////
     }
-
 
 
 	private Medico atribuiMedico() {

@@ -1,11 +1,16 @@
 package controle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
+
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import dialogCadastroPanels.DialogCadastrarMaterial;
 import visual.PanelMateriais;
 import visual.TemplatePanel;
+import modelo.Material;
+import repositorio.RepositorioMateriais;
 /**
  *
  * @author fonfon
@@ -14,10 +19,14 @@ public class ControladorPanelMateriais implements ActionListener {
     PanelMateriais panelMateriais;
     DialogCadastrarMaterial  dialogCadastrarMaterial;
     ControladorDialogCadastrarMaterial controladorDialogCadastrarMaterial;
+    RepositorioMateriais repositorioMateriais;
+    
 
-    public ControladorPanelMateriais(PanelMateriais panelMateriais) {
+    public ControladorPanelMateriais(PanelMateriais panelMateriais, RepositorioMateriais repositorioMateriais) {
         this.panelMateriais = panelMateriais;
+        this.repositorioMateriais = repositorioMateriais;
         addEventos();
+        
     }
 
     public void addEventos() {
@@ -44,6 +53,33 @@ public class ControladorPanelMateriais implements ActionListener {
         }
     }
     
+    public void atualizarEstoque(List<Material> materiaisUsados) {
+        for (int i = 0; i < materiaisUsados.size(); i++) {
+            Material materialUsado = materiaisUsados.get(i);
+
+            //Procurar material
+            for (int j = 0; j < ControladorFrame.repositorioMateriais.getMateriais().size(); j++) {
+                Material estoqueMaterial = ControladorFrame.repositorioMateriais.getMateriais().get(j);
+
+                if (estoqueMaterial.getNome().equals(materialUsado.getNome())) {
+               // Subtrair a qnt usada
+                    int novaQuantidade = estoqueMaterial.getQuant() - materialUsado.getQuant();
+               //Impedir dar negativo
+                    if (novaQuantidade < 0) {
+                        JOptionPane.showMessageDialog(panelMateriais,
+                                "Estoque baixo de " + materialUsado.getNome(),
+                                "Erro", JOptionPane.ERROR_MESSAGE);
+                        return;
+                    }
+                    estoqueMaterial.setQuant(novaQuantidade);
+                    break; // Material encontrado, não precisa continuar o loop interno
+                }
+            }
+        }
+        atualizarTabela();
+    }
+
+
     public void atualizarTabela() {
         DefaultTableModel model = (DefaultTableModel) this.panelMateriais.getTable().getModel(); 
         
