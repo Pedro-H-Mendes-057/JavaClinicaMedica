@@ -25,7 +25,7 @@ public class PanelExames extends TemplatePanel {
     @Override
     public JTable getTable() {
         if (this.table == null) {
-            String[] colunas = {"NOME DO EXAME", "TIPO DE EXAME", "VALOR", "DESCRICAO"};
+            String[] colunas = {"NOME DO EXAME", "TIPO DE EXAME", "VALOR", "DESCRICAO", "MEDICO"};
             DefaultTableModel model = new DefaultTableModel(0, colunas.length);
             model.setColumnIdentifiers(colunas);
             this.table = new JTable(model);

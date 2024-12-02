@@ -73,6 +73,8 @@ public class Medico {
 		this.valorConsulta = valorConsulta;
 	}
 	
-	
-	
+	@Override
+    public String toString() { // Sobrescreve toString pra retornar o nome do medico na tabela exames
+        return this.nome;
+    }
 }

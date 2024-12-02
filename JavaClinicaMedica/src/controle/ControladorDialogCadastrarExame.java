@@ -178,13 +178,14 @@ public class ControladorDialogCadastrarExame implements ActionListener {
 
 
 	private Medico atribuiMedico() {
-		for(int i = 0; i<ControladorFrame.repositorioExames.getExames().size();i++) {
-			if(ControladorFrame.repositorioMedicos.getMedicos().get(i).getNome() == 
-					this.dialogCadastrarExames.getCBMedico().getSelectedItem()) {
-				return ControladorFrame.repositorioMedicos.getMedicos().get(i);
-			}
-		}
-		return null;
+		String medicoSelecionado = (String) this.dialogCadastrarExames.getCBMedico().getSelectedItem();
+
+	    for (int i = 0; i < ControladorFrame.repositorioMedicos.getMedicos().size(); i++) { // Procura o indice na lista de medicos
+	        if (ControladorFrame.repositorioMedicos.getMedicos().get(i).getNome().equals(medicoSelecionado)) {
+	            return ControladorFrame.repositorioMedicos.getMedicos().get(i);
+	        }
+	    }
+	    return null;
 	}
     
 

@@ -56,11 +56,11 @@ public class ControladorPanelExames implements ActionListener {
         for (int i = 0; i < ControladorFrame.repositorioExames.getExames().size(); i++) {
             //System.out.println("OI " + i);
             model.addRow(new Object [] {
-                ControladorFrame.repositorioExames.getExames().get(i).getNomeExame(),
-                ControladorFrame.repositorioExames.getExames().get(i).getDescricao(),
-                String.valueOf(ControladorFrame.repositorioExames.getExames().get(i).getValorParticular()),
-                ControladorFrame.repositorioExames.getExames().get(i).getMedico(),
-                ControladorFrame.repositorioExames.getExames().get(i).getTipo(),
+            		ControladorFrame.repositorioExames.getExames().get(i).getNomeExame(),
+                    ControladorFrame.repositorioExames.getExames().get(i).getTipo(),
+                    String.valueOf(ControladorFrame.repositorioExames.getExames().get(i).getValorParticular()),
+                    ControladorFrame.repositorioExames.getExames().get(i).getDescricao(),
+                    ControladorFrame.repositorioExames.getExames().get(i).getMedico() 
             });
         }    
     }
