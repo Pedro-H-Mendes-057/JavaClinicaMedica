@@ -13,7 +13,7 @@ import java.awt.event.ActionEvent;
 
 public class DialogCadastrarExames extends JDialog {
     private JTextField txFNomeExame;
-    private JTextField txFDescricao;
+    private JTextArea txArDescricao;
     private JTextField txFValor;
     private JTextField txFMedico;
     private JButton btSalvar;
@@ -37,7 +37,7 @@ public class DialogCadastrarExames extends JDialog {
 	        getLblNomeExame();
 	        getTxFNomeExame();
 	        getLblDescricao();
-	        getTxFDescricao();
+	        getTxArDescricao();
 	        getLblTipo();
 	        getComboBoxTipo();
 	        getLblMedicoResponsavel();
@@ -76,14 +76,18 @@ public class DialogCadastrarExames extends JDialog {
 	        return lblDescricao;
 	    }
 	
-	    public JTextField getTxFDescricao() {
-	        if (this.txFDescricao == null) {
-	            this.txFDescricao = new JTextField();
-	            this.txFDescricao.setBounds(62, 172, 453, 149);
-	            this.txFDescricao.setColumns(10);
-	            getContentPane().add(this.txFDescricao);
+	    public JTextArea getTxArDescricao() {
+	        if (this.txArDescricao == null) {
+	            this.txArDescricao = new JTextArea();
+	            this.txArDescricao.setLineWrap(true);
+	            this.txArDescricao.setWrapStyleWord(true);
+	            this.txArDescricao.setFont(new Font("Tahoma", Font.PLAIN, 14));
+
+	            JScrollPane scrollPane = new JScrollPane(this.txArDescricao);
+	            scrollPane.setBounds(62, 172, 453, 149);
+	            getContentPane().add(scrollPane);
 	        }
-	        return this.txFDescricao;
+	        return this.txArDescricao;
 	    }
 	
 	    public JLabel getLblTipo() {

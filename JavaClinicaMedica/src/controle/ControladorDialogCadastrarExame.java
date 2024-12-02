@@ -66,7 +66,8 @@ public class ControladorDialogCadastrarExame implements ActionListener {
     private boolean ValidosCamposVazios() {
         int valorParticular = Integer.parseInt(this.dialogCadastrarExames.getTxFValor().getText());
         String nomeExame = dialogCadastrarExames.getTxFNomeExame().getText().trim();
-        String descricao = dialogCadastrarExames.getTxFDescricao().getText().trim();
+        String descricao = dialogCadastrarExames.getTxArDescricao().getText().trim();
+
         try {            
             String tipo = dialogCadastrarExames.getComboBoxTipo().getSelectedItem().toString().trim();            
             String medico = dialogCadastrarExames.getCBMedico().getSelectedItem().toString().trim();            
@@ -169,7 +170,7 @@ public class ControladorDialogCadastrarExame implements ActionListener {
         exame.setMedico(atribuiMedico());
         List<Material> materiaisUsados = getMateriaisUsados();
         exame.setMateriasUsar(materiaisUsados);
-        exame.setDescricao(this.dialogCadastrarExames.getTxFDescricao().getText());
+        exame.setDescricao(this.dialogCadastrarExames.getTxArDescricao().getText());
         ControladorFrame.repositorioExames.addExame(exame);
         //ControladorFrame.atualizarTabelaEstoque(materiaisUsar); /////////////////////////
     }

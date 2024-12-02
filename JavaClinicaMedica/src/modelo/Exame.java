@@ -57,7 +57,7 @@ public class Exame {
 		this.valorParticular = valorParticular;
 	}
 
-	public String getMateriasUsar() {
+	public List<Material> getMateriasUsar() {
 		return materiaisUsar;
 	}
 
