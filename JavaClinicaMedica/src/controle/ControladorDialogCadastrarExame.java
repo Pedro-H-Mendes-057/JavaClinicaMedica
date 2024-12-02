@@ -1,14 +1,19 @@
 package controle;
 
 import java.awt.Color;
+
 import java.awt.event.ActionEvent;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.swing.JTable;
 import javax.swing.JOptionPane;
 import dialogCadastroPanels.DialogCadastrarExames;
 import modelo.Exame;
 import modelo.Medico;
+import modelo.Material;
 import modelo.Paciente;
 import java.awt.Component;
 import javax.swing.*;
@@ -69,10 +74,7 @@ public class ControladorDialogCadastrarExame implements ActionListener {
             JOptionPane.showMessageDialog(dialogCadastrarExames, "Preencha todos os campos!");
             return false;
         }
-   
-    //String materiaisUsar = dialogCadastrarExames.getCBMateriaisUsar().getSelectedItem().toString().trim();
         
-        		//Depois adicione materiaisUsados.isEmpty()
         if (nomeExame.isEmpty() || descricao.isEmpty()) {
             JOptionPane.showMessageDialog(dialogCadastrarExames, "Preencha todos os campos!");
             return false;
@@ -87,6 +89,14 @@ public class ControladorDialogCadastrarExame implements ActionListener {
         	JOptionPane.showMessageDialog(dialogCadastrarExames, "Valor deve conter numeros!");
             return false;
         }
+        
+        List<Material> materiaisUsados = getMateriaisUsados();
+        if (materiaisUsados.isEmpty()) {
+            JOptionPane.showMessageDialog(dialogCadastrarExames,
+                    "Insira ao menos 1 material");
+            return false;
+        }
+        
         return true;
     }//fim do validarcampos
 
@@ -125,7 +135,31 @@ public class ControladorDialogCadastrarExame implements ActionListener {
         tabela.repaint();
     } // atualizarCoresLinha
     	            
-    
+    private List<Material> getMateriaisUsados() {
+        List<Material> materiaisUsados = new ArrayList<>();
+        JTable tabela = this.dialogCadastrarExames.getTabela();
+        DefaultTableModel modeloTabela = (DefaultTableModel) tabela.getModel();
+
+        for (int i = 0; i < modeloTabela.getRowCount(); i++) {
+            Object valorQuantidade = modeloTabela.getValueAt(i, 1);
+            Object nomeMaterial = modeloTabela.getValueAt(i, 0);
+
+            try {
+                int quantidade = Integer.parseInt(valorQuantidade.toString());
+                if (quantidade > 0) {
+                    Material material = new Material();
+                    material.setNome(nomeMaterial.toString());
+                    material.setQuant(quantidade);
+                    materiaisUsados.add(material);
+                }
+            } catch (NumberFormatException e) {
+            	
+            }
+        }
+
+        return materiaisUsados;
+    }
+
     
     public void addExame() {
     	Exame exame = new Exame();
@@ -133,13 +167,11 @@ public class ControladorDialogCadastrarExame implements ActionListener {
         exame.setTipo(this.dialogCadastrarExames.getComboBoxTipo().getSelectedItem().toString());
         exame.setValorParticular(Integer.parseInt(this.dialogCadastrarExames.getTxFValor().getText()));
         exame.setMedico(atribuiMedico());
-        //exame.setMateriasUsar(null);
+        List<Material> materiaisUsados = getMateriaisUsados();
+        exame.setMateriasUsar(materiaisUsados);
         exame.setDescricao(this.dialogCadastrarExames.getTxFDescricao().getText());
-        //this.exame.setMedico(this.dialogCadastrarExames.getCBMedico().getSelectedItem().toString());
-        // this.exame.setMateriaisUsar(this.dialogCadastrarExames.getComboBoxMateriaisUsar().getSelectedItem().toString());
-
         ControladorFrame.repositorioExames.addExame(exame);
-        //ControladorFrame.atualizarTabelas(); /////////////////////////
+        //ControladorFrame.atualizarTabelaEstoque(materiaisUsar); /////////////////////////
     }
 
 

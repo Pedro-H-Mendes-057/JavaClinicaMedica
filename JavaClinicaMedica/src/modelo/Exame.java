@@ -1,18 +1,20 @@
 package modelo;
 
+import java.util.List;
+
 public class Exame {
 	private String nomeExame;
 	private String descricao;
 	private String tipo;
 	private int valorParticular;
-	private String materiaisUsar; //seria interessante um ArrayList pra guardar os materiais necessarios no exame
+	private List<Material> materiaisUsar; //seria interessante um ArrayList pra guardar os materiais necessarios no exame
 	private Medico medico;
 	
 	public Exame() {
 		
 	}
 	
-	public Exame(String nomeExame, String descricao, String tipo, int valorParticular, String materiaisUsar,
+	public Exame(String nomeExame, String descricao, String tipo, int valorParticular, List<Material> materiaisUsar,
 			Medico medico) {
 		super();
 		this.nomeExame = nomeExame;
@@ -59,8 +61,8 @@ public class Exame {
 		return materiaisUsar;
 	}
 
-	public void setMateriasUsar(String materiaisUsar) {
-		this.materiaisUsar = materiaisUsar;
+	public void setMateriasUsar(List<Material> materiaisUsados) {
+		this.materiaisUsar = materiaisUsados;
 	}
 
 	public Medico getMedico() {
