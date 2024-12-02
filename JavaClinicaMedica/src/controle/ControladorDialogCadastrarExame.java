@@ -91,16 +91,51 @@ public class ControladorDialogCadastrarExame implements ActionListener {
             return false;
         }
         
-        List<Material> materiaisUsados = getMateriaisUsados();
+        /*List<Material> materiaisUsados = getMateriaisUsados();
         if (materiaisUsados.isEmpty()) {
             JOptionPane.showMessageDialog(dialogCadastrarExames,
                     "Insira ao menos 1 material");
             return false;
+        }*/
+        if (!validarQntMateriais()) { 
+            return false;
         }
-        
         return true;
     }//fim do validarcampos
 
+    public boolean validarQntMateriais() {
+        JTable tabela = dialogCadastrarExames.getTabela();
+        DefaultTableModel modeloTabela = (DefaultTableModel) tabela.getModel();
+
+        boolean algumMaterialUsado = false;
+
+        // Ler a coluna de Qnt
+        for (int i = 0; i < modeloTabela.getRowCount(); i++) {
+            Object valorQuantidade = modeloTabela.getValueAt(i, 1);
+
+            try {
+                int quantidade = Integer.parseInt(valorQuantidade.toString());
+                if (quantidade > 0) {
+                    algumMaterialUsado = true; // Encontrou um material com qnt> 0
+                    break;
+                }
+            } catch (NumberFormatException e) { //impedir letras
+                JOptionPane.showMessageDialog(dialogCadastrarExames, 
+                        "Preenchimento inválido!", 
+                        "Erro", JOptionPane.ERROR_MESSAGE);
+                return false;
+            }
+        }
+        
+        if (!algumMaterialUsado) {
+            JOptionPane.showMessageDialog(dialogCadastrarExames,
+                    "Insira pelo menos um material!",
+                    "Aviso", JOptionPane.WARNING_MESSAGE);
+            return false;
+        }
+        return true; 
+    }
+    
     public void atualizarCoresLinha() { ////////////////////
         JTable tabela = this.dialogCadastrarExames.getTabela();
         DefaultTableModel modeloTabela = (DefaultTableModel) tabela.getModel();
