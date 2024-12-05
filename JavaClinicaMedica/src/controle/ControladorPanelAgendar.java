@@ -33,8 +33,7 @@ public class ControladorPanelAgendar implements ActionListener {
     private int chaveMedico;
     
     public ControladorPanelAgendar(PanelAgendar panelAgendar) {
-        this.panelAgendar = panelAgendar;
-        chaveMedico = -1; 
+        this.panelAgendar = panelAgendar;        
         addEventos();
     }
     
@@ -56,8 +55,10 @@ public class ControladorPanelAgendar implements ActionListener {
             limparAgenda();
             dialogBuscarMedico = new DialogBuscarMedico(ControladorFrame.frame);
             controladorDialogBuscarMedico = new ControladorDialogBuscarMedico(dialogBuscarMedico);
-            chaveMedico = controladorDialogBuscarMedico.getChaveMedico();
-            atualizarAgenda(chaveMedico);
+            chaveMedico = controladorDialogBuscarMedico.getChaveMedico();            
+            if (chaveMedico != -1) {
+                atualizarAgenda(chaveMedico);
+            }            
         } else if (e.getSource() == this.panelAgendar.getBTNVoltar()) {
             this.panelAgendar.mudarSemana(-1);
             limparAgenda();

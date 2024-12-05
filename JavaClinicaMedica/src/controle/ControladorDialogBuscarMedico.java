@@ -19,6 +19,7 @@ public class ControladorDialogBuscarMedico implements EventListener {
     private int chaveMedico;
     
     public ControladorDialogBuscarMedico(DialogBuscarMedico dialogBuscarMedico) {
+        this.chaveMedico = -1;
         this.dialogBuscarMedico = dialogBuscarMedico;
         addEventos();
         adicionarNomes();

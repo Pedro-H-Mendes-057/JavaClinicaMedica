@@ -7,6 +7,7 @@ package controle;
 import dialogCadastroPanels.DialogCadastrarConsulta;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import javax.swing.JOptionPane;
@@ -43,6 +44,9 @@ public class ControladorDialogCadastrarConsulta implements ActionListener{
     }
     
     void salvarConsulta() {
+        String [] erros = {this.medico.getNome() + " não atende na data e horário selecionados!", 
+        "Já existe uma consulta cadastrada na data e horário selecionados!"};
+        
         Calendar calendar = Calendar.getInstance();
         Date dataSelecionada = (Date) this.dialogCadastrarConsulta.getJDatePicker().getModel().getValue();
         calendar.setTime(dataSelecionada);
@@ -52,9 +56,17 @@ public class ControladorDialogCadastrarConsulta implements ActionListener{
         //System.out.println("Horário selecionado: " + horarioSelecionado);
         //System.out.println("Data selecionada: " + diaDaSemana);
         if (diaDaSemana != -1 && diaDaSemana != 5 && medico.getHorasAtend()[horarioSelecionado][diaDaSemana] == 1) {
-            
+            SimpleDateFormat formatador = new SimpleDateFormat("dd/MM/yyyy");
+            String horario = (String) this.dialogCadastrarConsulta.getjComboBoxHorario().getSelectedItem();
+            String chaveConsulta = "D=" + formatador.format(dataSelecionada) + "#H=" + horario;
+            if (ControladorFrame.repositorioConsultas.getConsulta(chaveConsulta) == false) {
+                ControladorFrame.repositorioConsultas.addConsulta(chaveConsulta, chaveConsulta);
+            } else {
+                JOptionPane.showMessageDialog(this.dialogCadastrarConsulta, erros[1]);
+            }
+            System.out.println("Chave consulta: " + chaveConsulta);
         } else {
-            JOptionPane.showMessageDialog(this.dialogCadastrarConsulta, this.medico.getNome() + " não atende na data e horário selecionados!");
+            JOptionPane.showMessageDialog(this.dialogCadastrarConsulta, erros[0]);
         }
     }
 }

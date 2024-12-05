@@ -6,20 +6,33 @@ import modelo.Consulta;
 
 public class RepositorioConsultas {
     static String chave; 
-    LinkedHashMap<Integer, Consulta> repositorioConsultas;
-    
+    //LinkedHashMap<String, Consulta> repositorioConsultas;    <---- sera usada depois
+    LinkedHashMap<String, String> repositorioConsultas;
     
     public RepositorioConsultas() {        
         this.repositorioConsultas = new LinkedHashMap<>();        
     }
     
-     public void addEconsulta(Consulta consulta) {
-         
-        //repositorioConsultas.put(, consulta);
+    //TESTE
+    public void addConsulta(String chave, String consulta) {         
+        repositorioConsultas.put(chave, consulta);
     }
     
-    public LinkedHashMap<Integer, Consulta> getConsultas() {
+    // Esta sera usada depois:    <-------
+    /*public void addConsulta(String chave, Consulta consulta) {         
+        repositorioConsultas.put(chave, consulta);
+    } */
+    
+    public LinkedHashMap<String, String> getConsultas() {
         return this.repositorioConsultas;
+    }
+    
+    public boolean getConsulta(String chave) {
+        if (this.repositorioConsultas.get(chave) == null) {
+            return false;
+        } else {
+            return true;
+        }
     }
     /*private ArrayList<Consulta> repositorioConsultas;
 
