@@ -2,6 +2,7 @@ package controle;
 
 import java.awt.Color;
 
+
 import java.awt.event.ActionEvent;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionListener;
@@ -20,22 +21,34 @@ import controle.ControladorPanelMateriais;
 import java.awt.Component;
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
+import controle.ControladorPanelMateriais;
 
 public class ControladorDialogCadastrarExame implements ActionListener {
-    DialogCadastrarExames dialogCadastrarExames;
-    //private Exame exame;
+    private DialogCadastrarExames dialogCadastrarExames;
+    private ControladorPanelMateriais controlePanelMateriais;
 
+    //Construtor 1
+    public ControladorDialogCadastrarExame(DialogCadastrarExames dialogCadastrarExames, ControladorPanelMateriais controlePanelMateriais) {
+        this.controlePanelMateriais = controlePanelMateriais;
+        this.dialogCadastrarExames = dialogCadastrarExames;
+
+        addEventos();
+        this.dialogCadastrarExames.setVisible(true);
+    }
+
+    //Construtor 2 (pra garantir)
     public ControladorDialogCadastrarExame(DialogCadastrarExames dialogCadastrarExames) {
-        this.dialogCadastrarExames = dialogCadastrarExames;        
+        this.dialogCadastrarExames = dialogCadastrarExames;
+
         addEventos();
         this.dialogCadastrarExames.setVisible(true);
     }
 
     void addEventos() {
         this.dialogCadastrarExames.getBTSalvar().addActionListener(this);
-    	this.dialogCadastrarExames.getBTCancelar().addActionListener(this);
-    	this.dialogCadastrarExames.getBTConfSelect().addActionListener(this);
-    }//do AddEventos
+        this.dialogCadastrarExames.getBTCancelar().addActionListener(this);
+        this.dialogCadastrarExames.getBTConfSelect().addActionListener(this);
+    }
     
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -47,6 +60,9 @@ public class ControladorDialogCadastrarExame implements ActionListener {
               //String materiaisUsar = this.dialogCadastrarExames.getCBMateriaisUsar().getSelectedItem().toString();
 
             	if (ValidosCamposVazios()) {
+            		 if (controlePanelMateriais != null) {
+                         controlePanelMateriais.atualizarTabela();
+                     }
                     addExame();
                     JOptionPane.showMessageDialog(this.dialogCadastrarExames,
                             "Exame salvo com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);

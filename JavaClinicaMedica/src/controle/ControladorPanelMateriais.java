@@ -53,7 +53,7 @@ public class ControladorPanelMateriais implements ActionListener {
         }
     }
     
-    public void atualizarEstoque(List<Material> materiaisUsados) {
+    public void atualizarEstoque(List<Material> materiaisUsados) { //cálculos 
         for (int i = 0; i < materiaisUsados.size(); i++) {
             Material materialUsado = materiaisUsados.get(i);
 
