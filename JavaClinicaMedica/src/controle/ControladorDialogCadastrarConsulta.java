@@ -58,7 +58,7 @@ public class ControladorDialogCadastrarConsulta implements ActionListener{
         if (diaDaSemana != -1 && diaDaSemana != 5 && medico.getHorasAtend()[horarioSelecionado][diaDaSemana] == 1) {
             SimpleDateFormat formatador = new SimpleDateFormat("dd/MM/yyyy");
             String horario = (String) this.dialogCadastrarConsulta.getjComboBoxHorario().getSelectedItem();
-            String chaveConsulta = "D=" + formatador.format(dataSelecionada) + "#H=" + horario;
+            String chaveConsulta = "M=" + chaveMedico + "#D=" + formatador.format(dataSelecionada) + "#H=" + horario;
             if (ControladorFrame.repositorioConsultas.getConsulta(chaveConsulta) == false) {
                 ControladorFrame.repositorioConsultas.addConsulta(chaveConsulta, chaveConsulta);
             } else {
