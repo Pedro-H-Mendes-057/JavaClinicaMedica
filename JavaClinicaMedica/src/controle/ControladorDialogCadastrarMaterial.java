@@ -71,6 +71,14 @@ public class ControladorDialogCadastrarMaterial implements ActionListener {
                 JOptionPane.showMessageDialog(dialogCadastrarMaterial, "Quantidade e preço devem ser maiores que zero!");
                 return false;
             }
+            
+            if (quant < quantMin) {
+            	 JOptionPane.showMessageDialog(dialogCadastrarMaterial, 
+                         "Estoque deve ser maior que a quantidade mínima!",
+                         "Erro!",
+                         JOptionPane.ERROR_MESSAGE);
+                     return false;
+                 }
 
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(dialogCadastrarMaterial, "Preenchimento inválido!");
