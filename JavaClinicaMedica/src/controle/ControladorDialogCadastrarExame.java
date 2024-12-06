@@ -229,6 +229,7 @@ public class ControladorDialogCadastrarExame implements ActionListener {
         
         exame.setDescricao(this.dialogCadastrarExames.getTxArDescricao().getText());
         ControladorFrame.repositorioExames.addExame(exame);
+        
         //ControladorFrame.atualizarTabelaEstoque(materiaisUsar); /////////////////////////
     }
 
