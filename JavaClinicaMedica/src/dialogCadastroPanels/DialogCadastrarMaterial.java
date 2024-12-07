@@ -12,6 +12,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
+import modelo.Material;
+
 /**
  *
  * @author fonfon
@@ -30,6 +32,8 @@ public class DialogCadastrarMaterial extends JDialog {
     JButton buttonSalvar;
     JButton buttonCancelar;
     JButton buttonUpload;
+    private boolean modoEdicao = false;
+    private Material materialAlterado;
     
     public DialogCadastrarMaterial(JFrame parent) {
         super(parent, "Cadastrar Material", true);
@@ -52,6 +56,23 @@ public class DialogCadastrarMaterial extends JDialog {
         this.add(getButtonUpload());
         
     }
+    public void setModoEdicao(boolean modoEdicao, Material material) {
+        this.modoEdicao = modoEdicao;
+        this.materialAlterado = material;
+
+        if (modoEdicao) {
+                getTextFieldNome().setText(material.getNome());
+                getTextFieldFornecedor().setText(material.getFornecedor());
+                getTextFieldQtdEstoque().setText(String.valueOf(material.getQuant()));
+                getTextFieldQtdMinima().setText(String.valueOf(material.getQuantMin()));
+                getTextFieldPreco().setText(material.getPreco());
+                
+                getTextFieldNome().setEnabled(false);
+                getTextFieldFornecedor().setEnabled(false);
+                getTextFieldQtdMinima().setEnabled(false);
+        }
+    }//ModoEdicao
+
     
     JLabel getLabelNome() {
         if (this.labelNome == null) {
