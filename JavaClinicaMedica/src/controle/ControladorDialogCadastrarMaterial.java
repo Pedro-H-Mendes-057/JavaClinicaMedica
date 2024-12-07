@@ -15,8 +15,7 @@ import dialogCadastroPanels.DialogCadastrarMaterial;
  */
 public class ControladorDialogCadastrarMaterial implements ActionListener {
     DialogCadastrarMaterial dialogCadastrarMaterial;
-    Material material;
-    private ControladorPanelMateriais controlePanelMateriais;
+    Material material;    
 
     public ControladorDialogCadastrarMaterial(DialogCadastrarMaterial dialogCadastrarMaterial) {
         this.dialogCadastrarMaterial = dialogCadastrarMaterial;
@@ -54,8 +53,7 @@ public class ControladorDialogCadastrarMaterial implements ActionListener {
                     addMaterial();
                     JOptionPane.showMessageDialog(this.dialogCadastrarMaterial, "Material salvo com sucesso!");
                 }
-                this.dialogCadastrarMaterial.dispose();
-                controlePanelMateriais.atualizarTabela();
+                this.dialogCadastrarMaterial.dispose();                
             }
         }
     }  

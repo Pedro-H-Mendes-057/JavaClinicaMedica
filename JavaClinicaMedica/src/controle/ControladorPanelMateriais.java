@@ -33,8 +33,7 @@ public class ControladorPanelMateriais implements ActionListener {
 
     public void addEventos() {
         this.panelMateriais.getBTNNovo().addActionListener(this);
-        this.panelMateriais.getBTNExcluir().addActionListener(this);
-       
+        this.panelMateriais.getBTNExcluir().addActionListener(this);       
         this.panelMateriais.getBTNEditar().addActionListener(this);
         
         this.panelMateriais.getTable().getSelectionModel().addListSelectionListener(event -> {
