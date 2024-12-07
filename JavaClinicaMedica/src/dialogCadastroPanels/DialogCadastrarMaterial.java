@@ -32,7 +32,7 @@ public class DialogCadastrarMaterial extends JDialog {
     JButton buttonSalvar;
     JButton buttonCancelar;
     JButton buttonUpload;
-    private boolean modoEdicao = false;
+    public boolean modoEdicao = false;
     private Material materialAlterado;
     
     public DialogCadastrarMaterial(JFrame parent) {
