@@ -6,6 +6,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import modelo.Material;
+import controle.ControladorPanelMateriais;
 import dialogCadastroPanels.DialogCadastrarMaterial;
 
 /**
@@ -15,17 +16,23 @@ import dialogCadastroPanels.DialogCadastrarMaterial;
 public class ControladorDialogCadastrarMaterial implements ActionListener {
     DialogCadastrarMaterial dialogCadastrarMaterial;
     Material material;
+    private ControladorPanelMateriais controlePanelMateriais;
 
     public ControladorDialogCadastrarMaterial(DialogCadastrarMaterial dialogCadastrarMaterial) {
         this.dialogCadastrarMaterial = dialogCadastrarMaterial;
         //this.material = materialAlterado;
+        this.dialogCadastrarMaterial.setModoEdicao(false, null);  //(boolean, material)
         addEventos();
 
         this.dialogCadastrarMaterial.setVisible(true);
     }
     
+    //Construtor 2 pra Edição
     public ControladorDialogCadastrarMaterial(DialogCadastrarMaterial dialogCadastrarMaterial, Material materialAlterado) {
-
+    	this.dialogCadastrarMaterial.setModoEdicao(true, materialAlterado);
+    	this.material = materialAlterado;
+        addEventos();
+        this.dialogCadastrarMaterial.setVisible(true);
     }
     
     void addEventos() {
@@ -39,12 +46,17 @@ public class ControladorDialogCadastrarMaterial implements ActionListener {
             
         } else if (e.getSource() == this.dialogCadastrarMaterial.getButtonSalvar()) { 
         	if(camposValidos() == true) {
-            addMaterial();
-            JOptionPane.showMessageDialog(this.dialogCadastrarMaterial, "Material salvo com sucesso!");
- 
-            this.dialogCadastrarMaterial.dispose();
-            //System.out.println("TESTE AQUI");
-        	}
+        		
+        		if (this.dialogCadastrarMaterial.modoEdicao) {
+                    atualizarMaterial();
+                    JOptionPane.showMessageDialog(this.dialogCadastrarMaterial, "Material atualizado com sucesso!");
+                } else {
+                    addMaterial();
+                    JOptionPane.showMessageDialog(this.dialogCadastrarMaterial, "Material salvo com sucesso!");
+                }
+                this.dialogCadastrarMaterial.dispose();
+                controlePanelMateriais.atualizarTabela();
+            }
         }
     }  
 
@@ -91,20 +103,11 @@ public class ControladorDialogCadastrarMaterial implements ActionListener {
         }
         return true;
     }
-
-    						/////////////////////EDIÇÃO////////////////////////////////
-    private void configsEdit(Material material) {
-        this.dialogCadastrarMaterial.getTextFieldNome().setText(material.getNome());
-        this.dialogCadastrarMaterial.getTextFieldFornecedor().setText(material.getFornecedor());
-        this.dialogCadastrarMaterial.getTextFieldQtdEstoque().setText(String.valueOf(material.getQuant()));
-        this.dialogCadastrarMaterial.getTextFieldQtdMinima().setText(String.valueOf(material.getQuantMin()));
-        this.dialogCadastrarMaterial.getTextFieldPreco().setText(material.getPreco());
-
-        this.dialogCadastrarMaterial.getTextFieldNome().setEnabled(false);
-        this.dialogCadastrarMaterial.getTextFieldFornecedor().setEnabled(false);
-        this.dialogCadastrarMaterial.getTextFieldQtdMinima().setEnabled(false);
+    
+    private void atualizarMaterial() {
+        this.material.setQuant(Integer.valueOf(this.dialogCadastrarMaterial.getTextFieldQtdEstoque().getText()));
+        this.material.setPreco(this.dialogCadastrarMaterial.getTextFieldPreco().getText());
     }
-    					/////////////////////////////////////////////////////
     
     public void addMaterial() {
         this.material = new Material();
