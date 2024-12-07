@@ -225,7 +225,7 @@ public class ControladorDialogCadastrarExame implements ActionListener {
         exame.setMedico(atribuiMedico());
         
         List<Material> materiaisUsados = getMateriaisUsados();
-       // ControladorPanelMateriais controladorMateriais = new ControladorPanelMateriais(new PanelMateriais(), ControladorFrame.repositorioMateriais);
+        ControladorPanelMateriais controladorMateriais = new ControladorPanelMateriais(new PanelMateriais(), ControladorFrame.repositorioMateriais);
         controladorMateriais.atualizarEstoque(materiaisUsados);
         exame.setMateriasUsar(materiaisUsados);
         
