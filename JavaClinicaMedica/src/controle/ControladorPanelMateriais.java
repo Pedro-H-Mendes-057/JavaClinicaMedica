@@ -134,8 +134,8 @@ public class ControladorPanelMateriais implements ActionListener {
                 int qutMin = Integer.parseInt(model.getValueAt(linha, 2).toString());
 
                 if (qntEstoque < qutMin) {
-                    cell.setBackground(Color.RED);
-                    cell.setForeground(Color.WHITE);
+                    cell.setBackground(Color.WHITE);
+                    cell.setForeground(Color.RED);
                 } else {
                     //Reseta as cores 
                     cell.setBackground(Color.WHITE);
