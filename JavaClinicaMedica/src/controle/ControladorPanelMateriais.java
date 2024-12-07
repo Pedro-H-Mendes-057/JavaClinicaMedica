@@ -1,10 +1,13 @@
 package controle;
+import java.awt.Color;
+import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import dialogCadastroPanels.DialogCadastrarMaterial;
 import java.awt.event.ComponentEvent;
@@ -61,7 +64,7 @@ public class ControladorPanelMateriais implements ActionListener {
         	int indexLinhaItem = this.panelMateriais.getTable().getSelectedRow();
         	if (indexLinhaItem != -1) {
         		Material materialSeleciona = ControladorFrame.repositorioMateriais.getMateriais().get(indexLinhaItem);
-                this.dialogCadastrarMaterial = new DialogCadastrarMaterial(ControladorFrame.frame);
+        		this.dialogCadastrarMaterial = new DialogCadastrarMaterial(ControladorFrame.frame);
                 this.controladorDialogCadastrarMaterial = new ControladorDialogCadastrarMaterial(this.dialogCadastrarMaterial, materialSeleciona);
                 atualizarTabela();
 
@@ -112,6 +115,38 @@ public class ControladorPanelMateriais implements ActionListener {
                 ControladorFrame.repositorioMateriais.getMateriais().get(i).getFornecedor(),
                 ControladorFrame.repositorioMateriais.getMateriais().get(i).getPreco(),
             });
-        }    
+        } 
+        atualizarCoresLinha();
     }
+    public void atualizarCoresLinha() {
+        JTable tabela = this.panelMateriais.getTable();
+
+        tabela.setDefaultRenderer(Object.class, new DefaultTableCellRenderer() {
+            @Override
+          
+            public Component getTableCellRendererComponent(JTable tabela, Object value, boolean isSelected,
+                                                           boolean hasFocus, int linha, int coluna) {
+            	
+                Component cell = super.getTableCellRendererComponent(tabela, value, isSelected, hasFocus, linha, coluna);
+                
+                DefaultTableModel model = (DefaultTableModel) tabela.getModel();
+                int qntEstoque = Integer.parseInt(model.getValueAt(linha, 1).toString());
+                int qutMin = Integer.parseInt(model.getValueAt(linha, 2).toString());
+
+                if (qntEstoque < qutMin) {
+                    cell.setBackground(Color.RED);
+                    cell.setForeground(Color.WHITE);
+                } else {
+                    //Reseta as cores 
+                    cell.setBackground(Color.WHITE);
+                    cell.setForeground(Color.BLACK);
+                }
+
+                return cell;
+            }
+        });
+
+        tabela.repaint();
+    }
+    
 }
