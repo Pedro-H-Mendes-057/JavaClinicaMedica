@@ -29,7 +29,7 @@ public class ControladorDialogCadastrarExame implements ActionListener {
 
     //Construtor 1
     public ControladorDialogCadastrarExame(DialogCadastrarExames dialogCadastrarExames, ControladorPanelMateriais controlePanelMateriais) {
-        //this.controlePanelMateriais = controlePanelMateriais;
+        this.controlePanelMateriais = controlePanelMateriais;
         this.dialogCadastrarExames = dialogCadastrarExames;
 
         addEventos();
@@ -225,8 +225,9 @@ public class ControladorDialogCadastrarExame implements ActionListener {
         exame.setMedico(atribuiMedico());
         
         List<Material> materiaisUsados = getMateriaisUsados();
-        ControladorPanelMateriais controladorMateriais = new ControladorPanelMateriais(new PanelMateriais(), ControladorFrame.repositorioMateriais);
-        controladorMateriais.atualizarEstoque(materiaisUsados);
+        //ControladorPanelMateriais controladorMateriais = new ControladorPanelMateriais(new PanelMateriais(), ControladorFrame.repositorioMateriais);
+        controlePanelMateriais.atualizarEstoque(materiaisUsados);
+        controlePanelMateriais.atualizarTabela();
         exame.setMateriasUsar(materiaisUsados);
         
         exame.setDescricao(this.dialogCadastrarExames.getTxArDescricao().getText());
