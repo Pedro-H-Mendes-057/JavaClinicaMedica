@@ -32,7 +32,12 @@ public class ControladorPanelMateriais implements ActionListener {
     public void addEventos() {
         this.panelMateriais.getBTNNovo().addActionListener(this);
         this.panelMateriais.getBTNExcluir().addActionListener(this);
-
+        this.panelMateriais.getBTNEditar().addActionListener(this);
+        
+        this.panelMateriais.getTable().getSelectionModel().addListSelectionListener(event -> {
+            boolean itemSelecionado = this.panelMateriais.getTable().getSelectedRow() != -1;
+            this.panelMateriais.getBTNEditar().setEnabled(itemSelecionado);
+        });
     }
 
     public void actionPerformed(ActionEvent e) {
@@ -49,9 +54,19 @@ public class ControladorPanelMateriais implements ActionListener {
             	ControladorFrame.repositorioMateriais.getMateriais().remove(this.panelMateriais.getTable().getSelectedRow());
             	atualizarTabela();
             }
-            
-        }
-    }
+        }//if
+        if (e.getSource()== this.panelMateriais.getBTNEditar()) {
+        	int indexLinhaItem = this.panelMateriais.getTable().getSelectedRow();
+        	if (indexLinhaItem != -1) {
+        		Material materialSeleciona = ControladorFrame.repositorioMateriais.getMateriais().get(indexLinhaItem);
+                this.dialogCadastrarMaterial = new DialogCadastrarMaterial(ControladorFrame.frame);
+                this.controladorDialogCadastrarMaterial = new ControladorDialogCadastrarMaterial(this.dialogCadastrarMaterial, materialSeleciona);
+                atualizarTabela();
+
+        	}
+        }//BTEditar
+        
+    }//actionPerformed
     
     public void atualizarEstoque(List<Material> materiaisUsados) { //cálculos 
         for (int i = 0; i < materiaisUsados.size(); i++) {
