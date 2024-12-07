@@ -29,8 +29,8 @@ public class ControladorDialogCadastrarExame implements ActionListener {
 
     //Construtor 1
     public ControladorDialogCadastrarExame(DialogCadastrarExames dialogCadastrarExames, ControladorPanelMateriais controlePanelMateriais) {
-        this.controlePanelMateriais = controlePanelMateriais;
-        
+        //this.controlePanelMateriais = controlePanelMateriais;
+        this.dialogCadastrarExames = dialogCadastrarExames;
 
         addEventos();
         this.dialogCadastrarExames.setVisible(true);

@@ -7,6 +7,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import dialogCadastroPanels.DialogCadastrarMaterial;
+import java.awt.event.ComponentEvent;
+import java.awt.event.ComponentListener;
 import visual.PanelMateriais;
 import visual.TemplatePanel;
 import modelo.Material;
@@ -32,6 +34,22 @@ public class ControladorPanelMateriais implements ActionListener {
     public void addEventos() {
         this.panelMateriais.getBTNNovo().addActionListener(this);
         this.panelMateriais.getBTNExcluir().addActionListener(this);
+        this.panelMateriais.addComponentListener(new ComponentListener() {
+            @Override
+                public void componentShown(ComponentEvent e) {
+                    atualizarTabela();
+                    System.out.println("teste");
+                }
+                @Override
+                public void componentHidden(ComponentEvent e) {
+                   
+                }
+                @Override
+                public void componentResized(ComponentEvent e) {}
+
+                @Override
+                public void componentMoved(ComponentEvent e) {}
+        });
 
     }
 
