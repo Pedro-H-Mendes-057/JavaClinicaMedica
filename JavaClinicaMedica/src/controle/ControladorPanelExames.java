@@ -13,9 +13,11 @@ public class ControladorPanelExames implements ActionListener {
     private PanelExames panelExames;
     private DialogCadastrarExames dialogCadastrarExames;
     private ControladorDialogCadastrarExame controladorDialogCadastrarExame;
+    ControladorPanelMateriais controladorPanelMateriais;
     
-    public ControladorPanelExames(PanelExames panelExames) {
-        this.panelExames = panelExames;       
+    public ControladorPanelExames(PanelExames panelExames, ControladorPanelMateriais controladorPanelMateriais) {
+        this.panelExames = panelExames;
+        this.controladorPanelMateriais = controladorPanelMateriais;
         addEventos();
     }
     
@@ -29,7 +31,7 @@ public class ControladorPanelExames implements ActionListener {
         if (e.getSource() == panelExames.getBTNNovo()) {   
            
             dialogCadastrarExames = new DialogCadastrarExames(ControladorFrame.frame);
-            controladorDialogCadastrarExame = new ControladorDialogCadastrarExame(this.dialogCadastrarExames);           
+            controladorDialogCadastrarExame = new ControladorDialogCadastrarExame(this.dialogCadastrarExames, this.controladorPanelMateriais);           
             atualizarTabela();
             
         }

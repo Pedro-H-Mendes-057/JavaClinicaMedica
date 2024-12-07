@@ -62,11 +62,11 @@ public class Frame extends JFrame {
         this.panelMedicos = new PanelMedicos();
         this.controladorPanelMedicos = new ControladorPanelMedicos(this.panelMedicos);
         this.panelAgendar = new PanelAgendar(this);
-        this.controladorPanelAgendar = new ControladorPanelAgendar(this.panelAgendar);
-        this.panelExames = new PanelExames();
-        this.controladorPanelExames = new ControladorPanelExames(this.panelExames);
+        this.controladorPanelAgendar = new ControladorPanelAgendar(this.panelAgendar);        
         this.panelMateriais = new PanelMateriais();
-        this.controladorPanelMateriais = new ControladorPanelMateriais(this.panelMateriais, ControladorFrame.repositorioMateriais); 
+        this.controladorPanelMateriais = new ControladorPanelMateriais(this.panelMateriais, ControladorFrame.repositorioMateriais);
+        this.panelExames = new PanelExames();
+        this.controladorPanelExames = new ControladorPanelExames(this.panelExames, this.controladorPanelMateriais);
         this.panelRelatorios = new PanelRelatorios(this);
         this.controladorPanelRelatorios = new ControladorPanelRelatorios(this.panelRelatorios);
         

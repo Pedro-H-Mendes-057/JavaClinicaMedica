@@ -30,7 +30,7 @@ public class ControladorDialogCadastrarExame implements ActionListener {
     //Construtor 1
     public ControladorDialogCadastrarExame(DialogCadastrarExames dialogCadastrarExames, ControladorPanelMateriais controlePanelMateriais) {
         this.controlePanelMateriais = controlePanelMateriais;
-        this.dialogCadastrarExames = dialogCadastrarExames;
+        
 
         addEventos();
         this.dialogCadastrarExames.setVisible(true);
@@ -60,8 +60,10 @@ public class ControladorDialogCadastrarExame implements ActionListener {
               //String materiaisUsar = this.dialogCadastrarExames.getCBMateriaisUsar().getSelectedItem().toString();
 
             	if (ValidosCamposVazios()) {
+                    System.out.println(controlePanelMateriais);
             		 if (controlePanelMateriais != null) {
                          controlePanelMateriais.atualizarTabela();
+                         System.out.println("teste");
                      }
                     addExame();
                     JOptionPane.showMessageDialog(this.dialogCadastrarExames,
