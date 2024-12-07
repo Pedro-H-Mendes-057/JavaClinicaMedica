@@ -18,12 +18,16 @@ public class ControladorDialogCadastrarMaterial implements ActionListener {
 
     public ControladorDialogCadastrarMaterial(DialogCadastrarMaterial dialogCadastrarMaterial) {
         this.dialogCadastrarMaterial = dialogCadastrarMaterial;
-
+        //this.material = materialAlterado;
         addEventos();
 
         this.dialogCadastrarMaterial.setVisible(true);
     }
+    
+    public ControladorDialogCadastrarMaterial(DialogCadastrarMaterial dialogCadastrarMaterial, Material materialAlterado) {
 
+    }
+    
     void addEventos() {
         this.dialogCadastrarMaterial.getButtonUpload().addActionListener(this);
         this.dialogCadastrarMaterial.getButtonSalvar().addActionListener(this);
@@ -32,6 +36,7 @@ public class ControladorDialogCadastrarMaterial implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == this.dialogCadastrarMaterial.getButtonUpload()) {
             uploadImage();
+            
         } else if (e.getSource() == this.dialogCadastrarMaterial.getButtonSalvar()) { 
         	if(camposValidos() == true) {
             addMaterial();
@@ -87,6 +92,20 @@ public class ControladorDialogCadastrarMaterial implements ActionListener {
         return true;
     }
 
+    						/////////////////////EDIÇÃO////////////////////////////////
+    private void configsEdit(Material material) {
+        this.dialogCadastrarMaterial.getTextFieldNome().setText(material.getNome());
+        this.dialogCadastrarMaterial.getTextFieldFornecedor().setText(material.getFornecedor());
+        this.dialogCadastrarMaterial.getTextFieldQtdEstoque().setText(String.valueOf(material.getQuant()));
+        this.dialogCadastrarMaterial.getTextFieldQtdMinima().setText(String.valueOf(material.getQuantMin()));
+        this.dialogCadastrarMaterial.getTextFieldPreco().setText(material.getPreco());
+
+        this.dialogCadastrarMaterial.getTextFieldNome().setEnabled(false);
+        this.dialogCadastrarMaterial.getTextFieldFornecedor().setEnabled(false);
+        this.dialogCadastrarMaterial.getTextFieldQtdMinima().setEnabled(false);
+    }
+    					/////////////////////////////////////////////////////
+    
     public void addMaterial() {
         this.material = new Material();
         this.material.setNome(this.dialogCadastrarMaterial.getTextFieldNome().getText());

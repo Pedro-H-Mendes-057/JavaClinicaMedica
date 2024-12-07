@@ -22,6 +22,7 @@ public class PanelMateriais extends TemplatePanel {
     public PanelMateriais() {
     	super();
     	getBTNNovo().setText("NOVO"); //Ignore, apenas teste
+    	getBTNEditar().setEnabled(false);
     }
 }//da Classe
 
