@@ -23,4 +23,14 @@ public class RepositorioMateriais {
     public ArrayList<Material> getMateriais() {       
         return this.repositorioMateriais;
     }
+    
+    public boolean buscarMaterial(String nomeMaterial) {
+        for (int i = 0; i < getMateriais().size(); i++) {
+            if (getMateriais().get(i).getNome().equalsIgnoreCase(nomeMaterial)) {
+                return true; 
+            }
+        }
+        
+        return false;
+    }
 }

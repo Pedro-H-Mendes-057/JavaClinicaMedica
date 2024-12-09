@@ -76,6 +76,11 @@ public class ControladorDialogCadastrarMaterial implements ActionListener {
             JOptionPane.showMessageDialog(dialogCadastrarMaterial, "Preencha todos os campos!");
             return false;
         }
+        
+        if (ControladorFrame.repositorioMateriais.buscarMaterial(nome)) {
+            JOptionPane.showMessageDialog(dialogCadastrarMaterial, "Esse material já está cadastrado!");
+            return false;
+        }
 
         try {
             int quant = Integer.parseInt(quantString);
@@ -116,5 +121,6 @@ public class ControladorDialogCadastrarMaterial implements ActionListener {
         this.material.setPreco(this.dialogCadastrarMaterial.getTextFieldPreco().getText());
        
         ControladorFrame.repositorioMateriais.addMaterial(this.material);
-    }
+    }    
+    
 }
