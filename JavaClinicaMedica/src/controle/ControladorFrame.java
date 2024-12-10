@@ -10,6 +10,7 @@ import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
+import exportacoes.exportarDados;
 import visual.Frame;
 import visual.PanelMateriais;
 
@@ -94,6 +95,6 @@ public class ControladorFrame {
 
     public static void main(String[] args) {
         new ControladorFrame();
-       
+        exportarDados.exportarPacientes();
     }
 }
