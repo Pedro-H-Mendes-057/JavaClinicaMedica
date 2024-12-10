@@ -1,5 +1,8 @@
 package modelo;
 
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 public class Paciente {
 	private String nome;
 	private String dataNasc;
@@ -100,6 +103,5 @@ public class Paciente {
 	public void setEndereco(Endereco endereco) {
 		this.endereco = endereco;
 	}
-	
 	
 }
