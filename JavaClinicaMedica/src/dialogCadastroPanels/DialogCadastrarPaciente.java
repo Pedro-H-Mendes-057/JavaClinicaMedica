@@ -26,7 +26,7 @@ public class DialogCadastrarPaciente extends JDialog {
     private JTextField txFTipoSang;
     private JComboBox<String> cbTipoSang;
     private JTextField txFPeso;
-    private JTextField txFHistMedic;
+    private JTextArea txFHistMedic;
     private JTextField txFConvenio;
     private JComboBox<String> cbConvenio;
     private JTextField txFNumero;
@@ -134,7 +134,7 @@ public class DialogCadastrarPaciente extends JDialog {
         lblHistMedic.setBounds(634, 330, 710, 29);
         getContentPane().add(lblHistMedic);
         
-        txFHistMedic = new JTextField();
+        txFHistMedic = new JTextArea();
         txFHistMedic.setColumns(10);
         txFHistMedic.setBounds(634, 369, 598, 159);
         getContentPane().add(txFHistMedic);
@@ -244,23 +244,41 @@ public class DialogCadastrarPaciente extends JDialog {
     }
    
     public String getNomePaciente() {
-        return txFNomePaciente.getText(); }
+        return txFNomePaciente.getText(); 
+    }
+    
     public String getDataNascimento() {
-        return txFDataNasc.getText(); }
+        return txFDataNasc.getText(); 
+    }
+    
     public String getContato() {
-        return txFContato.getText(); }
-    public int getAltura() {
-        return parseInt(txFAltura.getText(), 0); }
+        return txFContato.getText(); 
+    }
+    
+    public double getAltura() {
+        return parseDouble(txFAltura.getText(), 0.0); 
+    }
+    
     public String getTipoSang() {
-        return (String) cbTipoSang.getSelectedItem(); }
+        return (String) cbTipoSang.getSelectedItem(); 
+    }
+    
     public double getPeso() {
-        return parseDouble(txFPeso.getText(), 0.0); }
+        return parseDouble(txFPeso.getText(), 0.0); 
+    }
+    
     public String getHistoricoMedico() {
-        return txFHistMedic.getText(); }
+        return txFHistMedic.getText(); 
+    }
+    
     public String getConvenio() {
-        return (String) cbConvenio.getSelectedItem(); }
+        return (String) cbConvenio.getSelectedItem(); 
+    }
+    
     public JButton getBtSalvar() {
-        return btSalvar; }
+        return btSalvar; 
+    }
+    
     public JButton getBtCancelar() {
         return btCancelar;
     }
@@ -275,50 +293,67 @@ public class DialogCadastrarPaciente extends JDialog {
         catch (NumberFormatException e) { return defaultValue; }
     }
 
-	public JTextField getTxFNomePaciente() {
-		return txFNomePaciente;}
+    public JTextField getTxFNomePaciente() {
+            return txFNomePaciente;
+    }
 
-	public JTextField getTxFDataNasc() {
-		return txFDataNasc;}
+    public JTextField getTxFDataNasc() {
+            return txFDataNasc;
+    }
 
-	public JTextField getTxFContato() {
-		return txFContato;}
+    public JTextField getTxFContato() {
+            return txFContato;
+    }
 
-	public JTextField getTxFAltura() {
-		return txFAltura;}
+    public JTextField getTxFAltura() {
+            return txFAltura;
+    }
 
-	public JComboBox<String> getCbTipoSang() {
-		return cbTipoSang;}
+    public JComboBox<String> getCbTipoSang() {
+            return cbTipoSang;
+    }
 
-	public JTextField getTxFPeso() {
-		return txFPeso;}
+    public JTextField getTxFPeso() {
+            return txFPeso;
+    }
 
-	public JTextField getTxFHistMedic() {
-		return txFHistMedic;}
+    public JTextArea getTxFHistMedic() {
+            return txFHistMedic;
+    }
 
-	public JTextField getTxFConvenio() {
-		return txFConvenio;}
+    public JTextField getTxFConvenio() {
+            return txFConvenio;
+    }
 
-	public JComboBox<String> getCbConvenio() {
-		return cbConvenio;}
+    public JComboBox<String> getCbConvenio() {
+            return cbConvenio;
+    }
 
-	public JTextField getTxFNumero() {
-		return txFNumero;}
+    public JTextField getTxFNumero() {
+            return txFNumero;
+    }
 
-	public JTextField getTxFRua() {
-		return txFRua;}
+    public JTextField getTxFRua() {
+            return txFRua;
+    }
 
-	public JTextField getTxFBairro() {
-		return txFBairro;}
+    public JTextField getTxFBairro() {
+            return txFBairro;
+    }
 
-	public JTextField getTxFCidade() {
-		return txFCidade;}
+    public JTextField getTxFCidade() {
+            return txFCidade;
+    }
 
-	public JTextField getTxFCEP() {
-		return txFCEP;}
+    public JTextField getTxFCEP() {
+            return txFCEP;
+    }
 
-	public JComboBox getCBEstado() {
-		return cbEstado;}
+    public JComboBox getCBEstado() {
+            return cbEstado;
+    }
 
-	
+    public String getEstado() {
+         return (String) cbEstado.getSelectedItem(); 
+     }
 }

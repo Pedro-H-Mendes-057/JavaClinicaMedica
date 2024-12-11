@@ -9,18 +9,18 @@ import modelo.Paciente;
 import controle.ControladorPanelPacientes;
 import dialogCadastroPanels.DialogCadastrarPaciente;
 import exportacoes.ExportarDados;
+import modelo.Endereco;
 import repositorio.RepositorioPacientes;
 
 public class ControladorDialogCadastrarPaciente implements ActionListener {
     private DialogCadastrarPaciente dialogCadastrarPaciente;
     private Paciente paciente;
+    private Endereco endereco;
 
     // Construtor que recebe o DialogCadastroPaciente
     public ControladorDialogCadastrarPaciente(DialogCadastrarPaciente dialogCadastrarPaciente) {
-        this.dialogCadastrarPaciente = dialogCadastrarPaciente;
-        
-        addEventos();
-        
+        this.dialogCadastrarPaciente = dialogCadastrarPaciente;        
+        addEventos();        
         this.dialogCadastrarPaciente.setVisible(true);
     }
 
@@ -32,8 +32,8 @@ public class ControladorDialogCadastrarPaciente implements ActionListener {
     public void actionPerformed(ActionEvent e) {
     	if(e.getSource() == this.dialogCadastrarPaciente.getBtCancelar()){
     		this.dialogCadastrarPaciente.dispose();
-    		};
-       if (e.getSource() == this.dialogCadastrarPaciente.getBtSalvar()) {
+    	}
+        if (e.getSource() == this.dialogCadastrarPaciente.getBtSalvar()) {
     	    try { 
     	    	if (verifCamposVazios() == false) {
     	    		return;
@@ -42,7 +42,7 @@ public class ControladorDialogCadastrarPaciente implements ActionListener {
     	        String dataNasc = this.dialogCadastrarPaciente.getTxFDataNasc().getText();
     	        String contato = this.dialogCadastrarPaciente.getTxFContato().getText();
     	        String tipoSang = dialogCadastrarPaciente.getCbTipoSang().getSelectedItem().toString();
-    	        int altura = Integer.parseInt(this.dialogCadastrarPaciente.getTxFAltura().getText());
+    	        double altura = Double.parseDouble(this.dialogCadastrarPaciente.getTxFAltura().getText());
     	        double peso = Double.parseDouble(this.dialogCadastrarPaciente.getTxFPeso().getText());
     	        String convenio = this.dialogCadastrarPaciente.getCbConvenio().getSelectedItem().toString();
     	        String estado = this.dialogCadastrarPaciente.getCBEstado().getSelectedItem().toString();
@@ -52,10 +52,10 @@ public class ControladorDialogCadastrarPaciente implements ActionListener {
     	        /*if(verifCampoVazio(nome, dataNasc, contato, tipoSang, altura, peso, convenio)) {
     	        	throw new IllegalArgumentException ("Preencha todos os campos!");
     	        } else */
-    	        if (nome.isEmpty() || dataNasc.isEmpty() || contato.isEmpty() || tipoSang.isEmpty() || convenio.isEmpty()) {
+    	        /*if (nome.isEmpty() || dataNasc.isEmpty() || contato.isEmpty() || tipoSang.isEmpty() || convenio.isEmpty()) {
                     throw new IllegalArgumentException("Preencha todos os campos!");
-                }
-    	        else if (altura <= 0) {
+                } */
+    	        if (altura <= 0) {
     	        	throw new IllegalArgumentException("Altura inválida!");
     	        } else if (peso <= 0) {
     	        	throw new IllegalArgumentException("Peso inválido!");
@@ -64,13 +64,12 @@ public class ControladorDialogCadastrarPaciente implements ActionListener {
     	       		"Paciente salvo com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
     	        	addPaciente();
     	        	this.dialogCadastrarPaciente.dispose();
-    	        }//do else
+    	        }
     	    } catch (IllegalArgumentException ex) {
                 JOptionPane.showMessageDialog(this.dialogCadastrarPaciente, 
-                    ex.getMessage(), "Preenchimento inválido!", JOptionPane.ERROR_MESSAGE);
-              //this.dialogCadastrarPaciente.dispose();
+                    ex.getMessage(), "Preenchimento inválido!", JOptionPane.ERROR_MESSAGE);             
             }
-        }//DO SALVAR
+        }
     }
     
     private boolean verifCamposVazios() {
@@ -79,9 +78,14 @@ public class ControladorDialogCadastrarPaciente implements ActionListener {
             dialogCadastrarPaciente.getTxFContato().getText().isBlank() ||
             dialogCadastrarPaciente.getTxFAltura().getText().isBlank() ||
             dialogCadastrarPaciente.getTxFPeso().getText().isBlank() ||
-            dialogCadastrarPaciente.getCbConvenio().getSelectedItem().toString().isBlank()) {
+            dialogCadastrarPaciente.getCbConvenio().getSelectedItem().toString().isBlank() ||
+            dialogCadastrarPaciente.getTxFNumero().getText().isBlank() ||
+            dialogCadastrarPaciente.getTxFRua().getText().isBlank() ||
+            dialogCadastrarPaciente.getTxFBairro().getText().isBlank() ||
+            dialogCadastrarPaciente.getTxFCidade().getText().isBlank() ||
+            dialogCadastrarPaciente.getCBEstado().getSelectedItem().toString().isBlank()) {
             JOptionPane.showMessageDialog(dialogCadastrarPaciente, 
-                                          "Preencha todos os campos obrigatórios!", "Erro", 
+                                          "Preencha todos os campos!", "Erro", 
                                           JOptionPane.ERROR_MESSAGE);
             return false;
         }
@@ -118,9 +122,18 @@ public class ControladorDialogCadastrarPaciente implements ActionListener {
         this.paciente.setTipoSang(this.dialogCadastrarPaciente.getTipoSang());
         this.paciente.setPeso(this.dialogCadastrarPaciente.getPeso());
         this.paciente.setConvenio(this.dialogCadastrarPaciente.getConvenio());
+        
+        this.endereco = new Endereco();
+        this.endereco.setRua(this.dialogCadastrarPaciente.getTxFRua().toString());
+	this.endereco.setNumero(this.dialogCadastrarPaciente.getTxFNumero().toString());      
+        this.endereco.setBairro(this.dialogCadastrarPaciente.getTxFBairro().toString());
+        this.endereco.setCep(this.dialogCadastrarPaciente.getTxFCEP().toString());
+        this.endereco.setCidade(this.dialogCadastrarPaciente.getTxFCidade().toString());
+        this.endereco.setEstado(this.dialogCadastrarPaciente.getEstado());
 
+        this.paciente.setEndereco(this.endereco);
         ControladorFrame.repositorioPacientes.addPaciente(this.paciente);
         ExportarDados.anexarPaciente(this.paciente);
-        System.out.print("teste");
+        //System.out.print("teste");
     }
 }

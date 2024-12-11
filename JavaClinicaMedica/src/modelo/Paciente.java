@@ -8,7 +8,7 @@ public class Paciente {
 	private String dataNasc;
 	private String contato;
 	private String tipoSang;
-	private int altura;
+	private double altura;
 	private double peso;
 	private HistMed histMed;
 	private String convenio;
@@ -64,11 +64,11 @@ public class Paciente {
 		this.tipoSang = string;
 	}
 
-	public int getAltura() {
+	public double getAltura() {
 		return altura;
 	}
 
-	public void setAltura(int altura) {
+	public void setAltura(double altura) {
 		this.altura = altura;
 	}
 

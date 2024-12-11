@@ -37,9 +37,8 @@ public class ExportarDados {
                                 paciente.getTipoSang() + ";" +
                                 paciente.getAltura() + ";" +
                                 paciente.getPeso() + ";" +
-                                endereco.getLogradouro() + ";" +
-                                endereco.getNumero() + ";" +
-                                endereco.getComplemento() + ";" +
+                                endereco.getRua() + ";" +
+                                endereco.getNumero() + ";" +                               
                                 endereco.getBairro() + ";" +
                                 endereco.getCep() + ";" +
                                 endereco.getCidade() + ";" +
@@ -60,13 +59,20 @@ public class ExportarDados {
         try {
             File arquivo = new File("src" + File.separator + "exportacoes" + File.separator, "Pacientes.txt");          
             fW = new FileWriter(arquivo, true); // para anexar paciente
-            System.out.println(arquivo.getAbsolutePath());
-            String salvar = paciente.getNome() + ";" +
-                            paciente.getDataNasc() + ";" +
-                            paciente.getContato() + ";" +
-                            paciente.getTipoSang() + ";" +
-                            paciente.getAltura() + ";" +
-                            paciente.getPeso() + ";";
+            Endereco endereco = paciente.getEndereco();
+            //System.out.println(arquivo.getAbsolutePath());
+            String salvar = paciente.getNome() + ";;" +
+                            paciente.getDataNasc() + ";;" +
+                            paciente.getContato() + ";;" +
+                            paciente.getTipoSang() + ";;" +
+                            paciente.getAltura() + ";;" +
+                            paciente.getPeso() + ";;" +
+                            endereco.getRua() + ";;" +
+                            endereco.getNumero() + ";;" +                            
+                            endereco.getBairro() + ";;" +
+                            endereco.getCep() + ";;" +
+                            endereco.getCidade() + ";;" +
+                            endereco.getEstado() + "\n";
             fW.write(salvar, 0, salvar.length());
             //System.out.println(salvar);
         } catch (IOException ex) {

@@ -1,32 +1,34 @@
 package modelo;
 
 public class Endereco {
-	private String logradouro;
-	private String numero;
-	private String complemento;
+	private String rua;
+	private String numero;	
 	private String bairro;
 	private String cep;
 	private String cidade;
 	private String estado;
+        
+        public Endereco() {
+        
+        }
 	
-	public Endereco(String logradouro, String numero, String complemento, String bairro, String cep, String cidade,
+	public Endereco(String logradouro, String numero, String bairro, String cep, String cidade,
 			String estado) {
 		super();
-		this.logradouro = logradouro;
-		this.numero = numero;
-		this.complemento = complemento;
+		this.rua = logradouro;
+		this.numero = numero;		
 		this.bairro = bairro;
 		this.cep = cep;
 		this.cidade = cidade;
 		this.estado = estado;
 	}
 
-	public String getLogradouro() {
-		return logradouro;
+	public String getRua() {
+		return rua;
 	}
 
-	public void setLogradouro(String logradouro) {
-		this.logradouro = logradouro;
+	public void setRua(String rua) {
+		this.rua = rua;
 	}
 
 	public String getNumero() {
@@ -35,15 +37,7 @@ public class Endereco {
 
 	public void setNumero(String numero) {
 		this.numero = numero;
-	}
-
-	public String getComplemento() {
-		return complemento;
-	}
-
-	public void setComplemento(String complemento) {
-		this.complemento = complemento;
-	}
+	}	
 
 	public String getBairro() {
 		return bairro;
