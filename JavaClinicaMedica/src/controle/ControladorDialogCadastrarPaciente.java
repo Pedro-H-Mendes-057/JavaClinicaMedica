@@ -46,15 +46,25 @@ public class ControladorDialogCadastrarPaciente implements ActionListener {
     	        double peso = Double.parseDouble(this.dialogCadastrarPaciente.getTxFPeso().getText());
     	        String convenio = this.dialogCadastrarPaciente.getCbConvenio().getSelectedItem().toString();
     	        String estado = this.dialogCadastrarPaciente.getCBEstado().getSelectedItem().toString();
+    	        String rua = dialogCadastrarPaciente.getTxFRua().getText();
+                String bairro = dialogCadastrarPaciente.getTxFBairro().getText();
+                String cidade = dialogCadastrarPaciente.getTxFCidade().getText();
+                String cep = dialogCadastrarPaciente.getTxFCEP().getText();
+                String numero = dialogCadastrarPaciente.getTxFNumero().getText(); 
+
+                Endereco endereco = new Endereco();
+                endereco.setRua(rua);
+                endereco.setBairro(bairro);
+                endereco.setCidade(cidade);
+                endereco.setCep(cep);
+                endereco.setEstado(estado);
+                endereco.setNumero(numero);
+
+                if (nome.matches(".*\\d.*") || estado.matches(".*\\d.*") || rua.matches(".*\\d.*") ||
+                							bairro.matches(".*\\d.*") || cidade.matches(".*\\d.*")) {
+                    throw new IllegalArgumentException("Preenchimento inválido!");
+                }
     	        
-    	        //por algum motivo, não exibe a mensagem "preencha todos os campos", por isso o 1º if está comentado
-    	        
-    	        /*if(verifCampoVazio(nome, dataNasc, contato, tipoSang, altura, peso, convenio)) {
-    	        	throw new IllegalArgumentException ("Preencha todos os campos!");
-    	        } else */
-    	        /*if (nome.isEmpty() || dataNasc.isEmpty() || contato.isEmpty() || tipoSang.isEmpty() || convenio.isEmpty()) {
-                    throw new IllegalArgumentException("Preencha todos os campos!");
-                } */
     	        if (altura <= 0) {
     	        	throw new IllegalArgumentException("Altura inválida!");
     	        } else if (peso <= 0) {
