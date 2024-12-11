@@ -8,6 +8,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import modelo.Material;
 import controle.ControladorPanelMateriais;
 import dialogCadastroPanels.DialogCadastrarMaterial;
+import exportacoes.ExportarDados;
 
 public class ControladorDialogCadastrarMaterial implements ActionListener {
     DialogCadastrarMaterial dialogCadastrarMaterial;
@@ -117,6 +118,7 @@ public class ControladorDialogCadastrarMaterial implements ActionListener {
         this.material.setPreco(this.dialogCadastrarMaterial.getTextFieldPreco().getText());
        
         ControladorFrame.repositorioMateriais.addMaterial(this.material);
+        ExportarDados.anexarMaterial(this.material);
     }    
     
 }
