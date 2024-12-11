@@ -161,7 +161,7 @@ public class DialogCadastrarPaciente extends JDialog {
         txFNumero.setColumns(10);
         
         //RUA
-         JLabel lblRua = new JLabel("Rua:");
+        JLabel lblRua = new JLabel("Rua:");
         lblRua.setFont(new Font("Tahoma", Font.PLAIN, 15));
         lblRua.setBounds(717, 133, 152, 29);
         getContentPane().add(lblRua);
