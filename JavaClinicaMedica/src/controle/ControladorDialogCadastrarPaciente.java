@@ -124,11 +124,11 @@ public class ControladorDialogCadastrarPaciente implements ActionListener {
         this.paciente.setConvenio(this.dialogCadastrarPaciente.getConvenio());
         
         this.endereco = new Endereco();
-        this.endereco.setRua(this.dialogCadastrarPaciente.getTxFRua().toString());
-	this.endereco.setNumero(this.dialogCadastrarPaciente.getTxFNumero().toString());      
-        this.endereco.setBairro(this.dialogCadastrarPaciente.getTxFBairro().toString());
-        this.endereco.setCep(this.dialogCadastrarPaciente.getTxFCEP().toString());
-        this.endereco.setCidade(this.dialogCadastrarPaciente.getTxFCidade().toString());
+        this.endereco.setRua(this.dialogCadastrarPaciente.getTxFRua().getText());
+	this.endereco.setNumero(this.dialogCadastrarPaciente.getTxFNumero().getText());      
+        this.endereco.setBairro(this.dialogCadastrarPaciente.getTxFBairro().getText());
+        this.endereco.setCep(this.dialogCadastrarPaciente.getTxFCEP().getText());
+        this.endereco.setCidade(this.dialogCadastrarPaciente.getTxFCidade().getText());
         this.endereco.setEstado(this.dialogCadastrarPaciente.getEstado());
 
         this.paciente.setEndereco(this.endereco);
