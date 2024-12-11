@@ -20,7 +20,7 @@ public class ControladorPanelPacientes implements ActionListener {
         try {
             ExportarDados.recuperarPacientes();
         } catch (IOException ex) {
-           System.out.println("Falha na recuperação do arquivo Pacientes.txt");
+           System.out.println("Falha na criação do arquivo Pacientes.txt");
         }
         atualizarTabela();
         addEventos();

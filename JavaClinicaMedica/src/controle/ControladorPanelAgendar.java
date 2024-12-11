@@ -33,7 +33,8 @@ public class ControladorPanelAgendar implements ActionListener {
     private int chaveMedico;
     
     public ControladorPanelAgendar(PanelAgendar panelAgendar) {
-        this.panelAgendar = panelAgendar;        
+        this.panelAgendar = panelAgendar;
+        this.panelAgendar.getBTNNovaConsulta().setEnabled(false);
         addEventos();
     }
     
@@ -58,6 +59,7 @@ public class ControladorPanelAgendar implements ActionListener {
             chaveMedico = controladorDialogBuscarMedico.getChaveMedico();            
             if (chaveMedico != -1) {
                 atualizarAgenda(chaveMedico);
+                this.panelAgendar.getBTNNovaConsulta().setEnabled(true);
             }            
         } else if (e.getSource() == this.panelAgendar.getBTNVoltar()) {
             this.panelAgendar.mudarSemana(-1);

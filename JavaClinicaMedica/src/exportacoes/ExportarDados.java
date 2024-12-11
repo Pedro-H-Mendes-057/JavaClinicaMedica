@@ -130,7 +130,7 @@ public class ExportarDados {
                 }
             }
         } catch (FileNotFoundException ex) {
-            System.out.println("Arquivo Pacientes.txt não encontrado. Criando arquivo...");
+            System.out.println("Arquivo Pacientes.txt não encontrado.\nCriando arquivo...");
             File arquivo = new File("src" + File.separator + "exportacoes" + File.separator, "Pacientes.txt");          
             arquivo.createNewFile();
         } catch (IOException ex) {

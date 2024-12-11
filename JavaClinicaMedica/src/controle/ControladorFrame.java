@@ -94,7 +94,6 @@ public class ControladorFrame {
     }
 
     public static void main(String[] args) {
-        new ControladorFrame();
-        ExportarDados.exportarPacientes();
+        new ControladorFrame();        
     }
 }
