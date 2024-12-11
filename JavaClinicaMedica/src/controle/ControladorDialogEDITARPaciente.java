@@ -73,7 +73,7 @@ public class ControladorDialogEDITARPaciente implements ActionListener {
     	        } else {
     	        	JOptionPane.showMessageDialog(this.dialogEditarPaciente, 
     	       		"Paciente atualizado com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
-    	        	addPaciente();
+    	        	atualizarPaciente();
     	        	this.dialogEditarPaciente.dispose();
     	        }
     	    } catch (IllegalArgumentException ex) {
@@ -123,28 +123,22 @@ public class ControladorDialogEDITARPaciente implements ActionListener {
         return true;
     } 
     
-    
-    public void addPaciente() {
-        this.paciente = new Paciente();
-        this.paciente.setNome(this.dialogEditarPaciente.getNomePaciente());
-        this.paciente.setDataNasc(this.dialogEditarPaciente.getDataNascimento());
-        this.paciente.setContato(this.dialogEditarPaciente.getContato());
-        this.paciente.setAltura(this.dialogEditarPaciente.getAltura());
-        this.paciente.setTipoSang(this.dialogEditarPaciente.getTipoSang());
-        this.paciente.setPeso(this.dialogEditarPaciente.getPeso());
-        this.paciente.setConvenio(this.dialogEditarPaciente.getConvenio());
-        
-        this.endereco = new Endereco();
-        this.endereco.setRua(this.dialogEditarPaciente.getTxFRua().getText());
-	this.endereco.setNumero(this.dialogEditarPaciente.getTxFNumero().getText());      
-        this.endereco.setBairro(this.dialogEditarPaciente.getTxFBairro().getText());
-        this.endereco.setCep(this.dialogEditarPaciente.getTxFCEP().getText());
-        this.endereco.setCidade(this.dialogEditarPaciente.getTxFCidade().getText());
-        this.endereco.setEstado(this.dialogEditarPaciente.getEstado());
+    private void atualizarPaciente() {
+    	 this.paciente.setAltura(Double.parseDouble(this.dialogEditarPaciente.getTxFAltura().getText()));
+    	    this.paciente.setPeso(Double.parseDouble(this.dialogEditarPaciente.getTxFPeso().getText()));
+    	    this.paciente.setConvenio(this.dialogEditarPaciente.getCbConvenio().getSelectedItem().toString());
+    	    
+    	    Endereco enderecoAtualizado = new Endereco();
+    	    enderecoAtualizado.setRua(this.dialogEditarPaciente.getTxFRua().getText());
+    	    enderecoAtualizado.setNumero(this.dialogEditarPaciente.getTxFNumero().getText());
+    	    enderecoAtualizado.setBairro(this.dialogEditarPaciente.getTxFBairro().getText());
+    	    enderecoAtualizado.setCidade(this.dialogEditarPaciente.getTxFCidade().getText());
+    	    enderecoAtualizado.setCep(this.dialogEditarPaciente.getTxFCEP().getText());
+    	    enderecoAtualizado.setEstado(this.dialogEditarPaciente.getCBEstado().getSelectedItem().toString());
+    	    
+    	    this.paciente.setEndereco(enderecoAtualizado);
 
-        this.paciente.setEndereco(this.endereco);
-        ControladorFrame.repositorioPacientes.addPaciente(this.paciente);
-        ExportarDados.anexarPaciente(this.paciente);
-        //System.out.print("teste");
-    }
+    	    ControladorFrame.repositorioPacientes.atualizarPaciente(this.paciente);
+   }
+   
 }
