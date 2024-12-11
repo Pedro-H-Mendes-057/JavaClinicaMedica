@@ -34,6 +34,7 @@ public class ControladorDialogCadastrarMaterial implements ActionListener {
     void addEventos() {
         this.dialogCadastrarMaterial.getButtonUpload().addActionListener(this);
         this.dialogCadastrarMaterial.getButtonSalvar().addActionListener(this);
+        this.dialogCadastrarMaterial.getButtonCancelar().addActionListener(this);
     }
 
     public void actionPerformed(ActionEvent e) {
@@ -52,7 +53,9 @@ public class ControladorDialogCadastrarMaterial implements ActionListener {
                 }
                 this.dialogCadastrarMaterial.dispose();                
             }
-        }
+        }//do salvar
+        else if (e.getSource()== this.dialogCadastrarMaterial.getButtonCancelar()) {
+        	this.dialogCadastrarMaterial.dispose();    }
     }  
 
     public void uploadImage() {

@@ -25,6 +25,7 @@ public class ControladorDialogEDITARMaterial implements ActionListener {
     void addEventos() {
         this.dialogEditarMaterial.getButtonUpload().addActionListener(this);
         this.dialogEditarMaterial.getButtonSalvar().addActionListener(this);
+        this.dialogEditarMaterial.getButtonCancelar().addActionListener(this);
     }
 
     public void actionPerformed(ActionEvent e) {
@@ -33,7 +34,6 @@ public class ControladorDialogEDITARMaterial implements ActionListener {
             
         } else if (e.getSource() == this.dialogEditarMaterial.getButtonSalvar()) { 
         	if(camposValidos() == true) {
-        		
                     atualizarMaterial();
                     JOptionPane.showMessageDialog(this.dialogEditarMaterial, "Material atualizado com sucesso!");
                     this.dialogEditarMaterial.dispose();   

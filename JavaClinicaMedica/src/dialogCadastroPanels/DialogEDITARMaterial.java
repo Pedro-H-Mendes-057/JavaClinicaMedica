@@ -24,6 +24,7 @@ public class DialogEDITARMaterial extends JDialog {
     JButton buttonSalvar;
     JButton buttonCancelar;
     JButton buttonUpload;
+    
     private Material materialAlterado;
     
     public DialogEDITARMaterial(JFrame parent, Material materialAlterado) {
@@ -31,7 +32,8 @@ public class DialogEDITARMaterial extends JDialog {
         this.setSize(1300, 650);
         this.setResizable(false);
         this.setLocationRelativeTo(parent);         
-        this.setLayout(null); 
+        this.setLayout(null);
+        
         this.add(getLabelNome()); 
         this.add(getTextFieldNome());
         this.add(getLabelQtdEstoque()); 

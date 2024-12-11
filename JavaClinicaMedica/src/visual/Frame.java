@@ -58,7 +58,7 @@ public class Frame extends JFrame {
         //										inicialização dos respectivos paineis e controladores
         //OBS.: FALTA CRIAR OS CONTROLADORES DE MUITOS PAINEIS
         this.panelPacientes = new PanelPacientes();
-        this.controladorPanelPacientes = new ControladorPanelPacientes(this.panelPacientes);
+        this.controladorPanelPacientes = new ControladorPanelPacientes(this.panelPacientes, ControladorFrame.repositorioPacientes);
         this.panelMedicos = new PanelMedicos();
         this.controladorPanelMedicos = new ControladorPanelMedicos(this.panelMedicos);
         this.panelAgendar = new PanelAgendar(this);

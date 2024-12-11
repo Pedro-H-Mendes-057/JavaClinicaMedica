@@ -5,17 +5,27 @@ import java.awt.event.ActionListener;
 import javax.swing.table.DefaultTableModel;
 import visual.PanelPacientes;
 import dialogCadastroPanels.DialogCadastrarPaciente;
+import dialogCadastroPanels.DialogEDITARMaterial;
+import dialogCadastroPanels.DialogEDITARPaciente;
 import exportacoes.ExportarDados;
+import modelo.Material;
+import modelo.Paciente;
+
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import repositorio.RepositorioPacientes;
 
 public class ControladorPanelPacientes implements ActionListener {
     private PanelPacientes panelPacientes;
     private DialogCadastrarPaciente dialogCadastrarPaciente;
     private ControladorDialogCadastrarPaciente controladorDialogCadastrarPaciente;
+    RepositorioPacientes repositorioPacientes;
+    ControladorDialogEDITARPaciente controladorDialogEditarPaciente;
+    DialogEDITARPaciente dialogEditarPaciente;
     
-    public ControladorPanelPacientes(PanelPacientes panelPacientes) {
+    
+    public ControladorPanelPacientes(PanelPacientes panelPacientes, RepositorioPacientes repositorioPacientes) {
         this.panelPacientes = panelPacientes;
         try {
             ExportarDados.recuperarPacientes();
@@ -29,6 +39,7 @@ public class ControladorPanelPacientes implements ActionListener {
     private void addEventos() {
         panelPacientes.getBTNNovo().addActionListener(this);
         panelPacientes.getBTNExcluir().addActionListener(this);
+        panelPacientes.getBTNEditar().addActionListener(this);
     }
 
     @Override
@@ -47,7 +58,15 @@ public class ControladorPanelPacientes implements ActionListener {
             	ControladorFrame.repositorioPacientes.getPacientes().remove(this.panelPacientes.getTable().getSelectedRow());
             	atualizarTabela();
             }
-            
+        }//do Excluir
+        else if (e.getSource() == this.panelPacientes.getBTNEditar()) {
+        	int indexLinhaItem = this.panelPacientes.getTable().getSelectedRow();
+            if (indexLinhaItem != -1) {
+                Paciente pacienteSeleciona = ControladorFrame.repositorioPacientes.getPacientes().get(indexLinhaItem);
+                this.dialogEditarPaciente = new DialogEDITARPaciente(ControladorFrame.frame, pacienteSeleciona);
+                this.controladorDialogEditarPaciente = new ControladorDialogEDITARPaciente(this.dialogEditarPaciente, pacienteSeleciona);
+                atualizarTabela();
+            }
         }
     }
     
