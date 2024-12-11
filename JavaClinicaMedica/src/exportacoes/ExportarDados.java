@@ -139,77 +139,115 @@ public class ExportarDados {
     }
 
 ////////////MÉDICOS
-    public static void exportarMedicos() {
-        RepositorioMedicos repositorio = new RepositorioMedicos();
-
-        try {
-            FileWriter fw = new FileWriter("MedicosLOL.txt");
-            PrintWriter pw = new PrintWriter(fw);
-            for (int i = 0; i < repositorio.getMedicos().size(); i++) {
-                Medico medico = repositorio.getMedicos().get(i);
-                String salvar = medico.getNome() + ";" +
-                                medico.getEspecialidade() + ";" +
-                                medico.getCrm() + ";" +
-                                medico.getContato() + ";" +
-                                //Arrays.toString(medico.getHorasAtend()) + ";" + //AAAAAAAA COMO Q RESOLVE ISSSOOOOO
-                                medico.getValorConsulta();
-                pw.println(salvar);
-            }
-            pw.close();
-            fw.close();
-        } catch (IOException e) {
-            System.err.println("Erro ao salvar médicos");
-        }
-    }
-
+	public static void exportarMedicos() {
+	   RepositorioMedicos repositorio = new RepositorioMedicos();
+	
+	   try {
+	       FileWriter fw = new FileWriter("MedicosLOL.txt");
+	       PrintWriter pw = new PrintWriter(fw);
+	       for (int i = 0; i < repositorio.getMedicos().size(); i++) {
+	           Medico medico = repositorio.getMedicos().get(i);
+	           String salvar = medico.getNome() + ";" +
+	                           medico.getEspecialidade() + ";" +
+	                           medico.getCrm() + ";" +
+	                           medico.getContato() + ";" +
+	                           medico.getValorConsulta();
+	           pw.println(salvar);
+	       }
+	
+	       pw.close();
+	       fw.close();
+	   } catch (IOException e) {
+	       System.err.println("Erro ao salvar médicos");
+	   }
+	}
+	
+	public static void anexarMedico(Medico medico) {
+	   FileWriter fW = null;
+	   try {
+	       File arquivo = new File("src" + File.separator + "exportacoes" + File.separator, "Medicos.txt");
+	       fW = new FileWriter(arquivo, true);
+	       String salvar = medico.getNome() + ";;" +
+	                       medico.getEspecialidade() + ";;" +
+	                       medico.getCrm() + ";;" +
+	                       medico.getContato() + ";;" +
+	                       medico.getValorConsulta() + "\n";
+	       fW.write(salvar, 0, salvar.length());
+	   } catch (IOException ex) {
+	       Logger.getLogger(ExportarDados.class.getName()).log(Level.SEVERE, null, ex);
+	   } finally {
+	       try {
+	           fW.close();
+	       } catch (IOException ex) {
+	           Logger.getLogger(ExportarDados.class.getName()).log(Level.SEVERE, null, ex);
+	       }
+	   }
+	}
+	
 ////////////MATERIAIS
-    public static void exportarMateriais() {
-        RepositorioMateriais repositorio = new RepositorioMateriais();
-
-        try {
-            FileWriter fw = new FileWriter("MateriaisLOL.txt");
-            PrintWriter pw = new PrintWriter(fw);
-            for (int i = 0; i < repositorio.getMateriais().size(); i++) {
-                Material material = repositorio.getMateriais().get(i);
-                String salvar = material.getNome() + ";" +
-                                material.getQuant() + ";" +
-                                material.getQuantMin() + ";" +
-                                material.getFornecedor() + ";" +
-                                material.getPreco();
-                pw.println(salvar);
-            }
-            pw.close();
-            fw.close();
-        } catch (IOException e) {
-            System.err.println("Erro ao salvar materiais");
-        }
-    }
+	public static void exportarMateriais() {
+	   RepositorioMateriais repositorio = new RepositorioMateriais();
+	
+	   try {
+	       FileWriter fw = new FileWriter("Materiais.txt");
+	       PrintWriter pw = new PrintWriter(fw);
+	       for (int i = 0; i < repositorio.getMateriais().size(); i++) {
+	           Material material = repositorio.getMateriais().get(i);
+	           String salvar = material.getNome() + ";" +
+	                           material.getQuant() + ";" +
+	                           material.getQuantMin() + ";" +
+	                           material.getFornecedor() + ";" +
+	                           material.getPreco();
+	           pw.println(salvar);
+	       }
+	
+	       pw.close();
+	       fw.close();
+	   } catch (IOException e) {
+	       System.err.println("Erro ao salvar materiais");
+	   }
+	}
+	
+	public static void anexarMaterial(Material material) {
+	   FileWriter fW = null;
+	   try {
+	       File arquivo = new File("src" + File.separator + "exportacoes" + File.separator, "Materiais.txt");
+	       fW = new FileWriter(arquivo, true);
+	       String salvar = material.getNome() + ";;" +
+	                       material.getQuant() + ";;" +
+	                       material.getQuantMin() + ";;" +
+	                       material.getFornecedor() + ";;" +
+	                       material.getPreco() + "\n";
+	       fW.write(salvar, 0, salvar.length());
+	   } catch (IOException ex) {
+	       Logger.getLogger(ExportarDados.class.getName()).log(Level.SEVERE, null, ex);
+	   } finally {
+	       try {
+	           fW.close();
+	       } catch (IOException ex) {
+	           Logger.getLogger(ExportarDados.class.getName()).log(Level.SEVERE, null, ex);
+	       }
+	   }
+	}
 
 ////////////EXAMES
-    public static void exportarExames() {
-        RepositorioExames repositorio = new RepositorioExames();
-
-        try {
-            FileWriter fw = new FileWriter("ExamesLOL.txt");
-            PrintWriter pw = new PrintWriter(fw);
-            for (int i = 0; i < repositorio.getExames().size(); i++) {
-                Exame exame = repositorio.getExames().get(i);
-                String salvar = exame.getNomeExame() + ";" +
-                                exame.getDescricao() + ";" +
-                                exame.getTipo() + ";" +
-                                exame.getValorParticular() + ";" +
-                                exame.getMateriasUsar().toString() + ";" +
-                                exame.getMedico().getNome();
-                pw.println(salvar);
-            }
-            pw.close();
-            fw.close();
-        } catch (IOException e) {
-            System.err.println("Erro ao salvar exames");
-        }
-    }
+  /*
+   * 
+   * 
+   * 
+   * 
+   * 
+   * 
+   * 
+   * 
+   * 
+   * 
+   * 
+   * 
+   */
 
 ////////////CONSULTAS
+		
    /* public static void exportarConsultas() {
         RepositorioConsultas repositorio = new RepositorioConsultas();
 
