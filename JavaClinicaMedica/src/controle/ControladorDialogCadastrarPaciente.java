@@ -8,6 +8,7 @@ import javax.swing.JOptionPane;
 import modelo.Paciente;
 import controle.ControladorPanelPacientes;
 import dialogCadastroPanels.DialogCadastrarPaciente;
+import exportacoes.ExportarDados;
 import repositorio.RepositorioPacientes;
 
 public class ControladorDialogCadastrarPaciente implements ActionListener {
@@ -119,5 +120,7 @@ public class ControladorDialogCadastrarPaciente implements ActionListener {
         this.paciente.setConvenio(this.dialogCadastrarPaciente.getConvenio());
 
         ControladorFrame.repositorioPacientes.addPaciente(this.paciente);
+        ExportarDados.anexarPaciente(this.paciente);
+        System.out.print("teste");
     }
 }

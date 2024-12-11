@@ -1,5 +1,6 @@
 package exportacoes;
 
+import java.io.File;
 import repositorio.RepositorioPacientes;
 import repositorio.RepositorioConsultas;
 import repositorio.RepositorioExames;
@@ -15,8 +16,10 @@ import modelo.Consulta;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
-public class exportarDados {
+public class ExportarDados {
 
     //////////// PACIENTES
     public static void exportarPacientes() {
@@ -24,7 +27,7 @@ public class exportarDados {
 
         try {
     		FileWriter fw = new FileWriter("PacientesLOL.txt");
-            PrintWriter pw = new PrintWriter(fw);
+                PrintWriter pw = new PrintWriter(fw);
             for (int i = 0; i < repositorio.getPacientes().size(); i++) {
                 Paciente paciente = repositorio.getPacientes().get(i);
                 Endereco endereco = paciente.getEndereco();
@@ -50,6 +53,32 @@ public class exportarDados {
         } catch (IOException e) {
             System.err.println("Erro ao salvar paciente");
         }
+    }
+    
+    public static void anexarPaciente(Paciente paciente) {
+        FileWriter fW = null;
+        try {
+            File arquivo = new File("src" + File.separator + "exportacoes" + File.separator, "Pacientes.txt");          
+            fW = new FileWriter(arquivo, true); // para anexar paciente
+            System.out.println(arquivo.getAbsolutePath());
+            String salvar = paciente.getNome() + ";" +
+                            paciente.getDataNasc() + ";" +
+                            paciente.getContato() + ";" +
+                            paciente.getTipoSang() + ";" +
+                            paciente.getAltura() + ";" +
+                            paciente.getPeso() + ";";
+            fW.write(salvar, 0, salvar.length());
+            //System.out.println(salvar);
+        } catch (IOException ex) {
+            Logger.getLogger(ExportarDados.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                fW.close();
+            } catch (IOException ex) {
+                Logger.getLogger(ExportarDados.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        
     }
 
 ////////////MÉDICOS
@@ -124,7 +153,7 @@ public class exportarDados {
     }
 
 ////////////CONSULTAS
-    public static void exportarConsultas() {
+   /* public static void exportarConsultas() {
         RepositorioConsultas repositorio = new RepositorioConsultas();
 
         try {
@@ -148,7 +177,7 @@ public class exportarDados {
         } catch (IOException e) {
             System.err.println("Erro ao salvar consultas");
         }
-    }
+    } */
 
     
 }
