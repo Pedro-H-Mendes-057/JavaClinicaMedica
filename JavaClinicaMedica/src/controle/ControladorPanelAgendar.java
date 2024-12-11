@@ -12,7 +12,11 @@ import dialogCadastroPanels.DialogCadastrarConsulta;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Image;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.net.URL;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JTable;
@@ -31,10 +35,12 @@ public class ControladorPanelAgendar implements ActionListener {
     ControladorDialogBuscarMedico controladorDialogBuscarMedico;
     ControladorDialogCadastrarConsulta controladorDialogCadastrarConsulta;
     private int chaveMedico;
+    private String [][] simularTabela;
     
     public ControladorPanelAgendar(PanelAgendar panelAgendar) {
         this.panelAgendar = panelAgendar;
         this.panelAgendar.getBTNNovaConsulta().setEnabled(false);
+        this.simularTabela = new String[5][11];
         addEventos();
     }
     
@@ -44,12 +50,30 @@ public class ControladorPanelAgendar implements ActionListener {
         this.panelAgendar.getBTNBuscar().addActionListener(this);
         this.panelAgendar.getBTNVoltar().addActionListener(this);
         this.panelAgendar.getBTNAvancar().addActionListener(this);
+        this.panelAgendar.getTableSemana().addMouseListener(new MouseAdapter() {
+            @Override 
+            public void mouseClicked(MouseEvent e) {
+                int linha = panelAgendar.getTableSemana().rowAtPoint(e.getPoint());
+                int coluna = panelAgendar.getTableSemana().columnAtPoint(e.getPoint());
+                System.out.println("teste");
+                if (linha >= 0 && linha <= 11 && coluna >= 1 && coluna <= 5) {
+                    System.out.println("linha = " + linha + " coluna = " + coluna);
+                    String chaveConsulta = simularTabela[linha][coluna - 1];
+                    
+                    if (ControladorFrame.repositorioConsultas.procurarConsulta(chaveConsulta) == true) { 
+                         dialogCadastrarConsulta = new DialogCadastrarConsulta(ControladorFrame.frame);
+                        controladorDialogCadastrarConsulta = new ControladorDialogCadastrarConsulta(dialogCadastrarConsulta, chaveMedico, chaveConsulta);
+                    }                   
+                }
+            }
+        });
     }
     
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() ==  this.panelAgendar.getBTNNovaConsulta()) {            
             dialogCadastrarConsulta = new DialogCadastrarConsulta(ControladorFrame.frame);
             controladorDialogCadastrarConsulta = new ControladorDialogCadastrarConsulta(dialogCadastrarConsulta, chaveMedico);
+            atualizarAgenda(chaveMedico);
         } else if (e.getSource() == this.panelAgendar.getBTNNovoExame()) {
             
         } else if (e.getSource() ==  this.panelAgendar.getBTNBuscar()) {
@@ -73,15 +97,27 @@ public class ControladorPanelAgendar implements ActionListener {
     }
     
     // depois que o usuario escolhe um medico, o nome do medico sera atualizado aqui
-    void atualizarAgenda(int chaveMedico) {
+    void atualizarAgenda(int chaveMedico) {        
         if (chaveMedico >= 0) {
+            String[] options = { "08:00", "09:00", "10:00", "11:00", "13:00", "12:00", "14:00", "15:00", "16:00", "17:00", "18:00" };
+            LocalDate inicioSemana = this.panelAgendar.getInicioSemana();
+            
             Medico medico = ControladorFrame.repositorioMedicos.getMedicos().get(chaveMedico);
             this.panelAgendar.getTxFPesquisar().setText(medico.getNome());
             for (int col = 1; col < 6; col++) {
                 for (int row = 0; row < 11; row++) {
                     if (medico.getHorasAtend()[row][col - 1] == 1) {
-                        this.panelAgendar.getTableSemana().getModel().setValueAt("DISPONÍVEL", row, col);   
-                       
+                        LocalDate dia = inicioSemana.plusDays(col - 1);
+                        DateTimeFormatter formatador = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                        String dataFormatada = dia.format(formatador);
+                        String procurarChave = "M=" + chaveMedico + "#D=" + dataFormatada + "#H=" + options[row];
+                        //System.out.println(procurarChave);
+                        if (ControladorFrame.repositorioConsultas.procurarConsulta(procurarChave) == true) {
+                            this.panelAgendar.getTableSemana().getModel().setValueAt("RESERVADO", row, col);
+                            this.simularTabela[row][col -1] = procurarChave;
+                        } else {
+                            this.panelAgendar.getTableSemana().getModel().setValueAt("DISPONÍVEL", row, col);
+                        }                        
                     }
                 }
             }
@@ -126,7 +162,12 @@ public class ControladorPanelAgendar implements ActionListener {
                 super.setBackground(new Color(50, 205, 101));
                 super.setText("DISPONÍVEL");
                 super.setForeground(new Color(255, 255, 255));
-            } else {
+            } else if (texto.equals("RESERVADO")) {
+                super.setBackground(new Color(128, 128, 128));
+                super.setText("RESERVADO");
+                super.setForeground(new Color(255, 255, 255));
+            }
+            else {
                 super.setBackground(Color.WHITE);
                 super.setText("");
             }

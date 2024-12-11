@@ -33,6 +33,17 @@ public class ControladorDialogCadastrarConsulta implements ActionListener{
        this.dialogCadastrarConsulta.setVisible(true);
     }
     
+    public ControladorDialogCadastrarConsulta(DialogCadastrarConsulta dialogCadastrarConsulta, int chaveMedico, String chaveConsulta) {
+       this.dialogCadastrarConsulta = dialogCadastrarConsulta;
+       this.chaveMedico = chaveMedico;
+       this.medico = ControladorFrame.repositorioMedicos.getMedicos().get(chaveMedico);
+       this.dialogCadastrarConsulta.getTextFieldNomeMedico().setText(this.medico.getNome());
+       
+       addEventos();
+       
+       this.dialogCadastrarConsulta.setVisible(true);
+    }
+    
     void addEventos() {
         this.dialogCadastrarConsulta.getButtonSalvar().addActionListener(this);
     }
@@ -59,7 +70,7 @@ public class ControladorDialogCadastrarConsulta implements ActionListener{
             SimpleDateFormat formatador = new SimpleDateFormat("dd/MM/yyyy");
             String horario = (String) this.dialogCadastrarConsulta.getjComboBoxHorario().getSelectedItem();
             String chaveConsulta = "M=" + chaveMedico + "#D=" + formatador.format(dataSelecionada) + "#H=" + horario;
-            if (ControladorFrame.repositorioConsultas.getConsulta(chaveConsulta) == false) {
+            if (ControladorFrame.repositorioConsultas.procurarConsulta(chaveConsulta) == false) {
                 ControladorFrame.repositorioConsultas.addConsulta(chaveConsulta, chaveConsulta);
             } else {
                 JOptionPane.showMessageDialog(this.dialogCadastrarConsulta, erros[1]);

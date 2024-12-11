@@ -26,7 +26,8 @@ public class PanelAgendar extends JPanel { // Alterado para herdar de JPanel
     private JScrollPane scrollPane;
     private LocalDate dataAtual = LocalDate.now();
     private String[] horarios = { "08:00", "09:00", "10:00", "11:00", "12:00","13:00", "14:00", "15:00", "16:00", "17:00", "18:00" };
-
+    LocalDate inicioSemana;    
+    
     public PanelAgendar(Frame frame) {
         this.frame = frame;
         setLayout(new GridBagLayout());
@@ -70,6 +71,7 @@ public class PanelAgendar extends JPanel { // Alterado para herdar de JPanel
 
     private void atualizarTabelaSemana() {
         LocalDate inicioSemana = dataAtual.with(java.time.DayOfWeek.MONDAY);
+        this.inicioSemana = inicioSemana;
         String[] colunas = new String[8];
         colunas[0] = "HORÁRIOS";
         for (int i = 1; i < 8; i++) {
@@ -92,6 +94,11 @@ public class PanelAgendar extends JPanel { // Alterado para herdar de JPanel
     public void mudarSemana(int nav) {
         dataAtual = dataAtual.plusWeeks(nav); // Muda a semana de acordo com navegaçao (-1 ou +1)
         atualizarTabelaSemana();
+    }
+    
+    // este método será útil nas consultas 
+    public LocalDate getInicioSemana() {
+        return inicioSemana;
     }
     
     public JPanel getPanelPesquisar() {

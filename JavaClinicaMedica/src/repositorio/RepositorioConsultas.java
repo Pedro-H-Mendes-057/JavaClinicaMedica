@@ -27,13 +27,18 @@ public class RepositorioConsultas {
         return this.repositorioConsultas;
     }
     
-    public boolean getConsulta(String chave) {
+    public boolean procurarConsulta(String chave) {
         if (this.repositorioConsultas.get(chave) == null) {
             return false;
         } else {
             return true;
         }
     }
+    
+    public String getConsulta(String chave) {
+        return this.repositorioConsultas.get(chave);     
+    }
+    
     /*private ArrayList<Consulta> repositorioConsultas;
 
     // Construtor
