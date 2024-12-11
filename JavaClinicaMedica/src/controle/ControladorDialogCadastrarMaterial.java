@@ -9,10 +9,6 @@ import modelo.Material;
 import controle.ControladorPanelMateriais;
 import dialogCadastroPanels.DialogCadastrarMaterial;
 
-/**
- *
- * @author fonfon
- */
 public class ControladorDialogCadastrarMaterial implements ActionListener {
     DialogCadastrarMaterial dialogCadastrarMaterial;
     Material material;    
@@ -20,19 +16,19 @@ public class ControladorDialogCadastrarMaterial implements ActionListener {
     public ControladorDialogCadastrarMaterial(DialogCadastrarMaterial dialogCadastrarMaterial) {
         this.dialogCadastrarMaterial = dialogCadastrarMaterial;
         //this.material = materialAlterado;
-        this.dialogCadastrarMaterial.setModoEdicao(false, null);  //(boolean, material)
+        //this.dialogCadastrarMaterial.setModoEdicao(false, null);  //(boolean, material)
         addEventos();
 
         this.dialogCadastrarMaterial.setVisible(true);
     }
     
-    //Construtor 2 pra Edição
+    /*//Construtor 2 pra Edição
     public ControladorDialogCadastrarMaterial(DialogCadastrarMaterial dialogCadastrarMaterial, Material materialAlterado) {
     	this.dialogCadastrarMaterial.setModoEdicao(true, materialAlterado);
     	this.material = materialAlterado;
         addEventos();
         this.dialogCadastrarMaterial.setVisible(true);
-    }
+    }*/
     
     void addEventos() {
         this.dialogCadastrarMaterial.getButtonUpload().addActionListener(this);
