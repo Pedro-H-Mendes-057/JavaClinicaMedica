@@ -40,6 +40,12 @@ public class ControladorPanelPacientes implements ActionListener {
         panelPacientes.getBTNNovo().addActionListener(this);
         panelPacientes.getBTNExcluir().addActionListener(this);
         panelPacientes.getBTNEditar().addActionListener(this);
+        
+        this.panelPacientes.getBTNEditar().setEnabled(false);
+        this.panelPacientes.getTable().getSelectionModel().addListSelectionListener(event -> {
+            boolean itemSelecionado = this.panelPacientes.getTable().getSelectedRow() != -1;
+            this.panelPacientes.getBTNEditar().setEnabled(itemSelecionado);
+        });
     }
 
     @Override
