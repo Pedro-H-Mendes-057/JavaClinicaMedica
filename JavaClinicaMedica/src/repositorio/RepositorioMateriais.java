@@ -20,6 +20,18 @@ public class RepositorioMateriais {
         this.repositorioMateriais.add(material);
     }
     
+    public void atualizarMaterial(Material materialAtualizado) {
+        for (int i = 0; i < repositorioMateriais.size(); i++) {
+            Material materialExistente = repositorioMateriais.get(i);
+            if (materialExistente.getNome().equalsIgnoreCase(materialAtualizado.getNome())) {
+            	
+                materialExistente.setQuant(materialAtualizado.getQuant());
+                materialExistente.setPreco(materialAtualizado.getPreco());
+                return; //se encontrar material para de procurar
+            }
+        }
+    }
+    
     public ArrayList<Material> getMateriais() {       
         return this.repositorioMateriais;
     }

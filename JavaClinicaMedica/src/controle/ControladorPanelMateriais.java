@@ -10,21 +10,21 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import dialogCadastroPanels.DialogCadastrarMaterial;
+import dialogCadastroPanels.DialogEDITARMaterial;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
 import visual.PanelMateriais;
 import visual.TemplatePanel;
 import modelo.Material;
 import repositorio.RepositorioMateriais;
-/**
- *
- * @author fonfon
- */
+
 public class ControladorPanelMateriais implements ActionListener {
     PanelMateriais panelMateriais;
     DialogCadastrarMaterial  dialogCadastrarMaterial;
     ControladorDialogCadastrarMaterial controladorDialogCadastrarMaterial;
     RepositorioMateriais repositorioMateriais;
+    ControladorDialogEDITARMaterial controladorDialogEditarMaterial;
+    DialogEDITARMaterial dialogEditarMaterial;
     
 
     public ControladorPanelMateriais(PanelMateriais panelMateriais, RepositorioMateriais repositorioMateriais) {
@@ -60,16 +60,15 @@ public class ControladorPanelMateriais implements ActionListener {
             	atualizarTabela();
             }
         }//if
-        if (e.getSource()== this.panelMateriais.getBTNEditar()) {
-        	int indexLinhaItem = this.panelMateriais.getTable().getSelectedRow();
-        	if (indexLinhaItem != -1) {
-        		Material materialSeleciona = ControladorFrame.repositorioMateriais.getMateriais().get(indexLinhaItem);
-        		this.dialogCadastrarMaterial = new DialogCadastrarMaterial(ControladorFrame.frame);
-                this.controladorDialogCadastrarMaterial = new ControladorDialogCadastrarMaterial(this.dialogCadastrarMaterial, materialSeleciona);
+        if (e.getSource() == this.panelMateriais.getBTNEditar()) {
+            int indexLinhaItem = this.panelMateriais.getTable().getSelectedRow();
+            if (indexLinhaItem != -1) {
+                Material materialSeleciona = ControladorFrame.repositorioMateriais.getMateriais().get(indexLinhaItem);
+                this.dialogEditarMaterial = new DialogEDITARMaterial(ControladorFrame.frame, materialSeleciona);
+                this.controladorDialogEditarMaterial = new ControladorDialogEDITARMaterial(this.dialogEditarMaterial, materialSeleciona);
                 atualizarTabela();
-
-        	}
-        }//BTEditar
+            }
+        }
         
     }//actionPerformed
     
