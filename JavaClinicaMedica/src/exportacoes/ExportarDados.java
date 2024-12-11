@@ -1,6 +1,9 @@
 package exportacoes;
 
+import controle.ControladorFrame;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import repositorio.RepositorioPacientes;
 import repositorio.RepositorioConsultas;
 import repositorio.RepositorioExames;
@@ -67,6 +70,7 @@ public class ExportarDados {
                             paciente.getTipoSang() + ";;" +
                             paciente.getAltura() + ";;" +
                             paciente.getPeso() + ";;" +
+                            paciente.getConvenio() + ";;" +
                             endereco.getRua() + ";;" +
                             endereco.getNumero() + ";;" +                            
                             endereco.getBairro() + ";;" +
@@ -83,8 +87,55 @@ public class ExportarDados {
             } catch (IOException ex) {
                 Logger.getLogger(ExportarDados.class.getName()).log(Level.SEVERE, null, ex);
             }
+        }        
+    }
+    
+    public static void recuperarPacientes() throws IOException {
+        try {
+            File arquivo = new File("src" + File.separator + "exportacoes" + File.separator, "Pacientes.txt");  
+            FileReader fR = new FileReader(arquivo);
+            String registros = "";
+            String [] arrayRegistros;
+            int i;
+            
+            while (true) {
+                i = fR.read();
+                if (i == -1) break;
+                char c = (char) i;
+                registros += c;
+            }
+            
+            if (registros.length() != 0) {
+                arrayRegistros = registros.split("\n");
+                for (String registro : arrayRegistros) {
+                    String [] arrayRegistro = registro.split(";;");
+                    Paciente paciente = new Paciente(); 
+                    Endereco endereco = new Endereco();
+                    paciente.setNome(arrayRegistro[0]);
+                    paciente.setDataNasc(arrayRegistro[1]);
+                    paciente.setContato(arrayRegistro[2]);
+                    paciente.setTipoSang(arrayRegistro[3]);
+                    paciente.setAltura(Double.parseDouble(arrayRegistro[4]));
+                    paciente.setPeso(Double.parseDouble(arrayRegistro[5]));
+                    paciente.setConvenio(arrayRegistro[6]);                    
+                    endereco.setRua(arrayRegistro[7]);
+                    endereco.setNumero(arrayRegistro[8]);                          
+                    endereco.setBairro(arrayRegistro[9]);
+                    endereco.setCep(arrayRegistro[10]);
+                    endereco.setCidade(arrayRegistro[11]);
+                    endereco.setEstado(arrayRegistro[12]);
+                    paciente.setEndereco(endereco);
+                    
+                    ControladorFrame.repositorioPacientes.addPaciente(paciente);
+                }
+            }
+        } catch (FileNotFoundException ex) {
+            System.out.println("Arquivo Pacientes.txt não encontrado. Criando arquivo...");
+            File arquivo = new File("src" + File.separator + "exportacoes" + File.separator, "Pacientes.txt");          
+            arquivo.createNewFile();
+        } catch (IOException ex) {
+            Logger.getLogger(ExportarDados.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
     }
 
 ////////////MÉDICOS

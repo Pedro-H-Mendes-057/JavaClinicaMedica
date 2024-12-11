@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 import javax.swing.table.DefaultTableModel;
 import visual.PanelPacientes;
 import dialogCadastroPanels.DialogCadastrarPaciente;
+import exportacoes.ExportarDados;
 
 public class ControladorPanelPacientes implements ActionListener {
     private PanelPacientes panelPacientes;
@@ -13,6 +14,8 @@ public class ControladorPanelPacientes implements ActionListener {
     
     public ControladorPanelPacientes(PanelPacientes panelPacientes) {
         this.panelPacientes = panelPacientes;
+        ExportarDados.recuperarPacientes();
+        atualizarTabela();
         addEventos();
     }
 
