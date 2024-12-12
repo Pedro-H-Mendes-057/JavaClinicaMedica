@@ -27,8 +27,8 @@ import java.util.Map;
 
 public class ControladorPanelRelatorios implements ActionListener{
 	
-	private PanelRelatorios panelRelatorios;
-	private List<String> repositorioPacientes;
+    private PanelRelatorios panelRelatorios;
+    private List<String> repositorioPacientes;
     private List<String> repositorioMedicos;
     private List<String> repositorioMateriais;
     private List<String> repositorioExames;
