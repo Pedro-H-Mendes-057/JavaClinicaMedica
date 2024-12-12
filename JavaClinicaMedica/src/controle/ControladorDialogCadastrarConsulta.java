@@ -28,7 +28,10 @@ public class ControladorDialogCadastrarConsulta implements ActionListener{
     Paciente paciente;
     ControladorDialogBuscarPaciente controladorDialogBuscarPaciente;
     DialogBuscar dialogBuscarPaciente;
+    ControladorDialogBuscarMaterial controladorDialogBuscarMaterial;
+    DialogBuscar dialogBuscarMaterial;
     int chavePaciente;
+    int chaveMaterial;
     
     public ControladorDialogCadastrarConsulta(DialogCadastrarConsulta dialogCadastrarConsulta, int chaveMedico) {
        this.dialogCadastrarConsulta = dialogCadastrarConsulta;
@@ -55,6 +58,7 @@ public class ControladorDialogCadastrarConsulta implements ActionListener{
     void addEventos() {
         this.dialogCadastrarConsulta.getButtonSalvar().addActionListener(this);
         this.dialogCadastrarConsulta.getButtonBuscarPaciente().addActionListener(this);
+        this.dialogCadastrarConsulta.getButtonBuscarMateriais().addActionListener(this);
     }
     
     public void actionPerformed(ActionEvent e) {
@@ -67,7 +71,16 @@ public class ControladorDialogCadastrarConsulta implements ActionListener{
             if (this.chavePaciente != -1) {
                 this.dialogCadastrarConsulta.getTextFieldNomePaciente().setText(ControladorFrame.repositorioPacientes.getPacientes().get(this.chavePaciente).getNome());
                 this.dialogCadastrarConsulta.getTextFieldConvenio().setText(ControladorFrame.repositorioPacientes.getPacientes().get(this.chavePaciente).getConvenio());                
+            } else {
+                this.dialogCadastrarConsulta.getTextFieldNomePaciente().setText("");
+                this.dialogCadastrarConsulta.getTextFieldConvenio().setText("");
             }
+        } else if (e.getSource() == this.dialogCadastrarConsulta.getButtonBuscarMateriais()) {
+            this.dialogBuscarMaterial = new DialogBuscar(this.dialogCadastrarConsulta);
+            this.controladorDialogBuscarMaterial = new ControladorDialogBuscarMaterial(this.dialogBuscarMaterial);
+            if (this.chaveMaterial != -1) {
+                addMaterial();
+            }            
         }
     }
     
@@ -102,5 +115,9 @@ public class ControladorDialogCadastrarConsulta implements ActionListener{
         this.consulta = new Consulta();
         
         return this.consulta;
+    }
+    
+    void addMaterial() {
+        
     }
 }

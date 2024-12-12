@@ -1,5 +1,7 @@
 package modelo;
 
+import java.util.ArrayList;
+
 public class Consulta {
 	private String data;
 	private String hora;
@@ -9,14 +11,14 @@ public class Consulta {
 	private String tipoConsulta;
 	private String convenio;
 	private String observacoes;
-	private int [] chaveMateriais;
+	private Object[][] chaveMateriais;
 	
         public Consulta() {
         
         }
         
 	public Consulta(String data, String hora, int chaveMedico, int chavePaciente, String queixa, String tipoConsulta,
-			String convenio, String observacoes, int [] chaveMateriais) {
+			String convenio, String observacoes, Object [][] chaveMateriais) {
 		super();
 		this.data = data;
 		this.hora = hora;
@@ -93,11 +95,11 @@ public class Consulta {
 		this.observacoes = observacoes;
 	}
 
-	public int[] getMateriaisUsar() {
+	public Object[][] getMateriaisUsar() {
 		return this.chaveMateriais;
 	}
 
-	public void setMateriaisUsar(int[] chaveMateriais) {
+	public void setMateriaisUsar(Object[][] chaveMateriais) {
 		this.chaveMateriais = chaveMateriais;
 	}
 	
