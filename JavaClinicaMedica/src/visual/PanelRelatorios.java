@@ -82,6 +82,7 @@ public class PanelRelatorios extends JPanel {
         if (this.table == null) {
             this.table = new JTable();
             table.setBounds(592, 41, 862, 561);
+            System.out.println("Tabela criada");
         }
         return this.table;
     }

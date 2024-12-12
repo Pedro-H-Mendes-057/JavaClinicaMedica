@@ -6,7 +6,7 @@ import modelo.Exame;
 public class RepositorioExames {
     private ArrayList<Exame> repositorioExames;
 
-    // Construtor
+    //Construtor
     public RepositorioExames() {
         this.repositorioExames = new ArrayList<>();
     }
@@ -14,6 +14,12 @@ public class RepositorioExames {
     public void addExame(Exame exame) {
         repositorioExames.add(exame);
     }
+    
+ //cConverter um objeto Exame para String (Para Relatorios)
+    public String converterExameParaString(Exame exame) {
+        return exame.getTipo() + "," + exame.getDescricao() + "," + exame.getValorParticular() + "," + exame.getMedico();
+    }
+
 
     public ArrayList<Exame> getExames() {
         return this.repositorioExames;
@@ -35,6 +41,6 @@ public class RepositorioExames {
             }
         }
 
-        throw new IllegalArgumentException("Exame não encontrado para atualização.");
+        throw new IllegalArgumentException("Exame não encontrado");
     }
 }
