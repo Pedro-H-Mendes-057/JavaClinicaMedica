@@ -168,8 +168,9 @@ public class ExportarDados {
                         int [][] horasAtend = new int[11][5];
                         for (int j = 0; j < 11; j++) {
                             for (int k = 0; k < 5; k++) {
-                                horasAtend[j][k] = arrayRegistro[6].charAt(j + j * k) - '0';                                
-                            }                           
+                                horasAtend[j][k] = arrayRegistro[6].charAt(j * 5 + k) - '0';
+                            }
+                            
                         }
                         medico.setHorasAtend(horasAtend);
                         

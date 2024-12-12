@@ -124,7 +124,7 @@ public class ControladorPanelAgendar implements ActionListener {
                             this.panelAgendar.getTableSemana().getModel().setValueAt(procurarChave, row, col);
                             this.simularTabela[row][col -1] = procurarChave;
                         } else {
-                            this.panelAgendar.getTableSemana().getModel().setValueAt("DISPONÍVEL", row, col);
+                            this.panelAgendar.getTableSemana().getModel().setValueAt("DISPONÍVEL", row, col);                           
                         }                        
                     } else {
                         this.simularTabela[row][col -1] = null;
