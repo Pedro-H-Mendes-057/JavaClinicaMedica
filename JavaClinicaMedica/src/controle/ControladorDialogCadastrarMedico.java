@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JTable;
 import javax.swing.JOptionPane;
 import dialogCadastroPanels.DialogCadastrarMedico;
+import exportacoes.ExportarDados;
 import modelo.Medico;
 import modelo.Paciente;
 
@@ -133,8 +134,7 @@ public class ControladorDialogCadastrarMedico implements ActionListener {
         this.medico.setContato(this.dialogCadastrarMedico.getTextFieldContato().getText().trim());
         this.medico.setCrm(this.dialogCadastrarMedico.getTextFieldCRM().getText().trim());
         this.medico.setEspecialidade(this.dialogCadastrarMedico.getTextFieldEspecialidade().getText().trim());
-        this.medico.setValorConsulta(Double.parseDouble(this.dialogCadastrarMedico.getTextFieldValor().getText().trim()));
-        ControladorFrame.repositorioMedicos.addMedico(this.medico);
+        this.medico.setValorConsulta(Double.parseDouble(this.dialogCadastrarMedico.getTextFieldValor().getText().trim()));        
         
         
         for (int row = 0; row < 11; row++) { 
@@ -146,6 +146,8 @@ public class ControladorDialogCadastrarMedico implements ActionListener {
                 }
             }
         }
+        ExportarDados.anexarMedico(this.medico, ControladorFrame.repositorioMedicos.contador);
+        ControladorFrame.repositorioMedicos.addMedico(this.medico);
         
         /*for (int row = 0; row < 11; row++) { 
             for (int col = 0; col < 5; col++) {         

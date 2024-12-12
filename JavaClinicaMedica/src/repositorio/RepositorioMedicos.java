@@ -5,7 +5,7 @@ import modelo.Medico;
 import java.util.LinkedHashMap;
 
 public class RepositorioMedicos {
-    static int contador = 0; 
+    public static int contador = 0; 
     LinkedHashMap<Integer, Medico> repositorioMedicos;
     String [] nomesMedicos;
     
@@ -13,9 +13,14 @@ public class RepositorioMedicos {
         this.repositorioMedicos = new LinkedHashMap<>();        
     }
     
-     public void addMedico(Medico medico) {
+    public void addMedico(Medico medico) {
         repositorioMedicos.put(RepositorioMedicos.contador, medico);
         RepositorioMedicos.contador++;
+    }
+    
+    public void recuperarMedico(Medico medico, int chave) {
+        repositorioMedicos.put(chave, medico);
+        contador = chave + 1;
     }
     
     public LinkedHashMap<Integer, Medico> getMedicos() {

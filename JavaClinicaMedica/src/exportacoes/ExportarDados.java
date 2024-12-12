@@ -139,39 +139,61 @@ public class ExportarDados {
     }
 
 ////////////MÉDICOS
-	public static void exportarMedicos() {
-	   RepositorioMedicos repositorio = new RepositorioMedicos();
-	
-	   try {
-	       FileWriter fw = new FileWriter("MedicosLOL.txt");
-	       PrintWriter pw = new PrintWriter(fw);
-	       for (int i = 0; i < repositorio.getMedicos().size(); i++) {
-	           Medico medico = repositorio.getMedicos().get(i);
-	           String salvar = medico.getNome() + ";" +
-	                           medico.getEspecialidade() + ";" +
-	                           medico.getCrm() + ";" +
-	                           medico.getContato() + ";" +
-	                           medico.getValorConsulta();
-	           pw.println(salvar);
-	       }
-	
-	       pw.close();
-	       fw.close();
-	   } catch (IOException e) {
-	       System.err.println("Erro ao salvar médicos");
-	   }
+	public static void recuperarMedicos() throws IOException {
+            try {
+                File arquivo = new File("src" + File.separator + "exportacoes" + File.separator, "Medicos.txt");  
+                FileReader fR = new FileReader(arquivo);
+                String registros = "";
+                String [] arrayRegistros;
+                int i;
+
+                while (true) {
+                    i = fR.read();
+                    if (i == -1) break;
+                    char c = (char) i;
+                    registros += c;
+                }
+
+                if (registros.length() != 0) {
+                    arrayRegistros = registros.split("\n");
+                    for (String registro : arrayRegistros) {
+                        String [] arrayRegistro = registro.split(";;");
+                        Medico medico = new Medico();                         
+                        medico.setNome(arrayRegistro[1]);
+                        medico.setEspecialidade(arrayRegistro[2]);
+                        medico.setCrm(arrayRegistro[3]);
+                        medico.setContato(arrayRegistro[4]);
+                        medico.setValorConsulta(Double.parseDouble(arrayRegistro[5]));
+                        
+                        ControladorFrame.repositorioMedicos.recuperarMedico(medico, Integer.parseInt(arrayRegistro[0]));
+                    }
+                }
+            } catch (FileNotFoundException ex) {
+                System.out.println("Arquivo Medicos.txt não encontrado.\nCriando arquivo...");
+                File arquivo = new File("src" + File.separator + "exportacoes" + File.separator, "Medicos.txt");          
+                arquivo.createNewFile();
+            } catch (IOException ex) {
+                Logger.getLogger(ExportarDados.class.getName()).log(Level.SEVERE, null, ex);
+            }
 	}
 	
-	public static void anexarMedico(Medico medico) {
+	public static void anexarMedico(Medico medico, int chaveMedico) {
 	   FileWriter fW = null;
 	   try {
 	       File arquivo = new File("src" + File.separator + "exportacoes" + File.separator, "Medicos.txt");
 	       fW = new FileWriter(arquivo, true);
-	       String salvar = medico.getNome() + ";;" +
+	       String salvar = chaveMedico + ";;" +
+                               medico.getNome() + ";;" +
 	                       medico.getEspecialidade() + ";;" +
 	                       medico.getCrm() + ";;" +
 	                       medico.getContato() + ";;" +
-	                       medico.getValorConsulta() + "\n";
+	                       medico.getValorConsulta() + ";;";
+               for (int i = 0; i < medico.getHorasAtend().length; i++) {
+                  for (int j = 0; j < medico.getHorasAtend()[i].length; j++) {
+                      salvar += medico.getHorasAtend()[i][j];
+                  }
+               }
+               salvar += "\n";
 	       fW.write(salvar, 0, salvar.length());
 	   } catch (IOException ex) {
 	       Logger.getLogger(ExportarDados.class.getName()).log(Level.SEVERE, null, ex);

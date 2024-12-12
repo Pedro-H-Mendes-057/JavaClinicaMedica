@@ -8,6 +8,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import dialogCadastroPanels.DialogCadastrarMedico;
+import exportacoes.ExportarDados;
+import java.io.IOException;
 import javax.swing.table.DefaultTableModel;
 import modelo.Medico;
 import visual.PanelMedicos;
@@ -23,6 +25,12 @@ public class ControladorPanelMedicos implements ActionListener {
     
     public ControladorPanelMedicos(PanelMedicos panelMedicos) {
         this.panelMedicos = panelMedicos;
+        try {
+            ExportarDados.recuperarMedicos();
+        } catch (IOException ex) {
+           System.out.println("Falha na criação do arquivo Medicos.txt");
+        }
+        atualizarTabela();
         addEventos();
     }
     
