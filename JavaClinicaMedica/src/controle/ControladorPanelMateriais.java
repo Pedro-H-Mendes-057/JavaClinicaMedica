@@ -11,8 +11,10 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import dialogCadastroPanels.DialogCadastrarMaterial;
 import dialogCadastroPanels.DialogEDITARMaterial;
+import exportacoes.ExportarDados;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
+import java.io.IOException;
 import visual.PanelMateriais;
 import visual.TemplatePanel;
 import modelo.Material;
@@ -30,6 +32,12 @@ public class ControladorPanelMateriais implements ActionListener {
     public ControladorPanelMateriais(PanelMateriais panelMateriais, RepositorioMateriais repositorioMateriais) {
         this.panelMateriais = panelMateriais;
         this.repositorioMateriais = repositorioMateriais;
+        try {
+            ExportarDados.recuperarMateriais();
+        } catch (IOException ex) {
+           System.out.println("Falha na criação do arquivo Materiais.txt");
+        }
+        atualizarTabela();
         addEventos();
         
     }

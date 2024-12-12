@@ -168,10 +168,8 @@ public class ExportarDados {
                         int [][] horasAtend = new int[11][5];
                         for (int j = 0; j < 11; j++) {
                             for (int k = 0; k < 5; k++) {
-                                horasAtend[j][k] = arrayRegistro[6].charAt(j + j * k) - '0';
-                                System.out.print(horasAtend[j][k]);
-                            }
-                            System.out.print("\n");
+                                horasAtend[j][k] = arrayRegistro[6].charAt(j + j * k) - '0';                                
+                            }                           
                         }
                         medico.setHorasAtend(horasAtend);
                         
@@ -215,31 +213,40 @@ public class ExportarDados {
 	       }
 	   }
 	}
-	
-////////////MATERIAIS
-	public static void exportarMateriais() {
-	   RepositorioMateriais repositorio = new RepositorioMateriais();
-	
+////////////CONSULTAS
+        public static void anexarConsulta(Consulta consulta, String chaveConsulta) {
+	   FileWriter fW = null;
 	   try {
-	       FileWriter fw = new FileWriter("Materiais.txt");
-	       PrintWriter pw = new PrintWriter(fw);
-	       for (int i = 0; i < repositorio.getMateriais().size(); i++) {
-	           Material material = repositorio.getMateriais().get(i);
-	           String salvar = material.getNome() + ";" +
-	                           material.getQuant() + ";" +
-	                           material.getQuantMin() + ";" +
-	                           material.getFornecedor() + ";" +
-	                           material.getPreco();
-	           pw.println(salvar);
+	       File arquivo = new File("src" + File.separator + "exportacoes" + File.separator, "Consultas.txt");
+	       fW = new FileWriter(arquivo, true);
+	       String salvar = chaveConsulta + ";;" +
+                               consulta.getPaciente() + ";;" +
+	                       consulta.getConvenio() + ";;" +
+	                       consulta.getData() + ";;" +
+	                       consulta.getQueixa() + ";;" +
+	                       consulta.getObservacoes() + ";;" + 
+                               consulta.getHora() + ";;" +
+                               consulta.getTipoConsulta() + ";;" + 
+                               consulta.getMedico();
+               for (int i = 0; i < consulta.getMateriaisUsar().length; i++) {
+                   salvar += consulta.getMateriaisUsar()[i][0] + "<>";
+                   salvar += consulta.getMateriaisUsar()[i][1] + "<>";
+               }
+               salvar += "\n";
+	       fW.write(salvar, 0, salvar.length());
+	   } catch (IOException ex) {
+	       Logger.getLogger(ExportarDados.class.getName()).log(Level.SEVERE, null, ex);
+	   } finally {
+	       try {
+	           fW.close();
+	       } catch (IOException ex) {
+	           Logger.getLogger(ExportarDados.class.getName()).log(Level.SEVERE, null, ex);
 	       }
-	
-	       pw.close();
-	       fw.close();
-	   } catch (IOException e) {
-	       System.err.println("Erro ao salvar materiais");
 	   }
 	}
+        
 	
+////////////MATERIAIS	
 	public static void anexarMaterial(Material material) {
 	   FileWriter fW = null;
 	   try {
@@ -261,6 +268,44 @@ public class ExportarDados {
 	       }
 	   }
 	}
+        
+        public static void recuperarMateriais() throws IOException {
+        try {
+            File arquivo = new File("src" + File.separator + "exportacoes" + File.separator, "Materiais.txt");  
+            FileReader fR = new FileReader(arquivo);
+            String registros = "";
+            String [] arrayRegistros;
+            int i;
+            
+            while (true) {
+                i = fR.read();
+                if (i == -1) break;
+                char c = (char) i;
+                registros += c;
+            }
+            
+            if (registros.length() != 0) {
+                arrayRegistros = registros.split("\n");
+                for (String registro : arrayRegistros) {
+                    String [] arrayRegistro = registro.split(";;");
+                    Material material = new Material();
+                    material.setNome(arrayRegistro[0]);
+                    material.setQuant(Integer.parseInt(arrayRegistro[1]));
+                    material.setQuantMin(Integer.parseInt(arrayRegistro[2]));
+                    material.setFornecedor(arrayRegistro[3]); 
+                    material.setPreco(arrayRegistro[4]);
+                    
+                    ControladorFrame.repositorioMateriais.addMaterial(material);
+                }
+            }
+        } catch (FileNotFoundException ex) {
+            System.out.println("Arquivo Materiais.txt não encontrado.\nCriando arquivo...");
+            File arquivo = new File("src" + File.separator + "exportacoes" + File.separator, "Materiais.txt");          
+            arquivo.createNewFile();
+        } catch (IOException ex) {
+            Logger.getLogger(ExportarDados.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 
 ////////////EXAMES
   /*

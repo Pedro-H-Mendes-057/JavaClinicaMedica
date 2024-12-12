@@ -7,6 +7,7 @@ package controle;
 import dialogCadastroPanels.DialogBuscar;
 import dialogCadastroPanels.DialogCadastrarConsulta;
 import dialogCadastroPanels.DialogEditarConsulta;
+import exportacoes.ExportarDados;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
@@ -187,6 +188,8 @@ public class ControladorDialogCadastrarConsulta implements ActionListener{
         }
         
         this.consulta.setMateriaisUsar(arrayMateriais);
+        
+        ExportarDados.anexarConsulta(this.consulta, this.chaveConsulta);
         
         return this.consulta;
     }

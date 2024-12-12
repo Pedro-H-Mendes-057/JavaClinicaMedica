@@ -6,7 +6,7 @@ public class Consulta {
 	private String data;
 	private String hora;
 	private int chaveMedico;
-	String chavePaciente;
+	String chavePaciente;  // o mesmo que nome Paciente
 	private String queixa;
 	private String tipoConsulta;
 	private String convenio;
