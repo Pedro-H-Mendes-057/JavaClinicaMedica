@@ -4,14 +4,9 @@ import java.awt.event.ActionEvent;
 
 import java.awt.event.ActionListener;
 import dialogCadastroPanels.DialogCadastrarExames;
-import dialogCadastroPanels.DialogCadastrarPaciente;
 import dialogCadastroPanels.DialogEDITARExames;
-import dialogCadastroPanels.DialogEDITARMaterial;
-import dialogCadastroPanels.DialogReagendarExames;
 import modelo.Exame;
-import modelo.Material;
 import visual.PanelExames;
-import javax.swing.JFrame;
 import javax.swing.table.DefaultTableModel;
 
 public class ControladorPanelExames implements ActionListener {
@@ -36,6 +31,7 @@ public class ControladorPanelExames implements ActionListener {
         this.panelExames.getTable().getSelectionModel().addListSelectionListener(event -> {
             boolean itemSelecionado = this.panelExames.getTable().getSelectedRow() != -1;
             this.panelExames.getBTNEditar().setEnabled(itemSelecionado);
+            this.panelExames.getBTNExcluir().setEnabled(itemSelecionado);
         });
         //this.panelExames.getBTNEditar().addActionListener(this);
     }
@@ -76,6 +72,19 @@ public class ControladorPanelExames implements ActionListener {
         
         model.setRowCount(0);
         
+        ControladorFrame.repositorioExames.getExames().forEach(exame -> {
+            model.addRow(new Object[]{
+                exame.getNomeExame(),
+                exame.getTipo(),
+                exame.getValorParticular(),
+                exame.getDescricao(),
+                exame.getMedico().getNome()
+            });
+        });
+        
+    }
+
+    /*
         for (int i = 0; i < ControladorFrame.repositorioExames.getExames().size(); i++) {
             //System.out.println("OI " + i);
             model.addRow(new Object [] {
@@ -85,9 +94,7 @@ public class ControladorPanelExames implements ActionListener {
                     ControladorFrame.repositorioExames.getExames().get(i).getDescricao(),
                     ControladorFrame.repositorioExames.getExames().get(i).getMedico() 
             });
-        }    
-    }
-
+        }   */ 
     
 
 }//da classe

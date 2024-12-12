@@ -93,16 +93,16 @@ public class ControladorDialogCadastrarExame implements ActionListener {
         int valorParticular = Integer.parseInt(this.dialogCadastrarExames.getTxFValor().getText());
         String nomeExame = dialogCadastrarExames.getTxFNomeExame().getText().trim();
         String descricao = dialogCadastrarExames.getTxArDescricao().getText().trim();
-
-        try {            
-            String tipo = dialogCadastrarExames.getComboBoxTipo().getSelectedItem().toString().trim();            
-            String medico = dialogCadastrarExames.getCBMedico().getSelectedItem().toString().trim();            
+        String tipo = dialogCadastrarExames.getComboBoxTipo().getSelectedItem().toString().trim();            
+        String medico = dialogCadastrarExames.getCBMedico().getSelectedItem().toString().trim();            
+        /*
+        try {	
         } catch (NullPointerException e) {
             JOptionPane.showMessageDialog(dialogCadastrarExames, "Preencha todos os campos!");
             return false;
-        }
+        }*/
         
-        if (nomeExame.isEmpty() || descricao.isEmpty()) {
+        if (nomeExame.isEmpty() || descricao.isEmpty() || tipo == "") {
             JOptionPane.showMessageDialog(dialogCadastrarExames, "Preencha todos os campos!");
             return false;
         }
