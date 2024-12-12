@@ -45,4 +45,13 @@ public class RepositorioMateriais {
         
         return false;
     }
+    
+    public int getQuantPorNome(String nomeMaterial) {
+        for (Material material : repositorioMateriais) {
+            if (material.getNome().equalsIgnoreCase(nomeMaterial)) {
+                return material.getQuant();
+            }
+        }
+        return 0; //se n encontrar retorna 0
+    }
 }

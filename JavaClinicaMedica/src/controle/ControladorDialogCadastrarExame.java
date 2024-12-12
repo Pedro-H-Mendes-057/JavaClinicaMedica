@@ -22,10 +22,12 @@ import java.awt.Component;
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
 import controle.ControladorPanelMateriais;
+import repositorio.RepositorioMateriais;
 
 public class ControladorDialogCadastrarExame implements ActionListener {
     private DialogCadastrarExames dialogCadastrarExames;
     private ControladorPanelMateriais controlePanelMateriais;
+    private RepositorioMateriais repositorioMateriais;
 
     //Construtor 1
     public ControladorDialogCadastrarExame(DialogCadastrarExames dialogCadastrarExames, ControladorPanelMateriais controlePanelMateriais) {
@@ -135,6 +137,15 @@ public class ControladorDialogCadastrarExame implements ActionListener {
 
             try {
                 int quantidade = Integer.parseInt(valorQuantidade.toString());
+                String nomeMaterial = modeloTabela.getValueAt(i, 0).toString(); 
+                int qntEstoque = ControladorFrame.repositorioMateriais.getQuantPorNome(nomeMaterial);
+                
+                if (quantidade > qntEstoque) {
+                    JOptionPane.showMessageDialog(dialogCadastrarExames,
+                            "Quantidade para o material '" + nomeMaterial + "' excede o estoque disponível (" + qntEstoque + ").",
+                            "Erro", JOptionPane.ERROR_MESSAGE);
+                    return false;
+                }
                 if (quantidade > 0) {
                     algumMaterialUsado = true; // Encontrou um material com qnt> 0
                     break;

@@ -147,7 +147,16 @@ public class ControladorDialogEDITARExame implements ActionListener {
             Object valorQuantidade = modeloTabela.getValueAt(i, 1);
 
             try {
-                int quantidade = Integer.parseInt(valorQuantidade.toString());
+            	int quantidade = Integer.parseInt(valorQuantidade.toString());
+                String nomeMaterial = modeloTabela.getValueAt(i, 0).toString(); 
+                int qntEstoque = ControladorFrame.repositorioMateriais.getQuantPorNome(nomeMaterial);
+                
+                if (quantidade > qntEstoque) {
+                    JOptionPane.showMessageDialog(dialogEditarExames,
+                            "Quantidade para o material '" + nomeMaterial + "' excede o estoque disponível (" + qntEstoque + ").",
+                            "Erro", JOptionPane.ERROR_MESSAGE);
+                    return false;
+                }
                 if (quantidade > 0) {
                     algumMaterialUsado = true; // Encontrou um material com qnt> 0
                     break;
