@@ -10,7 +10,7 @@ public class PanelPacientes extends TemplatePanel {
     	super();
     	
     	getLabelPesquisar().setText("Pesquisar por Paciente:");
-    	
+    	getBTNExcluir().setEnabled(false);
         
     }
     
