@@ -45,7 +45,7 @@ public class ControladorPanelAgendar implements ActionListener {
         this.panelAgendar = panelAgendar;
         this.panelAgendar.getBTNNovaConsulta().setEnabled(false);
         this.simularTabela = new String[11][5];
-        
+        this.chaveMedico = -1; // alteracao
         try {
             ExportarDados.recuperarConsultas();
         } catch (IOException ex) {
@@ -70,7 +70,8 @@ public class ControladorPanelAgendar implements ActionListener {
                     //System.out.println("linha = " + linha + " coluna = " + coluna);
                     String chaveConsulta = simularTabela[linha][coluna - 1];
                     System.out.println("CHAVE CONSULTA " + chaveConsulta);
-                    if (ControladorFrame.repositorioConsultas.procurarConsulta(chaveConsulta) == true) { 
+                    //alteracao
+                    if (chaveMedico != -1 && ControladorFrame.repositorioConsultas.procurarConsulta(chaveConsulta) == true) { 
                         dialogEditarConsulta = new DialogEditarConsulta(ControladorFrame.frame);
                         controladorDialogCadastrarConsulta = new ControladorDialogCadastrarConsulta(dialogEditarConsulta, chaveMedico, chaveConsulta);
                     }                   
