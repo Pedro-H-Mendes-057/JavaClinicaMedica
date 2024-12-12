@@ -10,11 +10,13 @@ import java.awt.event.ActionListener;
 import visual.PanelAgendar;
 import dialogCadastroPanels.DialogCadastrarConsulta;
 import dialogCadastroPanels.DialogEditarConsulta;
+import exportacoes.ExportarDados;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -43,6 +45,13 @@ public class ControladorPanelAgendar implements ActionListener {
         this.panelAgendar = panelAgendar;
         this.panelAgendar.getBTNNovaConsulta().setEnabled(false);
         this.simularTabela = new String[11][5];
+        
+        try {
+            ExportarDados.recuperarConsultas();
+        } catch (IOException ex) {
+           System.out.println("Falha na criação do arquivo Consultas.txt");
+        }
+        
         addEventos();
     }
     
