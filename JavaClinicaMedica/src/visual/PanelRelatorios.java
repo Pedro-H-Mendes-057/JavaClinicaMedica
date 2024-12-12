@@ -1,53 +1,55 @@
 package visual;
 
-import java.awt.BorderLayout;
-
-import javax.swing.*;
-import java.awt.*;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
 import java.awt.Font;
-import javax.swing.JTable;
+import javax.swing.*;
+import java.awt.event.ActionListener;
 
-public class PanelRelatorios extends JPanel { //aaaaaaaaaaaaaaaaaaa
-	private Frame frame;
-	private JTable table;
-	private JButton btConsultas, btExames, btFinan,
-					btMateriais, btDownload, btReserva;
-	private JLabel lbTitulo;
+public class PanelRelatorios extends JPanel {
+    private Frame frame;
+    private JTable table;
+    private JButton btConsultas, btExames, btFinan, btMateriais, btDownload, btReserva;
+    private JLabel lbTitulo;
+    private JTextField txFMedico;
+    private JTextField txFPaciente;
+    private JButton pescPac1;
+    private JButton pescMed;
+    private JRadioButton rBFiltrarMedico;
+    private JRadioButton rBtFiltrarPaciente;
+    private JButton btnPesquisar;
 
     public PanelRelatorios(Frame frame) {
-    	this.frame = frame;
-    	setLayout(null);
-    	
-    	getBTConsultas();
-        getBTExames();
-        getBTFinan();
-        getBTMateriais();
-        getBTDownload();
-        getBTReserva();
-        getLbTitulo();
-        getTable();
+        this.frame = frame;
+        setLayout(null);
+
+        add(getLbTitulo());
+        add(getBTConsultas());
+        add(getBTExames());
+        add(getBTFinan());
+        add(getBTMateriais());
+        add(getTable());
+        add(getPescMed());
+        add(getPescPac1());
+        add(getTxFMedico());
+        add(getTxFPaciente());
+        add(getRBTFiltrarMedico());
+        add(getRBTFiltrarPaciente());
+        add(getBTPesquisar());
     }
-    
+
     public JLabel getLbTitulo() {
         if (this.lbTitulo == null) {
             this.lbTitulo = new JLabel("RELATÓRIOS");
             lbTitulo.setFont(new Font("Tahoma", Font.PLAIN, 30));
             lbTitulo.setBounds(171, 5, 190, 70);
-            add(lbTitulo);
         }
         return this.lbTitulo;
     }
-    	
+
     public JButton getBTConsultas() {
         if (this.btConsultas == null) {
             this.btConsultas = new JButton("CONSULTAS");
             btConsultas.setFont(new Font("Tahoma", Font.PLAIN, 20));
             btConsultas.setBounds(125, 130, 270, 69);
-            add(btConsultas);
         }
         return this.btConsultas;
     }
@@ -57,7 +59,6 @@ public class PanelRelatorios extends JPanel { //aaaaaaaaaaaaaaaaaaa
             this.btExames = new JButton("EXAMES");
             btExames.setFont(new Font("Tahoma", Font.PLAIN, 20));
             btExames.setBounds(124, 227, 270, 69);
-            add(btExames);
         }
         return this.btExames;
     }
@@ -67,7 +68,6 @@ public class PanelRelatorios extends JPanel { //aaaaaaaaaaaaaaaaaaa
             this.btFinan = new JButton("FINANCEIRO");
             btFinan.setFont(new Font("Tahoma", Font.PLAIN, 20));
             btFinan.setBounds(124, 419, 270, 69);
-            add(btFinan);
         }
         return this.btFinan;
     }
@@ -77,7 +77,6 @@ public class PanelRelatorios extends JPanel { //aaaaaaaaaaaaaaaaaaa
             this.btMateriais = new JButton("MATERIAIS");
             btMateriais.setFont(new Font("Tahoma", Font.PLAIN, 20));
             btMateriais.setBounds(126, 325, 270, 69);
-            add(btMateriais);
         }
         return this.btMateriais;
     }
@@ -85,29 +84,79 @@ public class PanelRelatorios extends JPanel { //aaaaaaaaaaaaaaaaaaa
     public JTable getTable() {
         if (this.table == null) {
             this.table = new JTable();
-            table.setBounds(503, 41, 951, 561);
-            add(table);
+            table.setBounds(592, 41, 862, 561);
         }
         return this.table;
     }
-    
-    public JButton getBTDownload() {
-        if (this.btDownload == null) {
-            this.btDownload = new JButton("");
-            btDownload.setBounds(1208, 612, 62, 62);
-            add(btDownload);
+
+    //////////////////////////////////////////////////////////////////////
+    public JRadioButton getRBTFiltrarMedico() {
+        if (this.rBFiltrarMedico == null) {
+            this.rBFiltrarMedico = new JRadioButton("Filtrar por médico");
+            rBFiltrarMedico.setFont(new Font("Tahoma", Font.PLAIN, 15));
+            rBFiltrarMedico.setBounds(21, 505, 146, 39);
+            rBFiltrarMedico.setVisible(false);
         }
-        return this.btDownload;
+        return rBFiltrarMedico;
     }
 
-    public JButton getBTReserva() {
-        if (this.btReserva == null) {
-            this.btReserva = new JButton("");
-            btReserva.setBounds(1280, 612, 62, 62);
-            add(btReserva);
+    public JRadioButton getRBTFiltrarPaciente() {
+        if (this.rBtFiltrarPaciente == null) {
+            this.rBtFiltrarPaciente = new JRadioButton("Filtrar por paciente");
+            rBtFiltrarPaciente.setFont(new Font("Tahoma", Font.PLAIN, 15));
+            rBtFiltrarPaciente.setBounds(21, 563, 159, 39);
+            rBtFiltrarPaciente.setVisible(false);
         }
-        return this.btReserva;
+        return rBtFiltrarPaciente;
     }
 
+    public JTextField getTxFMedico() {
+        if (this.txFMedico == null) {
+            this.txFMedico = new JTextField();
+            txFMedico.setBounds(182, 507, 224, 39);
+            txFMedico.setColumns(10);
+            txFMedico.setVisible(false);
+            txFMedico.setEnabled(false);
+        }
+        return txFMedico;
+    }
 
-}// da classe
+    public JTextField getTxFPaciente() {
+        if (this.txFPaciente == null) {
+            this.txFPaciente = new JTextField();
+            txFPaciente.setBounds(182, 563, 224, 39);
+            txFPaciente.setColumns(10);
+            txFPaciente.setVisible(false);
+            txFPaciente.setEnabled(false);
+        }
+        return txFPaciente;
+    }
+
+    public JButton getBTPesquisar() {
+        if (this.btnPesquisar == null) {
+            this.btnPesquisar = new JButton("Abrir Relatório");
+            btnPesquisar.setFont(new Font("Tahoma", Font.PLAIN, 15));
+            btnPesquisar.setBounds(220, 612, 159, 39);
+            btnPesquisar.setVisible(false);
+        }
+        return btnPesquisar;
+    }
+
+    public JButton getPescMed() {
+        if (this.pescMed == null) {
+            this.pescMed = new JButton("Pesquisar");
+            pescMed.setBounds(416, 504, 95, 44);
+            pescMed.setVisible(false);
+        }
+        return pescMed;
+    }
+
+    public JButton getPescPac1() {
+        if (this.pescPac1 == null) {
+            this.pescPac1 = new JButton("Pesquisar");
+            pescPac1.setBounds(416, 563, 95, 44);
+            pescPac1.setVisible(false);
+        }
+        return pescPac1;
+    }
+}

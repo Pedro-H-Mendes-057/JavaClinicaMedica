@@ -1,12 +1,15 @@
 package visual;
 
 import controle.ControladorFrame;
+
 import controle.ControladorPanelAgendar;
 import controle.ControladorPanelMateriais;
 import controle.ControladorPanelRelatorios;
 import javax.swing.*;
 import java.awt.*;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 
 import visual.PanelPacientes;
 import visual.PanelMedicos;
@@ -37,6 +40,7 @@ public class Frame extends JFrame {
     ControladorPanelRelatorios controladorPanelRelatorios;
     
     
+    
     public Frame() {
         super();
         this.setSize(1280, 720);
@@ -44,6 +48,7 @@ public class Frame extends JFrame {
         this.setTitle("Clínica Médica");
         this.setLocationRelativeTo(null);
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        
 
         tabbedPane = new JTabbedPane();
 
@@ -54,6 +59,11 @@ public class Frame extends JFrame {
         //														imagem de fundo
         JLabel backgroundLabel = new JLabel(new ImageIcon(getClass().getResource("resources/Background.png"))); 
         panelInicial.add(backgroundLabel, BorderLayout.CENTER);
+        
+        List<String> repositorioPacientes = new ArrayList<>();
+        List<String> repositorioMedicos = new ArrayList<>();
+        List<String> repositorioMateriais = new ArrayList<>();
+        List<String> repositorioExames = new ArrayList<>();
         
         //										inicialização dos respectivos paineis e controladores
         //OBS.: FALTA CRIAR OS CONTROLADORES DE MUITOS PAINEIS
@@ -68,7 +78,10 @@ public class Frame extends JFrame {
         this.panelExames = new PanelExames();
         this.controladorPanelExames = new ControladorPanelExames(this.panelExames, this.controladorPanelMateriais);
         this.panelRelatorios = new PanelRelatorios(this);
-        this.controladorPanelRelatorios = new ControladorPanelRelatorios(this.panelRelatorios);
+        this.controladorPanelRelatorios = new ControladorPanelRelatorios(
+        									this.panelRelatorios, repositorioPacientes, repositorioMedicos, 
+        									repositorioMateriais, repositorioExames
+        									);
         
         tabbedPane.addTab("Home", resizeIcon("resources/Pacientes.png", 30, 30), this.panelInicial, "BEM VINDO(A) À ZELOCUIDAR");
         tabbedPane.addTab("Pacientes", resizeIcon("resources/Pacientes.png", 30, 30), this.panelPacientes);

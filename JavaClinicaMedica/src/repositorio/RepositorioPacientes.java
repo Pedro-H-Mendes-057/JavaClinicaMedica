@@ -6,7 +6,7 @@ import modelo.Material;
 import modelo.Paciente;
 
 public class RepositorioPacientes {
-    private ArrayList<Paciente> repositorioPacientes;
+    public ArrayList<Paciente> repositorioPacientes;
     // Construtor
     public RepositorioPacientes() {
         this.repositorioPacientes = new ArrayList<>();
