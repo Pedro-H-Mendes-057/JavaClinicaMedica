@@ -5,7 +5,7 @@
 package controle;
 
 
-import dialogCadastroPanels.DialogBuscarMedico;
+import dialogCadastroPanels.DialogBuscar;
 import java.awt.event.ActionEvent;
 import java.util.EventListener;
 import javax.swing.table.DefaultTableModel;
@@ -15,10 +15,10 @@ import javax.swing.table.DefaultTableModel;
  * @author fonfon
  */
 public class ControladorDialogBuscarMedico implements EventListener {
-    private DialogBuscarMedico dialogBuscarMedico;
+    private DialogBuscar dialogBuscarMedico;
     private int chaveMedico;
     
-    public ControladorDialogBuscarMedico(DialogBuscarMedico dialogBuscarMedico) {
+    public ControladorDialogBuscarMedico(DialogBuscar dialogBuscarMedico) {
         this.chaveMedico = -1;
         this.dialogBuscarMedico = dialogBuscarMedico;
         addEventos();

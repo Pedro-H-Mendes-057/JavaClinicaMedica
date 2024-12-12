@@ -4,7 +4,7 @@
  */
 package controle;
 
-import dialogCadastroPanels.DialogBuscarMedico;
+import dialogCadastroPanels.DialogBuscar;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import visual.PanelAgendar;
@@ -31,7 +31,7 @@ import modelo.Medico;
 public class ControladorPanelAgendar implements ActionListener {
     PanelAgendar panelAgendar;
     DialogCadastrarConsulta dialogCadastrarConsulta;
-    DialogBuscarMedico dialogBuscarMedico;
+    DialogBuscar dialogBuscarMedico;
     ControladorDialogBuscarMedico controladorDialogBuscarMedico;
     ControladorDialogCadastrarConsulta controladorDialogCadastrarConsulta;
     private int chaveMedico;
@@ -80,7 +80,7 @@ public class ControladorPanelAgendar implements ActionListener {
             this.panelAgendar.getTxFPesquisar().setText("");
             this.panelAgendar.getBTNNovaConsulta().setEnabled(false);
             limparAgenda();
-            dialogBuscarMedico = new DialogBuscarMedico(ControladorFrame.frame);
+            dialogBuscarMedico = new DialogBuscar(ControladorFrame.frame);
             controladorDialogBuscarMedico = new ControladorDialogBuscarMedico(dialogBuscarMedico);
             chaveMedico = controladorDialogBuscarMedico.getChaveMedico();            
             if (chaveMedico != -1) {

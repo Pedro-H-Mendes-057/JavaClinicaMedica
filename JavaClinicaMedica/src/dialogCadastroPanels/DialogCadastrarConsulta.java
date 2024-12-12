@@ -218,7 +218,7 @@ public class DialogCadastrarConsulta extends JDialog {
     }
     
 
-    public JTextField getTextFielConvenio() {
+    public JTextField getTextFieldConvenio() {
         if (this.textFielConvenio == null) {
             this.textFielConvenio = new JTextField();            
             this.textFielConvenio.setEditable(false);
@@ -271,7 +271,7 @@ public class DialogCadastrarConsulta extends JDialog {
             constraints.insets = new Insets(0, 50,0,0);
             constraints.gridx=1; // coluna 1
             constraints.gridy=1; // linha 1 
-            this.panelConsultaConvenio.add(getTextFielConvenio(), constraints);
+            this.panelConsultaConvenio.add(getTextFieldConvenio(), constraints);
         } 
         
         return this.panelConsultaConvenio;        

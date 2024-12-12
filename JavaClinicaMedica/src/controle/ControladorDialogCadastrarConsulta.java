@@ -4,6 +4,7 @@
  */
 package controle;
 
+import dialogCadastroPanels.DialogBuscar;
 import dialogCadastroPanels.DialogCadastrarConsulta;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -13,6 +14,7 @@ import java.util.Date;
 import javax.swing.JOptionPane;
 import modelo.Consulta;
 import modelo.Medico;
+import modelo.Paciente;
 
 /**
  *
@@ -23,12 +25,17 @@ public class ControladorDialogCadastrarConsulta implements ActionListener{
     private int chaveMedico;
     Medico medico;
     Consulta consulta;
+    Paciente paciente;
+    ControladorDialogBuscarPaciente controladorDialogBuscarPaciente;
+    DialogBuscar dialogBuscarPaciente;
+    int chavePaciente;
     
     public ControladorDialogCadastrarConsulta(DialogCadastrarConsulta dialogCadastrarConsulta, int chaveMedico) {
        this.dialogCadastrarConsulta = dialogCadastrarConsulta;
        this.chaveMedico = chaveMedico;
        this.medico = ControladorFrame.repositorioMedicos.getMedicos().get(chaveMedico);
-       this.dialogCadastrarConsulta.getTextFieldNomeMedico().setText(this.medico.getNome());      
+       this.dialogCadastrarConsulta.getTextFieldNomeMedico().setText(this.medico.getNome()); 
+       
        addEventos();
        
        this.dialogCadastrarConsulta.setVisible(true);
@@ -47,11 +54,20 @@ public class ControladorDialogCadastrarConsulta implements ActionListener{
     
     void addEventos() {
         this.dialogCadastrarConsulta.getButtonSalvar().addActionListener(this);
+        this.dialogCadastrarConsulta.getButtonBuscarPaciente().addActionListener(this);
     }
     
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == this.dialogCadastrarConsulta.getButtonSalvar()) {
             salvarConsulta();
+        } else if (e.getSource() == this.dialogCadastrarConsulta.getButtonBuscarPaciente()) {
+            this.dialogBuscarPaciente = new DialogBuscar(this.dialogCadastrarConsulta);
+            this.controladorDialogBuscarPaciente = new ControladorDialogBuscarPaciente(this.dialogBuscarPaciente);
+            this.chavePaciente = this.controladorDialogBuscarPaciente.getChavePaciente();
+            if (this.chavePaciente != -1) {
+                this.dialogCadastrarConsulta.getTextFieldNomePaciente().setText(ControladorFrame.repositorioPacientes.getPacientes().get(this.chavePaciente).getNome());
+                this.dialogCadastrarConsulta.getTextFieldConvenio().setText(ControladorFrame.repositorioPacientes.getPacientes().get(this.chavePaciente).getConvenio());                
+            }
         }
     }
     
