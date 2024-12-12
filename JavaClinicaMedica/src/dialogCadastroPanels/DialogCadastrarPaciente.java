@@ -110,7 +110,7 @@ public class DialogCadastrarPaciente extends JDialog {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        //txFAltura.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
+        txFAltura.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
         txFAltura.setCaretPosition(3);
         
 
@@ -145,6 +145,7 @@ public class DialogCadastrarPaciente extends JDialog {
         } catch (ParseException e) {
             e.printStackTrace();
         }
+        txFPeso.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
         txFPeso.setCaretPosition(3);
         
         //HISTORICO MEDICO
