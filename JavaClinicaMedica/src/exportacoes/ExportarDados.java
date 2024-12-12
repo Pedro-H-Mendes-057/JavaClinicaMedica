@@ -274,13 +274,14 @@ public class ExportarDados {
                         consulta.setMedico(Integer.parseInt(arrayRegistro[8]));
                         consulta.setHora(arrayRegistro[6]);
                         consulta.setTipoConsulta(arrayRegistro[7]);
-                        String [] arrayMateriais = arrayRegistro[8].split("<>");
-                        
-                        Object[][] chaveMateriais = new Object[arrayMateriais.length][2]; 
+                        String [] arrayMateriais = arrayRegistro[9].split("<>");
+                        System.err.println(arrayMateriais.length);
+                        Object[][] chaveMateriais = new Object[arrayMateriais.length - 1][2];
                         
                         for (int j = 0; j < arrayMateriais.length - 1; j++) {
                             chaveMateriais[j][0] = arrayMateriais[j];
-                            chaveMateriais[j][1] = arrayMateriais[j + 1];
+                            chaveMateriais[j][1] = arrayMateriais[j + 1]; 
+                                                                                    
                         }
                         
                         consulta.setMateriaisUsar(chaveMateriais);

@@ -1,1 +1,1 @@
-M=0#D=09/12/2024#H=09:00;;Alberto;;Bem-Estar;;09/12/2024;;Tosse com sangue;;O paciente não consegue se lembrar de quando os sintomas apareceram;;09:00;;Emergencial;;0;;Luva<>1<>
+M=0#D=09/12/2024#H=09:00;;Alberto;;Bem-Estar;;09/12/2024;;Tosse com sangue;;O paciente não consegue se lembrar de quando os sintomas apareceram;;09:00;;Emergencial;;0;;Luva<>1
