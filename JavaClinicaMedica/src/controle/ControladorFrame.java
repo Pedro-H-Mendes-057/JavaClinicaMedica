@@ -21,7 +21,7 @@ public class ControladorFrame {
     public static RepositorioMedicos repositorioMedicos;
     public static RepositorioExames repositorioExames;
     public static RepositorioConsultas repositorioConsultas;
-    public static ControladorPanelMateriais controladorPanelMateriais;
+    //public static ControladorPanelMateriais controladorPanelMateriais;
 
     public ControladorFrame() {
         repositorioMateriais = new RepositorioMateriais();
@@ -31,7 +31,7 @@ public class ControladorFrame {
         repositorioConsultas = new RepositorioConsultas();
         frame = new Frame();
         frame.getTabbedPane().setIconAt(0, frame.resizeIcon("resources/Pintados/Pacientes2.png", 30, 30));
-        controladorPanelMateriais = new ControladorPanelMateriais(new PanelMateriais(), repositorioMateriais);
+        //controladorPanelMateriais = new ControladorPanelMateriais(new PanelMateriais(), repositorioMateriais);
         addEventos();
     }
 

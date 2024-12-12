@@ -32,7 +32,7 @@ public class Frame extends JFrame {
     ControladorPanelPacientes controladorPanelPacientes; 
     ControladorPanelMedicos controladorPanelMedicos; 
     ControladorPanelExames controladorPanelExames;
-    ControladorPanelMateriais controladorPanelMateriais; 
+    public static ControladorPanelMateriais controladorPanelMateriais; 
     ControladorPanelAgendar controladorPanelAgendar;
     ControladorPanelRelatorios controladorPanelRelatorios;
     

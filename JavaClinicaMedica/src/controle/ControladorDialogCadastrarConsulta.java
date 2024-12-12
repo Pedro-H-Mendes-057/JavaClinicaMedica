@@ -16,6 +16,7 @@ import javax.swing.table.DefaultTableModel;
 import modelo.Consulta;
 import modelo.Medico;
 import modelo.Paciente;
+import visual.Frame;
 
 /**
  *
@@ -63,11 +64,15 @@ public class ControladorDialogCadastrarConsulta implements ActionListener{
         this.dialogCadastrarConsulta.getButtonSalvar().addActionListener(this);
         this.dialogCadastrarConsulta.getButtonBuscarPaciente().addActionListener(this);
         this.dialogCadastrarConsulta.getButtonBuscarMateriais().addActionListener(this);
+        this.dialogCadastrarConsulta.getButtonCancelar().addActionListener(this);
     }
     
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == this.dialogCadastrarConsulta.getButtonSalvar()) {
-            salvarConsulta();
+            if (validarCampos()) {
+                salvarConsulta();
+                this.dialogCadastrarConsulta.dispose();
+            }
         } else if (e.getSource() == this.dialogCadastrarConsulta.getButtonBuscarPaciente()) {
             this.dialogBuscarPaciente = new DialogBuscar(this.dialogCadastrarConsulta);
             this.controladorDialogBuscarPaciente = new ControladorDialogBuscarPaciente(this.dialogBuscarPaciente);
@@ -80,24 +85,30 @@ public class ControladorDialogCadastrarConsulta implements ActionListener{
                 this.dialogCadastrarConsulta.getTextFieldConvenio().setText("");
             }
         } else if (e.getSource() == this.dialogCadastrarConsulta.getButtonBuscarMateriais()) {
+            this.chaveMaterial = -1;
             this.dialogBuscarMaterial = new DialogBuscar(this.dialogCadastrarConsulta);
             this.controladorDialogBuscarMaterial = new ControladorDialogBuscarMaterial(this.dialogBuscarMaterial);
+            this.chaveMaterial = this.controladorDialogBuscarMaterial.getChaveMaterial();          
             if (this.chaveMaterial != -1) {
-                for (int i = 0; i < this.countMateriais; i++) {
+                int contTemp = this.countMateriais; 
+                for (int i = 0; i < contTemp; i++) {
                     if (this.chaveMateriais[i] == this.chaveMaterial) {
                         mostrarErro(1);
                     } else if (i + 1 == this.countMateriais) {
-                        this.chaveMateriais[this.countMateriais++] = this.chaveMaterial;
+                        this.chaveMateriais[i] = this.chaveMaterial;
+                        this.countMateriais++;
                         addMaterial();
                     }
-                } 
-                
+                }                
                 if (this.countMateriais == 0) {
                     this.chaveMateriais[this.countMateriais++] = this.chaveMaterial;
-
+                    
                     addMaterial();
                 }
-            }            
+            } 
+            
+        } else if (e.getSource() == this.dialogCadastrarConsulta.getButtonCancelar()) {
+            this.dialogCadastrarConsulta.dispose();
         }
     }
     
@@ -148,10 +159,75 @@ public class ControladorDialogCadastrarConsulta implements ActionListener{
             });
         }
     }
+    
+    boolean validarCampos() {
+        if (this.dialogCadastrarConsulta.getTextAreaQueixa().getText().isBlank()
+            || this.dialogCadastrarConsulta.getTextAreaObservacoes().getText().isBlank()
+            || this.dialogCadastrarConsulta.getTextFieldConvenio().getText().isBlank()
+            || this.dialogCadastrarConsulta.getTextFieldNomePaciente().getText().isBlank()) {
+            mostrarErro(2);
+            return false;
+        }
+        
+        if (this.countMateriais == 0) {
+            mostrarErro(3);
+            return false;
+        }
+        
+        if (this.dialogCadastrarConsulta.getJDatePicker().getModel().getValue() == null ) {
+            mostrarErro(4);
+            return false;
+        }
+        
+        int quantidadeEscolhida;
+        int quantidadeEstoque;
+        for (int i = 0; i < this.countMateriais; i++) {
+            quantidadeEstoque = ControladorFrame.repositorioMateriais.getMateriais().get(this.chaveMateriais[i]).getQuant();
+            System.out.println("Quantidade estoque = " + quantidadeEstoque);
+            try {
+                if (this.dialogCadastrarConsulta.getTableBuscarMateriais().isEditing()) {
+                    this.dialogCadastrarConsulta.getTableBuscarMateriais().getCellEditor().stopCellEditing(); // Finaliza a edição da célula atual
+                }
+                quantidadeEscolhida = Integer.parseInt(this.dialogCadastrarConsulta.getTableBuscarMateriais().getValueAt(i, 1).toString());
+                System.out.println("Quantidade escolhida = " + quantidadeEscolhida);
+                if (quantidadeEstoque < quantidadeEscolhida) {
+                    mostrarErro(5);
+                    return false;
+                }
+                
+                ControladorFrame.repositorioMateriais.getMateriais().get(this.chaveMateriais[i]).setQuant(quantidadeEstoque - quantidadeEscolhida);
+                Frame.controladorPanelMateriais.atualizarTabela();
+            } catch (NumberFormatException ex) {
+                mostrarErro(6);
+                return false;
+            }
+        } 
+        
+        return true;
+    }
 
     void mostrarErro(int erro) {
-        if (erro == 1) {
-            JOptionPane.showMessageDialog(this.dialogCadastrarConsulta, "Esse material já foi adicionado! Altere a quantidade!");
+        switch (erro) {
+            case 1:
+                JOptionPane.showMessageDialog(this.dialogCadastrarConsulta, "Esse material já foi adicionado! Altere a quantidade!");
+                break;
+            case 2:
+                JOptionPane.showMessageDialog(this.dialogCadastrarConsulta, "Preencha todos os campos!");
+                break;
+            case 3:
+                JOptionPane.showMessageDialog(this.dialogCadastrarConsulta, "Escolha um material!");
+                break;
+            case 4:
+                JOptionPane.showMessageDialog(this.dialogCadastrarConsulta, "Selecione uma data!");
+                break;
+            case 5:
+                JOptionPane.showMessageDialog(this.dialogCadastrarConsulta, "Sem estoque suficiente de materiais!");
+                break;
+            case 6:
+                JOptionPane.showMessageDialog(this.dialogCadastrarConsulta, "Digite números na coluna quantidade!");
+                break;                
+            default:
+                break;
         }
         
     }
