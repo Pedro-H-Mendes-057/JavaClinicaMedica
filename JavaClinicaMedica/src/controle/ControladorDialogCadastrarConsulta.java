@@ -39,6 +39,7 @@ public class ControladorDialogCadastrarConsulta implements ActionListener{
     int [] chaveMateriais;
     int countMateriais;
     String chaveConsulta;
+    boolean modoEdicao; 
     
     public ControladorDialogCadastrarConsulta(DialogCadastrarConsulta dialogCadastrarConsulta, int chaveMedico) {
        this.dialogCadastrarConsulta = dialogCadastrarConsulta;
@@ -47,7 +48,8 @@ public class ControladorDialogCadastrarConsulta implements ActionListener{
        this.dialogCadastrarConsulta.getTextFieldNomeMedico().setText(this.medico.getNome()); 
        this.countMateriais = 0;
        this.chaveMateriais = new int[1000];
-       addEventos();
+       this.modoEdicao = false;
+       addEventosCadastrar();
        
        this.dialogCadastrarConsulta.setVisible(true);
     }
@@ -65,13 +67,20 @@ public class ControladorDialogCadastrarConsulta implements ActionListener{
        this.dialogEditarConsulta.getjComboBoxTipoConsulta().setSelectedItem(consulta.getTipoConsulta());
        this.dialogEditarConsulta.getjComboBoxHorario().setSelectedItem(consulta.getHora());       
        this.dialogEditarConsulta.getTextFieldData().setText(consulta.getData());
-       
-       //addEventos();
+       this.dialogEditarConsulta.getButtonBuscarMateriais().setEnabled(false);
+       this.dialogEditarConsulta.getButtonBuscarPaciente().setEnabled(false);
+       preencherTabelaMateriais(consulta.getMateriaisUsar());
+       this.modoEdicao = true;
        
        this.dialogEditarConsulta.setVisible(true);
     }
     
-    void addEventos() {
+    void addEventosEditar() {
+        this.dialogEditarConsulta.getButtonSalvar().addActionListener(this);
+        this.dialogEditarConsulta.getButtonCancelar().addActionListener(this);
+    }
+    
+    void addEventosCadastrar() {
         this.dialogCadastrarConsulta.getButtonSalvar().addActionListener(this);
         this.dialogCadastrarConsulta.getButtonBuscarPaciente().addActionListener(this);
         this.dialogCadastrarConsulta.getButtonBuscarMateriais().addActionListener(this);
@@ -80,7 +89,7 @@ public class ControladorDialogCadastrarConsulta implements ActionListener{
     
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == this.dialogCadastrarConsulta.getButtonSalvar()) {
-            if (validarCampos() &&  validarData()) {
+            if (validarCampos() && validarData()) {
                 salvarConsulta();
                 this.dialogCadastrarConsulta.dispose();
             }
@@ -120,6 +129,8 @@ public class ControladorDialogCadastrarConsulta implements ActionListener{
             
         } else if (e.getSource() == this.dialogCadastrarConsulta.getButtonCancelar()) {
             this.dialogCadastrarConsulta.dispose();
+           
+            
         }
     }
     
@@ -167,7 +178,32 @@ public class ControladorDialogCadastrarConsulta implements ActionListener{
         this.consulta.setHora(this.dialogCadastrarConsulta.getjComboBoxHorario().getSelectedItem().toString());
         this.consulta.setTipoConsulta(this.dialogCadastrarConsulta.getjComboBoxTipoConsulta().getSelectedItem().toString());
         
+        int numLinhas = this.dialogCadastrarConsulta.getTableBuscarMateriais().getRowCount();
+        Object [][] arrayMateriais = new Object[numLinhas][2]; 
+        int quantidadeMateriais = this.dialogCadastrarConsulta.getTableBuscarMateriais().getRowCount();
+        for (int i = 0; i < quantidadeMateriais; i++) {
+            arrayMateriais[i][0] = this.dialogCadastrarConsulta.getTableBuscarMateriais().getValueAt(i, 0);
+            arrayMateriais[i][1] = this.dialogCadastrarConsulta.getTableBuscarMateriais().getValueAt(i, 1);
+        }
+        
+        this.consulta.setMateriaisUsar(arrayMateriais);
+        
         return this.consulta;
+    }
+    
+    void preencherTabelaMateriais(Object [][] arrayMateriais) {
+        DefaultTableModel model = (DefaultTableModel) this.dialogEditarConsulta.getTableBuscarMateriais().getModel();
+        
+        model.setRowCount(0);
+        
+        for (int i = 0; i < arrayMateriais.length; i++) {
+            model.addRow(new Object [] {
+                arrayMateriais[i][0],
+                arrayMateriais[i][1]              
+            });
+        }
+        
+        
     }
 
     void addMaterial() {      

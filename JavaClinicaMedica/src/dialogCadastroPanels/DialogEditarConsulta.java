@@ -292,10 +292,7 @@ public class DialogEditarConsulta extends JDialog {
             this.tableBuscarMateriais = new JTable(model) {
                 @Override 
                 public boolean isCellEditable(int row, int column) {
-                    if (column == 1) {
-                        return true;
-                    }
-                    return false;
+                   return false;
                 }
             };
             this.tableBuscarMateriais.removeColumn(this.tableBuscarMateriais.getColumn("CHAVE"));
