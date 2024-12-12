@@ -6,10 +6,15 @@ import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
+
+import modelo.Material;
+import modelo.Paciente;
+
 
 import dialogCadastroPanels.DialogPesquisa;
 import modelo.Paciente;
@@ -17,6 +22,8 @@ import repositorio.RepositorioExames;
 import repositorio.RepositorioMateriais;
 import repositorio.RepositorioMedicos;
 import repositorio.RepositorioPacientes;
+
+import java.util.Map;
 
 public class ControladorPanelRelatorios implements ActionListener{
 	
@@ -51,62 +58,58 @@ public class ControladorPanelRelatorios implements ActionListener{
         this.panelRelatorios.getBTExames().addActionListener(this);
         this.panelRelatorios.getBTFinan().addActionListener(this);
         this.panelRelatorios.getBTMateriais().addActionListener(this);
-        
-        this.panelRelatorios.getBTPesquisar().addActionListener(this);   
-        
         panelRelatorios.getPescPac1().addActionListener(this);
         panelRelatorios.getPescMed().addActionListener(this);
-        panelRelatorios.getRBTFiltrarMedico().addActionListener(this);
-        panelRelatorios.getRBTFiltrarPaciente().addActionListener(this);
-        panelRelatorios.getBTPesquisar().addActionListener(this);
 	}//do addEventos
 	
 	
-	@Override
-	public void actionPerformed(ActionEvent e) {
-	    CorNormal();
-	    if (e.getSource() == panelRelatorios.getBTConsultas()) {
-	        panelRelatorios.getBTConsultas().setBackground(new Color(0, 128, 255));  //////////CONSULTAS
-	        System.out.println("CONSULTAS APERTADO");
-	        configurarRelatorioConsultas();
-	    } else if (e.getSource() == panelRelatorios.getBTExames()) {
-	        panelRelatorios.getBTExames().setBackground(new Color(0, 128, 255));  //////////EXAMES
-	        System.out.println("EXAMES APERTADO");
-	        configurarRelatorioExames();
-	    } else if (e.getSource() == panelRelatorios.getBTFinan()) {
-	        panelRelatorios.getBTFinan().setBackground(new Color(0, 128, 255));  //////////FINANCEIRO
-	        configurarRelatorioFinanceiro();
-	    } else if (e.getSource() == panelRelatorios.getBTMateriais()) {
-	        panelRelatorios.getBTMateriais().setBackground(new Color(0, 128, 255));  ////////////MATERIAIS
-	        configurarRelatorioMateriais();
-	        
-	    } else if (e.getSource() == panelRelatorios.getBTPesquisar()) {
-	        String tipo = FiltroSelect();
-	        if (tipo != null) {
-	            String textoPesquisa = obterTextoPesquisa(tipo);
-	            if (textoPesquisa != null && !textoPesquisa.isEmpty()) {
-	                pesquisar(panelRelatorios.getParent(), tipo, textoPesquisa);
-	            } else {
-	                JOptionPane.showMessageDialog(panelRelatorios, "Digite um nome para pesquisar", "Erro", JOptionPane.WARNING_MESSAGE);
-	            }
+	 @Override
+	    public void actionPerformed(ActionEvent e) {
+	        CorNormal();
+	        if (e.getSource() == panelRelatorios.getBTConsultas()) {
+	            panelRelatorios.getBTConsultas().setBackground(new Color(0, 128, 255));  //////////CONSULTAS
+	            configurarRelatorioConsultas();
+	        } else if (e.getSource() == panelRelatorios.getBTExames()) {
+	            panelRelatorios.getBTExames().setBackground(new Color(0, 128, 255));  //////////EXAMES
+	            configurarRelatorioExames();
+	        } else if (e.getSource() == panelRelatorios.getBTFinan()) {
+	            panelRelatorios.getBTFinan().setBackground(new Color(0, 128, 255));  //////////FINANCEIRO
+	            configurarRelatorioFinanceiro();
+	        } else if (e.getSource() == panelRelatorios.getBTMateriais()) {
+	            panelRelatorios.getBTMateriais().setBackground(new Color(0, 128, 255));  ////////////MATERIAIS
+	            configurarRelatorioMateriais();
 	        } 
+	        
+	        else if (e.getSource() == panelRelatorios.getPescMed()) {
+	            DefaultTableModel model = (DefaultTableModel) panelRelatorios.getTable().getModel();
+	            
+	            repositorioMedicos.repositorioMedicos.forEach((chave, medico) -> {
+	                model.addRow(new Object[]{
+	                    medico.getNome(),
+	                    medico.getEspecialidade(),
+	                    medico.getCrm(),
+	                    medico.getContato(),
+	                    medico.getValorConsulta(),
+	                    chave
+	                });
+	            });
+	        }
+	        
+	        else if (e.getSource() == panelRelatorios.getPescPac1()) {
+	            DefaultTableModel model = (DefaultTableModel) panelRelatorios.getTable().getModel();
+	            model.setRowCount(0);
+	            
+	            repositorioPacientes.getPacientes().forEach(paciente -> {
+	                model.addRow(new Object[]{
+	                    paciente.getNome(),
+	                    paciente.getDataNasc(),
+	                    paciente.getContato(),
+	                    paciente.getTipoSang(),
+	                    paciente.getConvenio()
+	                });
+	            });
+	        }
 	    }
-	    
-	    ////// EM CONSUTLAS
-	    if (e.getSource() == panelRelatorios.getRBTFiltrarMedico()) {
-	        configurarFiltroMedico();
-	    } else if (e.getSource() == panelRelatorios.getRBTFiltrarPaciente()) {
-	        configurarFiltroPaciente();
-	    } else if (e.getSource() == panelRelatorios.getPescMed()) {
-	        pesquisarMedico();
-	    } else if (e.getSource() == panelRelatorios.getPescPac1()) {
-	        pesquisarPaciente();
-	    } else if (e.getSource() == panelRelatorios.getBTPesquisar()) {
-	        abrirRelatorio();
-	    }
-}////ACTION PERFORMER
-	
-
 
 
 //da classe ////////////////////////////
@@ -120,8 +123,7 @@ public class ControladorPanelRelatorios implements ActionListener{
     }
     private void configurarRelatorioConsultas() {
         panelRelatorios.getBTConsultas().setBackground(new Color(0, 128, 255));
-        mostrarFiltros(true);
-        limparCamposFiltros();
+       mostrarFiltros(true);
     }
 
     private void configurarRelatorioExames() {
@@ -143,46 +145,88 @@ public class ControladorPanelRelatorios implements ActionListener{
     }
 
     private void mostrarFiltros(boolean visivel) {
-        panelRelatorios.getRBTFiltrarMedico().setVisible(visivel);
-        panelRelatorios.getRBTFiltrarPaciente().setVisible(visivel);
-        panelRelatorios.getTxFMedico().setVisible(visivel);
-        panelRelatorios.getTxFPaciente().setVisible(visivel);
         panelRelatorios.getPescMed().setVisible(visivel);
         panelRelatorios.getPescPac1().setVisible(visivel);
-        panelRelatorios.getBTPesquisar().setVisible(visivel);
+    }
+////////////////////////////////
+    private void configurarRelatorioExames() {
+        panelRelatorios.getBTExames().setBackground(new Color(0, 128, 255));
+        mostrarFiltros(false);
+        
+        // Lógica para exibir todos os exames
+        atualizarTabelaExames();
     }
 
-    private void limparCamposFiltros() {
-        panelRelatorios.getTxFMedico().setText("");
-        panelRelatorios.getTxFPaciente().setText("");
-        panelRelatorios.getTxFMedico().setEditable(true);
-        panelRelatorios.getTxFPaciente().setEditable(true);
-        panelRelatorios.getBTPesquisar().setEnabled(false);
+    private void atualizarTabelaExames() {
+        DefaultTableModel model = (DefaultTableModel) panelRelatorios.getTable().getModel();
+        model.setRowCount(0); // Limpar tabela antes de preencher
+        
+        repositorioExames.forEach(exame -> {
+            model.addRow(new Object[]{
+                exame.getTipo(),
+                exame.getDescricao(),
+                exame.getValor()
+            });
+        });
+    }
+ 
+    
+    private void configurarRelatorioMateriais() {
+        panelRelatorios.getBTMateriais().setBackground(new Color(0, 128, 255));
+        mostrarFiltros(false);
+        
+        // Lógica para exibir todos os materiais
+        atualizarTabelaMateriais();
     }
 
-    private void configurarFiltroMedico() {
-        panelRelatorios.getRBTFiltrarPaciente().setSelected(false);
-        panelRelatorios.getTxFPaciente().setEditable(false);
-        panelRelatorios.getTxFMedico().setEditable(true);
-        panelRelatorios.getPescMed().setVisible(true);
-        panelRelatorios.getPescPac1().setVisible(false);
-        panelRelatorios.getTxFPaciente().setText("");
+    private void atualizarTabelaMateriais() {
+        DefaultTableModel model = (DefaultTableModel) panelRelatorios.getTable().getModel();
+        model.setRowCount(0); // Limpar tabela antes de preencher
+        
+        repositorioMateriais.forEach(material -> {
+            model.addRow(new Object[]{
+                material.getNome(),
+                material.getQuantidade(),
+                material.getValor()
+            });
+        });
     }
 
-    private void configurarFiltroPaciente() {
-        panelRelatorios.getRBTFiltrarMedico().setSelected(false);
-        panelRelatorios.getTxFMedico().setEditable(false);
-        panelRelatorios.getTxFPaciente().setEditable(true);
-        panelRelatorios.getPescPac1().setVisible(true);
-        panelRelatorios.getPescMed().setVisible(false);
-        panelRelatorios.getTxFMedico().setText("");
+    private void configurarRelatorioFinanceiro() {
+        panelRelatorios.getBTFinan().setBackground(new Color(0, 128, 255));
+        mostrarFiltros(false);
+        
+        // Lógica para exibir o relatório financeiro
+        atualizarTabelaFinanceiro();
     }
 
+    /*private void atualizarTabelaFinanceiro() {
+        DefaultTableModel model = (DefaultTableModel) panelRelatorios.getTable().getModel();
+        model.setRowCount(0); // Limpar tabela antes de preencher
+        
+        double totalGastos = 0;
+        double totalGanhos = 0;
+        
+        // Aqui, você somaria os custos de materiais e exames e os ganhos de consultas realizadas
+        for (Exame exame : repositorioExames) {
+            totalGastos += exame.getValor();
+        }
+        
+        for (Consulta consulta : repositorioConsultas) {
+            totalGanhos += consulta.getValor();
+        }
+        
+        model.addRow(new Object[]{"Total de Gastos", totalGastos});
+        model.addRow(new Object[]{"Total de Ganhos", totalGanhos});
+        model.addRow(new Object[]{"Lucro", totalGanhos - totalGastos});
+    }*/
 
-    private void abrirRelatorio() {
+    
+    
+    /*private void abrirRelatorio() {
         // Lógica para abrir e exibir o relatório filtrado na tabela
-        String filtroMedico = panelRelatorios.getTxFMedico().getText();
-        String filtroPaciente = panelRelatorios.getTxFPaciente().getText();
+       // String filtroMedico = panelRelatorios.getTxFMedico().getText();
+        //String filtroPaciente = panelRelatorios.getTxFPaciente().getText();
 
         if (!filtroMedico.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Exibindo consultas do médico: " + filtroMedico);
@@ -191,5 +235,5 @@ public class ControladorPanelRelatorios implements ActionListener{
         } else {
             JOptionPane.showMessageDialog(null, "Seleção inválida!");
         }
-    }
+    }*/
 }//da Classe

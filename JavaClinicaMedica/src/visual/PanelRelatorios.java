@@ -29,11 +29,8 @@ public class PanelRelatorios extends JPanel {
         add(getTable());
         add(getPescMed());
         add(getPescPac1());
-        add(getTxFMedico());
-        add(getTxFPaciente());
-        add(getRBTFiltrarMedico());
-        add(getRBTFiltrarPaciente());
-        add(getBTPesquisar());
+        
+       
     }
 
     public JLabel getLbTitulo() {
@@ -90,62 +87,11 @@ public class PanelRelatorios extends JPanel {
     }
 
     //////////////////////////////////////////////////////////////////////
-    public JRadioButton getRBTFiltrarMedico() {
-        if (this.rBFiltrarMedico == null) {
-            this.rBFiltrarMedico = new JRadioButton("Filtrar por médico");
-            rBFiltrarMedico.setFont(new Font("Tahoma", Font.PLAIN, 15));
-            rBFiltrarMedico.setBounds(21, 505, 146, 39);
-            rBFiltrarMedico.setVisible(false);
-        }
-        return rBFiltrarMedico;
-    }
-
-    public JRadioButton getRBTFiltrarPaciente() {
-        if (this.rBtFiltrarPaciente == null) {
-            this.rBtFiltrarPaciente = new JRadioButton("Filtrar por paciente");
-            rBtFiltrarPaciente.setFont(new Font("Tahoma", Font.PLAIN, 15));
-            rBtFiltrarPaciente.setBounds(21, 563, 159, 39);
-            rBtFiltrarPaciente.setVisible(false);
-        }
-        return rBtFiltrarPaciente;
-    }
-
-    public JTextField getTxFMedico() {
-        if (this.txFMedico == null) {
-            this.txFMedico = new JTextField();
-            txFMedico.setBounds(182, 507, 224, 39);
-            txFMedico.setColumns(10);
-            txFMedico.setVisible(false);
-            txFMedico.setEnabled(false);
-        }
-        return txFMedico;
-    }
-
-    public JTextField getTxFPaciente() {
-        if (this.txFPaciente == null) {
-            this.txFPaciente = new JTextField();
-            txFPaciente.setBounds(182, 563, 224, 39);
-            txFPaciente.setColumns(10);
-            txFPaciente.setVisible(false);
-            txFPaciente.setEnabled(false);
-        }
-        return txFPaciente;
-    }
-
-    public JButton getBTPesquisar() {
-        if (this.btnPesquisar == null) {
-            this.btnPesquisar = new JButton("Abrir Relatório");
-            btnPesquisar.setFont(new Font("Tahoma", Font.PLAIN, 15));
-            btnPesquisar.setBounds(220, 612, 159, 39);
-            btnPesquisar.setVisible(false);
-        }
-        return btnPesquisar;
-    }
 
     public JButton getPescMed() {
         if (this.pescMed == null) {
-            this.pescMed = new JButton("Pesquisar");
-            pescMed.setBounds(416, 504, 95, 44);
+            this.pescMed = new JButton("Medicos");
+            pescMed.setBounds(125, 522, 169, 54);
             pescMed.setVisible(false);
         }
         return pescMed;
@@ -153,8 +99,8 @@ public class PanelRelatorios extends JPanel {
 
     public JButton getPescPac1() {
         if (this.pescPac1 == null) {
-            this.pescPac1 = new JButton("Pesquisar");
-            pescPac1.setBounds(416, 563, 95, 44);
+            this.pescPac1 = new JButton("Exames");
+            pescPac1.setBounds(125, 589, 169, 54);
             pescPac1.setVisible(false);
         }
         return pescPac1;

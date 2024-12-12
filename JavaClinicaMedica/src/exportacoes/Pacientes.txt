@@ -2,3 +2,4 @@ Alberto;;33/33/3333;;(11)11111-1111;;B+;;21.0;;13.0;;Bem-Estar;;sad;;21;;ASD;;22
 Aroldo Santos Soares;;32/34/2432;;(32)34243-2343;;B+;;23.0;;233.0;;Bem-Estar;;dfsdf;;234;;sdfsd;;23234-323;;dsf;;Amazonas
 Arlindo Messi;;12/21/2121;;(23)32432-4324;;B+;;3324.0;;324.0;;Premium Care;;asd;;324;;asd;;32324-234;;asd;;Amapá
 Rebeca Soares;;23/01/2003;;(32)99328-2832;;A-;;160.0;;93.48;;Bem-Estar;;fsdf;;32;;sdf;;32322-323;;asd;;Amapá
+Joana;;23/23/2323;;(21)11111-1111;;B+;;211.0;;122.11;;Bem-Estar;;adsads;;312;;asddas;;11221-321;;sad;;Amazonas
