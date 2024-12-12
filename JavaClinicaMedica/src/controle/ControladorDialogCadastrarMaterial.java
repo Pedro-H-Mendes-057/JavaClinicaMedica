@@ -44,7 +44,7 @@ public class ControladorDialogCadastrarMaterial implements ActionListener {
         } else if (e.getSource() == this.dialogCadastrarMaterial.getButtonSalvar()) { 
         	if(camposValidos() == true) {
         		
-        		if (this.dialogCadastrarMaterial.modoEdicao) {
+        	if (this.dialogCadastrarMaterial.modoEdicao) {
                     atualizarMaterial();
                     JOptionPane.showMessageDialog(this.dialogCadastrarMaterial, "Material atualizado com sucesso!");
                 } else {
@@ -55,7 +55,8 @@ public class ControladorDialogCadastrarMaterial implements ActionListener {
             }
         }//do salvar
         else if (e.getSource()== this.dialogCadastrarMaterial.getButtonCancelar()) {
-        	this.dialogCadastrarMaterial.dispose();    }
+        	this.dialogCadastrarMaterial.dispose();    
+        }
     }  
 
     public void uploadImage() {
@@ -108,17 +109,17 @@ public class ControladorDialogCadastrarMaterial implements ActionListener {
     }
     
     private void atualizarMaterial() {
-        this.material.setQuant(Integer.valueOf(this.dialogCadastrarMaterial.getTextFieldQtdEstoque().getText()));
-        this.material.setPreco(this.dialogCadastrarMaterial.getTextFieldPreco().getText());
+        this.material.setQuant(Integer.valueOf(this.dialogCadastrarMaterial.getTextFieldQtdEstoque().getText().trim()));
+        this.material.setPreco(this.dialogCadastrarMaterial.getTextFieldPreco().getText().trim());
     }
     
     public void addMaterial() {
         this.material = new Material();
-        this.material.setNome(this.dialogCadastrarMaterial.getTextFieldNome().getText());
-        this.material.setFornecedor(this.dialogCadastrarMaterial.getTextFieldFornecedor().getText());
-        this.material.setQuant(Integer.valueOf(this.dialogCadastrarMaterial.getTextFieldQtdEstoque().getText()));
-        this.material.setQuantMin(Integer.valueOf(this.dialogCadastrarMaterial.getTextFieldQtdMinima().getText()));
-        this.material.setPreco(this.dialogCadastrarMaterial.getTextFieldPreco().getText());
+        this.material.setNome(this.dialogCadastrarMaterial.getTextFieldNome().getText().trim());
+        this.material.setFornecedor(this.dialogCadastrarMaterial.getTextFieldFornecedor().getText().trim());
+        this.material.setQuant(Integer.valueOf(this.dialogCadastrarMaterial.getTextFieldQtdEstoque().getText().trim()));
+        this.material.setQuantMin(Integer.valueOf(this.dialogCadastrarMaterial.getTextFieldQtdMinima().getText().trim()));
+        this.material.setPreco(this.dialogCadastrarMaterial.getTextFieldPreco().getText().trim());
        
         ControladorFrame.repositorioMateriais.addMaterial(this.material);
         ExportarDados.anexarMaterial(this.material);
