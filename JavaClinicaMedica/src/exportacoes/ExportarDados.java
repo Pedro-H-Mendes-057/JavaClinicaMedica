@@ -228,7 +228,7 @@ public class ExportarDados {
 	                       consulta.getObservacoes() + ";;" + 
                                consulta.getHora() + ";;" +
                                consulta.getTipoConsulta() + ";;" + 
-                               consulta.getMedico();
+                               consulta.getMedico() + ";;";
                for (int i = 0; i < consulta.getMateriaisUsar().length; i++) {
                    salvar += consulta.getMateriaisUsar()[i][0] + "<>";
                    salvar += consulta.getMateriaisUsar()[i][1] + "<>";
@@ -246,7 +246,57 @@ public class ExportarDados {
 	   }
 	}
         
-	
+	public static void recuperarConsultas() throws IOException {
+            try {
+                File arquivo = new File("src" + File.separator + "exportacoes" + File.separator, "Consultas.txt");  
+                FileReader fR = new FileReader(arquivo);
+                String registros = "";
+                String [] arrayRegistros;
+                int i;
+
+                while (true) {
+                    i = fR.read();
+                    if (i == -1) break;
+                    char c = (char) i;
+                    registros += c;
+                }
+
+                if (registros.length() != 0) {
+                    arrayRegistros = registros.split("\n");
+                    for (String registro : arrayRegistros) {
+                        String [] arrayRegistro = registro.split(";;");
+                        Consulta consulta = new Consulta();                         
+                        consulta.setPaciente(arrayRegistro[1]);
+                        consulta.setConvenio(arrayRegistro[2]);
+                        consulta.setObservacoes(arrayRegistro[5]);
+                        consulta.setQueixa(arrayRegistro[4]);
+                        consulta.setData(arrayRegistro[3]);
+                        consulta.setMedico(Integer.parseInt(arrayRegistro[8]));
+                        consulta.setHora(arrayRegistro[6]);
+                        consulta.setTipoConsulta(arrayRegistro[7]);
+                        String [] arrayMateriais = arrayRegistro[8].split("<>");
+                        
+                        Object[][] chaveMateriais = new Object[arrayMateriais.length][2]; 
+                        
+                        for (int j = 0; j < arrayMateriais.length - 1; j++) {
+                            chaveMateriais[j][0] = arrayMateriais[j];
+                            chaveMateriais[j][1] = arrayMateriais[j + 1];
+                        }
+                        
+                        consulta.setMateriaisUsar(chaveMateriais);
+                        
+                        ControladorFrame.repositorioConsultas.addConsulta(arrayRegistro[0], consulta);
+                    }
+                }
+            } catch (FileNotFoundException ex) {
+                System.out.println("Arquivo Consultas.txt não encontrado.\nCriando arquivo...");
+                File arquivo = new File("src" + File.separator + "exportacoes" + File.separator, "Consultas.txt");          
+                arquivo.createNewFile();
+            } catch (IOException ex) {
+                Logger.getLogger(ExportarDados.class.getName()).log(Level.SEVERE, null, ex);
+            }
+	}
+        
 ////////////MATERIAIS	
 	public static void anexarMaterial(Material material) {
 	   FileWriter fW = null;
