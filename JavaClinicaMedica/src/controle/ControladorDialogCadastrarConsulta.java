@@ -11,6 +11,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import javax.swing.JOptionPane;
+import modelo.Consulta;
 import modelo.Medico;
 
 /**
@@ -21,13 +22,13 @@ public class ControladorDialogCadastrarConsulta implements ActionListener{
     DialogCadastrarConsulta dialogCadastrarConsulta;
     private int chaveMedico;
     Medico medico;
+    Consulta consulta;
     
     public ControladorDialogCadastrarConsulta(DialogCadastrarConsulta dialogCadastrarConsulta, int chaveMedico) {
        this.dialogCadastrarConsulta = dialogCadastrarConsulta;
        this.chaveMedico = chaveMedico;
        this.medico = ControladorFrame.repositorioMedicos.getMedicos().get(chaveMedico);
-       this.dialogCadastrarConsulta.getTextFieldNomeMedico().setText(this.medico.getNome());
-       
+       this.dialogCadastrarConsulta.getTextFieldNomeMedico().setText(this.medico.getNome());      
        addEventos();
        
        this.dialogCadastrarConsulta.setVisible(true);
@@ -71,7 +72,7 @@ public class ControladorDialogCadastrarConsulta implements ActionListener{
             String horario = (String) this.dialogCadastrarConsulta.getjComboBoxHorario().getSelectedItem();
             String chaveConsulta = "M=" + chaveMedico + "#D=" + formatador.format(dataSelecionada) + "#H=" + horario;
             if (ControladorFrame.repositorioConsultas.procurarConsulta(chaveConsulta) == false) {
-                ControladorFrame.repositorioConsultas.addConsulta(chaveConsulta, chaveConsulta);
+                ControladorFrame.repositorioConsultas.addConsulta(chaveConsulta, getConsulta());
             } else {
                 JOptionPane.showMessageDialog(this.dialogCadastrarConsulta, erros[1]);
             }
@@ -79,5 +80,11 @@ public class ControladorDialogCadastrarConsulta implements ActionListener{
         } else {
             JOptionPane.showMessageDialog(this.dialogCadastrarConsulta, erros[0]);
         }
+    }
+    
+    Consulta getConsulta() {
+        this.consulta = new Consulta();
+        
+        return this.consulta;
     }
 }

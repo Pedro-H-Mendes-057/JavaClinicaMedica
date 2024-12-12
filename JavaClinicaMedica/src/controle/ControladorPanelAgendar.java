@@ -61,7 +61,7 @@ public class ControladorPanelAgendar implements ActionListener {
                     String chaveConsulta = simularTabela[linha][coluna - 1];
                     
                     if (ControladorFrame.repositorioConsultas.procurarConsulta(chaveConsulta) == true) { 
-                         dialogCadastrarConsulta = new DialogCadastrarConsulta(ControladorFrame.frame);
+                        dialogCadastrarConsulta = new DialogCadastrarConsulta(ControladorFrame.frame);
                         controladorDialogCadastrarConsulta = new ControladorDialogCadastrarConsulta(dialogCadastrarConsulta, chaveMedico, chaveConsulta);
                     }                   
                 }
@@ -77,6 +77,8 @@ public class ControladorPanelAgendar implements ActionListener {
         } else if (e.getSource() == this.panelAgendar.getBTNNovoExame()) {
             
         } else if (e.getSource() ==  this.panelAgendar.getBTNBuscar()) {
+            this.panelAgendar.getTxFPesquisar().setText("");
+            this.panelAgendar.getBTNNovaConsulta().setEnabled(false);
             limparAgenda();
             dialogBuscarMedico = new DialogBuscarMedico(ControladorFrame.frame);
             controladorDialogBuscarMedico = new ControladorDialogBuscarMedico(dialogBuscarMedico);
@@ -88,11 +90,15 @@ public class ControladorPanelAgendar implements ActionListener {
         } else if (e.getSource() == this.panelAgendar.getBTNVoltar()) {
             this.panelAgendar.mudarSemana(-1);
             limparAgenda();
-            atualizarAgenda(chaveMedico);
+            if (chaveMedico != -1) {
+                atualizarAgenda(chaveMedico);
+            }            
         } else if (e.getSource() == this.panelAgendar.getBTNAvancar()) {
             this.panelAgendar.mudarSemana(1);
             limparAgenda();
-            atualizarAgenda(chaveMedico);
+            if (chaveMedico != -1) {
+                atualizarAgenda(chaveMedico);
+            }
         }
     }
     

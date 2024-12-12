@@ -6,24 +6,24 @@ import modelo.Consulta;
 
 public class RepositorioConsultas {
     static String chave; 
-    //LinkedHashMap<String, Consulta> repositorioConsultas;    <---- sera usada depois
-    LinkedHashMap<String, String> repositorioConsultas;
+    LinkedHashMap<String, Consulta> repositorioConsultas;   
+    // LinkedHashMap<String, String> repositorioConsultas;
     
     public RepositorioConsultas() {        
         this.repositorioConsultas = new LinkedHashMap<>();        
     }
     
     //TESTE
-    public void addConsulta(String chave, String consulta) {         
-        repositorioConsultas.put(chave, consulta);
-    }
-    
-    // Esta sera usada depois:    <-------
-    /*public void addConsulta(String chave, Consulta consulta) {         
+    /*public void addConsulta(String chave, String consulta) {         
         repositorioConsultas.put(chave, consulta);
     } */
     
-    public LinkedHashMap<String, String> getConsultas() {
+    // Esta sera usada depois:    <-------
+    public void addConsulta(String chave, Consulta consulta) {         
+        repositorioConsultas.put(chave, consulta);
+    } 
+    
+    public LinkedHashMap<String, Consulta> getConsultas() {
         return this.repositorioConsultas;
     }
     
@@ -35,7 +35,7 @@ public class RepositorioConsultas {
         }
     }
     
-    public String getConsulta(String chave) {
+    public Consulta getConsulta(String chave) {
         return this.repositorioConsultas.get(chave);     
     }
     

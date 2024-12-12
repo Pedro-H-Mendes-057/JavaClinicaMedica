@@ -11,6 +11,10 @@ public class Consulta {
 	private String observacoes;
 	private int [] chaveMateriais;
 	
+        public Consulta() {
+        
+        }
+        
 	public Consulta(String data, String hora, int chaveMedico, int chavePaciente, String queixa, String tipoConsulta,
 			String convenio, String observacoes, int [] chaveMateriais) {
 		super();
