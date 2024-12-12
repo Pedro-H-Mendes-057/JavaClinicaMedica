@@ -141,7 +141,15 @@ public class ControladorDialogCadastrarConsulta implements ActionListener{
     
     Consulta getConsulta() {
         this.consulta = new Consulta();
-
+        this.consulta.setPaciente(this.dialogCadastrarConsulta.getTextFieldNomePaciente().getText());
+        this.consulta.setConvenio(this.dialogCadastrarConsulta.getTextFieldConvenio().getText());
+        this.consulta.setObservacoes(this.dialogCadastrarConsulta.getTextAreaObservacoes().getText());
+        this.consulta.setQueixa(this.dialogCadastrarConsulta.getTextAreaQueixa().getText());
+        this.consulta.setData(this.dialogCadastrarConsulta.getJDatePicker().getModel().getValue().toString());
+        this.consulta.setMedico(this.chaveMedico);
+        this.consulta.setHora(this.dialogCadastrarConsulta.getjComboBoxHorario().getSelectedItem().toString());
+        this.consulta.setTipoConsulta(this.dialogCadastrarConsulta.getjComboBoxTipoConsulta().getSelectedItem().toString());
+        
         return this.consulta;
     }
 

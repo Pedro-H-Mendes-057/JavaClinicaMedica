@@ -35,7 +35,7 @@ public class RepositorioConsultas {
         }
     }
     
-    public Consulta getConsulta(String chave) {
+public Consulta getConsulta(String chave) {
         return this.repositorioConsultas.get(chave);     
     }
     

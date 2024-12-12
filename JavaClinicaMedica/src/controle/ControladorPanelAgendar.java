@@ -119,7 +119,7 @@ public class ControladorPanelAgendar implements ActionListener {
                         String procurarChave = "M=" + chaveMedico + "#D=" + dataFormatada + "#H=" + options[row];
                         //System.out.println(procurarChave);
                         if (ControladorFrame.repositorioConsultas.procurarConsulta(procurarChave) == true) {
-                            this.panelAgendar.getTableSemana().getModel().setValueAt("RESERVADO", row, col);
+                            this.panelAgendar.getTableSemana().getModel().setValueAt(procurarChave, row, col);
                             this.simularTabela[row][col -1] = procurarChave;
                         } else {
                             this.panelAgendar.getTableSemana().getModel().setValueAt("DISPONÍVEL", row, col);
@@ -168,9 +168,9 @@ public class ControladorPanelAgendar implements ActionListener {
                 super.setBackground(new Color(50, 205, 101));
                 super.setText("DISPONÍVEL");
                 super.setForeground(new Color(255, 255, 255));
-            } else if (texto.equals("RESERVADO")) {
+            } else if (texto.startsWith("M=")) {
                 super.setBackground(new Color(128, 128, 128));
-                super.setText("RESERVADO");
+                super.setText(ControladorFrame.repositorioConsultas.getConsulta(texto).getPaciente());                
                 super.setForeground(new Color(255, 255, 255));
             }
             else {

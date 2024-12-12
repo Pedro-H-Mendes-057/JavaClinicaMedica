@@ -6,7 +6,7 @@ public class Consulta {
 	private String data;
 	private String hora;
 	private int chaveMedico;
-	private int chavePaciente;
+	String chavePaciente;
 	private String queixa;
 	private String tipoConsulta;
 	private String convenio;
@@ -17,7 +17,7 @@ public class Consulta {
         
         }
         
-	public Consulta(String data, String hora, int chaveMedico, int chavePaciente, String queixa, String tipoConsulta,
+	public Consulta(String data, String hora, int chaveMedico, String chavePaciente, String queixa, String tipoConsulta,
 			String convenio, String observacoes, Object [][] chaveMateriais) {
 		super();
 		this.data = data;
@@ -55,11 +55,11 @@ public class Consulta {
 		this.chaveMedico = chaveMedico;
 	}
 
-	public int getPaciente() {
+	public String getPaciente() {
 		return this.chavePaciente;
 	}
 
-	public void setPaciente(int chavePaciente) {
+	public void setPaciente(String chavePaciente) {
 		this.chavePaciente = chavePaciente;
 	}
 
