@@ -5,7 +5,6 @@
 package dialogCadastroPanels;
 
 import controle.DateLabelFormatter;
-import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
@@ -32,7 +31,7 @@ import org.jdatepicker.impl.UtilDateModel;
  *
  * @author fonfon
  */
-public class DialogCadastrarConsulta extends JDialog {
+public class DialogEditarConsulta extends JDialog {
     private JLabel labelNomePaciente;
     private JTextField textFieldNomePaciente;
     private JButton buttonBuscarPaciente;
@@ -61,9 +60,10 @@ public class DialogCadastrarConsulta extends JDialog {
     private JLabel labelData;
     private JLabel labelHorario;
     private JScrollPane scrollPaneQueixa;
-    private JScrollPane scrollPaneObservacoes;    
+    private JScrollPane scrollPaneObservacoes;
+    private JTextField textFieldData;
     
-    public DialogCadastrarConsulta(JFrame parent) {
+    public DialogEditarConsulta(JFrame parent) {
         super(parent, "Cadastrar Consulta", true);
         this.setSize(1500, 650);
         this.setResizable(false);
@@ -384,35 +384,28 @@ public class DialogCadastrarConsulta extends JDialog {
         return this.panelSalvarCancelar;
     }
     
-    public JDatePickerImpl getJDatePicker() {
-        if (this.datePicker == null) {
-            UtilDateModel model = new UtilDateModel();
-            Properties properties = new Properties();
-            properties.put("text.today", "Hoje");
-            properties.put("text.month", "Mês");
-            properties.put("text.year", "Ano");
-            
-            JDatePanelImpl datePanel = new JDatePanelImpl(model, properties);
-            this.datePicker = new JDatePickerImpl(datePanel, new DateLabelFormatter());
-        }
         
-        return this.datePicker;
-    }   
+    public JTextField getTextFieldData() {
+        if (this.textFieldData == null) {
+            this.textFieldData = new JTextField();            
+            this.textFieldData.setEditable(false);
+        }
+        return this.textFieldData; 
+    }
     
-    
-    public JComboBox<String> getjComboBoxHorario() {
-       if (this.jComboBoxHorario == null) {
-           String[] options = { "08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00" };
-           this.jComboBoxHorario = new JComboBox<>(options);
-       }
-
-       return this.jComboBoxHorario;
+     public JComboBox<String> getjComboBoxHorario() {
+        if (this.jComboBoxHorario == null) {
+            String[] options = { "08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00" };
+            this.jComboBoxHorario = new JComboBox<>(options);
+        }
+                
+        return this.jComboBoxHorario;
     }
      
      JLabel getLabelData() {
         if (this.labelData == null) {
             this.labelData = new JLabel();
-            this.labelData.setText("Selecione a data");                         
+            this.labelData.setText("Data da consulta");                         
         }
         return this.labelData;
     }
@@ -446,7 +439,7 @@ public class DialogCadastrarConsulta extends JDialog {
             constraints.insets = new Insets(0,0,0,0);
             constraints.gridx=0; // coluna 0
             constraints.gridy=1; // linha 1            
-            this.panelDataHorario.add(getJDatePicker(), constraints);
+            this.panelDataHorario.add(getTextFieldData(), constraints);
             
             constraints.insets = new Insets(0, 50,0,0);
             constraints.gridx=1; // coluna 1
@@ -457,5 +450,4 @@ public class DialogCadastrarConsulta extends JDialog {
         return this.panelDataHorario;        
     }
 }
-
 

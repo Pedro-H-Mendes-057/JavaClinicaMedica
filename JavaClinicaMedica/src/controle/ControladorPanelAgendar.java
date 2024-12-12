@@ -9,6 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import visual.PanelAgendar;
 import dialogCadastroPanels.DialogCadastrarConsulta;
+import dialogCadastroPanels.DialogEditarConsulta;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Image;
@@ -31,6 +32,7 @@ import modelo.Medico;
 public class ControladorPanelAgendar implements ActionListener {
     PanelAgendar panelAgendar;
     DialogCadastrarConsulta dialogCadastrarConsulta;
+    DialogEditarConsulta  dialogEditarConsulta;
     DialogBuscar dialogBuscarMedico;
     ControladorDialogBuscarMedico controladorDialogBuscarMedico;
     ControladorDialogCadastrarConsulta controladorDialogCadastrarConsulta;
@@ -40,7 +42,7 @@ public class ControladorPanelAgendar implements ActionListener {
     public ControladorPanelAgendar(PanelAgendar panelAgendar) {
         this.panelAgendar = panelAgendar;
         this.panelAgendar.getBTNNovaConsulta().setEnabled(false);
-        this.simularTabela = new String[5][11];
+        this.simularTabela = new String[11][5];
         addEventos();
     }
     
@@ -54,15 +56,14 @@ public class ControladorPanelAgendar implements ActionListener {
             @Override 
             public void mouseClicked(MouseEvent e) {
                 int linha = panelAgendar.getTableSemana().rowAtPoint(e.getPoint());
-                int coluna = panelAgendar.getTableSemana().columnAtPoint(e.getPoint());
-                System.out.println("teste");
+                int coluna = panelAgendar.getTableSemana().columnAtPoint(e.getPoint());                
                 if (linha >= 0 && linha <= 11 && coluna >= 1 && coluna <= 5) {
-                    System.out.println("linha = " + linha + " coluna = " + coluna);
+                    //System.out.println("linha = " + linha + " coluna = " + coluna);
                     String chaveConsulta = simularTabela[linha][coluna - 1];
-                    
+                    System.out.println("CHAVE CONSULTA " + chaveConsulta);
                     if (ControladorFrame.repositorioConsultas.procurarConsulta(chaveConsulta) == true) { 
-                        dialogCadastrarConsulta = new DialogCadastrarConsulta(ControladorFrame.frame);
-                        controladorDialogCadastrarConsulta = new ControladorDialogCadastrarConsulta(dialogCadastrarConsulta, chaveMedico, chaveConsulta);
+                        dialogEditarConsulta = new DialogEditarConsulta(ControladorFrame.frame);
+                        controladorDialogCadastrarConsulta = new ControladorDialogCadastrarConsulta(dialogEditarConsulta, chaveMedico, chaveConsulta);
                     }                   
                 }
             }
@@ -105,7 +106,7 @@ public class ControladorPanelAgendar implements ActionListener {
     // depois que o usuario escolhe um medico, o nome do medico sera atualizado aqui
     void atualizarAgenda(int chaveMedico) {        
         if (chaveMedico >= 0) {
-            String[] options = { "08:00", "09:00", "10:00", "11:00", "13:00", "12:00", "14:00", "15:00", "16:00", "17:00", "18:00" };
+            String[] options = { "08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00" };
             LocalDate inicioSemana = this.panelAgendar.getInicioSemana();
             
             Medico medico = ControladorFrame.repositorioMedicos.getMedicos().get(chaveMedico);
@@ -124,6 +125,8 @@ public class ControladorPanelAgendar implements ActionListener {
                         } else {
                             this.panelAgendar.getTableSemana().getModel().setValueAt("DISPONÍVEL", row, col);
                         }                        
+                    } else {
+                        this.simularTabela[row][col -1] = null;
                     }
                 }
             }

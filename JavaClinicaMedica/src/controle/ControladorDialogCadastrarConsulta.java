@@ -6,6 +6,7 @@ package controle;
 
 import dialogCadastroPanels.DialogBuscar;
 import dialogCadastroPanels.DialogCadastrarConsulta;
+import dialogCadastroPanels.DialogEditarConsulta;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
@@ -32,10 +33,12 @@ public class ControladorDialogCadastrarConsulta implements ActionListener{
     DialogBuscar dialogBuscarPaciente;
     ControladorDialogBuscarMaterial controladorDialogBuscarMaterial;
     DialogBuscar dialogBuscarMaterial;
+    DialogEditarConsulta dialogEditarConsulta;
     int chavePaciente;
     int chaveMaterial;
     int [] chaveMateriais;
     int countMateriais;
+    String chaveConsulta;
     
     public ControladorDialogCadastrarConsulta(DialogCadastrarConsulta dialogCadastrarConsulta, int chaveMedico) {
        this.dialogCadastrarConsulta = dialogCadastrarConsulta;
@@ -49,15 +52,23 @@ public class ControladorDialogCadastrarConsulta implements ActionListener{
        this.dialogCadastrarConsulta.setVisible(true);
     }
     
-    public ControladorDialogCadastrarConsulta(DialogCadastrarConsulta dialogCadastrarConsulta, int chaveMedico, String chaveConsulta) {
-       this.dialogCadastrarConsulta = dialogCadastrarConsulta;
+    public ControladorDialogCadastrarConsulta(DialogEditarConsulta dialogEditarConsulta, int chaveMedico, String chaveConsulta) {
+       this.dialogEditarConsulta = dialogEditarConsulta;
        this.chaveMedico = chaveMedico;
        this.medico = ControladorFrame.repositorioMedicos.getMedicos().get(chaveMedico);
-       this.dialogCadastrarConsulta.getTextFieldNomeMedico().setText(this.medico.getNome());
+       this.dialogEditarConsulta.getTextFieldNomeMedico().setText(this.medico.getNome());       
+       Consulta consulta = ControladorFrame.repositorioConsultas.getConsulta(chaveConsulta);
+       this.dialogEditarConsulta.getTextFieldNomePaciente().setText(consulta.getPaciente());
+       this.dialogEditarConsulta.getTextFieldConvenio().setText(consulta.getConvenio());
+       this.dialogEditarConsulta.getTextAreaQueixa().setText(consulta.getQueixa());
+       this.dialogEditarConsulta.getTextAreaObservacoes().setText(consulta.getObservacoes());
+       this.dialogEditarConsulta.getjComboBoxTipoConsulta().setSelectedItem(consulta.getTipoConsulta());
+       this.dialogEditarConsulta.getjComboBoxHorario().setSelectedItem(consulta.getHora());       
+       this.dialogEditarConsulta.getTextFieldData().setText(consulta.getData());
        
-       addEventos();
+       //addEventos();
        
-       this.dialogCadastrarConsulta.setVisible(true);
+       this.dialogEditarConsulta.setVisible(true);
     }
     
     void addEventos() {
@@ -69,7 +80,7 @@ public class ControladorDialogCadastrarConsulta implements ActionListener{
     
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == this.dialogCadastrarConsulta.getButtonSalvar()) {
-            if (validarCampos()) {
+            if (validarCampos() &&  validarData()) {
                 salvarConsulta();
                 this.dialogCadastrarConsulta.dispose();
             }
@@ -113,31 +124,36 @@ public class ControladorDialogCadastrarConsulta implements ActionListener{
     }
     
     void salvarConsulta() {
+        ControladorFrame.repositorioConsultas.addConsulta(this.chaveConsulta, getConsulta());            
+    }
+    
+    boolean validarData() {
         String [] erros = {this.medico.getNome() + " não atende na data e horário selecionados!", 
         "Já existe uma consulta cadastrada na data e horário selecionados!"};
 
         Calendar calendar = Calendar.getInstance();
         Date dataSelecionada = (Date) this.dialogCadastrarConsulta.getJDatePicker().getModel().getValue();
-        calendar.setTime(dataSelecionada);
-        //System.out.println(dataSelecionada);
+        calendar.setTime(dataSelecionada);       
         int diaDaSemana = calendar.get(Calendar.DAY_OF_WEEK) - 2;
-        int horarioSelecionado = this.dialogCadastrarConsulta.getjComboBoxHorario().getSelectedIndex();
-        //System.out.println("Horário selecionado: " + horarioSelecionado);
-        //System.out.println("Data selecionada: " + diaDaSemana);
+        int horarioSelecionado = this.dialogCadastrarConsulta.getjComboBoxHorario().getSelectedIndex();       
         if (diaDaSemana != -1 && diaDaSemana != 5 && medico.getHorasAtend()[horarioSelecionado][diaDaSemana] == 1) {
             SimpleDateFormat formatador = new SimpleDateFormat("dd/MM/yyyy");
             String horario = (String) this.dialogCadastrarConsulta.getjComboBoxHorario().getSelectedItem();
-            String chaveConsulta = "M=" + chaveMedico + "#D=" + formatador.format(dataSelecionada) + "#H=" + horario;
+            this.chaveConsulta = "M=" + chaveMedico + "#D=" + formatador.format(dataSelecionada) + "#H=" + horario;
             if (ControladorFrame.repositorioConsultas.procurarConsulta(chaveConsulta) == false) {
-                ControladorFrame.repositorioConsultas.addConsulta(chaveConsulta, getConsulta());
             } else {
                 JOptionPane.showMessageDialog(this.dialogCadastrarConsulta, erros[1]);
+                return false;
             }
             System.out.println("Chave consulta: " + chaveConsulta);
         } else {
             JOptionPane.showMessageDialog(this.dialogCadastrarConsulta, erros[0]);
+            return false;
         }
+        
+        return true;        
     }
+    
     
     Consulta getConsulta() {
         this.consulta = new Consulta();
@@ -145,7 +161,8 @@ public class ControladorDialogCadastrarConsulta implements ActionListener{
         this.consulta.setConvenio(this.dialogCadastrarConsulta.getTextFieldConvenio().getText());
         this.consulta.setObservacoes(this.dialogCadastrarConsulta.getTextAreaObservacoes().getText());
         this.consulta.setQueixa(this.dialogCadastrarConsulta.getTextAreaQueixa().getText());
-        this.consulta.setData(this.dialogCadastrarConsulta.getJDatePicker().getModel().getValue().toString());
+        SimpleDateFormat formatador = new SimpleDateFormat("dd/MM/yyyy");        
+        this.consulta.setData(formatador.format(this.dialogCadastrarConsulta.getJDatePicker().getModel().getValue()));
         this.consulta.setMedico(this.chaveMedico);
         this.consulta.setHora(this.dialogCadastrarConsulta.getjComboBoxHorario().getSelectedItem().toString());
         this.consulta.setTipoConsulta(this.dialogCadastrarConsulta.getjComboBoxTipoConsulta().getSelectedItem().toString());
