@@ -1,4 +1,4 @@
-package controle;
+/*package controle;
 import visual.PanelRelatorios;
 
 import java.awt.Color;
@@ -235,5 +235,5 @@ public class ControladorPanelRelatorios implements ActionListener{
         } else {
             JOptionPane.showMessageDialog(null, "Seleção inválida!");
         }
-    }*/
-}//da Classe
+    }
+} */
