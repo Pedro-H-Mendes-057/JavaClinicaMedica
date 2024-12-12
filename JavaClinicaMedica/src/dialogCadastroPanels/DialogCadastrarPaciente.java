@@ -76,6 +76,7 @@ public class DialogCadastrarPaciente extends JDialog {
             e.printStackTrace();
         }
         
+        
         //CONTATO
         JLabel lblContato = new JLabel("Contato");
         lblContato.setFont(new Font("Tahoma", Font.PLAIN, 15));
@@ -93,15 +94,25 @@ public class DialogCadastrarPaciente extends JDialog {
         }
         
         //ALTURA
-        JLabel lblAltura = new JLabel("Altura:");
+        JLabel lblAltura = new JLabel("Altura (em cm):");
         lblAltura.setFont(new Font("Tahoma", Font.PLAIN, 15));
         lblAltura.setBounds(64, 330, 204, 29);
         getContentPane().add(lblAltura);
         
-        txFAltura = new JTextField();
-        txFAltura.setColumns(10);
-        txFAltura.setBounds(63, 369, 205, 40);
-        getContentPane().add(txFAltura);
+        try {
+            MaskFormatter mascAltura = new MaskFormatter("###");
+            mascAltura.setPlaceholderCharacter(' ');
+
+            txFAltura = new JFormattedTextField(mascAltura);
+            txFAltura.setBounds(63, 369, 205, 40);
+            txFAltura.setFont(new Font("Tahoma", Font.PLAIN, 16));
+            getContentPane().add(txFAltura);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        txFAltura.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
+        txFAltura.setCaretPosition(3);
+        
 
 		//TIPO SANGUINEO
         JLabel lblTipoSang = new JLabel("Tipo Sanguíneo:");
@@ -123,10 +134,19 @@ public class DialogCadastrarPaciente extends JDialog {
         lblPeso.setBounds(64, 419, 204, 29);
         getContentPane().add(lblPeso);
         
-        txFPeso = new JTextField();
-        txFPeso.setColumns(10);
-        txFPeso.setBounds(63, 458, 205, 40);
-        getContentPane().add(txFPeso);
+        try {
+            MaskFormatter mascPeso = new MaskFormatter("###.##");
+            mascPeso.setPlaceholderCharacter(' ');
+
+            txFPeso = new JFormattedTextField(mascPeso);
+            txFPeso.setBounds(63, 458, 205, 40);
+            txFPeso.setFont(new Font("Tahoma", Font.PLAIN, 16));
+            getContentPane().add(txFPeso);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        txFPeso.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
+        txFPeso.setCaretPosition(3);
         
         //HISTORICO MEDICO
         JLabel lblHistMedic = new JLabel("Histórico Médico:");
