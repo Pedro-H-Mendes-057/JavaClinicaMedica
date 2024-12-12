@@ -89,7 +89,7 @@ public class ControladorDialogCadastrarConsulta implements ActionListener{
     
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == this.dialogCadastrarConsulta.getButtonSalvar()) {
-            if (validarCampos() && validarData()) {
+            if (validarCampos() && validarData() && validarMateriais()) {
                 salvarConsulta();
                 this.dialogCadastrarConsulta.dispose();
             }
@@ -238,9 +238,13 @@ public class ControladorDialogCadastrarConsulta implements ActionListener{
         if (this.dialogCadastrarConsulta.getJDatePicker().getModel().getValue() == null ) {
             mostrarErro(4);
             return false;
-        }
+        }       
         
-        int quantidadeEscolhida;
+        return true;
+    }
+    
+    boolean validarMateriais() {
+         int quantidadeEscolhida;
         int quantidadeEstoque;
         for (int i = 0; i < this.countMateriais; i++) {
             quantidadeEstoque = ControladorFrame.repositorioMateriais.getMateriais().get(this.chaveMateriais[i]).getQuant();
