@@ -81,7 +81,11 @@ public class ControladorDialogCadastrarExame implements ActionListener {
             }
         }//Do salvar
         if (e.getSource() == this.dialogCadastrarExames.getBTConfSelect()) {
-            atualizarCoresLinha();
+        	 JTable tabela = dialogCadastrarExames.getTabela();
+        	    if (tabela.isEditing()) {
+        	        tabela.getCellEditor().stopCellEditing();
+        	    }
+        	    atualizarCoresLinha();
         }
     } //actionPerformed
     

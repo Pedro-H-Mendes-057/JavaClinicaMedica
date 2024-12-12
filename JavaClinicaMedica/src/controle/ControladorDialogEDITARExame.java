@@ -92,7 +92,11 @@ public class ControladorDialogEDITARExame implements ActionListener {
             }
         }//Do salvar
         if (e.getSource() == this.dialogEditarExames.getBTConfSelect()) {
-            atualizarCoresLinha();
+        	JTable tabela = dialogEditarExames.getTabela();
+	    if (tabela.isEditing()) {
+	        tabela.getCellEditor().stopCellEditing();
+	    }
+	    atualizarCoresLinha();
         }
     } //actionPerformed
     

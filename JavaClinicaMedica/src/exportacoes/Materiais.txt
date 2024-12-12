@@ -52,3 +52,6 @@ teste 1;;10;;1;;teste ;;120
 teste 2;;10;;1;;teste 2;;12
 teste 3;;10;;1;;teste;;120
 teste;;10;;1;;teste;;120
+AAAAA;;32;;12;;D;;1
+Afulha;;32;;1;;d;;3
+Mascara;;93;;21;;2;;32
