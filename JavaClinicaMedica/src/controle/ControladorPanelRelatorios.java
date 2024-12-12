@@ -80,7 +80,7 @@ public class ControladorPanelRelatorios implements ActionListener{
 	            configurarRelatorioMateriais();
 	        } 
 	        
-	        else if (e.getSource() == panelRelatorios.getPescMed()) {
+	       /* else if (e.getSource() == panelRelatorios.getPescMed()) {
 	            DefaultTableModel model = (DefaultTableModel) panelRelatorios.getTable().getModel();
 	            
 	            repositorioMedicos.repositorioMedicos.forEach((chave, medico) -> {
@@ -109,7 +109,7 @@ public class ControladorPanelRelatorios implements ActionListener{
 	                });
 	            });
 	        }
-	    }
+	    }*/
 
 
 //da classe ////////////////////////////
@@ -154,10 +154,10 @@ public class ControladorPanelRelatorios implements ActionListener{
         mostrarFiltros(false);
         
         // Lógica para exibir todos os exames
-        atualizarTabelaExames();
+        //atualizarTabelaExames();
     }
 
-    private void atualizarTabelaExames() {
+    /*private void atualizarTabelaExames() {
         DefaultTableModel model = (DefaultTableModel) panelRelatorios.getTable().getModel();
         model.setRowCount(0); // Limpar tabela antes de preencher
         
