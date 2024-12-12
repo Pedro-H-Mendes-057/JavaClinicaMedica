@@ -43,6 +43,11 @@ public class ControladorPanelMateriais implements ActionListener {
             boolean itemSelecionado = this.panelMateriais.getTable().getSelectedRow() != -1;
             this.panelMateriais.getBTNEditar().setEnabled(itemSelecionado);
         });
+        
+        this.panelMateriais.getTable().getSelectionModel().addListSelectionListener(event -> {
+            boolean itemSelecionado = this.panelMateriais.getTable().getSelectedRow() != -1;
+            this.panelMateriais.getBTNExcluir().setEnabled(itemSelecionado);
+        });
     }
 
     public void actionPerformed(ActionEvent e) {

@@ -1,6 +1,7 @@
 package controle;
 
 import java.awt.event.ActionEvent;
+
 import java.awt.event.ActionListener;
 import dialogCadastroPanels.DialogCadastrarExames;
 import dialogCadastroPanels.DialogCadastrarPaciente;
@@ -31,7 +32,12 @@ public class ControladorPanelExames implements ActionListener {
     
     private void addEventos() {
         this.panelExames.getBTNNovo().addActionListener(this);
-        this.panelExames.getBTNEditar().addActionListener(this);
+        
+        this.panelExames.getTable().getSelectionModel().addListSelectionListener(event -> {
+            boolean itemSelecionado = this.panelExames.getTable().getSelectedRow() != -1;
+            this.panelExames.getBTNEditar().setEnabled(itemSelecionado);
+        });
+        //this.panelExames.getBTNEditar().addActionListener(this);
     }
     
     @Override

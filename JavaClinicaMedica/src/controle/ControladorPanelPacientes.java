@@ -44,6 +44,7 @@ public class ControladorPanelPacientes implements ActionListener {
         this.panelPacientes.getTable().getSelectionModel().addListSelectionListener(event -> {
             boolean itemSelecionado = this.panelPacientes.getTable().getSelectedRow() != -1;
             this.panelPacientes.getBTNEditar().setEnabled(itemSelecionado);
+            this.panelPacientes.getBTNExcluir().setEnabled(itemSelecionado);
         });
     }
 
