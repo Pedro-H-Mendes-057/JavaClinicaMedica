@@ -115,7 +115,7 @@ public class ControladorPanelRelatorios implements ActionListener{
 //da classe ////////////////////////////
         
 
-    private void CorNormal() {
+ /*   private void CorNormal() {
         panelRelatorios.getBTConsultas().setBackground(null);
         panelRelatorios.getBTExames().setBackground(null);
         panelRelatorios.getBTFinan().setBackground(null);
