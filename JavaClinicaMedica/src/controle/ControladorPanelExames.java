@@ -34,6 +34,7 @@ public class ControladorPanelExames implements ActionListener {
             this.panelExames.getBTNExcluir().setEnabled(itemSelecionado);
         });
         //this.panelExames.getBTNEditar().addActionListener(this);
+        this.panelExames.getBTNExcluir().addActionListener(this);
     }
     
     @Override
@@ -46,9 +47,10 @@ public class ControladorPanelExames implements ActionListener {
             
         }
         
-        if (e.getSource() == this.panelExames.getBTNExcluir()) {
+        if (e.getSource() == this.panelExames.getBTNExcluir()) {           
             if(this.panelExames.getMessageDialogExcluirItem(panelExames) &&
             		(this.panelExames.getTable().getSelectedRowCount()) == 1) {
+                
             	ControladorFrame.repositorioExames.getExames().remove(this.panelExames.getTable().getSelectedRow());
             	atualizarTabela();
             }
