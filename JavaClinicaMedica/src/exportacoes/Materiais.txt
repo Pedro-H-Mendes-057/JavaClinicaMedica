@@ -1,2 +1,9 @@
 teste;;20;;10;;teste;;120
 teste;;30;;20;;teste;;120
+teste;;120;;30;;teste;;120
+teste;;30;;10;;teste;;120
+teste;;120;;10;;teste;;120
+teste;;120;;20;;teste;;120
+teste;;120;;10;;teste;;133
+teste;;12;;1;;teste;;120
+teste;;120;;10;;teste;;12

@@ -287,15 +287,19 @@ public class DialogCadastrarConsulta extends JDialog {
 
     public JTable getTableBuscarMateriais() {
         if (this.tableBuscarMateriais == null) { 
-            String[] colunas = {"MATERIAL", "QUANTIDADE"};
+            String[] colunas = {"MATERIAL", "QUANTIDADE", "CHAVE"};
             DefaultTableModel model = new DefaultTableModel(0, colunas.length);
             model.setColumnIdentifiers(colunas);
             this.tableBuscarMateriais = new JTable(model) {
                 @Override 
                 public boolean isCellEditable(int row, int column) {
+                    if (column == 1) {
+                        return true;
+                    }
                     return false;
                 }
             };
+            this.tableBuscarMateriais.removeColumn(this.tableBuscarMateriais.getColumn("CHAVE"));
         }
         return this.tableBuscarMateriais;        
     }

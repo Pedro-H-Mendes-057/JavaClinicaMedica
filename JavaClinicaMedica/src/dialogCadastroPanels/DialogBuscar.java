@@ -71,7 +71,7 @@ public class DialogBuscar extends JDialog {
 
     public JTable getTable() {
         if (this.buscar == null) {
-            String[] colunas = {"NOME", "CHAVE"}; // a coluna POSICAO guarda o index do objeto 
+            String[] colunas = {"NOME", "CHAVE"}; // a coluna CHAVE guarda a chave do objeto 
             DefaultTableModel model = new DefaultTableModel(0, colunas.length);
             model.setColumnIdentifiers(colunas);
             this.buscar = new JTable(model) {

@@ -12,6 +12,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import modelo.Consulta;
 import modelo.Medico;
 import modelo.Paciente;
@@ -32,13 +33,16 @@ public class ControladorDialogCadastrarConsulta implements ActionListener{
     DialogBuscar dialogBuscarMaterial;
     int chavePaciente;
     int chaveMaterial;
+    int [] chaveMateriais;
+    int countMateriais;
     
     public ControladorDialogCadastrarConsulta(DialogCadastrarConsulta dialogCadastrarConsulta, int chaveMedico) {
        this.dialogCadastrarConsulta = dialogCadastrarConsulta;
        this.chaveMedico = chaveMedico;
        this.medico = ControladorFrame.repositorioMedicos.getMedicos().get(chaveMedico);
        this.dialogCadastrarConsulta.getTextFieldNomeMedico().setText(this.medico.getNome()); 
-       
+       this.countMateriais = 0;
+       this.chaveMateriais = new int[1000];
        addEventos();
        
        this.dialogCadastrarConsulta.setVisible(true);
@@ -79,7 +83,20 @@ public class ControladorDialogCadastrarConsulta implements ActionListener{
             this.dialogBuscarMaterial = new DialogBuscar(this.dialogCadastrarConsulta);
             this.controladorDialogBuscarMaterial = new ControladorDialogBuscarMaterial(this.dialogBuscarMaterial);
             if (this.chaveMaterial != -1) {
-                addMaterial();
+                for (int i = 0; i < this.countMateriais; i++) {
+                    if (this.chaveMateriais[i] == this.chaveMaterial) {
+                        mostrarErro(1);
+                    } else if (i + 1 == this.countMateriais) {
+                        this.chaveMateriais[this.countMateriais++] = this.chaveMaterial;
+                        addMaterial();
+                    }
+                } 
+                
+                if (this.countMateriais == 0) {
+                    this.chaveMateriais[this.countMateriais++] = this.chaveMaterial;
+
+                    addMaterial();
+                }
             }            
         }
     }
@@ -87,7 +104,7 @@ public class ControladorDialogCadastrarConsulta implements ActionListener{
     void salvarConsulta() {
         String [] erros = {this.medico.getNome() + " não atende na data e horário selecionados!", 
         "Já existe uma consulta cadastrada na data e horário selecionados!"};
-        
+
         Calendar calendar = Calendar.getInstance();
         Date dataSelecionada = (Date) this.dialogCadastrarConsulta.getJDatePicker().getModel().getValue();
         calendar.setTime(dataSelecionada);
@@ -113,11 +130,30 @@ public class ControladorDialogCadastrarConsulta implements ActionListener{
     
     Consulta getConsulta() {
         this.consulta = new Consulta();
-        
+
         return this.consulta;
     }
-    
-    void addMaterial() {
+
+    void addMaterial() {      
+
+        DefaultTableModel model = (DefaultTableModel) this.dialogCadastrarConsulta.getTableBuscarMateriais().getModel();         
+
+        model.setRowCount(0);
+
+        for (int chave = 0; chave < this.countMateriais; chave++) {
+            model.addRow(new Object [] {
+                ControladorFrame.repositorioMateriais.getMateriais().get(chaveMateriais[chave]).getNome(),
+                1,
+                chave
+            });
+        }
+    }
+
+    void mostrarErro(int erro) {
+        if (erro == 1) {
+            JOptionPane.showMessageDialog(this.dialogCadastrarConsulta, "Esse material já foi adicionado! Altere a quantidade!");
+        }
         
     }
+    
 }
