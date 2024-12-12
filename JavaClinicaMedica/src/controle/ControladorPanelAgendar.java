@@ -56,8 +56,7 @@ public class ControladorPanelAgendar implements ActionListener {
     }
     
     public void addEventos() {
-        this.panelAgendar.getBTNNovaConsulta().addActionListener(this);
-        this.panelAgendar.getBTNNovoExame().addActionListener(this);
+        this.panelAgendar.getBTNNovaConsulta().addActionListener(this);        
         this.panelAgendar.getBTNBuscar().addActionListener(this);
         this.panelAgendar.getBTNVoltar().addActionListener(this);
         this.panelAgendar.getBTNAvancar().addActionListener(this);
@@ -85,8 +84,6 @@ public class ControladorPanelAgendar implements ActionListener {
             dialogCadastrarConsulta = new DialogCadastrarConsulta(ControladorFrame.frame);
             controladorDialogCadastrarConsulta = new ControladorDialogCadastrarConsulta(dialogCadastrarConsulta, chaveMedico);
             atualizarAgenda(chaveMedico);
-        } else if (e.getSource() == this.panelAgendar.getBTNNovoExame()) {
-            
         } else if (e.getSource() ==  this.panelAgendar.getBTNBuscar()) {
             this.panelAgendar.getTxFPesquisar().setText("");
             this.panelAgendar.getBTNNovaConsulta().setEnabled(false);

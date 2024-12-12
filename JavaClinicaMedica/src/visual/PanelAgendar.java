@@ -63,6 +63,7 @@ public class PanelAgendar extends JPanel { // Alterado para herdar de JPanel
         gbcBotes.gridx = 0;
         gbcBotes.gridy = 3;
         gbcBotes.weightx = 0.1;
+        gbcBotes.fill = GridBagConstraints.HORIZONTAL;
         gbcBotes.insets = new Insets(0, 100, 50, 100);        
         add(getPanelBotoes(), gbcBotes);
 
@@ -162,11 +163,12 @@ public class PanelAgendar extends JPanel { // Alterado para herdar de JPanel
             GridBagConstraints c1 = new GridBagConstraints();
             c1.insets = new Insets(0, 0, 0, 10);
             c1.gridx = 0;
+            c1.weightx = 0.1;
             c1.ipady = 10;
             c1.anchor = GridBagConstraints.LINE_START;
             this.panelBotoes.add(getBTNNovaConsulta(), c1);
             
-            GridBagConstraints c2 = new GridBagConstraints();
+            /*GridBagConstraints c2 = new GridBagConstraints();
             c2.insets = new Insets(0, 0, 0, 10);
             c2.gridx = 1;
             c2.ipady = 10;
@@ -184,7 +186,7 @@ public class PanelAgendar extends JPanel { // Alterado para herdar de JPanel
             c4.gridx = 3;
             c4.ipady = 10;
             c4.anchor = GridBagConstraints.LINE_START;
-            this.panelBotoes.add(getBTNCancelar(), c4);
+            this.panelBotoes.add(getBTNCancelar(), c4); */
         }
         return this.panelBotoes;
     }
@@ -214,14 +216,14 @@ public class PanelAgendar extends JPanel { // Alterado para herdar de JPanel
         return this.btnNovo;
     }
     
-    public JButton getBTNNovoExame() {
+    /*public JButton getBTNNovoExame() {
         if (this.btnNovoExame == null) {
             this.btnNovoExame = new JButton("NOVO EXAME");
             this.btnNovoExame.setBackground(new Color(50, 205, 101));
             this.btnNovoExame.setForeground(Color.WHITE);
         }
         return this.btnNovoExame;
-    }
+    } */
     
     public JButton getBTNVoltar() {
         if (this.btnVoltar == null) {
@@ -237,14 +239,14 @@ public class PanelAgendar extends JPanel { // Alterado para herdar de JPanel
         return this.btnAvancar;
     }
 
-    public JButton getBTNEditar() {
+    /*public JButton getBTNEditar() {
         if (this.btnEditar == null) {
             this.btnEditar = new JButton("EDITAR");
             this.btnEditar.setBackground(new Color(100, 149, 237));
             this.btnEditar.setForeground(Color.WHITE);
         }
         return this.btnEditar;
-    }
+    } 
 
     public JButton getBTNCancelar() {
         if (this.btnCancelar == null) {
@@ -253,7 +255,7 @@ public class PanelAgendar extends JPanel { // Alterado para herdar de JPanel
             this.btnCancelar.setForeground(Color.WHITE);
         }
         return this.btnCancelar;
-    }
+    } */
     
      public JButton getBTNBuscar() {
         if (this.btnPesquisar == null) {
