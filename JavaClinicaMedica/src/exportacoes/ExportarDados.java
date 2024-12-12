@@ -165,6 +165,16 @@ public class ExportarDados {
                         medico.setContato(arrayRegistro[4]);
                         medico.setValorConsulta(Double.parseDouble(arrayRegistro[5]));
                         
+                        int [][] horasAtend = new int[11][5];
+                        for (int j = 0; j < 11; j++) {
+                            for (int k = 0; k < 5; k++) {
+                                horasAtend[j][k] = arrayRegistro[6].charAt(j + j * k) - '0';
+                                System.out.print(horasAtend[j][k]);
+                            }
+                            System.out.print("\n");
+                        }
+                        medico.setHorasAtend(horasAtend);
+                        
                         ControladorFrame.repositorioMedicos.recuperarMedico(medico, Integer.parseInt(arrayRegistro[0]));
                     }
                 }

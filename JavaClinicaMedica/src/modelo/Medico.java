@@ -62,7 +62,12 @@ public class Medico {
 	}
 
 	public void setHorasAtend(int[][] horasAtend) {
-		this.horariosAtendimento = horasAtend;
+            this.horariosAtendimento = new int[11][5];
+            for (int j = 0; j < 11; j++) {
+                for (int k = 0; k < 5; k++) {
+                    this.horariosAtendimento[j][k] = horasAtend[j][k];
+                }
+            }
 	}
 
 	public double getValorConsulta() {

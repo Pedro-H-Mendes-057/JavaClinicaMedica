@@ -83,7 +83,8 @@ public class ControladorPanelAgendar implements ActionListener {
             limparAgenda();
             dialogBuscarMedico = new DialogBuscar(ControladorFrame.frame);
             controladorDialogBuscarMedico = new ControladorDialogBuscarMedico(dialogBuscarMedico);
-            chaveMedico = controladorDialogBuscarMedico.getChaveMedico();            
+            chaveMedico = controladorDialogBuscarMedico.getChaveMedico();  
+            System.out.println("chave = " +chaveMedico);
             if (chaveMedico != -1) {
                 atualizarAgenda(chaveMedico);
                 this.panelAgendar.getBTNNovaConsulta().setEnabled(true);
