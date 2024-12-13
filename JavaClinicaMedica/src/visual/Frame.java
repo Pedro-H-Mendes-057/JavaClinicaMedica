@@ -80,8 +80,7 @@ public class Frame extends JFrame {
         this.panelExames = new PanelExames();
         this.controladorPanelExames = new ControladorPanelExames(this.panelExames, Frame.controladorPanelMateriais);
         this.panelRelatorios = new PanelRelatorios(this);
-        this.controladorPanelRelatorios = new ControladorPanelRelatorios(panelRelatorios, ControladorFrame.repositorioPacientes, ControladorFrame.repositorioMedicos,
-        		ControladorFrame.repositorioMateriais, ControladorFrame.repositorioExames);
+        this.controladorPanelRelatorios = new ControladorPanelRelatorios(panelRelatorios);
         /*this.controladorPanelRelatorios = new ControladorPanelRelatorios(
         									this.panelRelatorios, repositorioPacientes, repositorioMedicos, 
         									repositorioMateriais, repositorioExames
