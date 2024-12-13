@@ -1,1 +1,2 @@
 Luva;;100;;10;;RareMed Hospitalar;;5
+Alcool;;23;;2;;Alcolaria;;234
