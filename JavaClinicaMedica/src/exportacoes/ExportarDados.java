@@ -241,7 +241,11 @@ public class ExportarDados {
                                consulta.getMedico() + ";;";
                for (int i = 0; i < consulta.getMateriaisUsar().length; i++) {
                    salvar += consulta.getMateriaisUsar()[i][0] + "<>";
-                   salvar += consulta.getMateriaisUsar()[i][1] + "<>";
+                   if (i == consulta.getMateriaisUsar().length) {
+                       salvar += consulta.getMateriaisUsar()[i][1];
+                   } else {
+                       salvar += consulta.getMateriaisUsar()[i][1] + "<>";
+                   }                   
                }
                salvar += "\n";
 	       fW.write(salvar, 0, salvar.length());
@@ -332,7 +336,11 @@ public class ExportarDados {
                                consulta.getMedico() + ";;";
                     for (int i = 0; i < consulta.getMateriaisUsar().length; i++) {
                         salvar += consulta.getMateriaisUsar()[i][0] + "<>";
-                        salvar += consulta.getMateriaisUsar()[i][1] + "<>";
+                        if (i == consulta.getMateriaisUsar().length) {
+                            salvar += consulta.getMateriaisUsar()[i][1];
+                        } else {
+                            salvar += consulta.getMateriaisUsar()[i][1] + "<>";
+                        }
                     }
                     salvar += "\n";	       
                }              
@@ -460,7 +468,12 @@ public class ExportarDados {
 	                       exame.getMedico().getNome() + ";;";
                for (int i = 0; i < exame.getMateriaisUsar().size(); i++) {
                    salvar += exame.getMateriaisUsar().get(i).getNome() + "<>";
-                   salvar += exame.getMateriaisUsar().get(i).getQuant() + "<>";
+                   if (i == exame.getMateriaisUsar().size()) {
+                       salvar += exame.getMateriaisUsar().get(i).getQuant();
+                   } else {
+                       salvar += exame.getMateriaisUsar().get(i).getQuant() + "<>";
+                   }
+                   
                }
                salvar += "\n";
 	       fW.write(salvar, 0, salvar.length());
@@ -548,8 +561,13 @@ public class ExportarDados {
 	                       exame.getMedico().getNome() + ";;";
                     for (int j = 0; j < exame.getMateriaisUsar().size(); j++) {
                         salvar += exame.getMateriaisUsar().get(j).getNome() + "<>";
-                        salvar += exame.getMateriaisUsar().get(j).getQuant() + "<>";
-                    }
+                        if (j + 1 == exame.getMateriaisUsar().size()) {
+                            salvar += exame.getMateriaisUsar().get(j).getQuant();
+                        } else {
+                            salvar += exame.getMateriaisUsar().get(j).getQuant() + "<>";
+                        }
+                    }                    
+                    
                     salvar += "\n";
                }
 	       fW.write(salvar, 0, salvar.length());
