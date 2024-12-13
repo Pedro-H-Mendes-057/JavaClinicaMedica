@@ -11,6 +11,8 @@ public class PanelMedicos extends TemplatePanel {
         super();
         
         getLabelPesquisar().setText("Pesquisar por Médico:");
+        getBTNEditar().setVisible(false);
+        getBTNExcluir().setVisible(false);
     }
     
     @Override

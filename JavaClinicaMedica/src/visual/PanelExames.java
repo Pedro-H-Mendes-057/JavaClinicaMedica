@@ -20,6 +20,7 @@ public class PanelExames extends TemplatePanel {
         getBTNNovo().setEnabled(true);
         getBTNEditar().setEnabled(false);
         getBTNExcluir().setEnabled(false);
+        getBTNExcluir().setVisible(false);
     }
     
     @Override
