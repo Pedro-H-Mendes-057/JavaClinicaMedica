@@ -74,7 +74,7 @@ public class ControladorPanelMateriais implements ActionListener {
         if (e.getSource() == this.panelMateriais.getBTNExcluir()) {
             if(this.panelMateriais.getMessageDialogExcluirItem(panelMateriais) &&
             		(this.panelMateriais.getTable().getSelectedRowCount()) == 1) {
-                if (!ControladorFrame.repositorioMateriais.getMateriais().get(this.panelMateriais.getTable().getSelectedRow()).getUtilizado()) {
+                if (ControladorFrame.repositorioMateriais.getMateriais().get(this.panelMateriais.getTable().getSelectedRow()).getUtilizado() == 0) {
                     ControladorFrame.repositorioMateriais.getMateriais().remove(this.panelMateriais.getTable().getSelectedRow());
                     ExportarDados.atualizarTodosOsMateriais();
                     atualizarTabela();
@@ -170,7 +170,8 @@ public class ControladorPanelMateriais implements ActionListener {
                     }
                     estoqueMaterial.setQuant(novaQuantidade);
                    
-                    ControladorFrame.repositorioMateriais.getMateriais().get(j).setUtilizado(true);
+                    ControladorFrame.repositorioMateriais.getMateriais().get(j).setUtilizado(1);
+                    ExportarDados.atualizarTodosOsMateriais();
                     break; //Material encontrado, prar n continuar o loop interno
                     
                

@@ -290,7 +290,8 @@ public class ControladorDialogCadastrarConsulta implements ActionListener{
                 }
                 
                 ControladorFrame.repositorioMateriais.getMateriais().get(this.chaveMateriais[i]).setQuant(quantidadeEstoque - quantidadeEscolhida);
-                ControladorFrame.repositorioMateriais.getMateriais().get(this.chaveMateriais[i]).setUtilizado(true);
+                ControladorFrame.repositorioMateriais.getMateriais().get(this.chaveMateriais[i]).setUtilizado(1);
+                ExportarDados.atualizarTodosOsMateriais();
                 Frame.controladorPanelMateriais.atualizarTabela();
             } catch (NumberFormatException ex) {
                 mostrarErro(6);

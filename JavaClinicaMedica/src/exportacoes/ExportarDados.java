@@ -414,7 +414,7 @@ public class ExportarDados {
                     material.setQuantMin(Integer.parseInt(arrayRegistro[2]));
                     material.setFornecedor(arrayRegistro[3]); 
                     material.setPreco(arrayRegistro[4]);
-                    material.setUtilizado(Boolean.parseBoolean(arrayRegistro[5]));
+                    material.setUtilizado(Integer.parseInt(arrayRegistro[5]));
                     
                     ControladorFrame.repositorioMateriais.addMaterial(material);
                 }
@@ -491,6 +491,7 @@ public class ExportarDados {
                             material.setNome(arrayMateriais[j]);  
                             try {
                                 material.setQuant(Integer.parseInt(arrayMateriais[j + 1]));
+                                System.out.println(arrayMateriais[j + 1]);
                             } catch (NumberFormatException e) {
                                 System.out.println("TESTAR ERRO");
                             }

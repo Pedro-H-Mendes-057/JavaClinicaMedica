@@ -1,1 +1,1 @@
-Luva;;100;;10;;SolarMed;;5;;false
+Luva;;98;;10;;SolarMed;;5;;3
