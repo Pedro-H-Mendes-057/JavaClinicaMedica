@@ -6,6 +6,7 @@ public class Material {
 	private int quantMin; //sistema alerta baixo estoque!!
 	private String fornecedor;
 	private String preco;
+        boolean utilizado;
         
         public Material() {
         
@@ -20,7 +21,15 @@ public class Material {
 		this.preco = preco;
 	}
 
-	public String getNome() {
+	public void setUtilizado(boolean value) {
+            this.utilizado = value;
+	}
+        
+        public boolean getUtilizado() {
+            return this.utilizado;
+        }
+        
+        public String getNome() {
 		return nome;
 	}
 

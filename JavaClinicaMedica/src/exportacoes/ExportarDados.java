@@ -335,7 +335,35 @@ public class ExportarDados {
 	   }
 	}
         
-////////////MATERIAIS	
+////////////MATERIAIS
+        public static void atualizarTodosOsMateriais() {
+	   FileWriter fW = null;
+	   try {
+	       File arquivo = new File("src" + File.separator + "exportacoes" + File.separator, "Materiais.txt");
+	       fW = new FileWriter(arquivo);
+               String salvar = "";
+               for (int i = 0; i < ControladorFrame.repositorioMateriais.getMateriais().size(); i++) {
+                    Material material = ControladorFrame.repositorioMateriais.getMateriais().get(i);
+                    salvar += material.getNome() + ";;" +
+                              material.getQuant() + ";;" +
+                              material.getQuantMin() + ";;" +
+                              material.getFornecedor() + ";;" +
+                              material.getPreco() + ";;" +
+                              material.getUtilizado() + "\n";
+                }              
+	       
+	       fW.write(salvar, 0, salvar.length());
+	   } catch (IOException ex) {
+	       Logger.getLogger(ExportarDados.class.getName()).log(Level.SEVERE, null, ex);
+	   } finally {
+	       try {
+	           fW.close();
+	       } catch (IOException ex) {
+	           Logger.getLogger(ExportarDados.class.getName()).log(Level.SEVERE, null, ex);
+	       }
+	   }
+	}
+        
 	public static void anexarMaterial(Material material) {
 	   FileWriter fW = null;
 	   try {
@@ -345,7 +373,8 @@ public class ExportarDados {
 	                       material.getQuant() + ";;" +
 	                       material.getQuantMin() + ";;" +
 	                       material.getFornecedor() + ";;" +
-	                       material.getPreco() + "\n";
+	                       material.getPreco() + ";;" + 
+                               material.getUtilizado() + "\n";
 	       fW.write(salvar, 0, salvar.length());
 	   } catch (IOException ex) {
 	       Logger.getLogger(ExportarDados.class.getName()).log(Level.SEVERE, null, ex);
@@ -383,6 +412,7 @@ public class ExportarDados {
                     material.setQuantMin(Integer.parseInt(arrayRegistro[2]));
                     material.setFornecedor(arrayRegistro[3]); 
                     material.setPreco(arrayRegistro[4]);
+                    material.setUtilizado(Boolean.parseBoolean(arrayRegistro[5]));
                     
                     ControladorFrame.repositorioMateriais.addMaterial(material);
                 }

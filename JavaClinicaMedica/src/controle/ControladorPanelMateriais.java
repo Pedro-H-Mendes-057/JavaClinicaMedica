@@ -69,8 +69,13 @@ public class ControladorPanelMateriais implements ActionListener {
         if (e.getSource() == this.panelMateriais.getBTNExcluir()) {
             if(this.panelMateriais.getMessageDialogExcluirItem(panelMateriais) &&
             		(this.panelMateriais.getTable().getSelectedRowCount()) == 1) {
-            	ControladorFrame.repositorioMateriais.getMateriais().remove(this.panelMateriais.getTable().getSelectedRow());
-            	atualizarTabela();
+                if (!ControladorFrame.repositorioMateriais.getMateriais().get(this.panelMateriais.getTable().getSelectedRow()).getUtilizado()) {
+                    ControladorFrame.repositorioMateriais.getMateriais().remove(this.panelMateriais.getTable().getSelectedRow());
+                    ExportarDados.atualizarTodosOsMateriais();
+                    atualizarTabela();
+                } else {
+                    JOptionPane.showMessageDialog(this.dialogCadastrarMaterial, "Este material já foi utilizado em consultas e/ou exames!");
+                }           	
             }
         }//if
         if (e.getSource() == this.panelMateriais.getBTNEditar()) {
@@ -83,8 +88,8 @@ public class ControladorPanelMateriais implements ActionListener {
             }
         }
         
-    }//actionPerformed
-    
+    }//actionPerformed   
+        
     public void atualizarEstoque(List<Material> materiaisUsados) { //cálculos 
         for (int i = 0; i < materiaisUsados.size(); i++) {
             Material materialUsado = materiaisUsados.get(i);
@@ -104,6 +109,7 @@ public class ControladorPanelMateriais implements ActionListener {
                         return;
                     }
                     estoqueMaterial.setQuant(novaQuantidade);
+                    ControladorFrame.repositorioMateriais.getMateriais().get(j).setUtilizado(true);
                     break; // Material encontrado, não precisa continuar o loop interno
                 }
             }

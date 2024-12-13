@@ -8,6 +8,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import modelo.Material;
 import controle.ControladorPanelMateriais;
 import dialogCadastroPanels.DialogEDITARMaterial;
+import exportacoes.ExportarDados;
 
 public class ControladorDialogEDITARMaterial implements ActionListener {
     DialogEDITARMaterial dialogEditarMaterial;
@@ -22,17 +23,13 @@ public class ControladorDialogEDITARMaterial implements ActionListener {
         this.dialogEditarMaterial.setVisible(true);
     }
     
-    void addEventos() {
-        this.dialogEditarMaterial.getButtonUpload().addActionListener(this);
+    void addEventos() {        
         this.dialogEditarMaterial.getButtonSalvar().addActionListener(this);
         this.dialogEditarMaterial.getButtonCancelar().addActionListener(this);
     }
 
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == this.dialogEditarMaterial.getButtonUpload()) {
-            uploadImage();
-            
-        } else if (e.getSource() == this.dialogEditarMaterial.getButtonSalvar()) { 
+        if (e.getSource() == this.dialogEditarMaterial.getButtonSalvar()) { 
         	if(camposValidos() == true) {
                     atualizarMaterial();
                     JOptionPane.showMessageDialog(this.dialogEditarMaterial, "Material atualizado com sucesso!");
@@ -42,13 +39,7 @@ public class ControladorDialogEDITARMaterial implements ActionListener {
             this.dialogEditarMaterial.dispose();           
         }
     }
-
-    public void uploadImage() {
-        JFileChooser chooser = new JFileChooser(); 
-        FileNameExtensionFilter filter = new FileNameExtensionFilter("JPG Imagens", "jpg");
-        chooser.setFileFilter(filter);
-        int returnVal = chooser.showOpenDialog(this.dialogEditarMaterial);
-    }
+   
     
     public boolean camposValidos() {
     	 String quantString = this.dialogEditarMaterial.getTextFieldQtdEstoque().getText().trim();
@@ -76,12 +67,13 @@ public class ControladorDialogEDITARMaterial implements ActionListener {
     }
     
     private void atualizarMaterial() {
-    	 //Material materialAtualizado = new Material();
-    	 this.material.setNome(this.dialogEditarMaterial.getTextFieldNome().getText().trim());
-    	 this.material.setQuant(Integer.parseInt(this.dialogEditarMaterial.getTextFieldQtdEstoque().getText().trim()));
-    	 this.material.setPreco(this.dialogEditarMaterial.getTextFieldPreco().getText().trim());
+        //Material materialAtualizado = new Material();
+        this.material.setNome(this.dialogEditarMaterial.getTextFieldNome().getText().trim());
+        this.material.setQuant(Integer.parseInt(this.dialogEditarMaterial.getTextFieldQtdEstoque().getText().trim()));
+        this.material.setPreco(this.dialogEditarMaterial.getTextFieldPreco().getText().trim());
 
-    	 ControladorFrame.repositorioMateriais.atualizarMaterial(this.material);
+        ControladorFrame.repositorioMateriais.atualizarMaterial(this.material);
+        ExportarDados.atualizarTodosOsMateriais();
     }
     
     /*public void addMaterial() {

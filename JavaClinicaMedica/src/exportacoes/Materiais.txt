@@ -1,1 +1,1 @@
-Luva;;100;;10;;RareMed Hospitalar;;5
+Luva;;101;;10;;RareMed Hospitalar;;5;;true

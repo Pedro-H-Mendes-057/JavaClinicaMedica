@@ -109,7 +109,8 @@ public class ControladorDialogCadastrarMaterial implements ActionListener {
         this.material.setQuant(Integer.valueOf(this.dialogCadastrarMaterial.getTextFieldQtdEstoque().getText().trim()));
         this.material.setQuantMin(Integer.valueOf(this.dialogCadastrarMaterial.getTextFieldQtdMinima().getText().trim()));
         this.material.setPreco(this.dialogCadastrarMaterial.getTextFieldPreco().getText().trim());
-       
+        this.material.setUtilizado(false);
+        
         ControladorFrame.repositorioMateriais.addMaterial(this.material);
         ExportarDados.anexarMaterial(this.material);
     }    
