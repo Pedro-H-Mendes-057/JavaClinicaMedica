@@ -1,5 +1,6 @@
 package visual;
 
+import java.awt.Component;
 import java.awt.Font;
 import javax.swing.*;
 import java.awt.event.ActionListener;
@@ -15,10 +16,12 @@ public class PanelRelatorios extends JPanel {
     private JTextField txFPaciente;
     private JButton pescPac1;
     private JButton pescMed;
+    private JButton pesq;
     private JRadioButton rBFiltrarMedico;
     private JRadioButton rBtFiltrarPaciente;
     private JButton btnPesquisar;
-
+    private JComboBox<String> comboBoxTipo;
+    
     public PanelRelatorios(Frame frame) {
         this.frame = frame;
         setLayout(null);
@@ -28,13 +31,16 @@ public class PanelRelatorios extends JPanel {
         this.add(getBTExames());
         this.add(getBTFinan());
         this.add(getJScrollPane());
+        this.add(getComboBoxTipo());
         this.add(getPescMed());
         this.add(getPescPac1());
+        this.add(getPesq());
         
        
     }
 
-    public JLabel getLbTitulo() {
+
+	public JLabel getLbTitulo() {
         if (this.lbTitulo == null) {
             this.lbTitulo = new JLabel("RELATÓRIOS");
             lbTitulo.setBounds(171, 5, 190, 70);
@@ -46,7 +52,7 @@ public class PanelRelatorios extends JPanel {
     public JButton getBTConsultas() {
         if (this.btConsultas == null) {
             this.btConsultas = new JButton("CONSULTAS");
-            btConsultas.setBounds(125, 130, 270, 69);
+            btConsultas.setBounds(35, 131, 270, 69);
             btConsultas.setFont(new Font("Tahoma", Font.PLAIN, 20));
         }
         return this.btConsultas;
@@ -55,7 +61,7 @@ public class PanelRelatorios extends JPanel {
     public JButton getBTExames() {
         if (this.btExames == null) {
             this.btExames = new JButton("EXAMES");
-            btExames.setBounds(124, 227, 270, 69);
+            btExames.setBounds(34, 228, 270, 69);
             btExames.setFont(new Font("Tahoma", Font.PLAIN, 20));
         }
         return this.btExames;
@@ -64,7 +70,7 @@ public class PanelRelatorios extends JPanel {
     public JButton getBTFinan() {
         if (this.btFinan == null) {
             this.btFinan = new JButton("FINANCEIRO");
-            btFinan.setBounds(125, 324, 270, 69);
+            btFinan.setBounds(35, 325, 270, 69);
             btFinan.addActionListener(new ActionListener() {
             	public void actionPerformed(ActionEvent e) {
             	}
@@ -91,6 +97,15 @@ public class PanelRelatorios extends JPanel {
         }
         return this.scrollPane;
     }
+    
+    public JComboBox<String> getComboBoxTipo() {
+        if (this.comboBoxTipo == null) {
+            this.comboBoxTipo = new JComboBox<>(new String[]{"", "Exame físico", "Exame laboratorial", "Imagem",
+            												"Biópsia", "Patologia", "Análise clínica"});
+            this.comboBoxTipo.setBounds(325, 246, 167, 40);
+        }
+        return this.comboBoxTipo;
+    }
 
     //////////////////////////////////////////////////////////////////////
 
@@ -101,6 +116,15 @@ public class PanelRelatorios extends JPanel {
             pescMed.setVisible(false);
         }
         return pescMed;
+    }
+    private JButton getPesq() {
+    	if (this.pesq== null) {
+            this.pesq= new JButton("Pesquisar");
+            pesq.setBounds(125, 420, 169, 54);
+            pesq.setVisible(true);
+            pesq.setEnabled(true);
+        }
+        return pesq;
     }
 
     public JButton getPescPac1() {
