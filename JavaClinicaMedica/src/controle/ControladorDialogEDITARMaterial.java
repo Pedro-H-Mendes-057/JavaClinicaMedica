@@ -77,9 +77,9 @@ public class ControladorDialogEDITARMaterial implements ActionListener {
     
     private void atualizarMaterial() {
     	 //Material materialAtualizado = new Material();
-    	 this.material.setNome(this.dialogEditarMaterial.getTextFieldNome().getText());
-    	 this.material.setQuant(Integer.parseInt(this.dialogEditarMaterial.getTextFieldQtdEstoque().getText()));
-    	 this.material.setPreco(this.dialogEditarMaterial.getTextFieldPreco().getText());
+    	 this.material.setNome(this.dialogEditarMaterial.getTextFieldNome().getText().trim());
+    	 this.material.setQuant(Integer.parseInt(this.dialogEditarMaterial.getTextFieldQtdEstoque().getText().trim()));
+    	 this.material.setPreco(this.dialogEditarMaterial.getTextFieldPreco().getText().trim());
 
     	 ControladorFrame.repositorioMateriais.atualizarMaterial(this.material);
     }
