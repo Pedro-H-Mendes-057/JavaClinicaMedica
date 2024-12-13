@@ -12,6 +12,7 @@ public class PanelPacientes extends TemplatePanel {
     	getLabelPesquisar().setText("Pesquisar por Paciente:");
     	getBTNExcluir().setEnabled(false);
         getBTNExcluir().setVisible(false);
+        getBTNEditar().setText("Visualizar");
     }
     
     @Override

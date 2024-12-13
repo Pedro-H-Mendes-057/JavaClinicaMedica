@@ -38,7 +38,7 @@ public class DialogEDITARPaciente extends JDialog {
      * @wbp.parser.constructor
      */
     public DialogEDITARPaciente(JFrame parent, Paciente pacienteAlterado) {
-        super(parent, "Cadastrar Paciente", true);
+        super(parent, "Visualizar Paciente", true);
         this.setSize(1300, 650);
         this.setResizable(false);
         this.setLocationRelativeTo(parent);
@@ -253,7 +253,7 @@ public class DialogEDITARPaciente extends JDialog {
         btSalvar.setForeground(new Color(255, 255, 255));
         btSalvar.setBounds(844, 538, 177, 55);
         getContentPane().add(btSalvar);
-        
+        btSalvar.setVisible(false);
         //BOTAO CANCELAR
         btCancelar = new JButton("CANCELAR");
         btCancelar.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -390,7 +390,7 @@ public class DialogEDITARPaciente extends JDialog {
             txFAltura.setText(String.valueOf(pacienteAlterado.getAltura()));
             txFPeso.setText(String.valueOf(pacienteAlterado.getPeso()));
             cbTipoSang.setSelectedItem(pacienteAlterado.getTipoSang());
-            //txFHistMedic.setText(pacienteAlterado.getHistMed().toString());
+            txFHistMedic.setText(pacienteAlterado.getHistMed());
             cbConvenio.setSelectedItem(pacienteAlterado.getConvenio());
             txFNumero.setText(String.valueOf(pacienteAlterado.getEndereco().getNumero()));
             txFRua.setText(pacienteAlterado.getEndereco().getRua());

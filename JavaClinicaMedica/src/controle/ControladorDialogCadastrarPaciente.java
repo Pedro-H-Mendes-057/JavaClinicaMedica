@@ -134,7 +134,8 @@ public class ControladorDialogCadastrarPaciente implements ActionListener {
             dialogCadastrarPaciente.getTxFRua().getText().isBlank() ||
             dialogCadastrarPaciente.getTxFBairro().getText().isBlank() ||
             dialogCadastrarPaciente.getTxFCidade().getText().isBlank() ||
-            dialogCadastrarPaciente.getCBEstado().getSelectedItem().toString().isBlank()) {
+            dialogCadastrarPaciente.getCBEstado().getSelectedItem().toString().isBlank() ||
+            dialogCadastrarPaciente.getHistoricoMedico().isBlank()) {
             JOptionPane.showMessageDialog(dialogCadastrarPaciente, 
                                           "Preencha todos os campos!", "Erro", 
                                           JOptionPane.ERROR_MESSAGE);
@@ -183,21 +184,22 @@ public class ControladorDialogCadastrarPaciente implements ActionListener {
     
     public void addPaciente() {
         this.paciente = new Paciente();
-        this.paciente.setNome(this.dialogCadastrarPaciente.getNomePaciente());
-        this.paciente.setDataNasc(this.dialogCadastrarPaciente.getDataNascimento());
-        this.paciente.setContato(this.dialogCadastrarPaciente.getContato());
+        this.paciente.setNome(this.dialogCadastrarPaciente.getNomePaciente().trim());
+        this.paciente.setDataNasc(this.dialogCadastrarPaciente.getDataNascimento().trim());
+        this.paciente.setContato(this.dialogCadastrarPaciente.getContato().trim());
         this.paciente.setAltura(this.dialogCadastrarPaciente.getAltura());
         this.paciente.setTipoSang(this.dialogCadastrarPaciente.getTipoSang());
         this.paciente.setPeso(this.dialogCadastrarPaciente.getPeso());
         this.paciente.setConvenio(this.dialogCadastrarPaciente.getConvenio());
+        this.paciente.setHistMed(dialogCadastrarPaciente.getHistoricoMedico().trim());
         
         this.endereco = new Endereco();
-        this.endereco.setRua(this.dialogCadastrarPaciente.getTxFRua().getText());
-	this.endereco.setNumero(this.dialogCadastrarPaciente.getTxFNumero().getText());      
-        this.endereco.setBairro(this.dialogCadastrarPaciente.getTxFBairro().getText());
-        this.endereco.setCep(this.dialogCadastrarPaciente.getTxFCEP().getText());
-        this.endereco.setCidade(this.dialogCadastrarPaciente.getTxFCidade().getText());
-        this.endereco.setEstado(this.dialogCadastrarPaciente.getEstado());
+        this.endereco.setRua(this.dialogCadastrarPaciente.getTxFRua().getText().trim());
+	this.endereco.setNumero(this.dialogCadastrarPaciente.getTxFNumero().getText().trim());      
+        this.endereco.setBairro(this.dialogCadastrarPaciente.getTxFBairro().getText().trim());
+        this.endereco.setCep(this.dialogCadastrarPaciente.getTxFCEP().getText().trim());
+        this.endereco.setCidade(this.dialogCadastrarPaciente.getTxFCidade().getText().trim());
+        this.endereco.setEstado(this.dialogCadastrarPaciente.getEstado().trim());
 
         this.paciente.setEndereco(this.endereco);
         ControladorFrame.repositorioPacientes.addPaciente(this.paciente);

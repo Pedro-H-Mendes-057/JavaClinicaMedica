@@ -23,10 +23,11 @@ public class ControladorDialogEDITARPaciente implements ActionListener {
         addEventos();
         
         this.dialogEditarPaciente.setVisible(true);
+        //this.dialogEditarPaciente.getBtSalvar().setVisible(false);
     }
     
     void addEventos() {
-        this.dialogEditarPaciente.getBtSalvar().addActionListener(this);
+        //this.dialogEditarPaciente.getBtSalvar().addActionListener(this);
         this.dialogEditarPaciente.getBtCancelar().addActionListener(this);
     }
 

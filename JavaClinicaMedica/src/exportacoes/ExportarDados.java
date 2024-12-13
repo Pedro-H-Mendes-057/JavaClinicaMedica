@@ -78,7 +78,8 @@ public class ExportarDados {
                             endereco.getBairro() + ";;" +
                             endereco.getCep() + ";;" +
                             endereco.getCidade() + ";;" +
-                            endereco.getEstado() + "\n";
+                            endereco.getEstado() + ";;" +
+                            paciente.getHistMed() + "\n";
             fW.write(salvar, 0, salvar.length());
             //System.out.println(salvar);
         } catch (IOException ex) {
@@ -127,7 +128,7 @@ public class ExportarDados {
                     endereco.setCidade(arrayRegistro[11]);
                     endereco.setEstado(arrayRegistro[12]);
                     paciente.setEndereco(endereco);
-                    
+                    paciente.setHistMed(arrayRegistro[13]);
                     ControladorFrame.repositorioPacientes.addPaciente(paciente);
                 }
             }

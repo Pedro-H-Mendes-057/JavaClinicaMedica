@@ -1,2 +1,2 @@
-Luciana;;24/06/2025;;(33)34144-5345;;AB-;;481.0;;213.21;;Mais Saúde;;Rua alegre;;193;;bairor alegre;;12123-123;;asd;;Bahia
-Luciana Ferreira;;12/01/2121;;(21)34243-2324;;B+;;323.0;;232.32;;Mais Saúde;;rua alegre;;121;;bairro alegre;;23322-323;;itapipoca;;Ceará
+Alberto;;12/05/1999;;(73)98824-0326;;A-;;170.0;;120.0;;Mais Saúde;;Rua I;;24;;Jequiezinho;;45000-000;;Jequié;;Bahia;;O paciente não tem histórico de doenças graves na família
+Joana Pereira;;18/01/1989;;(73)98887-6240;;B-;;150.0;;450.0;;Mais Saúde;;Rua Matos;;45;;Urbis IV;;45000-000;;Jequié;;Bahia;;O paciente tem histórico de Alzheimer na família
