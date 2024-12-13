@@ -167,7 +167,7 @@ public class ExportarDados {
                         medico.setEspecialidade(arrayRegistro[2]);
                         medico.setCrm(arrayRegistro[3]);
                         medico.setContato(arrayRegistro[4]);
-                        medico.setValorConsulta(Double.parseDouble(arrayRegistro[5]));
+                        medico.setValorConsulta(Double.parseDouble(arrayRegistro[5].trim()));
                         
                         int [][] horasAtend = new int[11][5];
                         for (int j = 0; j < 11; j++) {
@@ -291,7 +291,7 @@ public class ExportarDados {
                         consulta.setMedico(Integer.parseInt(arrayRegistro[8]));
                         consulta.setHora(arrayRegistro[6]);
                         consulta.setTipoConsulta(arrayRegistro[7]);
-                        consulta.setMedico(Integer.parseInt(arrayRegistro[8]));
+                        consulta.setMedico(Integer.parseInt(arrayRegistro[8].trim()));
                         String [] arrayMateriais = arrayRegistro[9].split("<>");
                         System.err.println(arrayMateriais.length);
                         Object[][] chaveMateriais = new Object[arrayMateriais.length - 1][2];
@@ -440,7 +440,7 @@ public class ExportarDados {
                     material.setQuantMin(Integer.parseInt(arrayRegistro[2]));
                     material.setFornecedor(arrayRegistro[3]); 
                     material.setPreco(arrayRegistro[4]);
-                    material.setUtilizado(Integer.parseInt(arrayRegistro[5]));
+                    material.setUtilizado(Integer.parseInt(arrayRegistro[5].trim()));
                     
                     ControladorFrame.repositorioMateriais.addMaterial(material);
                 }
@@ -524,7 +524,7 @@ public class ExportarDados {
                             material = new Material();
                             material.setNome(arrayMateriais[j]);  
                             try {
-                                material.setQuant(Integer.parseInt(arrayMateriais[j + 1]));
+                                material.setQuant(Integer.parseInt(arrayMateriais[j + 1].trim()));
                                 System.out.println(arrayMateriais[j + 1]);
                             } catch (NumberFormatException e) {
                                 System.out.println("TESTAR ERRO");
