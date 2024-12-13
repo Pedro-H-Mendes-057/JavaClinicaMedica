@@ -217,7 +217,7 @@ public class ControladorDialogCadastrarExame implements ActionListener {
             Object nomeMaterial = modeloTabela.getValueAt(i, 0);
 
             try {
-                int quantidade = Integer.parseInt(valorQuantidade.toString());
+                int quantidade = Integer.parseInt(valorQuantidade.toString().trim());
                 if (quantidade > 0) {
                     Material material = new Material();
                     material.setNome(nomeMaterial.toString());
