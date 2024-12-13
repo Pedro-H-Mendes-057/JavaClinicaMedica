@@ -40,7 +40,7 @@ public class ControladorDialogCadastrarConsulta implements ActionListener{
     int [] chaveMateriais;
     int countMateriais;
     String chaveConsulta;
-    boolean modoEdicao; 
+    boolean modoEdicao;
     
     public ControladorDialogCadastrarConsulta(DialogCadastrarConsulta dialogCadastrarConsulta, int chaveMedico) {
        this.dialogCadastrarConsulta = dialogCadastrarConsulta;
@@ -48,10 +48,9 @@ public class ControladorDialogCadastrarConsulta implements ActionListener{
        this.medico = ControladorFrame.repositorioMedicos.getMedicos().get(chaveMedico);
        this.dialogCadastrarConsulta.getTextFieldNomeMedico().setText(this.medico.getNome()); 
        this.countMateriais = 0;
-       this.chaveMateriais = new int[1000];
-       this.modoEdicao = false;
+       this.chaveMateriais = new int[1000];       
        addEventosCadastrar();
-       
+       this.modoEdicao = false;
        this.dialogCadastrarConsulta.setVisible(true);
     }
     
@@ -70,9 +69,10 @@ public class ControladorDialogCadastrarConsulta implements ActionListener{
        this.dialogEditarConsulta.getTextFieldData().setText(consulta.getData());
        this.dialogEditarConsulta.getButtonBuscarMateriais().setEnabled(false);
        this.dialogEditarConsulta.getButtonBuscarPaciente().setEnabled(false);
-       preencherTabelaMateriais(consulta.getMateriaisUsar());
+       preencherTabelaMateriais(consulta.getMateriaisUsar());       
+       this.chaveConsulta = chaveConsulta;
+       addEventosEditar();
        this.modoEdicao = true;
-       
        this.dialogEditarConsulta.setVisible(true);
     }
     
@@ -89,54 +89,74 @@ public class ControladorDialogCadastrarConsulta implements ActionListener{
     }
     
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == this.dialogCadastrarConsulta.getButtonSalvar()) {
-            if (validarCampos() && validarData() && validarMateriais()) {
-                salvarConsulta();
-                this.dialogCadastrarConsulta.dispose();
-            }
-        } else if (e.getSource() == this.dialogCadastrarConsulta.getButtonBuscarPaciente()) {
-            this.dialogBuscarPaciente = new DialogBuscar(this.dialogCadastrarConsulta);
-            this.controladorDialogBuscarPaciente = new ControladorDialogBuscarPaciente(this.dialogBuscarPaciente);
-            this.chavePaciente = this.controladorDialogBuscarPaciente.getChavePaciente();
-            if (this.chavePaciente != -1) {
-                this.dialogCadastrarConsulta.getTextFieldNomePaciente().setText(ControladorFrame.repositorioPacientes.getPacientes().get(this.chavePaciente).getNome());
-                this.dialogCadastrarConsulta.getTextFieldConvenio().setText(ControladorFrame.repositorioPacientes.getPacientes().get(this.chavePaciente).getConvenio());                
-            } else {
-                this.dialogCadastrarConsulta.getTextFieldNomePaciente().setText("");
-                this.dialogCadastrarConsulta.getTextFieldConvenio().setText("");
-            }
-        } else if (e.getSource() == this.dialogCadastrarConsulta.getButtonBuscarMateriais()) {
-            this.chaveMaterial = -1;
-            this.dialogBuscarMaterial = new DialogBuscar(this.dialogCadastrarConsulta);
-            this.controladorDialogBuscarMaterial = new ControladorDialogBuscarMaterial(this.dialogBuscarMaterial);
-            this.chaveMaterial = this.controladorDialogBuscarMaterial.getChaveMaterial();          
-            if (this.chaveMaterial != -1) {
-                int contTemp = this.countMateriais; 
-                for (int i = 0; i < contTemp; i++) {
-                    if (this.chaveMateriais[i] == this.chaveMaterial) {
-                        mostrarErro(1);
-                    } else if (i + 1 == this.countMateriais) {
-                        this.chaveMateriais[i] = this.chaveMaterial;
-                        this.countMateriais++;
+        if (!this.modoEdicao) {
+            if (e.getSource() == this.dialogCadastrarConsulta.getButtonSalvar()) {
+                if (validarCampos() && validarData() && validarMateriais()) {
+                    salvarConsulta();
+                    this.dialogCadastrarConsulta.dispose();
+                }
+            } else if (e.getSource() == this.dialogCadastrarConsulta.getButtonBuscarPaciente()) {
+                this.dialogBuscarPaciente = new DialogBuscar(this.dialogCadastrarConsulta);
+                this.controladorDialogBuscarPaciente = new ControladorDialogBuscarPaciente(this.dialogBuscarPaciente);
+                this.chavePaciente = this.controladorDialogBuscarPaciente.getChavePaciente();
+                if (this.chavePaciente != -1) {
+                    this.dialogCadastrarConsulta.getTextFieldNomePaciente().setText(ControladorFrame.repositorioPacientes.getPacientes().get(this.chavePaciente).getNome());
+                    this.dialogCadastrarConsulta.getTextFieldConvenio().setText(ControladorFrame.repositorioPacientes.getPacientes().get(this.chavePaciente).getConvenio());                
+                } else {
+                    this.dialogCadastrarConsulta.getTextFieldNomePaciente().setText("");
+                    this.dialogCadastrarConsulta.getTextFieldConvenio().setText("");
+                }
+            } else if (e.getSource() == this.dialogCadastrarConsulta.getButtonBuscarMateriais()) {
+                this.chaveMaterial = -1;
+                this.dialogBuscarMaterial = new DialogBuscar(this.dialogCadastrarConsulta);
+                this.controladorDialogBuscarMaterial = new ControladorDialogBuscarMaterial(this.dialogBuscarMaterial);
+                this.chaveMaterial = this.controladorDialogBuscarMaterial.getChaveMaterial();          
+                if (this.chaveMaterial != -1) {
+                    int contTemp = this.countMateriais; 
+                    for (int i = 0; i < contTemp; i++) {
+                        if (this.chaveMateriais[i] == this.chaveMaterial) {
+                            mostrarErro(1);
+                        } else if (i + 1 == this.countMateriais) {
+                            this.chaveMateriais[i] = this.chaveMaterial;
+                            this.countMateriais++;
+                            addMaterial();
+                        }
+                    }                
+                    if (this.countMateriais == 0) {
+                        this.chaveMateriais[this.countMateriais++] = this.chaveMaterial;
+
                         addMaterial();
                     }
-                }                
-                if (this.countMateriais == 0) {
-                    this.chaveMateriais[this.countMateriais++] = this.chaveMaterial;
-                    
-                    addMaterial();
-                }
-            } 
-            
-        } else if (e.getSource() == this.dialogCadastrarConsulta.getButtonCancelar()) {
-            this.dialogCadastrarConsulta.dispose();
-           
-            
+                } 
+
+            }
+        } else {            
+            if (e.getSource() == this.dialogEditarConsulta.getButtonCancelar()) {
+                this.dialogEditarConsulta.dispose(); 
+            } else if (e.getSource() == this.dialogEditarConsulta.getButtonSalvar()) {                
+                if (editarConsulta()) {
+                    ExportarDados.atualizarTodasAsConsultas();
+                    this.dialogEditarConsulta.dispose();
+                }           
+            }
         }
     }
     
     void salvarConsulta() {
         ControladorFrame.repositorioConsultas.addConsulta(this.chaveConsulta, getConsulta());            
+    }
+    
+    boolean editarConsulta() {
+        if (this.dialogEditarConsulta.getTextAreaQueixa().getText().isBlank()
+            || this.dialogEditarConsulta.getTextAreaObservacoes().getText().isBlank()) {
+            JOptionPane.showMessageDialog(this.dialogEditarConsulta, "Preencha todos os campos!");
+            return false;
+        } else {
+            Consulta consulta = ControladorFrame.repositorioConsultas.getConsulta(this.chaveConsulta);
+            consulta.setObservacoes(this.dialogEditarConsulta.getTextAreaObservacoes().getText().trim());
+            consulta.setQueixa(this.dialogEditarConsulta.getTextAreaQueixa().getText().trim());
+            return true;
+        }        
     }
     
     boolean validarData() {

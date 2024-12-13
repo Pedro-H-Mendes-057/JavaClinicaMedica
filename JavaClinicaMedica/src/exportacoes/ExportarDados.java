@@ -299,6 +299,42 @@ public class ExportarDados {
             }
 	}
         
+        public static void atualizarTodasAsConsultas() {
+	   FileWriter fW = null;
+	   try {
+	       File arquivo = new File("src" + File.separator + "exportacoes" + File.separator, "Consultas.txt");
+	       fW = new FileWriter(arquivo);
+               String salvar = "";
+               for (String chave : ControladorFrame.repositorioConsultas.getConsultas().keySet()) {
+                   Consulta consulta = ControladorFrame.repositorioConsultas.getConsulta(chave);
+                   salvar += chave + ";;" +
+                               consulta.getPaciente() + ";;" +
+	                       consulta.getConvenio() + ";;" +
+	                       consulta.getData() + ";;" +
+	                       consulta.getQueixa() + ";;" +
+	                       consulta.getObservacoes() + ";;" + 
+                               consulta.getHora() + ";;" +
+                               consulta.getTipoConsulta() + ";;" + 
+                               consulta.getMedico() + ";;";
+                    for (int i = 0; i < consulta.getMateriaisUsar().length; i++) {
+                        salvar += consulta.getMateriaisUsar()[i][0] + "<>";
+                        salvar += consulta.getMateriaisUsar()[i][1] + "<>";
+                    }
+                    salvar += "\n";	       
+               }              
+	       
+	       fW.write(salvar, 0, salvar.length());
+	   } catch (IOException ex) {
+	       Logger.getLogger(ExportarDados.class.getName()).log(Level.SEVERE, null, ex);
+	   } finally {
+	       try {
+	           fW.close();
+	       } catch (IOException ex) {
+	           Logger.getLogger(ExportarDados.class.getName()).log(Level.SEVERE, null, ex);
+	       }
+	   }
+	}
+        
 ////////////MATERIAIS	
 	public static void anexarMaterial(Material material) {
 	   FileWriter fW = null;
