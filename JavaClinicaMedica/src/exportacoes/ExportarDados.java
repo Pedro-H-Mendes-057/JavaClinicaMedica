@@ -469,7 +469,7 @@ public class ExportarDados {
 	                       exame.getMedico().getNome() + ";;";
                for (int i = 0; i < exame.getMateriaisUsar().size(); i++) {
                    salvar += exame.getMateriaisUsar().get(i).getNome() + "<>";
-                   if (i == exame.getMateriaisUsar().size()) {
+                   if (i + 1 == exame.getMateriaisUsar().size()) {
                        salvar += exame.getMateriaisUsar().get(i).getQuant();
                    } else {
                        salvar += exame.getMateriaisUsar().get(i).getQuant() + "<>";
