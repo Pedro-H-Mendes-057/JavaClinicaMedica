@@ -100,7 +100,7 @@ public class ControladorDialogCadastrarMaterial implements ActionListener {
     private void atualizarMaterial() {
         this.material.setQuant(Integer.valueOf(this.dialogCadastrarMaterial.getTextFieldQtdEstoque().getText().trim()));
         this.material.setPreco(this.dialogCadastrarMaterial.getTextFieldPreco().getText().trim());
-    }
+    }//
     
     public void addMaterial() {
         this.material = new Material();
