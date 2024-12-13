@@ -14,6 +14,9 @@ import dialogCadastroPanels.DialogEDITARMaterial;
 import exportacoes.ExportarDados;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 import visual.PanelMateriais;
 import visual.TemplatePanel;
@@ -50,6 +53,8 @@ public class ControladorPanelMateriais implements ActionListener {
         this.panelMateriais.getTable().getSelectionModel().addListSelectionListener(event -> {
             boolean itemSelecionado = this.panelMateriais.getTable().getSelectedRow() != -1;
             this.panelMateriais.getBTNEditar().setEnabled(itemSelecionado);
+            
+            this.panelMateriais.getBTNPesquisar().addActionListener(this);
         });
         
         this.panelMateriais.getTable().getSelectionModel().addListSelectionListener(event -> {
@@ -87,9 +92,92 @@ public class ControladorPanelMateriais implements ActionListener {
                 atualizarTabela();
             }
         }
+        if (e.getSource() == this.panelMateriais.getBTNPesquisar()) {
+        	panelMateriais.getTxFPesquisar().getInputContext().endComposition();
+            buscarNome();
+        }
         
-    }//actionPerformed   
-        
+    }//actionPerformed
+    
+    void buscarNome() {
+        panelMateriais.getTxFPesquisar().getInputContext().endComposition();
+
+        String termoBusca = panelMateriais.getTxFPesquisar().getText().trim().toLowerCase();
+
+        if (termoBusca.isEmpty()) {
+            atualizarTabela();
+            return;
+        }
+
+        DefaultTableModel tabela = (DefaultTableModel) panelMateriais.getTable().getModel();
+        tabela.setRowCount(0);
+
+        boolean encontrou = false;
+
+        File arquivo = new File("src/exportacoes/Materiais.txt");
+        try (BufferedReader br = new BufferedReader(new FileReader(arquivo))) {
+            String linha;
+
+            while ((linha = br.readLine()) != null) {
+                String[] dados = linha.split(";");
+
+                //Validação
+                if (dados.length >= 5) {
+                	
+                	String nome = dados[0].trim().toLowerCase();
+                	
+                	String qntEstoque;
+                	if (dados[1].trim().isEmpty()) {
+                	    qntEstoque = "0";}
+                	else {
+                	    qntEstoque = dados[1].trim();}
+
+                	String qntMinima;
+                	if (dados[2].trim().isEmpty()) {
+                	    qntMinima = "0";}
+                	else {
+                	    qntMinima = dados[2].trim();}
+
+                	String fornecedor;
+                	if (dados[3].trim().isEmpty()) {
+                	    fornecedor = "Desconhecido";} 
+                	else {
+                	    fornecedor = dados[3].trim();}
+
+                	String preco;
+                	if (dados[4].trim().isEmpty()) {
+                	    preco = "0.0";}
+                	else {
+                	    preco = dados[4].trim();}
+                	
+                		/////////////////////
+                    if (nome.contains(termoBusca)) {
+                        encontrou = true;
+
+                        tabela.addRow(new Object[]{
+                            dados[0],           		 //Nome
+                            Integer.parseInt(qntEstoque),//Quant estoque
+                            Integer.parseInt(qntMinima), //Quant mínima
+                            fornecedor,         		 //Fornecedor
+                            Double.parseDouble(preco)    //Preço
+                        });
+                    }
+                } else {
+                    System.out.println("Linha mal formatada " + linha);
+                }
+            }
+
+            if (!encontrou) {
+                JOptionPane.showMessageDialog(null, "Nenhum material encontrado.", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+            }
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao processar os dados: " + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao acessar o arquivo: " + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    
     public void atualizarEstoque(List<Material> materiaisUsados) { //cálculos 
         for (int i = 0; i < materiaisUsados.size(); i++) {
             Material materialUsado = materiaisUsados.get(i);
@@ -109,8 +197,11 @@ public class ControladorPanelMateriais implements ActionListener {
                         return;
                     }
                     estoqueMaterial.setQuant(novaQuantidade);
+                   
                     ControladorFrame.repositorioMateriais.getMateriais().get(j).setUtilizado(true);
-                    break; // Material encontrado, não precisa continuar o loop interno
+                    break; //Material encontrado, prar n continuar o loop interno
+                    
+               
                 }
             }
         }

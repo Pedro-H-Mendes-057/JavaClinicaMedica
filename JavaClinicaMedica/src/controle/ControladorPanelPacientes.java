@@ -1,6 +1,8 @@
 package controle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import visual.PanelPacientes;
 import dialogCadastroPanels.DialogCadastrarPaciente;
@@ -10,6 +12,9 @@ import exportacoes.ExportarDados;
 import modelo.Material;
 import modelo.Paciente;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -45,6 +50,8 @@ public class ControladorPanelPacientes implements ActionListener {
             boolean itemSelecionado = this.panelPacientes.getTable().getSelectedRow() != -1;
             this.panelPacientes.getBTNEditar().setEnabled(itemSelecionado);
             this.panelPacientes.getBTNExcluir().setEnabled(itemSelecionado);
+            
+            this.panelPacientes.getBTNPesquisar().addActionListener(this);
         });
     }
 
@@ -56,7 +63,7 @@ public class ControladorPanelPacientes implements ActionListener {
             controladorDialogCadastrarPaciente = new ControladorDialogCadastrarPaciente(dialogCadastrarPaciente);
             
             atualizarTabela();
-        }
+        }//do Novo
         
         if (e.getSource() == this.panelPacientes.getBTNExcluir()) {
             if(this.panelPacientes.getMessageDialogExcluirItem(panelPacientes) &&
@@ -73,6 +80,55 @@ public class ControladorPanelPacientes implements ActionListener {
                 this.controladorDialogEditarPaciente = new ControladorDialogEDITARPaciente(this.dialogEditarPaciente, pacienteSeleciona);
                 atualizarTabela();
             }
+        }
+        else if (e.getSource() == panelPacientes.getBTNPesquisar()) {
+        	panelPacientes.getTxFPesquisar().getInputContext().endComposition();
+            buscarNome();
+        }
+    }///////do ActionPerformed
+
+    private void buscarNome() {
+        String termoBusca = panelPacientes.getTxFPesquisar().getText().trim().toLowerCase();
+
+        if (termoBusca.isEmpty()) {
+            atualizarTabela();
+            return;
+        }
+        
+        DefaultTableModel tabelaPac = (DefaultTableModel) panelPacientes.getTable().getModel();
+        tabelaPac.setRowCount(0); //Limpa as linhas
+
+      //Rastrear se algum paciente foi encontrado, pra evitar bug do OptionPane
+        boolean encontrou = false;
+        
+        File arquivo = new File("src/exportacoes/Pacientes.txt");
+        try (BufferedReader br = new BufferedReader(new FileReader(arquivo))) {
+            String linha;
+
+            while ((linha = br.readLine()) != null) {
+                String[] dados = linha.split(";");
+                if (dados.length >= 5) {
+                    String nome = dados[0].toLowerCase();
+                    
+                    if (nome.contains(termoBusca)) {
+                        encontrou = true;
+                        
+                        tabelaPac.addRow(new Object[]{
+                            dados[0], //Nome
+                            dados[1], //Data de nascimento
+                            dados[2], //Contato
+                            dados[3], //Tipo sanguíneo
+                            dados[4]  //Convênio
+                        });
+                    }
+                }
+            }
+
+            if (!encontrou) {
+                JOptionPane.showMessageDialog(null, "Nenhum paciente encontrado.", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+            }
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao acessar o arquivo: " + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
         }
     }
     
