@@ -36,7 +36,8 @@ public class PanelRelatorios extends JPanel {
         this.add(getPescPac1());
         this.add(getPesq());
         
-       
+        getBTConsultas().setVisible(false);
+        getBTFinan().setVisible(false);
     }
 
 
