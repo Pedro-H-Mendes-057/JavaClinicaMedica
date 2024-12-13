@@ -73,6 +73,10 @@ public class ControladorPanelAgendar implements ActionListener {
                     if (chaveMedico != -1 && ControladorFrame.repositorioConsultas.procurarConsulta(chaveConsulta) == true) { 
                         dialogEditarConsulta = new DialogEditarConsulta(ControladorFrame.frame);
                         controladorDialogCadastrarConsulta = new ControladorDialogCadastrarConsulta(dialogEditarConsulta, chaveMedico, chaveConsulta);
+                        if (ControladorFrame.repositorioConsultas.getConsulta(chaveConsulta) == null) {
+                            simularTabela[linha][coluna - 1] = "";
+                            atualizarAgenda(chaveMedico);
+                        }
                     }                   
                 }
             }

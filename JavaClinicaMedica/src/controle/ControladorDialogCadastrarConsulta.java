@@ -132,9 +132,11 @@ public class ControladorDialogCadastrarConsulta implements ActionListener{
             }
         } else {            
             if (e.getSource() == this.dialogEditarConsulta.getButtonCancelar()) {
+                deletarConsulta();
+                ExportarDados.atualizarTodasAsConsultas();
                 this.dialogEditarConsulta.dispose(); 
             } else if (e.getSource() == this.dialogEditarConsulta.getButtonSalvar()) {                
-                if (editarConsulta()) {
+                if (editarConsulta()) {                    
                     ExportarDados.atualizarTodasAsConsultas();
                     this.dialogEditarConsulta.dispose();
                 }           
@@ -144,6 +146,10 @@ public class ControladorDialogCadastrarConsulta implements ActionListener{
     
     void salvarConsulta() {
         ControladorFrame.repositorioConsultas.addConsulta(this.chaveConsulta, getConsulta());            
+    }
+    
+    void deletarConsulta() {
+        ControladorFrame.repositorioConsultas.getConsultas().remove(this.chaveConsulta);
     }
     
     boolean editarConsulta() {
