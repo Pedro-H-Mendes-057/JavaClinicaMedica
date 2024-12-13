@@ -5,6 +5,7 @@
 package dialogCadastroPanels;
 
 import controle.DateLabelFormatter;
+import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
@@ -64,7 +65,7 @@ public class DialogEditarConsulta extends JDialog {
     private JTextField textFieldData;
     
     public DialogEditarConsulta(JFrame parent) {
-        super(parent, "Cadastrar Consulta", true);
+        super(parent, "Editar Consulta", true);
         this.setSize(1500, 650);
         this.setResizable(false);
         this.setLocationRelativeTo(parent);         
@@ -356,6 +357,8 @@ public class DialogEditarConsulta extends JDialog {
     public JButton getButtonSalvar() {
          if (this.buttonSalvar == null) {
             this.buttonSalvar = new JButton("SALVAR");
+            this.buttonSalvar.setBackground(new Color(50, 205, 101));
+            this.buttonSalvar.setForeground(new Color(255, 255, 255));
             this.buttonSalvar.setFont(new Font("Tahoma", Font.PLAIN, 20));          
         }
         return this.buttonSalvar;
@@ -363,7 +366,9 @@ public class DialogEditarConsulta extends JDialog {
 
     public JButton getButtonCancelar() {
          if (this.buttonCancelar == null) {
-            this.buttonCancelar = new JButton("CANCELAR");
+            this.buttonCancelar = new JButton("EXCLUIR");
+            this.buttonCancelar.setBackground(new Color(244, 0, 9));
+            this.buttonCancelar.setForeground(new Color(255, 255, 255));
             this.buttonCancelar.setFont(new Font("Tahoma", Font.PLAIN, 20));          
         }
         return this.buttonCancelar;

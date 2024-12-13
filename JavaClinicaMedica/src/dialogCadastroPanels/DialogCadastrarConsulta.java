@@ -367,6 +367,10 @@ public class DialogCadastrarConsulta extends JDialog {
     public JButton getButtonCancelar() {
          if (this.buttonCancelar == null) {
             this.buttonCancelar = new JButton("CANCELAR");
+            this.buttonCancelar.setBackground(new Color(244, 0, 9));
+            this.buttonCancelar.setForeground(new Color(255, 255, 255));
+            this.buttonSalvar.setBackground(new Color(50, 205, 101));
+            this.buttonSalvar.setForeground(new Color(255, 255, 255));
             this.buttonCancelar.setFont(new Font("Tahoma", Font.PLAIN, 20));          
         }
         return this.buttonCancelar;
