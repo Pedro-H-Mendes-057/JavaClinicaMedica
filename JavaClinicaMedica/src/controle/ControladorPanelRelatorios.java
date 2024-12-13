@@ -12,13 +12,16 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 
+import modelo.Exame;
 import modelo.Material;
+import modelo.Medico;
 import modelo.Paciente;
  
 import dialogCadastroPanels.DialogPesquisa;
 import modelo.Paciente;
+import modelo.Medico;
+import modelo.Exame;
 import repositorio.RepositorioExames;
-import repositorio.RepositorioMateriais;
 import repositorio.RepositorioMedicos;
 import repositorio.RepositorioPacientes;
 
@@ -27,35 +30,28 @@ import java.util.Map;
 public class ControladorPanelRelatorios implements ActionListener{
 	
     private PanelRelatorios panelRelatorios;
-    private List<String> repositorioPacientes;
-    private List<String> repositorioMedicos;
-    private List<String> repositorioMateriais;
-    private List<String> repositorioExames;
-	
-    public ControladorPanelRelatorios(PanelRelatorios panelRelatorios,
-							            List<String> repositorioPacientes,
-							            List<String> repositorioMedicos,
-							            List<String> repositorioMateriais,
-							            List<String> repositorioExames) {
-    	
+    //private List<String> repositorioPacientes;
+    private RepositorioPacientes repositorioPacientes;
+    private RepositorioMedicos repositorioMedicos;
+    private RepositorioExames repositorioExames;
+    JTable table;
+
+	public ControladorPanelRelatorios(PanelRelatorios panelRelatorios) {
 		this.panelRelatorios = panelRelatorios;
-		this.repositorioPacientes = repositorioPacientes;
-		this.repositorioMedicos = repositorioMedicos;
-		this.repositorioMateriais = repositorioMateriais;
-		this.repositorioExames = repositorioExames;
+		this.repositorioPacientes = ControladorFrame.repositorioPacientes;
+		this.repositorioMedicos = ControladorFrame.repositorioMedicos;
+		this.repositorioExames = ControladorFrame.repositorioExames;
+		
+		this.table = panelRelatorios.getTable();
 		
 		addEventos();
-		
-	}//ControladorPanelRelatorios
-	
+	}
+
 
 	void addEventos() {
 		this.panelRelatorios.getBTConsultas().addActionListener(this);
-		
         this.panelRelatorios.getBTExames().addActionListener(this);
         this.panelRelatorios.getBTFinan().addActionListener(this);
-        
-        this.panelRelatorios.getBTMateriais().addActionListener(this);
         
         panelRelatorios.getPescPac1().addActionListener(this);
         panelRelatorios.getPescMed().addActionListener(this);
@@ -71,20 +67,19 @@ public class ControladorPanelRelatorios implements ActionListener{
 	            configurarRelatorioConsultas();
 	            panelRelatorios.getPescMed().setVisible(true);
 	            panelRelatorios.getPescPac1().setVisible(true);
+	            
+	            panelRelatorios.getBTExames().setEnabled(true);
 	        } 
 	        else if (e.getSource() == panelRelatorios.getBTExames()) {
 	            panelRelatorios.getBTExames().setBackground(new Color(0, 128, 255));  //////////EXAMES
 	            configurarRelatorioExames();
+	            panelRelatorios.getBTExames().setEnabled(false);
 	        } 
 	        else if (e.getSource() == panelRelatorios.getBTFinan()) {
 	            panelRelatorios.getBTFinan().setBackground(new Color(0, 128, 255));  //////////FINANCEIRO
 	            configurarRelatorioFinanceiro();
-	        } 
-	        else if (e.getSource() == panelRelatorios.getBTMateriais()) {
-	            panelRelatorios.getBTMateriais().setBackground(new Color(0, 128, 255));  ////////////MATERIAIS
-	            configurarRelatorioMateriais();
-	        } 
-	        
+	            panelRelatorios.getBTExames().setEnabled(true);
+	        }  
 	        else if (e.getSource() == panelRelatorios.getPescMed()) {
 	            /*DefaultTableModel model = (DefaultTableModel) panelRelatorios.getTable().getModel();
 	           
@@ -99,7 +94,6 @@ public class ControladorPanelRelatorios implements ActionListener{
 	                });
 	            });*/
 	        }
-	        
 	        else if (e.getSource() == panelRelatorios.getPescPac1()) {
 	            /*DefaultTableModel model = (DefaultTableModel) panelRelatorios.getTable().getModel();
 	            model.setRowCount(0);
@@ -122,7 +116,6 @@ public class ControladorPanelRelatorios implements ActionListener{
         panelRelatorios.getBTConsultas().setBackground(null);
         panelRelatorios.getBTExames().setBackground(null);
         panelRelatorios.getBTFinan().setBackground(null);
-        panelRelatorios.getBTMateriais().setBackground(null);
     }
     private void configurarRelatorioConsultas() {
         panelRelatorios.getBTConsultas().setBackground(new Color(0, 128, 255));/////////////////////CONSULTAS
@@ -142,13 +135,6 @@ public class ControladorPanelRelatorios implements ActionListener{
         //atualizarTabelaFinanceiro();
     }
 
-    private void configurarRelatorioMateriais() {
-        panelRelatorios.getBTMateriais().setBackground(new Color(0, 128, 255));/////////////////////MATERIAIS
-        mostrarBotoes(false);
-        // Lógica para exibir todos os materiais
-        atualizarTabelaMateriais();
-    }
-
     private void mostrarBotoes(boolean visivel) {
         panelRelatorios.getPescMed().setVisible(visivel);
         panelRelatorios.getPescPac1().setVisible(visivel);
@@ -156,45 +142,30 @@ public class ControladorPanelRelatorios implements ActionListener{
 ////////////////////////////////
 
     private void atualizarTabelaExames() {
-    	System.out.println("Atualizando tabela de exames...");
-    	DefaultTableModel model = (DefaultTableModel) panelRelatorios.getTable().getModel();
-        model.setRowCount(0); 
+    	System.out.println("Atualizando tabela de exames... eu acho2");
+    	String[] colunas = {"NOME DO EXAME", "TIPO DE EXAME", "VALOR", "DESCRICAO", "MEDICO"};
+    	DefaultTableModel model = (DefaultTableModel) table.getModel();
+    	
+    	model.setRowCount(0);
+    	model.setColumnCount(colunas.length);
         
-        model.setColumnIdentifiers(new Object[] { "Tipo", "Descrição", "Valor", "Médico" });
-
-        for (int i = 0; i < repositorioExames.size(); i++) {
-        	
-            //Pega a string formatada do repositório
-            String exameString = repositorioExames.get(i);
-
-            //Divide a string para extrair os dados
-            String[] dadosExame = exameString.split(",");
-
-            //Verifica se a string tem a quantidade certa de dados
-            if (dadosExame.length == 4) {
-                model.addRow(new Object[]{
-                    dadosExame[0],  // Tipo
-                    dadosExame[1],  // Descrição
-                    dadosExame[2],  // Valor
-                    dadosExame[3]   // Médico
-                });
-            }
-        }
-        panelRelatorios.getTable().revalidate();
-        panelRelatorios.getTable().repaint();
-    }
-
-    private void atualizarTabelaMateriais() {
-        DefaultTableModel model = (DefaultTableModel) panelRelatorios.getTable().getModel();
-        model.setRowCount(0); // Limpar tabela antes de preencher
+        model.setColumnIdentifiers(colunas);
         
-        /*repositorioMateriais.forEach(material -> {
+        table.setModel(model);
+        panelRelatorios.repaint();
+        panelRelatorios.revalidate();
+        
+        repositorioExames.getExames().forEach(exame -> {
             model.addRow(new Object[]{
-                material.getNome(),
-                material.getQuantidade(),
-                material.getValor()
+                exame.getNomeExame(),
+                exame.getTipo(),
+                exame.getValorParticular(),
+                exame.getDescricao(),
+                exame.getMedico().getNome()
             });
-        });*/
+        });
+        
+        
     }
 
 
