@@ -488,8 +488,12 @@ public class ExportarDados {
                         
                         for (int j = 0; j < arrayMateriais.length - 1; j++) {
                             material = new Material();
-                            material.setNome(arrayMateriais[j]);                            
-                            material.setQuant(Integer.parseInt(arrayMateriais[j + 1]));
+                            material.setNome(arrayMateriais[j]);  
+                            try {
+                                material.setQuant(Integer.parseInt(arrayMateriais[j + 1]));
+                            } catch (NumberFormatException e) {
+                                System.out.println("TESTAR ERRO");
+                            }
                             materiaisUsar.add(material);
                         }                       
                         exame.setMateriasUsar(materiaisUsar);
