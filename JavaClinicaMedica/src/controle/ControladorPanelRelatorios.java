@@ -15,7 +15,6 @@ import javax.swing.JOptionPane;
 import modelo.Material;
 import modelo.Paciente;
  
-
 import dialogCadastroPanels.DialogPesquisa;
 import modelo.Paciente;
 import repositorio.RepositorioExames;
@@ -70,6 +69,8 @@ public class ControladorPanelRelatorios implements ActionListener{
 	        if (e.getSource() == panelRelatorios.getBTConsultas()) {
 	            panelRelatorios.getBTConsultas().setBackground(new Color(0, 128, 255));  //////////CONSULTAS
 	            configurarRelatorioConsultas();
+	            panelRelatorios.getPescMed().setVisible(true);
+	            panelRelatorios.getPescPac1().setVisible(true);
 	        } 
 	        else if (e.getSource() == panelRelatorios.getBTExames()) {
 	            panelRelatorios.getBTExames().setBackground(new Color(0, 128, 255));  //////////EXAMES
