@@ -148,7 +148,21 @@ public class ControladorDialogCadastrarConsulta implements ActionListener{
         ControladorFrame.repositorioConsultas.addConsulta(this.chaveConsulta, getConsulta());            
     }
     
-    void deletarConsulta() {
+    void deletarConsulta() {     
+        Object [][] arrayMateriais = ControladorFrame.repositorioConsultas.getConsulta(this.chaveConsulta).getMateriaisUsar();
+        
+        for (int i = 0; i < arrayMateriais.length; i++) {
+            for (int j = 0; j < ControladorFrame.repositorioMateriais.getMateriais().size(); j++) {
+                if (ControladorFrame.repositorioMateriais.getMateriais().get(j).getNome().equalsIgnoreCase(arrayMateriais[i][0].toString())) {
+                    ControladorFrame.repositorioMateriais.getMateriais().get(j).setQuant(
+                        ControladorFrame.repositorioMateriais.getMateriais().get(j).getQuant() + Integer.parseInt(arrayMateriais[i][1].toString())
+                    );
+                    ControladorFrame.repositorioMateriais.getMateriais().get(j).setUtilizado(-1);
+                }
+            }
+        }     
+        ExportarDados.atualizarTodosOsMateriais();                
+        Frame.controladorPanelMateriais.atualizarTabela();
         ControladorFrame.repositorioConsultas.getConsultas().remove(this.chaveConsulta);
     }
     

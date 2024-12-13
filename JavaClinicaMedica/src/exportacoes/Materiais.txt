@@ -1,2 +1,2 @@
 Luva;;98;;10;;SolarMed;;5;;3
-Seringa;;150;;10;;SolarMed;;3;;1
+Seringa;;150;;10;;SolarMed;;3;;2
