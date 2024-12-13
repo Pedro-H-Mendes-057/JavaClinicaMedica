@@ -75,7 +75,7 @@ public class ControladorDialogCadastrarPaciente implements ActionListener {
     	        	throw new IllegalArgumentException("Altura inválida!");
     	        } else if (peso <= 0) {
     	        	throw new IllegalArgumentException("Peso inválido!");
-    	        } else {
+    	        } else { 
     	        	JOptionPane.showMessageDialog(this.dialogCadastrarPaciente, 
     	       		"Paciente salvo com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
     	        	addPaciente();

@@ -135,8 +135,8 @@ public class DialogCadastrarPaciente extends JDialog {
         getContentPane().add(lblPeso);
         
         try {
-            MaskFormatter mascPeso = new MaskFormatter("###.##");
-            mascPeso.setPlaceholderCharacter(' ');
+            MaskFormatter mascPeso = new MaskFormatter("###");
+            mascPeso.setPlaceholderCharacter('0');
 
             txFPeso = new JFormattedTextField(mascPeso);
             txFPeso.setBounds(63, 458, 205, 40);
