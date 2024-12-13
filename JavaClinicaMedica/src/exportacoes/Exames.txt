@@ -1,2 +1,2 @@
 Hemograma;;Exame de Sangue;;Exame laboratorial;;135;;Alberto Mendes Capiroba;;Luva<>1<>
-Exame de Urina;;Avaliar doença renal;;Exame laboratorial;;76;;Cesar Pinheiro;;Luva<>1<>
+Exame de Urina;;Avaliar doença renal, como infecções;;Exame laboratorial;;89;;Cesar Pinheiro;;Luva<>1<>

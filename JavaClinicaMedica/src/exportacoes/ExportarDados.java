@@ -510,4 +510,35 @@ public class ExportarDados {
                 Logger.getLogger(ExportarDados.class.getName()).log(Level.SEVERE, null, ex);
             }
     }
+    
+    public static void atualizarTodosOsExames() {
+	   FileWriter fW = null;
+	   try {
+	       File arquivo = new File("src" + File.separator + "exportacoes" + File.separator, "Exames.txt");               
+	       fW = new FileWriter(arquivo);
+                String salvar = "";
+                for (int i = 0; i < ControladorFrame.repositorioExames.getExames().size(); i++) {
+                    Exame exame = ControladorFrame.repositorioExames.getExames().get(i);
+                    salvar += exame.getNomeExame() + ";;" +
+	                       exame.getDescricao() + ";;" +
+	                       exame.getTipo() + ";;" +
+	                       exame.getValorParticular() + ";;" +
+	                       exame.getMedico().getNome() + ";;";
+                    for (int j = 0; j < exame.getMateriaisUsar().size(); j++) {
+                        salvar += exame.getMateriaisUsar().get(j).getNome() + "<>";
+                        salvar += exame.getMateriaisUsar().get(j).getQuant() + "<>";
+                    }
+                    salvar += "\n";
+               }
+	       fW.write(salvar, 0, salvar.length());
+	   } catch (IOException ex) {
+	       Logger.getLogger(ExportarDados.class.getName()).log(Level.SEVERE, null, ex);
+	   } finally {
+	       try {
+	           fW.close();
+	       } catch (IOException ex) {
+	           Logger.getLogger(ExportarDados.class.getName()).log(Level.SEVERE, null, ex);
+	       }
+	   }
+	}
 }

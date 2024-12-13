@@ -23,6 +23,7 @@ import java.awt.Component;
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
 import controle.ControladorPanelMateriais;
+import exportacoes.ExportarDados;
 
 public class ControladorDialogEDITARExame implements ActionListener {
     private DialogEDITARExames dialogEditarExames;
@@ -80,6 +81,7 @@ public class ControladorDialogEDITARExame implements ActionListener {
                          System.out.println("teste");
                      }
                     atualizarExame();
+                    ExportarDados.atualizarTodosOsExames();
                     JOptionPane.showMessageDialog(this.dialogEditarExames,
                             "Exame atualizado com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
                     this.dialogEditarExames.dispose();
