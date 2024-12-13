@@ -31,7 +31,6 @@ public class DialogCadastrarMaterial extends JDialog {
     JTextField textFieldFornecedor;
     JButton buttonSalvar;
     JButton buttonCancelar;
-    JButton buttonUpload;
     public boolean modoEdicao = false;
     private Material materialAlterado;
     
@@ -40,20 +39,19 @@ public class DialogCadastrarMaterial extends JDialog {
         this.setSize(1300, 650);
         this.setResizable(false);
         this.setLocationRelativeTo(parent);         
-        this.setLayout(null); 
-        this.add(getLabelNome()); 
-        this.add(getTextFieldNome());
-        this.add(getLabelQtdEstoque()); 
-        this.add(getTextFieldQtdEstoque());
-        this.add(getLabelQtdMinima()); 
-        this.add(getTextFieldQtdMinima()); 
-        this.add(getLabelPreco()); 
-        this.add(getTextFieldPreco());
-        this.add(getLabelFornecedor()); 
-        this.add(getTextFieldFornecedor());         
-        this.add(getButtonSalvar()); 
-        this.add(getButtonCancelar());
-        this.add(getButtonUpload());
+        getContentPane().setLayout(null); 
+        getContentPane().add(getLabelNome()); 
+        getContentPane().add(getTextFieldNome());
+        getContentPane().add(getLabelQtdEstoque()); 
+        getContentPane().add(getTextFieldQtdEstoque());
+        getContentPane().add(getLabelQtdMinima()); 
+        getContentPane().add(getTextFieldQtdMinima()); 
+        getContentPane().add(getLabelPreco()); 
+        getContentPane().add(getTextFieldPreco());
+        getContentPane().add(getLabelFornecedor()); 
+        getContentPane().add(getTextFieldFornecedor());         
+        getContentPane().add(getButtonSalvar()); 
+        getContentPane().add(getButtonCancelar());
         
     }
     public void setModoEdicao(boolean modoEdicao, Material material) {
@@ -79,7 +77,7 @@ public class DialogCadastrarMaterial extends JDialog {
             this.labelNome = new JLabel();
             this.labelNome.setText("Nome do material:"); 
             this.labelNome.setFont(new Font("Tahoma", Font.PLAIN, 20));
-            this.labelNome.setBounds(63, 44, 452, 29);
+            this.labelNome.setBounds(331, 44, 452, 29);
         }
         return this.labelNome;
     }
@@ -87,7 +85,7 @@ public class DialogCadastrarMaterial extends JDialog {
     public JTextField getTextFieldNome() {
         if (this.textFieldNome == null) {
             this.textFieldNome = new JTextField();
-            this.textFieldNome.setBounds(63, 83, 520, 40);
+            this.textFieldNome.setBounds(331, 84, 520, 40);
         }
         return this.textFieldNome;
     }
@@ -97,7 +95,7 @@ public class DialogCadastrarMaterial extends JDialog {
             this.labelQtdEstoque = new JLabel();
             this.labelQtdEstoque.setText("Quantidade estoque:"); 
             this.labelQtdEstoque.setFont(new Font("Tahoma", Font.PLAIN, 20));
-            this.labelQtdEstoque.setBounds(63, 140, 452, 29);
+            this.labelQtdEstoque.setBounds(331, 140, 452, 29);
         }
         return this.labelQtdEstoque;
     }
@@ -105,7 +103,7 @@ public class DialogCadastrarMaterial extends JDialog {
     public JTextField getTextFieldQtdEstoque() {
         if (this.textFieldQtdEstoque == null) {
             this.textFieldQtdEstoque = new JTextField();
-            this.textFieldQtdEstoque.setBounds(63, 179, 520, 40);
+            this.textFieldQtdEstoque.setBounds(331, 180, 520, 40);
         }
         return this.textFieldQtdEstoque;
     }
@@ -115,7 +113,7 @@ public class DialogCadastrarMaterial extends JDialog {
             this.labelQtdMinima = new JLabel();
             this.labelQtdMinima.setText("Quantidade mínima:"); 
             this.labelQtdMinima.setFont(new Font("Tahoma", Font.PLAIN, 20));
-            this.labelQtdMinima.setBounds(63, 236, 452, 29);
+            this.labelQtdMinima.setBounds(331, 236, 452, 29);
         }
         return this.labelQtdMinima;
     }
@@ -123,7 +121,7 @@ public class DialogCadastrarMaterial extends JDialog {
     public JTextField getTextFieldQtdMinima() {
         if (this.textFieldQtdMinima == null) {
             this.textFieldQtdMinima = new JTextField();
-            this.textFieldQtdMinima.setBounds(63, 275, 520, 40);
+            this.textFieldQtdMinima.setBounds(331, 276, 520, 40);
         }
         return this.textFieldQtdMinima;
     }
@@ -133,7 +131,7 @@ public class DialogCadastrarMaterial extends JDialog {
             this.labelPreco = new JLabel();
             this.labelPreco.setText("Preço:"); 
             this.labelPreco.setFont(new Font("Tahoma", Font.PLAIN, 20));
-            this.labelPreco.setBounds(63, 332, 452, 29);
+            this.labelPreco.setBounds(331, 337, 452, 29);
         }
         return this.labelPreco;
     }
@@ -141,7 +139,7 @@ public class DialogCadastrarMaterial extends JDialog {
     public JTextField getTextFieldPreco() {
         if (this.textFieldPreco == null) {
             this.textFieldPreco = new JTextField();
-            this.textFieldPreco.setBounds(63, 371, 520, 40);
+            this.textFieldPreco.setBounds(331, 377, 520, 40);
         }
         return this.textFieldPreco;
     }
@@ -151,7 +149,7 @@ public class DialogCadastrarMaterial extends JDialog {
             this.labelFornecedor = new JLabel();
             this.labelFornecedor.setText("Fornecedor:"); 
             this.labelFornecedor.setFont(new Font("Tahoma", Font.PLAIN, 20));
-            this.labelFornecedor.setBounds(63, 428, 452, 29);
+            this.labelFornecedor.setBounds(331, 428, 452, 29);
         }
         return this.labelFornecedor;
     }
@@ -159,7 +157,7 @@ public class DialogCadastrarMaterial extends JDialog {
     public JTextField getTextFieldFornecedor() {
         if (this.textFieldFornecedor == null) {
             this.textFieldFornecedor = new JTextField();
-            this.textFieldFornecedor.setBounds(63, 467, 520, 40);
+            this.textFieldFornecedor.setBounds(331, 468, 520, 40);
         }
         return this.textFieldFornecedor;
     }
@@ -170,7 +168,7 @@ public class DialogCadastrarMaterial extends JDialog {
             this.buttonSalvar.setFont(new Font("Tahoma", Font.PLAIN, 20));
             this.buttonSalvar.setBackground(new Color(50, 205, 101));
             this.buttonSalvar.setForeground(new Color(255, 255, 255));
-            this.buttonSalvar.setBounds(63, 530, 177, 55);
+            this.buttonSalvar.setBounds(389, 530, 177, 55);
            
         }
         return this.buttonSalvar;
@@ -182,19 +180,9 @@ public class DialogCadastrarMaterial extends JDialog {
             this.buttonCancelar.setFont(new Font("Tahoma", Font.PLAIN, 20));
             this.buttonCancelar.setBackground(new Color(244, 0, 9));
             this.buttonCancelar.setForeground(new Color(255, 255, 255));
-            this.buttonCancelar.setBounds(270, 530, 177, 55);
+            this.buttonCancelar.setBounds(596, 530, 177, 55);
            
         }
         return this.buttonCancelar;
-    }
-    
-    public JButton getButtonUpload() {
-        if (this.buttonUpload == null) {
-            this.buttonUpload = new JButton("UPLOAD IMAGEM");
-            this.buttonUpload.setFont(new Font("Tahoma", Font.PLAIN, 17));            
-            this.buttonUpload.setBounds(830, 420, 260, 37);
-           
-        }
-        return this.buttonUpload;
     }
 }

@@ -32,16 +32,12 @@ public class ControladorDialogCadastrarMaterial implements ActionListener {
     }*/
     
     void addEventos() {
-        this.dialogCadastrarMaterial.getButtonUpload().addActionListener(this);
         this.dialogCadastrarMaterial.getButtonSalvar().addActionListener(this);
         this.dialogCadastrarMaterial.getButtonCancelar().addActionListener(this);
     }
 
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == this.dialogCadastrarMaterial.getButtonUpload()) {
-            uploadImage();
-            
-        } else if (e.getSource() == this.dialogCadastrarMaterial.getButtonSalvar()) { 
+        if (e.getSource() == this.dialogCadastrarMaterial.getButtonSalvar()) { 
         	if(camposValidos() == true) {
         		
         	if (this.dialogCadastrarMaterial.modoEdicao) {
@@ -58,13 +54,6 @@ public class ControladorDialogCadastrarMaterial implements ActionListener {
         	this.dialogCadastrarMaterial.dispose();    
         }
     }  
-
-    public void uploadImage() {
-        JFileChooser chooser = new JFileChooser(); 
-        FileNameExtensionFilter filter = new FileNameExtensionFilter("JPG Imagens", "jpg");
-        chooser.setFileFilter(filter);
-        int returnVal = chooser.showOpenDialog(this.dialogCadastrarMaterial);
-    }
     
     public boolean camposValidos() {
         String nome = this.dialogCadastrarMaterial.getTextFieldNome().getText().trim();
