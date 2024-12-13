@@ -118,7 +118,7 @@ public class ControladorPanelMateriais implements ActionListener {
 
                 //Validação
                 if (dados.length >= 5) {
-                	
+                	 
                 	String nome = dados[0].trim().toLowerCase();
                 	
                 	String qntEstoque;
