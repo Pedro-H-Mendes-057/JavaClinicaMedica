@@ -14,7 +14,7 @@ public class PanelPacientes extends TemplatePanel {
         getBTNExcluir().setVisible(false);
         getBTNEditar().setText("Visualizar");
     }
-    
+     
     @Override
     public JTable getTable() {
         if (this.table == null) {

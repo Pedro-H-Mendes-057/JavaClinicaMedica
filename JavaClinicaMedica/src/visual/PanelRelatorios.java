@@ -24,7 +24,7 @@ public class PanelRelatorios extends JPanel {
     public PanelRelatorios(Frame frame) {
         this.frame = frame;
         setLayout(null);
-
+ 
         this.add(getLbTitulo());
         this.add(getBTConsultas());
         this.add(getBTExames());
@@ -35,8 +35,8 @@ public class PanelRelatorios extends JPanel {
         this.add(getPesq());
         add(getTextArea());
         
-       // getBTConsultas().setVisible(false);
-      //  getBTFinan().setVisible(false);
+       getBTConsultas().setVisible(false);
+       getBTFinan().setVisible(false);
     }
 
 
