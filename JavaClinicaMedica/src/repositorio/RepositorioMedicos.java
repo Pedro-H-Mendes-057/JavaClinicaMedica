@@ -37,6 +37,16 @@ public class RepositorioMedicos {
     	
     	return this.nomesMedicos;
     }
+    
+    public Medico procurarMedico(String nomeMedico) {        
+        for (Integer chave : this.repositorioMedicos.keySet()) {            
+            if (this.repositorioMedicos.get(chave).getNome().equals(nomeMedico)) {               
+                return this.repositorioMedicos.get(chave);                
+            }          
+        }
+        
+        return null;
+    }
      
     /*private ArrayList<Medico> repositorioMedicos;
     private String[] nomesMedicos;

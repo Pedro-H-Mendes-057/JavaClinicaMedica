@@ -22,6 +22,7 @@ import java.awt.Component;
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
 import controle.ControladorPanelMateriais;
+import exportacoes.ExportarDados;
 import repositorio.RepositorioMateriais;
 
 public class ControladorDialogCadastrarExame implements ActionListener {
@@ -247,7 +248,7 @@ public class ControladorDialogCadastrarExame implements ActionListener {
         
         exame.setDescricao(this.dialogCadastrarExames.getTxArDescricao().getText());
         ControladorFrame.repositorioExames.addExame(exame);
-        
+        ExportarDados.anexarExame(exame);
         //ControladorFrame.atualizarTabelaEstoque(materiaisUsar); /////////////////////////
     }
 

@@ -8,8 +8,8 @@ public class Exame {
 	private String tipo;
 	private int valorParticular;
 	private List<Material> materiaisUsar; //seria interessante um ArrayList pra guardar os materiais necessarios no exame
-	private Medico medico;
-	
+	private Medico medico;	   
+            
 	public Exame() {
 		
 	}
@@ -23,8 +23,8 @@ public class Exame {
 		this.valorParticular = valorParticular;
 		this.materiaisUsar = materiaisUsar;
 		this.medico = medico;
-	}
-
+	}        
+        
 	public String getNomeExame() {
 		return nomeExame;
 	}
@@ -57,7 +57,7 @@ public class Exame {
 		this.valorParticular = valorParticular;
 	}
 
-	public List<Material> getMateriasUsar() {
+	public List<Material> getMateriaisUsar() {
 		return materiaisUsar;
 	}
 

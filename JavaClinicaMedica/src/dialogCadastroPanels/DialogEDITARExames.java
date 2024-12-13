@@ -28,7 +28,7 @@ public class DialogEDITARExames extends JDialog {
     private Exame exameAlterado;
 
     public DialogEDITARExames(JFrame parent, Exame exameAlterado) {
-	        super(parent, "Cadastrar Exame", true);
+	        super(parent, "Editar Exame", true);
 	
 	        this.setSize(1300, 650);
 	        this.setResizable(false);
@@ -49,13 +49,14 @@ public class DialogEDITARExames extends JDialog {
 	        getBTSalvar();
 	        getBTCancelar();
 	        getTabela();
-	        getBTConfSelect();
+	        //getBTConfSelect();
 	        
 	        this.exameAlterado = exameAlterado;
 	        this.preencherCampos(exameAlterado);
 	        
 	        getTxFNomeExame().setEnabled(false);
 	        getComboBoxTipo().setEnabled(false);
+                getCBMedico().setEnabled(false);
     }
     
     public void preencherCampos(Exame exame) {
@@ -158,7 +159,7 @@ public class DialogEDITARExames extends JDialog {
 	            DefaultTableModel modeloTabela = new DefaultTableModel(new Object[]{"Material", "Quantidade"}, 0) {
 	                @Override
 	                public boolean isCellEditable(int row, int column) {
-	                    return column == 1; //Só QNT é editavel
+	                   return false;
 	                }
 	            };
 
@@ -236,7 +237,7 @@ public class DialogEDITARExames extends JDialog {
 	        return this.btCancelar;
 	    }//DO BTCANCELAR
 	    
-	    public JButton getBTConfSelect() {
+	   /* public JButton getBTConfSelect() {
 	    	if (this.btConfSelect == null) {
 			   this.btConfSelect = new JButton("Confirmar Seleção");
 			   this.btConfSelect.setFont(new Font("Tahoma", Font.PLAIN, 15));
@@ -244,5 +245,5 @@ public class DialogEDITARExames extends JDialog {
         getContentPane().add(btConfSelect);
 	    	}//DO IF
 	    	return this.btConfSelect;
-	    }
+	    } */
 }//da classe
