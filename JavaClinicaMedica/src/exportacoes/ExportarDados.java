@@ -489,6 +489,7 @@ public class ExportarDados {
                         for (int j = 0; j < arrayMateriais.length - 1; j++) {
                             material = new Material();
                             material.setNome(arrayMateriais[j]);
+                            System.out.println(arrayMateriais[j + 1]);
                             material.setQuant(Integer.parseInt(arrayMateriais[j + 1]));
                             materiaisUsar.add(material);
                         }                       

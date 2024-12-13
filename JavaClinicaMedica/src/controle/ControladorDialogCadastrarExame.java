@@ -235,9 +235,9 @@ public class ControladorDialogCadastrarExame implements ActionListener {
     
     public void addExame() {
     	Exame exame = new Exame();
-        exame.setNomeExame(this.dialogCadastrarExames.getTxFNomeExame().getText());
-        exame.setTipo(this.dialogCadastrarExames.getComboBoxTipo().getSelectedItem().toString());
-        exame.setValorParticular(Integer.parseInt(this.dialogCadastrarExames.getTxFValor().getText()));
+        exame.setNomeExame(this.dialogCadastrarExames.getTxFNomeExame().getText().trim());
+        exame.setTipo(this.dialogCadastrarExames.getComboBoxTipo().getSelectedItem().toString().trim());
+        exame.setValorParticular(Integer.parseInt(this.dialogCadastrarExames.getTxFValor().getText().trim()));
         exame.setMedico(atribuiMedico());
         
         List<Material> materiaisUsados = getMateriaisUsados();
