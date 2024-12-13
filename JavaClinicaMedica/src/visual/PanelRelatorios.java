@@ -37,6 +37,7 @@ public class PanelRelatorios extends JPanel {
         
        getBTConsultas().setVisible(false);
        getBTFinan().setVisible(false);
+       getPesq().setVisible(false);
     }
 
 
