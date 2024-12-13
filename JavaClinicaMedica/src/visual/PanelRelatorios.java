@@ -8,8 +8,6 @@ import java.awt.event.ActionEvent;
 
 public class PanelRelatorios extends JPanel {
     private Frame frame;
-    private JScrollPane scrollPane;
-    private JTable table;
     private JButton btConsultas, btExames, btFinan;
     private JLabel lbTitulo;
     private JTextField txFMedico;
@@ -21,6 +19,7 @@ public class PanelRelatorios extends JPanel {
     private JRadioButton rBtFiltrarPaciente;
     private JButton btnPesquisar;
     private JComboBox<String> comboBoxTipo;
+    private JTextArea textArea;
     
     public PanelRelatorios(Frame frame) {
         this.frame = frame;
@@ -30,14 +29,14 @@ public class PanelRelatorios extends JPanel {
         this.add(getBTConsultas());
         this.add(getBTExames());
         this.add(getBTFinan());
-        this.add(getJScrollPane());
         this.add(getComboBoxTipo());
         this.add(getPescMed());
         this.add(getPescPac1());
         this.add(getPesq());
+        add(getTextArea());
         
-        getBTConsultas().setVisible(false);
-        getBTFinan().setVisible(false);
+       // getBTConsultas().setVisible(false);
+      //  getBTFinan().setVisible(false);
     }
 
 
@@ -80,24 +79,6 @@ public class PanelRelatorios extends JPanel {
         }
         return this.btFinan;
     }
-
-    public JTable getTable() {
-        if (this.table == null) {
-            this.table = new JTable();
-            this.table.setBounds(592, 145, 719, 406);
-            this.table.setDefaultEditor(Object.class, null);
-        }
-        return this.table;
-    }
-    
-    public JScrollPane getJScrollPane() {
-        if (this.scrollPane == null) {
-            this.scrollPane = new JScrollPane(getTable());
-            scrollPane.setLocation(500, 90);
-            this.scrollPane.setSize(getTable().getWidth(), getTable().getHeight());
-        }
-        return this.scrollPane;
-    }
     
     public JComboBox<String> getComboBoxTipo() {
         if (this.comboBoxTipo == null) {
@@ -118,7 +99,7 @@ public class PanelRelatorios extends JPanel {
         }
         return pescMed;
     }
-    private JButton getPesq() {
+    public JButton getPesq() {
     	if (this.pesq== null) {
             this.pesq= new JButton("Pesquisar");
             pesq.setBounds(125, 420, 169, 54);
@@ -136,4 +117,11 @@ public class PanelRelatorios extends JPanel {
         }
         return pescPac1;
     }
+	public JTextArea getTextArea() {
+		if (textArea == null) {
+			textArea = new JTextArea();
+			textArea.setBounds(531, 53, 792, 593);
+		}
+		return textArea;
+	}
 }

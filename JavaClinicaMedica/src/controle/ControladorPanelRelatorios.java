@@ -26,6 +26,7 @@ import repositorio.RepositorioMedicos;
 import repositorio.RepositorioPacientes;
 
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class ControladorPanelRelatorios implements ActionListener{
 	
@@ -34,15 +35,17 @@ public class ControladorPanelRelatorios implements ActionListener{
     private RepositorioPacientes repositorioPacientes;
     private RepositorioMedicos repositorioMedicos;
     private RepositorioExames repositorioExames;
-    JTable table;
+    JTextArea textArea;
 
 	public ControladorPanelRelatorios(PanelRelatorios panelRelatorios) {
 		this.panelRelatorios = panelRelatorios;
-		this.repositorioPacientes = ControladorFrame.repositorioPacientes;
-		this.repositorioMedicos = ControladorFrame.repositorioMedicos;
-		this.repositorioExames = ControladorFrame.repositorioExames;
-		
-		this.table = panelRelatorios.getTable();
+	    this.repositorioPacientes = ControladorFrame.repositorioPacientes;
+	    this.repositorioMedicos = ControladorFrame.repositorioMedicos;
+	    this.repositorioExames = ControladorFrame.repositorioExames;
+
+	    this.textArea = panelRelatorios.getTextArea();
+	    
+	    panelRelatorios.getComboBoxTipo().setVisible(false);
 		
 		addEventos();
 	}
@@ -63,85 +66,131 @@ public class ControladorPanelRelatorios implements ActionListener{
 	        CorNormal();
 	        
 	        if (e.getSource() == panelRelatorios.getBTConsultas()) {
-	            panelRelatorios.getBTConsultas().setBackground(new Color(0, 128, 255));  //////////CONSULTAS
+	            panelRelatorios.getBTConsultas().setBackground(new Color(0, 128, 255));
 	            configurarRelatorioConsultas();
+	            
 	            panelRelatorios.getPescMed().setVisible(true);
 	            panelRelatorios.getPescPac1().setVisible(true);
+	            panelRelatorios.getComboBoxTipo().setVisible(false);
 	            
-	            panelRelatorios.getBTExames().setEnabled(true);
-	        } 
-	        else if (e.getSource() == panelRelatorios.getBTExames()) {
-	            panelRelatorios.getBTExames().setBackground(new Color(0, 128, 255));  //////////EXAMES
-	            configurarRelatorioExames();
-	            panelRelatorios.getBTExames().setEnabled(false);
-	        } 
-	        else if (e.getSource() == panelRelatorios.getBTFinan()) {
-	            panelRelatorios.getBTFinan().setBackground(new Color(0, 128, 255));  //////////FINANCEIRO
+	        }  else if (e.getSource() == panelRelatorios.getBTFinan()) {
+	            panelRelatorios.getBTFinan().setBackground(new Color(0, 128, 255));
 	            configurarRelatorioFinanceiro();
-	            panelRelatorios.getBTExames().setEnabled(true);
-	        }  
-	        else if (e.getSource() == panelRelatorios.getPescMed()) {
-	            /*DefaultTableModel model = (DefaultTableModel) panelRelatorios.getTable().getModel();
-	           
-	            repositorioMedicos.repositorioMedicos.forEach((chave, medico) -> {
-	                model.addRow(new Object[]{
-	                    medico.getNome(),
-	                    medico.getEspecialidade(),
-	                    medico.getCrm(),
-	                    medico.getContato(),
-	                    medico.getValorConsulta(),
-	                    chave
-	                });
-	            });*/
-	        }
-	        else if (e.getSource() == panelRelatorios.getPescPac1()) {
-	            /*DefaultTableModel model = (DefaultTableModel) panelRelatorios.getTable().getModel();
-	            model.setRowCount(0);
 	            
-	                model.addRow(new Object[]{
-	                    paciente.getNome(),
-	                    paciente.getDataNasc(),
-	                    paciente.getContato(),
-	                    paciente.getTipoSang(),
-	                    paciente.getConvenio();
-	                }
-	            }*/
+	            panelRelatorios.getComboBoxTipo().setVisible(false);
+	            panelRelatorios.getPescMed().setVisible(false);
+	            panelRelatorios.getPescPac1().setVisible(false);
+	        } 
+	        else if (e.getSource() == panelRelatorios.getPescPac1()) {
+	            if (panelRelatorios.getComboBoxTipo().getSelectedItem().toString().isEmpty()) {
+	                JOptionPane.showMessageDialog(panelRelatorios, "Selecione um filtro.", "Erro", JOptionPane.ERROR_MESSAGE);
+	                return;
+	            }
 	        }
-	 }
+	        
+	        else if (e.getSource() == panelRelatorios.getBTExames()) {
+	        	panelRelatorios.getBTExames().setBackground(new Color(0, 128, 255));
+	            configurarRelatorioExames();
+	            
+	            panelRelatorios.getComboBoxTipo().setVisible(true);
+	            panelRelatorios.getComboBoxTipo().setEnabled(true);
+	            panelRelatorios.getPescMed().setVisible(false);
+	            panelRelatorios.getPescPac1().setVisible(false);
 
-//da classe ////////////////////////////
+	            String tipoSelecionado = (String) panelRelatorios.getComboBoxTipo().getSelectedItem();
+
+	            if (tipoSelecionado == null || tipoSelecionado.isEmpty()) {
+	                JOptionPane.showMessageDialog(panelRelatorios, "Selecione um filtro.", "Erro", JOptionPane.ERROR_MESSAGE);
+	                return;
+	            }
+
+	            List<Exame> examesFiltrados = ControladorFrame.repositorioExames.getExames()
+	            	    .stream()
+	            	    .filter(exame -> exame.getTipo().equalsIgnoreCase(tipoSelecionado))
+	            	    .collect(Collectors.toList());
+
+	            	textArea.setText("");
+	            	if (examesFiltrados.isEmpty()) {
+	            	    textArea.append("Nenhume exame encontrado..\n");
+	            	    return;
+	            	}
+
+	            	for (Exame exame : examesFiltrados) {
+	            	    textArea.append("Nome: " + exame.getNomeExame() + "\n");
+	            	    textArea.append("Tipo: " + exame.getTipo() + "\n");
+	            	    textArea.append("Valor: " + exame.getValorParticular() + "\n");
+	            	    textArea.append("Descrição: " + exame.getDescricao() + "\n");
+	            	    textArea.append("Médico: " + exame.getMedico().getNome() + "\n\n");
+	            	}
+	        }
+
+	        else if (e.getSource() == panelRelatorios.getPesq()) {
+	            pesquisar();
+	        }
+	 }//da classe ////////////////////////////
         
+	 void pesquisar() {
+		    if (panelRelatorios.getComboBoxTipo().isVisible()) {
+		        String tipoSelecionado = (String) panelRelatorios.getComboBoxTipo().getSelectedItem();
+		        if (tipoSelecionado == null || tipoSelecionado.isEmpty()) {
+		            mostrarTodosOsExames();
+		        } 
+		    } else {
+		        JOptionPane.showMessageDialog(panelRelatorios, "Selecione um filtro.");
+		    }
+		}
+
+	 void mostrarTodosOsExames() {
+		    List<Exame> todosOsExames = ControladorFrame.repositorioExames.getExames();
+
+		    textArea.setText("");
+		    if (todosOsExames.isEmpty()) {
+		        textArea.append("Nenhum exame cadastrado.\n");
+		        return;
+		    }
+
+		    for (Exame exame : todosOsExames) {
+		        textArea.append("Nome: " + exame.getNomeExame() + "\n");
+		        textArea.append("Tipo: " + exame.getTipo() + "\n");
+		        textArea.append("Valor: " + exame.getValorParticular() + "\n");
+		        textArea.append("Descrição: " + exame.getDescricao() + "\n");
+		        textArea.append("Médico: " + exame.getMedico().getNome() + "\n\n");
+		    }
+		}
 
     private void CorNormal() {
         panelRelatorios.getBTConsultas().setBackground(null);
         panelRelatorios.getBTExames().setBackground(null);
         panelRelatorios.getBTFinan().setBackground(null);
     }
-    private void configurarRelatorioConsultas() {
-        panelRelatorios.getBTConsultas().setBackground(new Color(0, 128, 255));/////////////////////CONSULTAS
-       mostrarBotoes(true);
+    private void configurarRelatorioConsultas() {   /////////////////////CONSULTAS
+        mostrarBotoes(true);
+        panelRelatorios.getComboBoxTipo().setVisible(false);
     }
+
 
     private void configurarRelatorioExames() {
-        panelRelatorios.getBTExames().setBackground(new Color(0, 128, 255)); /////////////////////EXAMES
         mostrarBotoes(false);
-        atualizarTabelaExames();
+        panelRelatorios.getComboBoxTipo().setVisible(true);  /////////////////////EXAMES
     }
 
+
     private void configurarRelatorioFinanceiro() {
-        panelRelatorios.getBTFinan().setBackground(new Color(0, 128, 255));/////////////////////FINANCEIRO
         mostrarBotoes(false);
-        // Lógica para exibir relatórios financeiros
-        //atualizarTabelaFinanceiro();
+        panelRelatorios.getComboBoxTipo().setVisible(false);  /////////////////////FINANCEIRO
     }
+
 
     private void mostrarBotoes(boolean visivel) {
         panelRelatorios.getPescMed().setVisible(visivel);
         panelRelatorios.getPescPac1().setVisible(visivel);
+        panelRelatorios.getComboBoxTipo().setVisible(!visivel);
     }
+}
+
 ////////////////////////////////
 
-    private void atualizarTabelaExames() {
+    /*private void atualizarTabelaExames() {
     	System.out.println("Atualizando tabela de exames... eu acho2");
     	String[] colunas = {"NOME DO EXAME", "TIPO DE EXAME", "VALOR", "DESCRICAO", "MEDICO"};
     	DefaultTableModel model = (DefaultTableModel) table.getModel();
@@ -166,7 +215,7 @@ public class ControladorPanelRelatorios implements ActionListener{
         });
         
         
-    }
+    }*/
 
 
     /*private void atualizarTabelaFinanceiro() {
@@ -205,4 +254,3 @@ public class ControladorPanelRelatorios implements ActionListener{
             JOptionPane.showMessageDialog(null, "Seleção inválida!");
         }
     }*/
-} 
