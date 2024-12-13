@@ -106,7 +106,7 @@ public class ControladorPanelPacientes implements ActionListener {
             String linha;
 
             while ((linha = br.readLine()) != null) {
-                String[] dados = linha.split(";");
+                String[] dados = linha.split(";;");
                 if (dados.length >= 5) {
                     String nome = dados[0].toLowerCase();
                     
