@@ -118,22 +118,17 @@ public class ControladorPanelMateriais implements ActionListener {
         try (BufferedReader br = new BufferedReader(new FileReader(arquivo))) {
             String linha;
 
-            // Lê cada linha do arquivo
             while ((linha = br.readLine()) != null) {
-                // Divida cada linha usando ";;"
                 String[] dados = linha.split(";;");
 
-                // Garantir que há pelo menos 5 campos
                 if (dados.length >= 5) {
                     String nome = dados[0].trim().toLowerCase();
 
-                    // Verifique se o nome do material contém o termo de busca
                     if (nome.contains(termoBusca)) {
                         encontrou = true;
 
-                        // Adiciona os dados na tabela
                         tabela.addRow(new Object[]{
-                            dados[0],            // Nome
+                            dados[0],           				 // Nome
                             Integer.parseInt(dados[1].trim()), // Quant estoque
                             Integer.parseInt(dados[2].trim()), // Quant mínima
                             dados[3].trim().isEmpty() ? "Desconhecido" : dados[3].trim(), // Fornecedor
