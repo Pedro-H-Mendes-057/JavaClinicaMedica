@@ -119,51 +119,22 @@ public class ControladorPanelMateriais implements ActionListener {
             String linha;
 
             while ((linha = br.readLine()) != null) {
-                String[] dados = linha.split(";");
+                String[] dados = linha.split(";;");
 
-                //Validação
                 if (dados.length >= 5) {
-                	 
-                	String nome = dados[0].trim().toLowerCase();
-                	
-                	String qntEstoque;
-                	if (dados[1].trim().isEmpty()) {
-                	    qntEstoque = "0";}
-                	else {
-                	    qntEstoque = dados[1].trim();}
+                    String nome = dados[0].trim().toLowerCase();
 
-                	String qntMinima;
-                	if (dados[2].trim().isEmpty()) {
-                	    qntMinima = "0";}
-                	else {
-                	    qntMinima = dados[2].trim();}
-
-                	String fornecedor;
-                	if (dados[3].trim().isEmpty()) {
-                	    fornecedor = "Desconhecido";} 
-                	else {
-                	    fornecedor = dados[3].trim();}
-
-                	String preco;
-                	if (dados[4].trim().isEmpty()) {
-                	    preco = "0.0";}
-                	else {
-                	    preco = dados[4].trim();}
-                	
-                		/////////////////////
                     if (nome.contains(termoBusca)) {
                         encontrou = true;
 
                         tabela.addRow(new Object[]{
-                            dados[0],           		 //Nome
-                            Integer.parseInt(qntEstoque),//Quant estoque
-                            Integer.parseInt(qntMinima), //Quant mínima
-                            fornecedor,         		 //Fornecedor
-                            Double.parseDouble(preco)    //Preço
+                            dados[0],           				 // Nome
+                            Integer.parseInt(dados[1].trim()), // Quant estoque
+                            Integer.parseInt(dados[2].trim()), // Quant mínima
+                            dados[3].trim().isEmpty() ? "Desconhecido" : dados[3].trim(), // Fornecedor
+                            Double.parseDouble(dados[4].trim()) // Preço
                         });
                     }
-                } else {
-                    System.out.println("Linha mal formatada " + linha);
                 }
             }
 
@@ -176,6 +147,7 @@ public class ControladorPanelMateriais implements ActionListener {
             JOptionPane.showMessageDialog(null, "Erro ao acessar o arquivo: " + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
         }
     }
+
 
     
     public void atualizarEstoque(List<Material> materiaisUsados) { //cálculos 

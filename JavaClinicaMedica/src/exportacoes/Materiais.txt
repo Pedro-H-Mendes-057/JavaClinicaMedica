@@ -1,1 +1,2 @@
-Luva;;101;;10;;RareMed Hospitalar;;5;;true
+Luva;;101;;10;;RareMed Hospitalar;;5;;trueAgulha;;30;;21;;Agulharia;;0.4;;false
+Agulha;;30;;12;;Agulharia;;0.4;;false
