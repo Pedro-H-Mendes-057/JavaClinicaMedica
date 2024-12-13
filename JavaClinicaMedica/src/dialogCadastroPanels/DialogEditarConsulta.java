@@ -239,6 +239,7 @@ public class DialogEditarConsulta extends JDialog {
         if (this.jComboBoxTipoConsulta == null) {
             String[] options = {"Emergencial", "Agendamento"};
             this.jComboBoxTipoConsulta = new JComboBox<>(options);
+            this.jComboBoxTipoConsulta.setEnabled(false);
         }
         
         
@@ -399,6 +400,7 @@ public class DialogEditarConsulta extends JDialog {
         if (this.jComboBoxHorario == null) {
             String[] options = { "08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00" };
             this.jComboBoxHorario = new JComboBox<>(options);
+            this.jComboBoxHorario.setEnabled(false);
         }
                 
         return this.jComboBoxHorario;
