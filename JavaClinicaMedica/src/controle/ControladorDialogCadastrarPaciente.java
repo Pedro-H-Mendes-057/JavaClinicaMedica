@@ -23,7 +23,7 @@ public class ControladorDialogCadastrarPaciente implements ActionListener {
         addEventos();        
         this.dialogCadastrarPaciente.setVisible(true);
     }
-
+ 
     void addEventos() {
         this.dialogCadastrarPaciente.getBtSalvar().addActionListener(this);
         this.dialogCadastrarPaciente.getBtCancelar().addActionListener(this);
@@ -60,6 +60,10 @@ public class ControladorDialogCadastrarPaciente implements ActionListener {
                 endereco.setEstado(estado);
                 endereco.setNumero(numero);
 
+                if (!dataValida(dataNasc)) {
+                    throw new IllegalArgumentException("Data de nascimento inválida!");
+                }
+                
                 if (nome.matches(".*\\d.*") || estado.matches(".*\\d.*") || rua.matches(".*\\d.*") ||
                 							bairro.matches(".*\\d.*") || cidade.matches(".*\\d.*")) {
                     throw new IllegalArgumentException("Preenchimento inválido!");
@@ -81,6 +85,41 @@ public class ControladorDialogCadastrarPaciente implements ActionListener {
             }
         }
     }
+    
+    private boolean dataValida(String data) {
+        try {
+            int dia = Integer.parseInt(data.substring(0, 2));
+            int mes = Integer.parseInt(data.substring(3, 5));
+            int ano = Integer.parseInt(data.substring(6));
+
+            switch (mes) {
+                case 1, 3, 5, 7, 8, 10, 12:
+                    if (dia < 1 || dia > 31) {
+                        return false;
+                    }
+                    break;
+                case 4, 6, 9, 11:
+                    if (dia < 1 || dia > 30) {
+                        return false;
+                    }
+                    break;
+                case 2:
+                    if (dia < 1 || dia > 28) {
+                        if (dia == 29 && ((ano % 4 == 0 && ano % 100 != 0) || (ano % 400 == 0))) {
+                            break;
+                        }
+                        return false;
+                    }
+                    break;
+                default:
+                    return false;
+            }
+            return true;
+        } catch (NumberFormatException | StringIndexOutOfBoundsException ex) {
+            return false;
+        }
+    }
+
     
     private boolean verifCamposVazios() {
         if (dialogCadastrarPaciente.getTxFNomePaciente().getText().isBlank() ||

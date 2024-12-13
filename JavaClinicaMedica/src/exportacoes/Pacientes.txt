@@ -4,3 +4,6 @@ Arlindo Messi;;12/21/2121;;(23)32432-4324;;B+;;3324.0;;324.0;;Premium Care;;asd;
 Rebeca Soares;;23/01/2003;;(32)99328-2832;;A-;;160.0;;93.48;;Bem-Estar;;fsdf;;32;;sdf;;32322-323;;asd;;Amapá
 Joana;;23/23/2323;;(21)11111-1111;;B+;;211.0;;122.11;;Bem-Estar;;adsads;;312;;asddas;;11221-321;;sad;;Amazonas
 Alberto Cardoso;;23/32/3233;;(12)42453-2133;;B-;;333.0;;333.33;;Premium Care;;asd;;234;;FS;;23434-233;;dasdas;;Amazonas
+Alberto;;32/23/3232;;(32)22222-2222;;B-;;232.0;;232.32;;Premium Care;;asd;;23;;asddas;;32323-233;;asdas;;Tocantins
+Roberta Almeida Campos;;29/01/1955;;(31)22121-3212;;A+;;133.0;;240.0;;Premium Care;;Rua das alcaidas;;12;;ALoisio Conrado;;32232-323;;Itapipoca;;Bahia
+Reginaldo;;30/04/1832;;(22)22222-2222;;AB+;;323.0;;423.23;;Vida Melhor;;dos cachorro;;4;;Bairroooo;;26664-322;;Ibirataia;;Bahia
