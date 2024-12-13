@@ -7,3 +7,6 @@ Alberto Cardoso;;23/32/3233;;(12)42453-2133;;B-;;333.0;;333.33;;Premium Care;;as
 Alberto;;32/23/3232;;(32)22222-2222;;B-;;232.0;;232.32;;Premium Care;;asd;;23;;asddas;;32323-233;;asdas;;Tocantins
 Roberta Almeida Campos;;29/01/1955;;(31)22121-3212;;A+;;133.0;;240.0;;Premium Care;;Rua das alcaidas;;12;;ALoisio Conrado;;32232-323;;Itapipoca;;Bahia
 Reginaldo;;30/04/1832;;(22)22222-2222;;AB+;;323.0;;423.23;;Vida Melhor;;dos cachorro;;4;;Bairroooo;;26664-322;;Ibirataia;;Bahia
+Luciana;;12/12/2024;;(82)79920-0021;;AB+;;323.0;;332.21;;Mais Saúde;;rua tristinha;;12;;bairor tistitnho;;23230-000;;cidade da depressaum;;São Paulo
+Luciana;;24/06/2025;;(33)34144-5345;;AB-;;481.0;;213.21;;Mais Saúde;;Rua alegre;;193;;bairor alegre;;12123-123;;asd;;Bahia
+Luciana Ferreira;;12/01/2121;;(21)34243-2324;;B+;;323.0;;232.32;;Mais Saúde;;rua alegre;;121;;bairro alegre;;23322-323;;itapipoca;;Ceará

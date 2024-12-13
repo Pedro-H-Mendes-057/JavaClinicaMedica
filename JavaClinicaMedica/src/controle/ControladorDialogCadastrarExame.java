@@ -6,6 +6,9 @@ import java.awt.Color;
 import java.awt.event.ActionEvent;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -58,7 +61,8 @@ public class ControladorDialogCadastrarExame implements ActionListener {
     	if(e.getSource() == this.dialogCadastrarExames.getBTCancelar()){
     		this.dialogCadastrarExames.dispose();
         }
-        if (e.getSource() == this.dialogCadastrarExames.getBTSalvar()) {           
+        if (e.getSource() == this.dialogCadastrarExames.getBTSalvar()) { 
+        	String nome = dialogCadastrarExames.getTxFNomeExame().getText().trim();
             try {
               //String materiaisUsar = this.dialogCadastrarExames.getCBMateriaisUsar().getSelectedItem().toString();
 
@@ -67,6 +71,10 @@ public class ControladorDialogCadastrarExame implements ActionListener {
             		 if (controlePanelMateriais != null) {
                          controlePanelMateriais.atualizarTabela();
                          System.out.println("teste");
+                     }
+            		 
+            		 else if (nomeDuplicado(nome)) {
+                         throw new IllegalArgumentException("Este exame já foi cadastrado!");
                      }
                     addExame();
                     JOptionPane.showMessageDialog(this.dialogCadastrarExames,
@@ -89,6 +97,23 @@ public class ControladorDialogCadastrarExame implements ActionListener {
         	    atualizarCoresLinha();
         }
     } //actionPerformed
+    
+    private boolean nomeDuplicado(String nomeNovo) {
+        try (BufferedReader reader = new BufferedReader(new FileReader("src/exportacoes/Exames.txt"))) {
+            String linha;
+            while ((linha = reader.readLine()) != null) {
+                String[] dadosExame = linha.split(";;");
+                String nomeExistente = dadosExame[0];
+                if (nomeExistente.equalsIgnoreCase(nomeNovo)) {
+                    return true;
+                }
+            }
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(null, 
+                "Erro ao acessar o arquivo de exames", "Erro", JOptionPane.ERROR_MESSAGE);
+        }
+        return false;
+    }
     
     private boolean ValidosCamposVazios() {
         int valorParticular = Integer.parseInt(this.dialogCadastrarExames.getTxFValor().getText());

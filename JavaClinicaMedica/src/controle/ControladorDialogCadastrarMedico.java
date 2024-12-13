@@ -2,6 +2,10 @@ package controle;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+
 import javax.swing.JTable;
 import javax.swing.JOptionPane;
 import dialogCadastroPanels.DialogCadastrarMedico;
@@ -51,11 +55,19 @@ public class ControladorDialogCadastrarMedico implements ActionListener {
     }    
     
     public void actionPerformed(ActionEvent e) {
+    	String nome = this.dialogCadastrarMedico.getTextFieldNome().getText().trim();
+    	
         if (e.getSource() == this.dialogCadastrarMedico.getButtonSalvar()) {
             try {              
                 if (validosCamposVazios() == false) {
                     return;
-                } else {
+                } 
+                
+                else if (nomeDuplicado(nome)) {
+                    throw new IllegalArgumentException("Já existe um médico cadastrado com este nome!");
+                }
+                
+                else {
                     JOptionPane.showMessageDialog(this.dialogCadastrarMedico,
                             "Médico salvo com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
                     addMedico();
@@ -128,6 +140,24 @@ public class ControladorDialogCadastrarMedico implements ActionListener {
         return true;
     }
 
+    private boolean nomeDuplicado(String nomeNovo) {
+        try (BufferedReader reader = new BufferedReader(new FileReader("src/exportacoes/Medicos.txt"))) {
+            String linha;
+            while ((linha = reader.readLine()) != null) {
+                String[] dadosMedico = linha.split(";;");
+                String nomeExistente = dadosMedico[1];
+                if (nomeExistente.equalsIgnoreCase(nomeNovo)) {
+                    return true;
+                }
+            }
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(null, 
+                "Erro ao acessar o arquivo de médicos", "Erro", JOptionPane.ERROR_MESSAGE);
+        }
+        return false;
+    }
+
+    
     public void addMedico() {
         this.medico = new Medico();
         this.medico.setNome(this.dialogCadastrarMedico.getTextFieldNome().getText().trim());

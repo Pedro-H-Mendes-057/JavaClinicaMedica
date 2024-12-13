@@ -2,6 +2,9 @@ package controle;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 
 import javax.swing.JOptionPane;
 
@@ -62,14 +65,13 @@ public class ControladorDialogCadastrarPaciente implements ActionListener {
 
                 if (!dataValida(dataNasc)) {
                     throw new IllegalArgumentException("Data de nascimento inválida!");
+                } else if (nomeDuplicado(nome)) {
+                    throw new IllegalArgumentException("Já existe um paciente com este nome!");
                 }
-                
-                if (nome.matches(".*\\d.*") || estado.matches(".*\\d.*") || rua.matches(".*\\d.*") ||
+                else if (nome.matches(".*\\d.*") || estado.matches(".*\\d.*") || rua.matches(".*\\d.*") ||
                 							bairro.matches(".*\\d.*") || cidade.matches(".*\\d.*")) {
                     throw new IllegalArgumentException("Preenchimento inválido!");
-                }
-    	        
-    	        if (altura <= 0) {
+                } else  if (altura <= 0) {
     	        	throw new IllegalArgumentException("Altura inválida!");
     	        } else if (peso <= 0) {
     	        	throw new IllegalArgumentException("Peso inválido!");
@@ -161,6 +163,23 @@ public class ControladorDialogCadastrarPaciente implements ActionListener {
         return true;
     } 
     
+    private boolean nomeDuplicado(String nomeNovo) {
+        try (BufferedReader reader = new BufferedReader(new FileReader("src/exportacoes/Pacientes.txt"))) {
+            String linha;
+            while ((linha = reader.readLine()) != null) {
+                String[] dadosPaciente = linha.split(";;");
+                String nomeExistente = dadosPaciente[0];
+                if (nomeExistente.equalsIgnoreCase(nomeNovo)) {
+                    return true;
+                }
+            }
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(null, 
+                "Erro ao acessar o arquivo de pacientes", "Erro", JOptionPane.ERROR_MESSAGE);
+        }
+        return false;
+    }
+
     
     public void addPaciente() {
         this.paciente = new Paciente();

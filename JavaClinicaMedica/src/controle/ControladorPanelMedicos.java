@@ -80,7 +80,7 @@ public class ControladorPanelMedicos implements ActionListener {
             atualizarTabela();
             return;
         }
-
+ 
         DefaultTableModel tabelaPac = (DefaultTableModel) panelMedicos.getTable().getModel();
         tabelaPac.setRowCount(0);
 

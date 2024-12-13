@@ -66,10 +66,14 @@ public class ControladorDialogCadastrarMaterial implements ActionListener {
             JOptionPane.showMessageDialog(dialogCadastrarMaterial, "Preencha todos os campos!");
             return false;
         }
-        
-        if (ControladorFrame.repositorioMateriais.buscarMaterial(nome)) {
-            JOptionPane.showMessageDialog(dialogCadastrarMaterial, "Esse material já está cadastrado!");
-            return false;
+        /*else if (nomeDuplicado(nome)) {
+		            JOptionPane.showMessageDialog(dialogCadastrarMaterial, "Já existe um material com este nome cadastrado!");
+		            return false;
+		        }*/
+		        
+		        if (ControladorFrame.repositorioMateriais.buscarMaterial(nome)) {
+		            JOptionPane.showMessageDialog(dialogCadastrarMaterial, "Esse material já está cadastrado!");
+		            return false;
         }
 
         try {
