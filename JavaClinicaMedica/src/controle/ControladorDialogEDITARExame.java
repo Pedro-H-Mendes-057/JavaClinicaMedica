@@ -45,8 +45,8 @@ public class ControladorDialogEDITARExame implements ActionListener {
 
         addEventos();
         this.dialogEditarExames.setVisible(true);
-    }
-    
+    }     
+        
     private void preencherCampos(Exame exameSelecionado) {
     	if (exameSelecionado != null) {
             this.dialogEditarExames.getTxFNomeExame().setText(exameSelecionado.getNomeExame());
@@ -54,13 +54,14 @@ public class ControladorDialogEDITARExame implements ActionListener {
             this.dialogEditarExames.getComboBoxTipo().setSelectedItem(exameSelecionado.getTipo());
             this.dialogEditarExames.getCBMedico().setSelectedItem(exameSelecionado.getMedico().getNome());
             this.dialogEditarExames.getTxFValor().setText(String.valueOf(exameSelecionado.getValorParticular()));
+            preencherTabelaMateriais(exameSelecionado);            
         }
     }
     
 	void addEventos() {
         this.dialogEditarExames.getBTSalvar().addActionListener(this);
         this.dialogEditarExames.getBTCancelar().addActionListener(this);
-        this.dialogEditarExames.getBTConfSelect().addActionListener(this);
+        //this.dialogEditarExames.getBTConfSelect().addActionListener(this);
     }
     
     @Override
@@ -91,14 +92,27 @@ public class ControladorDialogEDITARExame implements ActionListener {
                         "Preenchimento inválido!");
             }
         }//Do salvar
-        if (e.getSource() == this.dialogEditarExames.getBTConfSelect()) {
+       /* if (e.getSource() == this.dialogEditarExames.getBTConfSelect()) {
         	JTable tabela = dialogEditarExames.getTabela();
 	    if (tabela.isEditing()) {
 	        tabela.getCellEditor().stopCellEditing();
 	    }
 	    atualizarCoresLinha();
-        }
+        } */
     } //actionPerformed
+    
+     void preencherTabelaMateriais(Exame exame) {
+        DefaultTableModel model = (DefaultTableModel) this.dialogEditarExames.getTabela().getModel();
+        
+        model.setRowCount(0);
+        
+        for (int i = 0; i < exame.getMateriaisUsar().size(); i++) {
+            model.addRow(new Object [] {
+                exame.getMateriaisUsar().get(i).getNome(),
+                exame.getMateriaisUsar().get(i).getQuant(),         
+            });
+        }
+    }
     
     private boolean ValidosCamposVazios() {
         int valorParticular = Integer.parseInt(this.dialogEditarExames.getTxFValor().getText());

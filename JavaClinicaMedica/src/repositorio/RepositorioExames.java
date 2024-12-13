@@ -33,7 +33,7 @@ public class RepositorioExames {
                 exameExistente.getDescricao().equals(exame.getDescricao()) &&
                 exameExistente.getTipo().equals(exame.getTipo()) &&
                 exameExistente.getValorParticular() == exame.getValorParticular() &&
-                exameExistente.getMateriasUsar().equals(exame.getMateriasUsar()) &&
+                exameExistente.getMateriaisUsar().equals(exame.getMateriaisUsar()) &&
                 exameExistente.getMedico().equals(exame.getMedico())) {
                 
                 repositorioExames.set(i, exame);

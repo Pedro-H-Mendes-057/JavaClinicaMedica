@@ -5,6 +5,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import dialogCadastroPanels.DialogCadastrarExames;
 import dialogCadastroPanels.DialogEDITARExames;
+import exportacoes.ExportarDados;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import modelo.Exame;
 import visual.PanelExames;
 import javax.swing.table.DefaultTableModel;
@@ -22,6 +26,12 @@ public class ControladorPanelExames implements ActionListener {
     public ControladorPanelExames(PanelExames panelExames, ControladorPanelMateriais controladorPanelMateriais) {
         this.panelExames = panelExames;
         this.controladorPanelMateriais = controladorPanelMateriais;
+        try {
+            ExportarDados.recuperarExames();
+        } catch (IOException ex) {
+            System.out.println("Falha na criação do arquivo Materiais.txt");
+        }
+        atualizarTabela();
         addEventos();
     }
     
@@ -32,9 +42,10 @@ public class ControladorPanelExames implements ActionListener {
             boolean itemSelecionado = this.panelExames.getTable().getSelectedRow() != -1;
             this.panelExames.getBTNEditar().setEnabled(itemSelecionado);
             this.panelExames.getBTNExcluir().setEnabled(itemSelecionado);
-        });
-        //this.panelExames.getBTNEditar().addActionListener(this);
-        this.panelExames.getBTNExcluir().addActionListener(this);
+            
+            this.panelExames.getBTNEditar().addActionListener(this);
+            this.panelExames.getBTNExcluir().addActionListener(this);
+        });        
     }
     
     @Override

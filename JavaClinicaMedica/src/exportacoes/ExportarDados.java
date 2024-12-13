@@ -19,6 +19,8 @@ import modelo.Consulta;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -427,48 +429,80 @@ public class ExportarDados {
     }
 
 ////////////EXAMES
-  /*
-   * 
-   * 
-   * 
-   * 
-   * 
-   * 
-   * 
-   * 
-   * 
-   * 
-   * 
-   * 
-   */
-
-////////////CONSULTAS
-		
-   /* public static void exportarConsultas() {
-        RepositorioConsultas repositorio = new RepositorioConsultas();
-
-        try {
-            FileWriter fw = new FileWriter("ConsultasLOL.txt");
-            PrintWriter pw = new PrintWriter(fw);
-            for (int i = 0; i < repositorio.getConsultas().size(); i++) {
-                Consulta consulta = repositorio.getConsultas().get(i); //Consulta é um LinkedHashMap
-                String salvar = consulta.getData() + ";" +
-                                consulta.getHora() + ";" +
-                                consulta.getMedico() + ";" +
-                                consulta.getPaciente() + ";" +
-                                consulta.getQueixa() + ";" +
-                                consulta.getTipoConsulta() + ";" +
-                                consulta.getConvenio() + ";" +
-                                consulta.getObservacoes() + ";" +
-                                //.toString(consulta.getMateriaisUsar());  //criar um for pra resolver isso
-                pw.println(salvar);
-            }
-            pw.close();
-            fw.close();
-        } catch (IOException e) {
-            System.err.println("Erro ao salvar consultas");
-        }
-    } */
-
+    public static void anexarExame(Exame exame) {
+	   FileWriter fW = null;
+	   try {
+	       File arquivo = new File("src" + File.separator + "exportacoes" + File.separator, "Exames.txt");
+	       fW = new FileWriter(arquivo, true);
+	       String salvar = exame.getNomeExame() + ";;" +
+	                       exame.getDescricao() + ";;" +
+	                       exame.getTipo() + ";;" +
+	                       exame.getValorParticular() + ";;" +
+	                       exame.getMedico().getNome() + ";;";
+               for (int i = 0; i < exame.getMateriaisUsar().size(); i++) {
+                   salvar += exame.getMateriaisUsar().get(i).getNome() + "<>";
+                   salvar += exame.getMateriaisUsar().get(i).getQuant() + "<>";
+               }
+               salvar += "\n";
+	       fW.write(salvar, 0, salvar.length());
+	   } catch (IOException ex) {
+	       Logger.getLogger(ExportarDados.class.getName()).log(Level.SEVERE, null, ex);
+	   } finally {
+	       try {
+	           fW.close();
+	       } catch (IOException ex) {
+	           Logger.getLogger(ExportarDados.class.getName()).log(Level.SEVERE, null, ex);
+	       }
+	   }
+	}
     
+    public static void recuperarExames() throws IOException {
+            try {
+                File arquivo = new File("src" + File.separator + "exportacoes" + File.separator, "Exames.txt");  
+                FileReader fR = new FileReader(arquivo);
+                String registros = "";
+                String [] arrayRegistros;
+                int i;
+
+                while (true) {
+                    i = fR.read();
+                    if (i == -1) break;
+                    char c = (char) i;
+                    registros += c;
+                }
+
+                if (registros.length() != 0) {
+                    arrayRegistros = registros.split("\n");
+                    for (String registro : arrayRegistros) {
+                        String [] arrayRegistro = registro.split(";;");
+                        Exame exame = new Exame();
+                        exame.setNomeExame(arrayRegistro[0]);
+                        exame.setDescricao(arrayRegistro[1]);
+                        exame.setTipo(arrayRegistro[2]);
+                        exame.setValorParticular(Integer.parseInt(arrayRegistro[3]));
+                        exame.setMedico(ControladorFrame.repositorioMedicos.procurarMedico(arrayRegistro[4]));
+                        
+                        String [] arrayMateriais = arrayRegistro[5].split("<>");                        
+                        List<Material> materiaisUsar = new ArrayList<>();
+                        Material material;
+                        
+                        for (int j = 0; j < arrayMateriais.length - 1; j++) {
+                            material = new Material();
+                            material.setNome(arrayMateriais[j]);
+                            material.setQuant(Integer.parseInt(arrayMateriais[j + 1]));
+                            materiaisUsar.add(material);
+                        }                       
+                        exame.setMateriasUsar(materiaisUsar);
+                        
+                        ControladorFrame.repositorioExames.addExame(exame);
+                    }
+                }
+            } catch (FileNotFoundException ex) {
+                System.out.println("Arquivo Exames.txt não encontrado.\nCriando arquivo...");
+                File arquivo = new File("src" + File.separator + "exportacoes" + File.separator, "Exames.txt");          
+                arquivo.createNewFile();
+            } catch (IOException ex) {
+                Logger.getLogger(ExportarDados.class.getName()).log(Level.SEVERE, null, ex);
+            }
+    }
 }

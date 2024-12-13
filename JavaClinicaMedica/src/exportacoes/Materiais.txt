@@ -1,2 +1,1 @@
-Luva;;101;;10;;RareMed Hospitalar;;5;;true
-Agulha;;30;;21;;Agulharia;;4;;false
+Luva;;100;;10;;SolarMed;;5;;false
