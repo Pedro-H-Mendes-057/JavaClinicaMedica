@@ -137,6 +137,8 @@ public class ExportarDados {
             arquivo.createNewFile();
         } catch (IOException ex) {
             Logger.getLogger(ExportarDados.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (NumberFormatException e) {
+            System.out.println("ERRO 1");
         }
     }
 
@@ -185,6 +187,8 @@ public class ExportarDados {
                 arquivo.createNewFile();
             } catch (IOException ex) {
                 Logger.getLogger(ExportarDados.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (NumberFormatException e) {
+                System.out.println("ERRO 2");
             }
 	}
 	
@@ -208,12 +212,16 @@ public class ExportarDados {
 	       fW.write(salvar, 0, salvar.length());
 	   } catch (IOException ex) {
 	       Logger.getLogger(ExportarDados.class.getName()).log(Level.SEVERE, null, ex);
+           } catch (NumberFormatException e) {
+            System.out.println("ERRO 3");
 	   } finally {
 	       try {
 	           fW.close();
 	       } catch (IOException ex) {
 	           Logger.getLogger(ExportarDados.class.getName()).log(Level.SEVERE, null, ex);
 	       }
+               
+          
 	   }
 	}
 ////////////CONSULTAS
@@ -239,6 +247,9 @@ public class ExportarDados {
 	       fW.write(salvar, 0, salvar.length());
 	   } catch (IOException ex) {
 	       Logger.getLogger(ExportarDados.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (NumberFormatException e) {
+            System.out.println("ERRO 4");
+            
 	   } finally {
 	       try {
 	           fW.close();
@@ -298,7 +309,8 @@ public class ExportarDados {
                 arquivo.createNewFile();
             } catch (IOException ex) {
                 Logger.getLogger(ExportarDados.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            }  catch (NumberFormatException e) {
+            System.out.println("ERRO 5"); }
 	}
         
         public static void atualizarTodasAsConsultas() {
@@ -328,6 +340,8 @@ public class ExportarDados {
 	       fW.write(salvar, 0, salvar.length());
 	   } catch (IOException ex) {
 	       Logger.getLogger(ExportarDados.class.getName()).log(Level.SEVERE, null, ex);
+               } catch (NumberFormatException e) {
+            System.out.println("ERRO 6");
 	   } finally {
 	       try {
 	           fW.close();
@@ -357,6 +371,8 @@ public class ExportarDados {
 	       fW.write(salvar, 0, salvar.length());
 	   } catch (IOException ex) {
 	       Logger.getLogger(ExportarDados.class.getName()).log(Level.SEVERE, null, ex);
+               } catch (NumberFormatException e) {
+            System.out.println("ERRO 7");
 	   } finally {
 	       try {
 	           fW.close();
@@ -380,6 +396,8 @@ public class ExportarDados {
 	       fW.write(salvar, 0, salvar.length());
 	   } catch (IOException ex) {
 	       Logger.getLogger(ExportarDados.class.getName()).log(Level.SEVERE, null, ex);
+               } catch (NumberFormatException e) {
+            System.out.println("ERRO 8");
 	   } finally {
 	       try {
 	           fW.close();
@@ -425,7 +443,8 @@ public class ExportarDados {
             arquivo.createNewFile();
         } catch (IOException ex) {
             Logger.getLogger(ExportarDados.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        }  catch (NumberFormatException e) {
+            System.out.println("ERRO 9"); }
     }
 
 ////////////EXAMES
@@ -447,6 +466,8 @@ public class ExportarDados {
 	       fW.write(salvar, 0, salvar.length());
 	   } catch (IOException ex) {
 	       Logger.getLogger(ExportarDados.class.getName()).log(Level.SEVERE, null, ex);
+               } catch (NumberFormatException e) {
+            System.out.println("ERRO 10");
 	   } finally {
 	       try {
 	           fW.close();
@@ -508,7 +529,8 @@ public class ExportarDados {
                 arquivo.createNewFile();
             } catch (IOException ex) {
                 Logger.getLogger(ExportarDados.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            }  catch (NumberFormatException e) {
+            System.out.println("ERRO 11"); }
     }
     
     public static void atualizarTodosOsExames() {
@@ -533,6 +555,8 @@ public class ExportarDados {
 	       fW.write(salvar, 0, salvar.length());
 	   } catch (IOException ex) {
 	       Logger.getLogger(ExportarDados.class.getName()).log(Level.SEVERE, null, ex);
+               } catch (NumberFormatException e) {
+                System.out.println("ERRO 12");
 	   } finally {
 	       try {
 	           fW.close();
