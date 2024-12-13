@@ -12,7 +12,9 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 
+import modelo.Exame;
 import modelo.Material;
+import modelo.Medico;
 import modelo.Paciente;
  
 import dialogCadastroPanels.DialogPesquisa;
@@ -27,17 +29,35 @@ import java.util.Map;
 public class ControladorPanelRelatorios implements ActionListener{
 	
     private PanelRelatorios panelRelatorios;
-    private List<String> repositorioPacientes;
-    private List<String> repositorioMedicos;
-    private List<String> repositorioMateriais;
-    private List<String> repositorioExames;
+    //private List<String> repositorioPacientes;
+    private RepositorioPacientes repositorioPacientes;
+    private RepositorioMedicos repositorioMedicos;
+    private RepositorioMateriais repositorioMateriais;
+    private RepositorioExames repositorioExames;
 	
-    public ControladorPanelRelatorios(PanelRelatorios panelRelatorios,
+    /*public ControladorPanelRelatorios(PanelRelatorios panelRelatorios,
 							            List<String> repositorioPacientes,
 							            List<String> repositorioMedicos,
 							            List<String> repositorioMateriais,
 							            List<String> repositorioExames) {
     	
+		
+	}//ControladorPanelRelatorios*/
+	
+/*
+	public ControladorPanelRelatorios(PanelRelatorios panelRelatorios,
+										ArrayList<Paciente> repositorioPacientes,
+										ArrayList<Medico> repositorioMedicos,
+										ArrayList<Material> repositorioMateriais,
+										ArrayList<Exame> repositorioExames) {
+	}
+*/
+
+	public ControladorPanelRelatorios(PanelRelatorios panelRelatorios, 
+										RepositorioPacientes repositorioPacientes,
+										RepositorioMedicos repositorioMedicos, 
+										RepositorioMateriais repositorioMateriais,
+										RepositorioExames repositorioExames) {
 		this.panelRelatorios = panelRelatorios;
 		this.repositorioPacientes = repositorioPacientes;
 		this.repositorioMedicos = repositorioMedicos;
@@ -45,9 +65,8 @@ public class ControladorPanelRelatorios implements ActionListener{
 		this.repositorioExames = repositorioExames;
 		
 		addEventos();
-		
-	}//ControladorPanelRelatorios
-	
+	}
+
 
 	void addEventos() {
 		this.panelRelatorios.getBTConsultas().addActionListener(this);
@@ -162,26 +181,27 @@ public class ControladorPanelRelatorios implements ActionListener{
         
         model.setColumnIdentifiers(new Object[] { "Tipo", "Descrição", "Valor", "Médico" });
 
-        for (int i = 0; i < repositorioExames.size(); i++) {
+        /*for (int i = 0; i < repositorioExames.size(); i++) {
         	
             //Pega a string formatada do repositório
-            String exameString = repositorioExames.get(i);
+            //String exameString = repositorioExames.get(i);
 
             //Divide a string para extrair os dados
-            String[] dadosExame = exameString.split(",");
+            //String[] dadosExame = exameString.split(",");
 
             //Verifica se a string tem a quantidade certa de dados
-            if (dadosExame.length == 4) {
+            /*if (dadosExame.length == 4) {
                 model.addRow(new Object[]{
                     dadosExame[0],  // Tipo
                     dadosExame[1],  // Descrição
                     dadosExame[2],  // Valor
                     dadosExame[3]   // Médico
                 });
-            }
+            }*//*
         }
         panelRelatorios.getTable().revalidate();
         panelRelatorios.getTable().repaint();
+        */
     }
 
     private void atualizarTabelaMateriais() {

@@ -19,6 +19,7 @@ import visual.PanelMateriais;
 import visual.PanelRelatorios;
 import controle.ControladorPanelMedicos; //temporario 
 import controle.ControladorPanelPacientes;
+import controle.ControladorPanelRelatorios;
 import controle.ControladorPanelExames;
 import controle.ControladorPanelMateriais;
 
@@ -37,6 +38,7 @@ public class Frame extends JFrame {
     ControladorPanelExames controladorPanelExames;
     public static ControladorPanelMateriais controladorPanelMateriais; 
     ControladorPanelAgendar controladorPanelAgendar;
+    ControladorPanelRelatorios controladorPanelRelatorios;
     //ControladorPanelRelatorios controladorPanelRelatorios;
     
     
@@ -74,10 +76,12 @@ public class Frame extends JFrame {
         this.panelAgendar = new PanelAgendar(this);
         this.controladorPanelAgendar = new ControladorPanelAgendar(this.panelAgendar);        
         this.panelMateriais = new PanelMateriais();
-        this.controladorPanelMateriais = new ControladorPanelMateriais(this.panelMateriais, ControladorFrame.repositorioMateriais);
+        Frame.controladorPanelMateriais = new ControladorPanelMateriais(this.panelMateriais, ControladorFrame.repositorioMateriais);
         this.panelExames = new PanelExames();
-        this.controladorPanelExames = new ControladorPanelExames(this.panelExames, this.controladorPanelMateriais);
+        this.controladorPanelExames = new ControladorPanelExames(this.panelExames, Frame.controladorPanelMateriais);
         this.panelRelatorios = new PanelRelatorios(this);
+        this.controladorPanelRelatorios = new ControladorPanelRelatorios(panelRelatorios, ControladorFrame.repositorioPacientes, ControladorFrame.repositorioMedicos,
+        		ControladorFrame.repositorioMateriais, ControladorFrame.repositorioExames);
         /*this.controladorPanelRelatorios = new ControladorPanelRelatorios(
         									this.panelRelatorios, repositorioPacientes, repositorioMedicos, 
         									repositorioMateriais, repositorioExames
