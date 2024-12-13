@@ -83,7 +83,7 @@ public class ControladorPanelPacientes implements ActionListener {
         }
         else if (e.getSource() == panelPacientes.getBTNPesquisar()) {
         	panelPacientes.getTxFPesquisar().getInputContext().endComposition();
-            buscarNome();
+                buscarNome();
         }
     }///////do ActionPerformed
 
